@@ -1,33 +1,36 @@
 export class Request {
-  static async Raw(
+  commonHeaders: { [key: string]: string };
+
+  constructor(commonHeaders: { [key: string]: string }) {
+    this.commonHeaders = commonHeaders;
+  }
+
+  async Raw(
     url: string,
     method: "GET" | "POST" | "PATCH" | "PUT" | "DELETE",
-    data = {}
+    data?: any
   ) {
     const response = await fetch(url, {
       method: method,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: method === "GET" ? null : JSON.stringify(data),
+      headers: this.commonHeaders,
+      body: data ? JSON.stringify(data) : null,
     });
     return response;
   }
 
-  // just some sugar coated functions to make working easy
-  static async Get(url: string, data = {}) {
-    return this.Raw(url, "GET", data);
+  async Get(url: string) {
+    return this.Raw(url, "GET", null);
   }
-  static async Post(url: string, data = {}) {
+  async Post(url: string, data = {}) {
     return this.Raw(url, "POST", data);
   }
-  static async Delete(url: string, data = {}) {
+  async Delete(url: string, data = {}) {
     return this.Raw(url, "DELETE", data);
   }
-  static async Patch(url: string, data = {}) {
+  async Patch(url: string, data = {}) {
     return this.Raw(url, "PATCH", data);
   }
-  static async Put(url: string, data = {}) {
+  async Put(url: string, data = {}) {
     return this.Raw(url, "PUT", data);
   }
 }
