@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/server": "^11.10.0",
+    "@mantine/core": "^5.2.3",
+    "@mantine/hooks": "^5.2.3",
+    "@mantine/next": "^5.2.3",
     "gray-matter": "^4.0.3",
     "html-react-parser": "^3.0.1",
     "marked": "^4.0.18",
