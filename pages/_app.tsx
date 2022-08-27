@@ -28,6 +28,22 @@ function MyApp({ Component, pageProps }: AppProps) {
                   withGlobalStyles
                   withNormalizeCSS
                   theme={{
+                    colors: {
+                      brand: [
+                        "#6698fe",
+                        "#4d87fe",
+                        "#3375fe",
+                        "#1a64fe",
+                        "#0053fe",
+                        "#004be5",
+                        "#0042cb",
+                        "#003ab2",
+                        "#003298",
+                        "#002a7f",
+                      ],
+                    },
+                    primaryColor: "brand",
+                    primaryShade: { light: 4, dark: 3 },
                     colorScheme: appStore.theme,
                   }}
                 >
