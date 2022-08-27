@@ -51,9 +51,6 @@ function EmailPasswordLogin() {
         compact
         style={{
           margin: "5px",
-          display: "block",
-          width: "",
-          background: "",
         }}
       >
         Forgot password?
