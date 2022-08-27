@@ -1,9 +1,10 @@
-import { Anchor, Button, Input, TextInput, Title } from "@mantine/core";
+import { Anchor, Button, Card, Title } from "@mantine/core";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { IconGoogle } from "../../Atoms/Icons";
 import IconWrapper from "../../Atoms/IconWrapper";
+import DontHaveAnAccount from "./DontHaveAnAccount";
 import EmailPasswordLogin from "./EmailPasswordLogin";
 import OrLabel from "./OrLabel";
 
@@ -39,7 +40,6 @@ function LeftPane() {
         <Button
           style={{
             margin: "30px 0",
-            display: "block",
             width: "100%",
           }}
           leftIcon={<IconWrapper>{IconGoogle}</IconWrapper>}
@@ -49,6 +49,7 @@ function LeftPane() {
         </Button>
         <OrLabel />
         <EmailPasswordLogin />
+        <DontHaveAnAccount />
         <span style={{ fontSize: "12px", maxWidth: "300px" }}>
           By signing up, you agree to the
           <Link href={"/tos"} passHref>
