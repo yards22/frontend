@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useStores } from "../../Logic/Providers/StoresProviders";
+import { Request } from "../../Logic/Utils/Fetch";
 
 const loadScript = (src: any): Promise<void> =>
   new Promise((resolve, reject) => {
@@ -12,9 +13,24 @@ const loadScript = (src: any): Promise<void> =>
   });
 
 function SignInWithGoogle() {
-  // ref for google button
+  const [idToken, setIdToken] = useState<null | string>(null);
   const googleButton = useRef(null);
   const store = useStores();
+
+  useEffect(() => {
+    if (idToken == null) return;
+    new Request({})
+      .Post("http://localhost:4000/auth/oauth", {
+        id_token: idToken,
+      })
+      .then(() => {
+        console.log("sent id token");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [idToken]);
+
   useEffect(() => {
     const src = "https://accounts.google.com/gsi/client";
     const id =
@@ -42,6 +58,7 @@ function SignInWithGoogle() {
   }, [store.appStore.theme]);
 
   function handleCredentialResponse(response: any) {
+    setIdToken(response.credential);
     console.log("Id Token: " + response.credential);
   }
 
