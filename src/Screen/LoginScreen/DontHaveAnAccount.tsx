@@ -1,7 +1,11 @@
 import { Card, Title, Button } from "@mantine/core";
 import React from "react";
 
-function DontHaveAnAccount() {
+interface DontHaveAnAccountProps {
+  onSignUpRequest: () => void;
+}
+
+function DontHaveAnAccount(props: DontHaveAnAccountProps) {
   return (
     <Card
       shadow="sm"
@@ -20,7 +24,12 @@ function DontHaveAnAccount() {
       }}
     >
       <Title order={5}>{"Don't have an account?"}</Title>
-      <Button compact style={{ marginLeft: "10px" }} variant="subtle">
+      <Button
+        onClick={props.onSignUpRequest}
+        compact
+        style={{ marginLeft: "10px" }}
+        variant="subtle"
+      >
         Sign Up
       </Button>
     </Card>

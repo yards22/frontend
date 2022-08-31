@@ -1,12 +1,14 @@
-import { Anchor, Button, Card, Title } from "@mantine/core";
+import { Anchor, Button, Card, Modal, Title } from "@mantine/core";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { IconGoogle } from "../../Atoms/Icons";
 import IconWrapper from "../../Atoms/IconWrapper";
 import DontHaveAnAccount from "./DontHaveAnAccount";
 import EmailPasswordLogin from "./EmailPasswordLogin";
+import NewAccount from "./NewAccount";
 import OrLabel from "./OrLabel";
+import SignInWithGoogle from "./SignInWithGoogle";
 
 const SLeftPane = styled.section`
   width: 50%;
@@ -21,6 +23,7 @@ const SLeftPane = styled.section`
   }
 `;
 function LeftPane() {
+  const [newAccountModal, setNewAccountModal] = useState(false);
   return (
     <SLeftPane>
       <h1 style={{ fontWeight: "100", margin: "0" }}>Log in</h1>
@@ -37,19 +40,28 @@ function LeftPane() {
           maxWidth: "300px",
         }}
       >
-        <Button
-          style={{
-            margin: "30px 0",
-            width: "100%",
-          }}
-          leftIcon={<IconWrapper>{IconGoogle}</IconWrapper>}
-          variant="default"
-        >
-          Log in with Google
-        </Button>
+        <SignInWithGoogle />
         <OrLabel />
         <EmailPasswordLogin />
-        <DontHaveAnAccount />
+        <DontHaveAnAccount
+          onSignUpRequest={() => {
+            setNewAccountModal(true);
+          }}
+        />
+        <Modal
+          centered
+          transition="fade"
+          transitionDuration={600}
+          transitionTimingFunction="ease"
+          overlayOpacity={0.55}
+          overlayBlur={3}
+          opened={newAccountModal}
+          onClose={() => {
+            setNewAccountModal(false);
+          }}
+        >
+          <NewAccount />
+        </Modal>
         <span style={{ fontSize: "12px", maxWidth: "300px" }}>
           By signing up, you agree to the
           <Link href={"/tos"} passHref>
