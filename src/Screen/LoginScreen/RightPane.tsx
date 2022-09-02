@@ -1,11 +1,14 @@
 import React from "react";
 import DarkThemeSwitch from "../../Organs/DarkThemeSwitch";
+import NewAccount from "./NewAccount/Index";
+import PasswordInput from "./NewAccount/PasswordInput";
 
 function RightPane() {
   return (
     <div>
-      Some Design Here
       <DarkThemeSwitch />
+      <NewAccount />
+      <PasswordInput />
     </div>
   );
 }

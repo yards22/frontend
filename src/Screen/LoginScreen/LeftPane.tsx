@@ -2,11 +2,10 @@ import { Anchor, Button, Card, Modal, Title } from "@mantine/core";
 import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { IconGoogle } from "../../Atoms/Icons";
-import IconWrapper from "../../Atoms/IconWrapper";
 import DontHaveAnAccount from "./DontHaveAnAccount";
 import EmailPasswordLogin from "./EmailPasswordLogin";
-import NewAccount from "./NewAccount";
+import NewAccount from "./NewAccount/Index";
+import ForgotPassword from "./ForgetPassword/Index";
 import OrLabel from "./OrLabel";
 import SignInWithGoogle from "./SignInWithGoogle";
 
@@ -49,6 +48,7 @@ function LeftPane() {
           }}
         />
         <Modal
+          title="New Account"
           centered
           transition="fade"
           transitionDuration={600}
