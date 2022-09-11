@@ -1,4 +1,4 @@
-import { TextInput, Button, Modal } from "@mantine/core";
+import { TextInput, Button, Modal, Alert } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ function EmailPasswordLogin() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [forgotPasswordModal, setForgotPasswordModal] = useState(false);
+  const [errorText, setErrorText] = useState("");
   const store = useStores();
   const navigator = useNavigate();
 
@@ -86,9 +87,19 @@ function EmailPasswordLogin() {
                 setForgotPasswordModal(false);
               }}
             >
-              <ForgotPassword />
+              <ForgotPassword
+                onClose={() => {
+                  setForgotPasswordModal(false);
+                }}
+              />
             </Modal>
+            {errorText !== "" && (
+              <Alert color="red" variant="light">
+                {errorText}
+              </Alert>
+            )}
             <Button
+              loading={authStore.isLoading}
               disabled={
                 credentials.email.length === 0 ||
                 credentials.password.length === 0 ||
@@ -105,6 +116,9 @@ function EmailPasswordLogin() {
                   .LoginUser(credentials.email, credentials.password)
                   .then(() => {
                     navigator("/profile");
+                  })
+                  .catch((err) => {
+                    setErrorText(err.message);
                   });
               }}
             >

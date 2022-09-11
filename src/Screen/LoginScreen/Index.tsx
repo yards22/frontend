@@ -1,6 +1,6 @@
 import { Loader } from "@mantine/core";
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import LeftPane from "./LeftPane";
@@ -69,7 +69,7 @@ function LoginIndex() {
   return (
     <SLoginIndex>
       <LeftPane />
-      <RightPane />
+      {!store.appStore.isPhone && <RightPane />}
     </SLoginIndex>
   );
 }

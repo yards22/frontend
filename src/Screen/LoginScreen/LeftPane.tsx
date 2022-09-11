@@ -59,7 +59,11 @@ function LeftPane() {
             setNewAccountModal(false);
           }}
         >
-          <NewAccount />
+          <NewAccount
+            onClose={() => {
+              setNewAccountModal(false);
+            }}
+          />
         </Modal>
         <span style={{ fontSize: "12px", maxWidth: "300px" }}>
           By signing up, you agree to the
