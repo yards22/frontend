@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import { Loader } from "@mantine/core";
 import { useStores } from "./Logic/Providers/StoresProviders";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 const AUTH_INITIAL = 0;
 const CHECKING_AUTH = 1;
@@ -13,8 +13,6 @@ interface ProtectedRoutesProps {}
 function ProtectedRoutes(props: ProtectedRoutesProps) {
   const [authStage, setAuthStage] = useState(CHECKING_AUTH);
   const store = useStores();
-  const location = useLocation();
-  console.log(location.pathname);
 
   useEffect(() => {
     if (
