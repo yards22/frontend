@@ -1,5 +1,4 @@
 import { Observer } from "mobx-react-lite";
-import Router from "next/router";
 import React, { useEffect } from "react";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 

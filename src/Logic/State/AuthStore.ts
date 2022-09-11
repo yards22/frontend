@@ -1,5 +1,4 @@
 import { action, makeAutoObservable, observable } from "mobx";
-import Router from "next/router";
 import { MAuth } from "../Model/MAuth";
 import { AuthRepo } from "../Repository/AuthRepo";
 const TOKEN_KEY = "token";

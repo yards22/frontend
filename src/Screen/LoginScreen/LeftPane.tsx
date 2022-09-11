@@ -1,5 +1,4 @@
 import { Anchor, Button, Card, Modal, Title } from "@mantine/core";
-import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
 import DontHaveAnAccount from "./DontHaveAnAccount";
@@ -64,14 +63,9 @@ function LeftPane() {
         </Modal>
         <span style={{ fontSize: "12px", maxWidth: "300px" }}>
           By signing up, you agree to the
-          <Link href={"/tos"} passHref>
-            <Anchor> Terms of Service </Anchor>
-          </Link>
+          <Anchor> Terms of Service </Anchor>
           and
-          <Link href={"pp"} passHref>
-            <Anchor> Privacy Policy</Anchor>
-          </Link>
-          .
+          <Anchor> Privacy Policy</Anchor>.
         </span>
       </div>
     </SLeftPane>

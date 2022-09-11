@@ -1,8 +1,5 @@
-import { Observer } from "mobx-react-lite";
-import Router, { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useStores } from "../../Logic/Providers/StoresProviders";
 import LeftPane from "./LeftPane";
 import RightPane from "./RightPane";
 
