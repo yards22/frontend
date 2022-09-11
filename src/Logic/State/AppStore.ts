@@ -8,7 +8,8 @@ export default class AppStore {
   constructor() {
     makeAutoObservable(this);
     const expTheme = window.localStorage.getItem("theme") ?? "light";
-    this.theme = expTheme === "light" || expTheme === "dark" ? expTheme : "light";
+    this.theme =
+      expTheme === "light" || expTheme === "dark" ? expTheme : "light";
   }
 
   @action
