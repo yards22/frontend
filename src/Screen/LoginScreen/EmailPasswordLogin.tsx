@@ -1,6 +1,7 @@
 import { TextInput, Button, Modal } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { IconEye, IconEyeOff } from "../../Atoms/Icons";
 import IconWrapper from "../../Atoms/IconWrapper";
 import { useStores } from "../../Logic/Providers/StoresProviders";
@@ -11,6 +12,8 @@ function EmailPasswordLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [forgotPasswordModal, setForgotPasswordModal] = useState(false);
   const store = useStores();
+  const navigator = useNavigate();
+
   return (
     <Observer>
       {() => {
@@ -98,7 +101,11 @@ function EmailPasswordLogin() {
                 width: "100%",
               }}
               onClick={() => {
-                authStore.LoginUser(credentials.email, credentials.password);
+                authStore
+                  .LoginUser(credentials.email, credentials.password)
+                  .then(() => {
+                    navigator("/profile");
+                  });
               }}
             >
               Sign In
