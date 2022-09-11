@@ -1,12 +1,8 @@
 import { Observer } from "mobx-react-lite";
-import React, { useEffect } from "react";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 
 function ProfileIndex() {
   const store = useStores();
-  useEffect(() => {
-    console.log(store.authStore.user);
-  }, [store]);
   return (
     <Observer>
       {() => {
