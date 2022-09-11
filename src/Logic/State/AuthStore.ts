@@ -9,8 +9,9 @@ export class AuthStore {
   @observable token: string | null = null;
   authRepo: AuthRepo;
   constructor(authRepo: AuthRepo) {
-    this.authRepo = authRepo;
     makeAutoObservable(this);
+    this.authRepo = authRepo;
+    this.token = window.localStorage.getItem("token");
   }
 
   @action
