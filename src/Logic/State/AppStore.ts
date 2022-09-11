@@ -1,4 +1,4 @@
-import { observable, action, runInAction, makeAutoObservable } from "mobx";
+import { observable, action, makeAutoObservable } from "mobx";
 
 const THEME_KEY = "theme";
 

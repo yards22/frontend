@@ -1,15 +1,26 @@
+import { Observer } from "mobx-react-lite";
+import Link from "next/link";
 import React from "react";
+import { useStores } from "../../Logic/Providers/StoresProviders";
 import DarkThemeSwitch from "../../Organs/DarkThemeSwitch";
-import NewAccount from "./NewAccount/Index";
-import PasswordInput from "./NewAccount/PasswordInput";
+import Logout from "./Logout";
 
 function RightPane() {
+  const store = useStores();
   return (
-    <div>
-      <DarkThemeSwitch />
-      <NewAccount />
-      <PasswordInput />
-    </div>
+    <Observer>
+      {() => {
+        const { authStore } = store;
+        return (
+          <div>
+            <DarkThemeSwitch />
+            {authStore.user?.mail_id}
+            <Link href={"/profile"}>Profile</Link>
+            {authStore.user && <Logout />}
+          </div>
+        );
+      }}
+    </Observer>
   );
 }
 
