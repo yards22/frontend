@@ -8,7 +8,7 @@ const SIndex = styled.div`
       display : flex;
       justifyContent : space-around;
       height : 100vh;
-      padding : 10px 20px;
+      padding : 10px;
       border : 1px solid black;
       maxWidth : 1400px;
       marginLeft : auto;

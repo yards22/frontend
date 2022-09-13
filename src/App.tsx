@@ -16,15 +16,12 @@ import NavBarIndex from "./Organs/Navbar/Index";
 import NavBarBottomIndex from "./Organs/NavBarBottom/Index";
 
 const SApp = styled.section`
-  display : flex;
-  justify-content : center;
-  align-items : center;
   width : 100%;
   border : 1px solid black;
   overflow : scroll;
   margin-left : 15px;
   margin-right : 15px;
-  padding : 60px 10px 0px 10px;
+  padding : 10px 10px 0px 10px;
 `
 
 function App() {
