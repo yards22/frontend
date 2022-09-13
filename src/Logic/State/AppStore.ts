@@ -5,6 +5,9 @@ const THEME_KEY = "theme";
 export default class AppStore {
   @observable theme: "light" | "dark" = "light";
   @observable isPhone: boolean = false;
+  @observable isTablet:boolean = false;
+  @observable isDesktop:boolean = true;
+
   constructor() {
     makeAutoObservable(this);
     const expTheme = window.localStorage.getItem("theme") ?? "light";
@@ -21,5 +24,22 @@ export default class AppStore {
   @action
   setIsPhone = (isPhone: boolean) => {
     this.isPhone = isPhone;
+    this.isTablet = false;
+    this.isDesktop = false;
   };
+
+  @action
+  setIsTablet = (isTablet: boolean) => {
+    this.isTablet = isTablet;
+    this.isPhone = false;
+    this.isDesktop = false;
+  };
+
+  @action
+  setIsDesktop = (isDesktop: boolean) => {
+    this.isDesktop = isDesktop;
+    this.isPhone = false;
+    this.isTablet = false;
+  };
+
 }

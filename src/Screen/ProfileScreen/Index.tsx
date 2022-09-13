@@ -7,7 +7,14 @@ function ProfileIndex() {
     <Observer>
       {() => {
         const { authStore } = store;
-        return <div>{authStore.user?.mail_id}</div>;
+        return (
+        <div
+          style={{
+            "height" : "100vh"            
+          }}
+        >
+           Profile
+        </div>)
       }}
     </Observer>
   );
