@@ -17,11 +17,12 @@ import NavBarBottomIndex from "./Organs/NavBarBottom/Index";
 
 const SApp = styled.section`
   width : 100%;
-  border : 1px solid black;
+  max-width : 800px;
   overflow : scroll;
   margin-left : 15px;
   margin-right : 15px;
-  padding : 10px 10px 0px 10px;
+  padding : 10px 20px 0px 20px;
+  border : 1px solid black;
 `
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
   function handleScreenWidthChanges(){
     if(window.innerWidth<=650){
        store.appStore.setIsPhone(true);
-    }else if(window.innerWidth<=1000){
+    }else if(window.innerWidth<=1250){
       store.appStore.setIsTablet(true);
     }else{
       store.appStore.setIsDesktop(true);
@@ -46,29 +47,30 @@ function App() {
   return (
       <Observer>
         {()=>{
-        const {appStore} = store;
+        const {appStore , authStore} = store;
         return (
           <>   
-              <NavBarIndex/>
-              { appStore && appStore.isDesktop && <LeftFooterIndex/>}
+              { <NavBarIndex/>}
+              {  appStore.isDesktop && <LeftFooterIndex/>}
               <SApp
                 style={{
                   "marginBottom" : `${appStore.isPhone ? "50px": "0px"}`
                 }}
               >
-                <Router>
-                  <Routes>
-                    <Route path="/login" element={<LoginIndex />} />
-                      <Route path="/network" element={<NetworkIndex />} />
-                      <Route path="/profile" element={<ProfileIndex />} />
-                      <Route path="/logout" element={<LogoutIndex />} />
-                    
-                    <Route>404</Route>
-                  </Routes>
-                </Router>
+                  <Router>
+                    <Routes>
+                      <Route path="/login" element={<LoginIndex />} />
+                      <Route>
+                          <Route path="network" element={<NetworkIndex />} />
+                          <Route path="profile" element={<ProfileIndex />} />
+                          <Route path="logout" element={<LogoutIndex />} />
+                      </Route>
+                      <Route>404</Route>
+                    </Routes>
+                  </Router>
               </SApp>
-              { appStore && !appStore.isPhone && <RightFooterIndex/>}
-              { appStore && appStore.isPhone && <NavBarBottomIndex/>}
+              {  !appStore.isPhone && <RightFooterIndex/>}
+              {  appStore.isPhone && <NavBarBottomIndex/>}
           </>
           )
        }}

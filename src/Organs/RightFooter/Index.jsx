@@ -1,17 +1,22 @@
 import React from 'react'
 import styled from 'styled-components'
+import NewsIndex from './News/Index'
+import ScoreCarousalIndex from './ScoreCarousal/Index'
 
 const SRightFooter = styled.div`
   display : flex;
-  align-items:center;
-  justify-content : center;
-  width : 350px;
-  border : 1px solid black;
+  flex-direction : column;
+  align-items : center;
+  width : 300px;
+  
 `
 
 function RightFooterIndex() {
   return (
-    <SRightFooter>RightFooterIndex</SRightFooter>
+    <SRightFooter>
+      <ScoreCarousalIndex/>
+      <NewsIndex/>
+    </SRightFooter>
   )
 }
 

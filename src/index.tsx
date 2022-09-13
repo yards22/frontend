@@ -6,14 +6,14 @@ import ProvidedApp from "./ProvidedApp";
 
 const SIndex = styled.div`
       display : flex;
-      justifyContent : space-around;
+      justify-content : center;
       height : 100vh;
       padding : 10px;
-      border : 1px solid black;
       maxWidth : 1400px;
-      marginLeft : auto;
-      marginRight : auto;
+      margin-left : auto;
+      margin-right : auto;
       padding-top : 50px;
+      border : 1px solid black;
 `;
 
 const root = ReactDOM.createRoot(

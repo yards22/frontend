@@ -1,20 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useStores } from '../../Logic/Providers/StoresProviders'
+import EventsIndex from './Events/Index';
+import LeaderBoardIndex from './LearderBoard/Index';
 
 const SLeftFooter = styled.div`
   display : flex;
+  flex-direction : column;
   align-items:center;
-  justify-content : center;
-  width : 350px;
-  border : 1px solid black
+  width : 300px;
+  
 `
 
 function LeftFooterIndex() {
   const store = useStores();
   return (
     <SLeftFooter>
-        LeftFooterIndex
+        <LeaderBoardIndex/>
+        <EventsIndex/>
     </SLeftFooter>
   )
 }
