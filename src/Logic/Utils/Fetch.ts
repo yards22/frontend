@@ -22,7 +22,7 @@ export class Request {
   async Get(url: string, headers?: { [key: string]: string }) {
     return this.Raw(url, "GET", null, headers);
   }
-  async Post(url: string, data = {}, headers?: { [key: string]: string }) {
+  async Post(url: string, data = {}, headers = {'Content-Type': 'application/json'}) {
     return this.Raw(url, "POST", data, headers);
   }
   async Delete(url: string, data = {}, headers?: { [key: string]: string }) {

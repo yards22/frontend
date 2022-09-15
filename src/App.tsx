@@ -17,12 +17,10 @@ import NavBarBottomIndex from "./Organs/NavBarBottom/Index";
 
 const SApp = styled.section`
   width : 100%;
-  max-width : 800px;
+  max-width : 600px;
   overflow : scroll;
-  margin-left : 15px;
-  margin-right : 15px;
-  padding : 10px 20px 0px 20px;
-  border : 1px solid black;
+  margin-left : 35px;
+  margin-right : 35px;
 `
 
 function App() {
@@ -50,8 +48,8 @@ function App() {
         const {appStore , authStore} = store;
         return (
           <>   
-              { <NavBarIndex/>}
-              {  appStore.isDesktop && <LeftFooterIndex/>}
+              { authStore.user && <NavBarIndex/>}
+              { authStore.user && appStore.isDesktop && <LeftFooterIndex/>}
               <SApp
                 style={{
                   "marginBottom" : `${appStore.isPhone ? "50px": "0px"}`
@@ -60,7 +58,7 @@ function App() {
                   <Router>
                     <Routes>
                       <Route path="/login" element={<LoginIndex />} />
-                      <Route>
+                      <Route element={<ProtectedRoutes/>}>
                           <Route path="network" element={<NetworkIndex />} />
                           <Route path="profile" element={<ProfileIndex />} />
                           <Route path="logout" element={<LogoutIndex />} />
@@ -69,8 +67,8 @@ function App() {
                     </Routes>
                   </Router>
               </SApp>
-              {  !appStore.isPhone && <RightFooterIndex/>}
-              {  appStore.isPhone && <NavBarBottomIndex/>}
+              { authStore.user && !appStore.isPhone && <RightFooterIndex/>}
+              { authStore.user && appStore.isPhone && <NavBarBottomIndex/>}
           </>
           )
        }}

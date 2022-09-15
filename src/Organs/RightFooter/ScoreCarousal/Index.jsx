@@ -15,7 +15,14 @@ function ScoreCarousalIndex() {
         sx={{ width: "300px", height : "300px",marginBottom: "10px" }}
         mx="auto"
         withIndicators
-      
+        styles={{
+          control: {
+            '&[data-inactive]': {
+              opacity: 0,
+              cursor: 'default',
+            },
+          },
+        }}
         dragFree
         slideGap="md"
         align="start"

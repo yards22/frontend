@@ -13,7 +13,7 @@ const SIndex = styled.div`
       margin-left : auto;
       margin-right : auto;
       padding-top : 50px;
-      border : 1px solid black;
+     
 `;
 
 const root = ReactDOM.createRoot(

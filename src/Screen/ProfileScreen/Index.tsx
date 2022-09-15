@@ -1,6 +1,12 @@
 import { Observer } from "mobx-react-lite";
+import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
+import ProfileSectionIndex from "./ProfileDetailsSection/Index";
 
+
+const SProfileIndex = styled.div`
+   
+`
 function ProfileIndex() {
   const store = useStores();
   return (
@@ -8,13 +14,10 @@ function ProfileIndex() {
       {() => {
         const { authStore } = store;
         return (
-        <div
-          style={{
-            "height" : "100vh"            
-          }}
+        <SProfileIndex
         >
-           Profile
-        </div>)
+           <ProfileSectionIndex/>
+        </SProfileIndex>)
       }}
     </Observer>
   );

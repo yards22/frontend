@@ -3,6 +3,7 @@ import { useStores } from "../../Logic/Providers/StoresProviders";
 import { Request } from "../../Logic/Utils/Fetch";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { Observer } from "mobx-react-lite";
+import { Outlet } from "react-router-dom";
 const CLIENT_ID =
   "442538559529-bm10qpqtcg3k06rrgnc4i0pqnc3fee4s.apps.googleusercontent.com";
 
@@ -19,6 +20,7 @@ function SignInWithGoogle() {
       })
       .then(() => {
         console.log("sent id token");
+        return <Outlet/>
       })
       .catch((err) => {
         console.log(err);
