@@ -18,7 +18,7 @@ import NavBarBottomIndex from "./Organs/NavBarBottom/Index";
 const SApp = styled.section`
   width : 100%;
   max-width : 600px;
-  overflow : scroll;
+  overflow : auto;
   margin-left : 35px;
   margin-right : 35px;
 `
