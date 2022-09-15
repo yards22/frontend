@@ -8,6 +8,8 @@ import { ThemeProvider } from "styled-components";
 import { MantineProvider } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { Request } from "./Logic/Utils/Fetch";
+import { ProfileRepo } from "./Logic/Repository/ProfileRepo";
+import { ProfileStore } from "./Logic/State/ProfileStore";
 
 interface ProvidedAppProps {
   children?: React.ReactNode;
@@ -19,9 +21,12 @@ function ProvidedApp(props: ProvidedAppProps) {
   const authStore = new AuthStore(
     new AuthRepo("http://localhost:4000/auth", rq)
   );
+  const profileStore = new ProfileStore(
+    new ProfileRepo("http://localhost:4000/profile", rq)
+  );
   return (
     <div>
-      <StoresContext.Provider value={{ appStore, authStore }}>
+      <StoresContext.Provider value={{ appStore, authStore, profileStore }}>
         {
           <Observer>
             {() => {
