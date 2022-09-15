@@ -6,7 +6,7 @@ const SNavBarBottomIndex = styled.div`
   bottom : 0px;
   right : 0px;
   left : 0px;
-  
+  border : 1px solid black;
   height : 45px;
   display : flex;
   justify-content : center;
