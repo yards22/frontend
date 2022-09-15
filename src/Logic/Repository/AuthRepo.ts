@@ -39,6 +39,22 @@ export class AuthRepo {
     }
   }
 
+  async oauthLogin(id_token: string) {
+    try {
+      const res = await this.rq.Post(`${this.baseUrl}/oauth`, {
+        id_token
+      });
+      const { body } = await CheckResponse(res, 200);
+      return {
+        user_data: body.data.user_data as MAuth,
+        token: body.data.token as string,
+      };
+    } catch (err: any) {
+      err.message = "Email/Password combination mismatch.";
+      throw err;
+    }
+  }
+
   async verifySignUpOTP(mail_id: string, otp: string) {
     try {
       const res = await this.rq.Post(`${this.baseUrl}/verifyOTP`, {
