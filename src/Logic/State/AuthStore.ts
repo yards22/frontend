@@ -70,6 +70,20 @@ export class AuthStore {
   };
 
   @action
+  OAuthLoginUser = async (id_token: string) => {
+    this.SetLoading(true);
+    try {
+      const { user_data, token } = await this.authRepo.oauthLogin(id_token);
+      this.SetUser(user_data);
+      this.SetToken(token);
+    } catch (err) {
+      throw err;
+    } finally {
+      this.SetLoading(false);
+    }
+  };
+
+  @action
   LogoutUser = async () => {
     this.SetLoading(true);
     try {

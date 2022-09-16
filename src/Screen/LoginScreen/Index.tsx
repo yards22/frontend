@@ -10,6 +10,8 @@ const SLoginIndex = styled.section`
   display: flex;
   flex-direction: row;
   width: 100%;
+  position : fixed;
+  top : 0px;
 `;
 
 const AUTH_INITIAL = 0;

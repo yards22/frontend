@@ -3,12 +3,12 @@ import { useStores } from "../../Logic/Providers/StoresProviders";
 import { Request } from "../../Logic/Utils/Fetch";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { Observer } from "mobx-react-lite";
+import { Outlet } from "react-router-dom";
 const CLIENT_ID =
   "442538559529-bm10qpqtcg3k06rrgnc4i0pqnc3fee4s.apps.googleusercontent.com";
 
 function SignInWithGoogle() {
   const [idToken, setIdToken] = useState<null | string>(null);
-  const googleButton = useRef(null);
   const store = useStores();
 
   useEffect(() => {
@@ -19,6 +19,7 @@ function SignInWithGoogle() {
       })
       .then(() => {
         console.log("sent id token");
+        return <Outlet />;
       })
       .catch((err) => {
         console.log(err);
@@ -34,10 +35,11 @@ function SignInWithGoogle() {
             <GoogleLogin
               size="large"
               width="300px"
-              theme={appStore.theme == "dark" ? "filled_blue" : "outline"}
+              theme={appStore.theme === "dark" ? "filled_blue" : "outline"}
               onSuccess={(credentialResponse) => {
-                console.log(credentialResponse.credential);
                 setIdToken(credentialResponse.credential || null);
+                if (credentialResponse.credential)
+                  store.authStore.OAuthLoginUser(credentialResponse.credential);
               }}
               onError={() => {
                 console.log("Login Failed");
