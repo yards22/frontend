@@ -8,29 +8,30 @@ export class Request {
   async Raw(
     url: string,
     method: "GET" | "POST" | "PATCH" | "PUT" | "DELETE",
-    data?: any
+    data?: any,
+    headers?: { [key: string]: string }
   ) {
     const response = await fetch(url, {
       method: method,
-      headers: this.commonHeaders,
+      headers: { ...this.commonHeaders, ...headers },
       body: data ? JSON.stringify(data) : null,
     });
     return response;
   }
 
-  async Get(url: string) {
-    return this.Raw(url, "GET", null);
+  async Get(url: string, headers?: { [key: string]: string }) {
+    return this.Raw(url, "GET", null, headers);
   }
-  async Post(url: string, data = {}) {
-    return this.Raw(url, "POST", data);
+  async Post(url: string, data = {}, headers = {'Content-Type': 'application/json'}) {
+    return this.Raw(url, "POST", data, headers);
   }
-  async Delete(url: string, data = {}) {
-    return this.Raw(url, "DELETE", data);
+  async Delete(url: string, data = {}, headers?: { [key: string]: string }) {
+    return this.Raw(url, "DELETE", data, headers);
   }
-  async Patch(url: string, data = {}) {
-    return this.Raw(url, "PATCH", data);
+  async Patch(url: string, data = {}, headers?: { [key: string]: string }) {
+    return this.Raw(url, "PATCH", data, headers);
   }
-  async Put(url: string, data = {}) {
-    return this.Raw(url, "PUT", data);
+  async Put(url: string, data = {}, headers?: { [key: string]: string }) {
+    return this.Raw(url, "PUT", data, headers);
   }
 }

@@ -1,4 +1,4 @@
-import { Button } from "@mantine/core";
+import { Button, Input } from "@mantine/core";
 import { Observer, useObserver } from "mobx-react-lite";
 import React from "react";
 import { useStores } from "../Logic/Providers/StoresProviders";
@@ -11,13 +11,19 @@ function Temp() {
       {() => {
         const { appStore } = store;
         return (
-          <Button
-            onClick={() => {
-              appStore.setTheme(appStore.theme == "light" ? "dark" : "light");
-            }}
-          >
-            {appStore.theme == "light" ? "Dark" : "Light"}
-          </Button>
+          <div>
+            <Button
+              style={{ margin: "10px" }}
+              onClick={() => {
+                appStore.setTheme(appStore.theme == "light" ? "dark" : "light");
+              }}
+            >
+              {appStore.theme == "light"
+                ? "Switch To Dark Theme"
+                : "Switch To Light Theme"}
+            </Button>
+            <Input />
+          </div>
         );
       }}
     </Observer>

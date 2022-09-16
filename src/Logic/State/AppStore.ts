@@ -1,11 +1,18 @@
-import { observable, action, runInAction, makeAutoObservable } from "mobx";
+import { observable, action, makeAutoObservable } from "mobx";
 
 const THEME_KEY = "theme";
 
 export default class AppStore {
   @observable theme: "light" | "dark" = "light";
+  @observable isPhone: boolean = false;
+  @observable isTablet:boolean = false;
+  @observable isDesktop:boolean = true;
+
   constructor() {
     makeAutoObservable(this);
+    const expTheme = window.localStorage.getItem("theme") ?? "light";
+    this.theme =
+      expTheme === "light" || expTheme === "dark" ? expTheme : "light";
   }
 
   @action
@@ -13,4 +20,26 @@ export default class AppStore {
     this.theme = theme;
     localStorage.setItem(THEME_KEY, theme);
   };
+
+  @action
+  setIsPhone = (isPhone: boolean) => {
+    this.isPhone = isPhone;
+    this.isTablet = false;
+    this.isDesktop = false;
+  };
+
+  @action
+  setIsTablet = (isTablet: boolean) => {
+    this.isTablet = isTablet;
+    this.isPhone = false;
+    this.isDesktop = false;
+  };
+
+  @action
+  setIsDesktop = (isDesktop: boolean) => {
+    this.isDesktop = isDesktop;
+    this.isPhone = false;
+    this.isTablet = false;
+  };
+
 }
