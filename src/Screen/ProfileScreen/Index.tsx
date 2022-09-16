@@ -1,4 +1,4 @@
-import { Loader } from "@mantine/core";
+import { Loader, Skeleton } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import styled from "styled-components";
@@ -21,7 +21,18 @@ function ProfileIndex() {
             <ProfileSectionIndex />
           </SProfileIndex>
         ) : (
-          <Loader variant="bars" />
+          <div
+            style={{
+              height: "50%",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <Loader />
+          </div>
         );
       }}
     </Observer>
