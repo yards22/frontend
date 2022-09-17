@@ -16,65 +16,62 @@ import NavBarIndex from "./Organs/Navbar/Index";
 import NavBarBottomIndex from "./Organs/NavBarBottom/Index";
 
 const SApp = styled.section`
-  width : 100%;
-  max-width : 600px;
-  overflow : auto;
-  margin-left : 35px;
-  margin-right : 35px;
-`
+  width: 100%;
+  max-width: 600px;
+  overflow: auto;
+  margin-left: 35px;
+  margin-right: 35px;
+`;
 
 function App() {
   const store = useStores();
 
-  function handleScreenWidthChanges(){
-    if(window.innerWidth<=650){
-       store.appStore.setIsPhone(true);
-    }else if(window.innerWidth<=1250){
+  function handleScreenWidthChanges() {
+    if (window.innerWidth <= 650) {
+      store.appStore.setIsPhone(true);
+    } else if (window.innerWidth <= 1250) {
       store.appStore.setIsTablet(true);
-    }else{
+    } else {
       store.appStore.setIsDesktop(true);
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     handleScreenWidthChanges();
-    window.addEventListener('resize',handleScreenWidthChanges);
-  },[])
-
+    window.addEventListener("resize", handleScreenWidthChanges);
+  }, []);
 
   return (
-      <Observer>
-        {()=>{
-        const {appStore , authStore} = store;
+    <Observer>
+      {() => {
+        const { appStore, authStore } = store;
         return (
-          <>   
-              { authStore.user && <NavBarIndex/>}
-              { authStore.user && appStore.isDesktop && <LeftFooterIndex/>}
-              <SApp
-                style={{
-                  "marginBottom" : `${appStore.isPhone ? "50px": "0px"}`
-                }}
-              >
-                  <Router>
-                    <Routes>
-                      <Route path="/login" element={<LoginIndex />} />
-                      <Route element={<ProtectedRoutes/>}>
-                          <Route path="network" element={<NetworkIndex />} />
-                          <Route path="profile" element={<ProfileIndex />} />
-                          <Route path="logout" element={<LogoutIndex />} />
-                      </Route>
-                      <Route>404</Route>
-                    </Routes>
-                  </Router>
-              </SApp>
-              { authStore.user && !appStore.isPhone && <RightFooterIndex/>}
-              { authStore.user && appStore.isPhone && <NavBarBottomIndex/>}
+          <>
+            {authStore.user && <NavBarIndex />}
+            {authStore.user && appStore.isDesktop && <LeftFooterIndex />}
+            <SApp
+              style={{
+                marginBottom: `${appStore.isPhone ? "50px" : "0px"}`,
+              }}
+            >
+              <Router>
+                <Routes>
+                  <Route path="/login" element={<LoginIndex />} />
+                  <Route element={<ProtectedRoutes />}>
+                    <Route path="network" element={<NetworkIndex />} />
+                    <Route path="profile" element={<ProfileIndex />} />
+                    <Route path="logout" element={<LogoutIndex />} />
+                  </Route>
+                  <Route>404</Route>
+                </Routes>
+              </Router>
+            </SApp>
+            {authStore.user && !appStore.isPhone && <RightFooterIndex />}
+            {authStore.user && appStore.isPhone && <NavBarBottomIndex />}
           </>
-          )
-       }}
-        </Observer>
-      
-    
+        );
+      }}
+    </Observer>
   );
 }
 

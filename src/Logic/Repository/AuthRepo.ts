@@ -42,7 +42,7 @@ export class AuthRepo {
   async oauthLogin(id_token: string) {
     try {
       const res = await this.rq.Post(`${this.baseUrl}/oauth`, {
-        id_token
+        id_token,
       });
       const { body } = await CheckResponse(res, 200);
       return {
