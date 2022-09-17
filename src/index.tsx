@@ -5,15 +5,14 @@ import App from "./App";
 import ProvidedApp from "./ProvidedApp";
 
 const SIndex = styled.div`
-      display : flex;
-      justify-content : center;
-      height : 100vh;
-      padding : 10px;
-      maxWidth : 1400px;
-      margin-left : auto;
-      margin-right : auto;
-      padding-top : 50px;
-     
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  padding: 10px;
+  maxwidth: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 50px;
 `;
 
 const root = ReactDOM.createRoot(
@@ -21,10 +20,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-     <ProvidedApp>
-       <SIndex>
-           <App />
-       </SIndex>
-     </ProvidedApp>
+    <ProvidedApp>
+      <SIndex>
+        <App />
+      </SIndex>
+    </ProvidedApp>
   </React.StrictMode>
 );
