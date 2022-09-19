@@ -9,14 +9,23 @@ const SProfilePhoto = styled.div`
     border-radius : 65px;
     background-color : red;
     border : 4px solid white;
+    overflow: hidden;
 `;
 
-function ProfilePhoto() {
+interface ProfilePhotoProps{
+   userName : string | undefined,
+   profileImageUri : string | null | undefined,
+}
+
+function ProfilePhoto(props:ProfilePhotoProps) {
   return (
     <SProfilePhoto>
+       {props.profileImageUri ? 
+          <img src={props.profileImageUri} height="100%" width={"100%"}/>
+         :  
        <h1
          style={{color : "white"}}
-       > S</h1>
+       > {props.userName?.charAt(0)}</h1>}
     </SProfilePhoto>
   )
 }

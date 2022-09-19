@@ -11,6 +11,8 @@ const SNavBarIndex = styled.div`
   display : flex;
   justify-content : center;
   align-items : center;
+  background-color: red;
+  z-index: 100;
 `
 
 function NavBarIndex() {

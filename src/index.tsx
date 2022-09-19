@@ -9,11 +9,10 @@ const SIndex = styled.div`
       justify-content : center;
       height : 100vh;
       padding : 10px;
-      maxWidth : 1400px;
+      max-width : 1400px;
       margin-left : auto;
       margin-right : auto;
       padding-top : 50px;
-     
 `;
 
 const root = ReactDOM.createRoot(

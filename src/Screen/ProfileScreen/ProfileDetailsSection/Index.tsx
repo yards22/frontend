@@ -2,8 +2,13 @@ import CoverPhotoSection from "./CoverPhotoSection"
 import ProfilePhoto from "./ProfilePhoto"
 import UserDetailsSection from "./UserDetailsSection"
 import { Card } from "@mantine/core"
+import { MProfile } from "../../../Logic/Model/MProfile"
 
-function ProfileSectionIndex() {
+interface ProfileDetailsSectionIndexProps{
+  profileInfo : MProfile | null;
+}
+
+function ProfileDetailsSectionIndex(props:ProfileDetailsSectionIndexProps) {
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder
        style={{
@@ -11,10 +16,10 @@ function ProfileSectionIndex() {
        }}
     >
         <CoverPhotoSection/>
-        <ProfilePhoto/>
+        <ProfilePhoto profileImageUri={props.profileInfo?.profile_image_uri} userName={props.profileInfo?.username}/>
         <UserDetailsSection/>
     </Card>
   )
 }
 
-export default ProfileSectionIndex
+export default ProfileDetailsSectionIndex

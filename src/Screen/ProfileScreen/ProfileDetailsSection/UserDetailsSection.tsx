@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Button, Modal } from "@mantine/core";
 import IconWrapper from "../../../Atoms/IconWrapper";
 import { IconPencil } from "../../../Atoms/Icons";
 import { Observer } from "mobx-react-lite";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
+import EditProfileModalIndex from "./EditProfileModal/Index";
 
 const SUserDetailsSection = styled.div`
   padding: 0px 15px 20px 15px;
@@ -20,6 +21,10 @@ const SEditButtonContainer = styled.div`
 function UserDetailsSection() {
   const [editProfileModal, setEditProfileModal] = useState(false);
   const store = useStores();
+
+  useEffect(()=>{
+    setEditProfileModal(false)
+  },[store.profileStore.profile])
   return (
     <Observer>
       {() => {
@@ -37,7 +42,7 @@ function UserDetailsSection() {
                 Edit Profile
               </Button>
               <Modal
-                size={"500px"}
+                size={"450px"}
                 title="Profile Edit"
                 centered
                 transition="fade"
@@ -51,7 +56,7 @@ function UserDetailsSection() {
                 }}
                 overflow="inside"
               >
-                <div style={{ minHeight: "70vh" }}></div>
+                 <EditProfileModalIndex profileInfo={profileStore.profile}/>
               </Modal>
             </SEditButtonContainer>
             <div
@@ -63,8 +68,8 @@ function UserDetailsSection() {
               <h3 style={{ margin: "0px" }}>
                 {profileStore.profile?.username}
               </h3>
-              <p style={{ margin: "0px" }}>MailID</p>
-              <p style={{ margin: "0px" }}>BIO</p>
+              <p style={{ margin: "0px" }}>{profileStore.profile?.email_id}</p>
+              <p style={{ margin: "0px" }}>{profileStore.profile?.bio}</p>
               <div
                 style={{
                   display: "flex",
@@ -72,7 +77,7 @@ function UserDetailsSection() {
                 }}
               >
                 <p style={{ margin: "0px" }}>Created_At</p>
-                <p style={{ margin: "0px" }}>CRIC INDEX</p>
+                <p style={{ margin: "0px" }}>{profileStore.profile?.cric_index}</p>
               </div>
               <div></div>
             </div>
