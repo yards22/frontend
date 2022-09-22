@@ -14,13 +14,13 @@ import styled from "styled-components";
 import { Observer } from "mobx-react-lite";
 import NavBarIndex from "./Organs/Navbar/Index";
 import NavBarBottomIndex from "./Organs/NavBarBottom/Index";
+import NotificationIndex from "./Screen/NotificationScreen/Index";
+import FeedIndex from "./Screen/FeedScreen/Index";
 
 const SApp = styled.section`
   width : 100%;
   max-width : 600px;
   overflow : auto;
-  margin-left : 35px;
-  margin-right : 35px;
 `
 
 function App() {
@@ -62,6 +62,8 @@ function App() {
                           <Route path="network" element={<NetworkIndex />} />
                           <Route path="profile" element={<ProfileIndex />} />
                           <Route path="logout" element={<LogoutIndex />} />
+                          <Route path="notification" element={<NotificationIndex/>}/>
+                          <Route path="feed" element={<FeedIndex/>} />
                       </Route>
                       <Route>404</Route>
                     </Routes>

@@ -115,7 +115,9 @@ function EmailPasswordLogin() {
                 authStore
                   .LoginUser(credentials.email, credentials.password)
                   .then(() => {
-                    navigator("/profile");
+                    if(store.authStore.user){
+                      navigator("/profile");
+                    }
                   })
                   .catch((err) => {
                     setErrorText(err.message);

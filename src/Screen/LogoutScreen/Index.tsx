@@ -1,10 +1,20 @@
-import React from "react";
+import { useEffect } from "react";
 import { Button } from "@mantine/core";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import { useNavigate } from "react-router-dom";
 function LogoutIndex() {
   const store = useStores();
   const navigator = useNavigate();
+
+  useEffect(()=>{
+    const logOutResponse = window.confirm("Are You sure want to logout");
+    if(logOutResponse){
+      store.authStore.LogoutUser().then(() => {
+        navigator("/login");
+      });
+    }
+  },[])
+
   return (
     <div
       style={{
