@@ -14,6 +14,7 @@ import styled from "styled-components";
 import { Observer } from "mobx-react-lite";
 import NavBarIndex from "./Organs/Navbar/Index";
 import NavBarBottomIndex from "./Organs/NavBarBottom/Index";
+import FeedIndex from "./Screen/FeedScreen/Index";
 
 const SApp = styled.section`
   width: 100%;
@@ -62,6 +63,7 @@ function App() {
                     <Route path="profile" element={<ProfileIndex />} />
                     <Route path="logout" element={<LogoutIndex />} />
                   </Route>
+                  <Route path="/feed" element={<FeedIndex />} />
                   <Route>404</Route>
                 </Routes>
               </Router>
