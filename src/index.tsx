@@ -21,9 +21,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ProvidedApp>
-      <SIndex>
-        <App />
-      </SIndex>
+      <App />
     </ProvidedApp>
   </React.StrictMode>
 );

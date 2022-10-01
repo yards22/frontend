@@ -1,4 +1,3 @@
-import ProvidedApp from "./ProvidedApp";
 import ProtectedRoutes from "./ProtectedRoutes";
 import ProfileIndex from "./Screen/ProfileScreen/Index";
 import LogoutIndex from "./Screen/LogoutScreen/Index";
@@ -6,22 +5,19 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginIndex from "./Screen/LoginScreen/Index";
 import NetworkIndex from "./Screen/NetworkScreen/Index";
 import { useStores } from "./Logic/Providers/StoresProviders";
-import { useState } from "react";
 import { useEffect } from "react";
 import RightFooterIndex from "./Organs/RightFooter/Index";
 import LeftFooterIndex from "./Organs/LeftFooter/Index";
 import styled from "styled-components";
 import { Observer } from "mobx-react-lite";
-import NavBarIndex from "./Organs/Navbar/Index";
-import NavBarBottomIndex from "./Organs/NavBarBottom/Index";
 import FeedIndex from "./Screen/FeedScreen/Index";
+import TopBar from "./Organs/Navbar/TopBar";
+import BottomBar from "./Organs/Navbar/BottomBar";
 
 const SApp = styled.section`
   width: 100%;
   max-width: 600px;
-  overflow: auto;
-  margin-left: 35px;
-  margin-right: 35px;
+  height: fit-content;
 `;
 
 function App() {
@@ -48,7 +44,7 @@ function App() {
         const { appStore, authStore } = store;
         return (
           <>
-            {authStore.user && <NavBarIndex />}
+            {<TopBar />}
             {authStore.user && appStore.isDesktop && <LeftFooterIndex />}
             <SApp
               style={{
@@ -69,7 +65,7 @@ function App() {
               </Router>
             </SApp>
             {authStore.user && !appStore.isPhone && <RightFooterIndex />}
-            {authStore.user && appStore.isPhone && <NavBarBottomIndex />}
+            {appStore.isPhone && <BottomBar />}
           </>
         );
       }}
