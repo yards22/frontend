@@ -1,19 +1,25 @@
 import React from "react";
-import { Avatar as MantineAvatar, useMantineTheme } from "@mantine/core";
+import {
+  Avatar as MantineAvatar,
+  MantineSize,
+  useMantineTheme,
+} from "@mantine/core";
 interface AvatarProps {
   imageUrl?: string;
   initials?: string;
   toolTip?: string;
+  size?: MantineSize;
   onClick?: () => void;
 }
 function ProfileAvatar(props: AvatarProps) {
   const mantineTheme = useMantineTheme();
+
   if (props.imageUrl)
     return (
       <MantineAvatar
         variant="filled"
-        radius="xl"
-        size="lg"
+        radius={props.size}
+        size={props.size}
         src={props.imageUrl}
       />
     );
@@ -21,8 +27,8 @@ function ProfileAvatar(props: AvatarProps) {
     return (
       <MantineAvatar
         variant="filled"
-        radius="xl"
-        size="lg"
+        radius={props.size}
+        size={props.size}
         color={mantineTheme.primaryColor}
         src={props.imageUrl}
       >
@@ -33,8 +39,8 @@ function ProfileAvatar(props: AvatarProps) {
     <MantineAvatar
       color={mantineTheme.primaryColor}
       variant="filled"
-      radius="xl"
-      size="lg"
+      radius={props.size}
+      size={props.size}
     />
   );
 }
