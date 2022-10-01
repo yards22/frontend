@@ -7,6 +7,7 @@ export default class AppStore {
   @observable isPhone: boolean = false;
   @observable isTablet: boolean = false;
   @observable isDesktop: boolean = true;
+  @observable navigationState: number = 0;
 
   constructor() {
     makeAutoObservable(this);
@@ -40,5 +41,10 @@ export default class AppStore {
     this.isDesktop = isDesktop;
     this.isPhone = false;
     this.isTablet = false;
+  };
+
+  @action
+  setNavigationState = (state: number) => {
+    this.navigationState = state;
   };
 }
