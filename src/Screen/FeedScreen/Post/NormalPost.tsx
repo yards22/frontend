@@ -3,6 +3,9 @@ import styled from "styled-components";
 import MPost from "../../../Logic/Model/MPost";
 import { Heart, MessageCircle } from "react-feather";
 import Liked from "./Liked";
+import LinkedUserName from "../../../Atoms/LinkedUserName";
+import { useState } from "react";
+import Comments from "./Comments";
 
 const SNormalPost = styled.div`
   width: 100%;
@@ -21,6 +24,7 @@ interface NormalPostProps {
 
 function NormalPost(props: NormalPostProps) {
   const mantineTheme = useMantineTheme();
+  const [showComments, setShowComments] = useState(false);
   return (
     <SNormalPost theme={{ bgColorOnHover: mantineTheme.colors["gray"][0] }}>
       <div
@@ -40,17 +44,20 @@ function NormalPost(props: NormalPostProps) {
             flexDirection: "column",
           }}
         >
-          <Title
+          <LinkedUserName
+            type="hard"
             order={5}
             style={{
+              textDecoration: "none",
               marginLeft: "10px",
               padding: "0",
               marginTop: "0",
               marginBottom: "0",
+              cursor: "pointer",
             }}
-          >
-            {props.data.username}
-          </Title>
+            username={props.data.username}
+          />
+
           <Title
             order={6}
             color="dimmed"
@@ -90,12 +97,31 @@ function NormalPost(props: NormalPostProps) {
                 strokeWidth={"2"}
               />
             </ActionIcon>
-            <ActionIcon variant="subtle" radius={"xl"} size="xl">
+            <ActionIcon
+              variant="subtle"
+              radius={"xl"}
+              size="xl"
+              onClick={() => {
+                setShowComments((p) => !p);
+              }}
+            >
               <MessageCircle size={"16"} />
             </ActionIcon>
           </div>
         </div>
       </div>
+      {showComments && (
+        <div
+          style={{
+            marginLeft: "50px",
+            marginTop: "20px",
+            marginBottom: "20px",
+          }}
+        >
+          <Title order={6}>Comments</Title>
+          <Comments />
+        </div>
+      )}
     </SNormalPost>
   );
 }
