@@ -9,6 +9,7 @@ const SLeftFooter = styled.div`
   flex-direction: column;
   align-items: center;
   width: 300px;
+  margin-right: 30px;
 `;
 
 function LeftFooterIndex() {

@@ -1,6 +1,8 @@
 import { MProfile } from "../Model/MProfile";
 import { Request } from "../Utils/Fetch";
 import { CheckResponse, ThrowFor } from "../Utils/ResponseHandler";
+import {AuthHeaders} from "../../Atoms/Util"
+
 export class ProfileRepo {
   baseUrl: string;
   rq: Request;
@@ -11,9 +13,7 @@ export class ProfileRepo {
 
   async getProfile(token: string): Promise<MProfile> {
     try {
-      const res = await this.rq.Get(`${this.baseUrl}/`, {
-        Authorization: `Bearer ${token}`,
-      });
+      const res = await this.rq.Get(`${this.baseUrl}/`, AuthHeaders(token));
       const { body } = await CheckResponse(res, 200);
       return {
         bio: body.data.bio,
@@ -25,6 +25,40 @@ export class ProfileRepo {
         username: body.data.username,
         updated_at: body.data.updated_at,
       };
+    } catch (err: any) {
+      throw ThrowFor(err, {});
+    }
+  }
+
+  async checkUserName(username: string): Promise<any> {
+    try {
+      const res = await this.rq.Post(`${this.baseUrl}/checkUsername`,{username});
+      const { body } = await CheckResponse(res, 200);
+      console.log(body)
+    } catch (err: any) {
+      throw ThrowFor(err, {});
+    }
+  }
+
+  async updateUserDetails(props:any): Promise<MProfile> {
+    try {
+      const data = {
+        username : props.username,
+        bio : props.bio,
+        image : props.image
+      }
+      const res = await this.rq.Put(`${this.baseUrl}/editProfile`,data,AuthHeaders(props.token));
+      const { body } = await CheckResponse(res, 200);
+      return {
+        bio: body.data.bio,
+        cric_index: body.data.cric_index,
+        email_id: body.data.email_id,
+        interests: [],
+        profile_image_uri: body.data.profile_image_uri,
+        user_id: body.data.user_id,
+        username: body.data.username,
+        updated_at: body.data.updated_at,
+      }
     } catch (err: any) {
       throw ThrowFor(err, {});
     }

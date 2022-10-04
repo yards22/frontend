@@ -37,10 +37,8 @@ const tempMatches: {
 
 function ScoreCarousalIndex() {
   return (
-    <div style={{ width: "300px", height: "300px" }}>
+    <div style={{ width: "300px", height: "200px",marginBottom:"15px"}}>
       <Carousel
-        sx={{ width: "300px", height: "300px", marginBottom: "10px" }}
-        mx="auto"
         withIndicators
         styles={{
           control: {
