@@ -5,8 +5,9 @@ const THEME_KEY = "theme";
 export default class AppStore {
   @observable theme: "light" | "dark" = "light";
   @observable isPhone: boolean = false;
-  @observable isTablet:boolean = false;
-  @observable isDesktop:boolean = true;
+  @observable isTablet: boolean = false;
+  @observable isDesktop: boolean = true;
+  @observable navigationState: number = 0;
 
   constructor() {
     makeAutoObservable(this);
@@ -42,4 +43,8 @@ export default class AppStore {
     this.isTablet = false;
   };
 
+  @action
+  setNavigationState = (state: number) => {
+    this.navigationState = state;
+  };
 }

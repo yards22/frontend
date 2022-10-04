@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
-import NewsIndex from './News/Index'
-import ScoreCarousalIndex from './ScoreCarousal/Index'
+import React from "react";
+import styled from "styled-components";
+import NewsIndex from "./News/Index";
+import ScoreCarousalIndex from "./ScoreCarousal/Index";
 
 const SRightFooter = styled.div`
   display : flex;
@@ -14,10 +14,10 @@ const SRightFooter = styled.div`
 function RightFooterIndex() {
   return (
     <SRightFooter>
-      <ScoreCarousalIndex/>
-      <NewsIndex/>
+      <ScoreCarousalIndex />
+      <NewsIndex />
     </SRightFooter>
-  )
+  );
 }
 
-export default RightFooterIndex
+export default RightFooterIndex;

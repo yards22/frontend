@@ -1,6 +1,5 @@
-import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
-import styled from 'styled-components';
-
+import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
+import styled from "styled-components";
 
 const SLeaderBoardIndex = styled.div`
    height : 300px;
@@ -19,7 +18,7 @@ function LeaderBoardIndex() {
             </div>
         </Card>
     </SLeaderBoardIndex>
-  )
+  );
 }
 
-export default LeaderBoardIndex
+export default LeaderBoardIndex;

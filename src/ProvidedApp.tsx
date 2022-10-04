@@ -36,6 +36,7 @@ function ProvidedApp(props: ProvidedAppProps) {
                     withGlobalStyles
                     withNormalizeCSS
                     theme={{
+                      loader: "dots",
                       colors: {},
                       colorScheme: appStore.theme,
                     }}

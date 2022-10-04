@@ -62,7 +62,7 @@ function NewAccount(props: NewAccountProps) {
                       });
                     }}
                   />
-                  <button
+                  <Button
                     disabled={
                       !ValidateEmail(data.mail_id) ||
                       !buttonName.includes("end OTP")
@@ -94,7 +94,7 @@ function NewAccount(props: NewAccountProps) {
                     }}
                   >
                     {buttonName}
-                  </button>
+                  </Button>
                 </div>
                 {buttonName.includes("Resend") && (
                   <div

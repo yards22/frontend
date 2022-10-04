@@ -1,4 +1,3 @@
-import ProvidedApp from "./ProvidedApp";
 import ProtectedRoutes from "./ProtectedRoutes";
 import ProfileIndex from "./Screen/ProfileScreen/Index";
 import LogoutIndex from "./Screen/LogoutScreen/Index";
@@ -6,14 +5,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginIndex from "./Screen/LoginScreen/Index";
 import NetworkIndex from "./Screen/NetworkScreen/Index";
 import { useStores } from "./Logic/Providers/StoresProviders";
-import { useState } from "react";
 import { useEffect } from "react";
 import RightFooterIndex from "./Organs/RightFooter/Index";
 import LeftFooterIndex from "./Organs/LeftFooter/Index";
 import styled from "styled-components";
 import { Observer } from "mobx-react-lite";
 import NavBarIndex from "./Organs/Navbar/Index";
-import NavBarBottomIndex from "./Organs/NavBarBottom/Index";
+import NavBarBottomIndex from "./Organs/NavbarBottom/Index";
 import NotificationIndex from "./Screen/NotificationScreen/Index";
 import FeedIndex from "./Screen/FeedScreen/Index";
 
@@ -26,26 +24,25 @@ const SApp = styled.section`
 function App() {
   const store = useStores();
 
-  function handleScreenWidthChanges(){
-    if(window.innerWidth<=650){
-       store.appStore.setIsPhone(true);
-    }else if(window.innerWidth<=1250){
+  function handleScreenWidthChanges() {
+    if (window.innerWidth <= 650) {
+      store.appStore.setIsPhone(true);
+    } else if (window.innerWidth <= 1250) {
       store.appStore.setIsTablet(true);
-    }else{
+    } else {
       store.appStore.setIsDesktop(true);
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     handleScreenWidthChanges();
-    window.addEventListener('resize',handleScreenWidthChanges);
-  },[])
-
+    window.addEventListener("resize", handleScreenWidthChanges);
+  }, []);
 
   return (
-      <Observer>
-        {()=>{
-        const {appStore , authStore} = store;
+    <Observer>
+      {() => {
+        const { appStore, authStore } = store;
         return (
           <>   
               { authStore.user && <NavBarIndex/>}
@@ -72,11 +69,9 @@ function App() {
               { authStore.user && !appStore.isPhone && <RightFooterIndex/>}
               { authStore.user && appStore.isPhone && <NavBarBottomIndex/>}
           </>
-          )
-       }}
-        </Observer>
-      
-    
+        );
+      }}
+    </Observer>
   );
 }
 

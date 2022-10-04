@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 const SCoverPhotoSection = styled.div`
     width : 100%;
@@ -7,9 +7,7 @@ const SCoverPhotoSection = styled.div`
 `;
 
 function CoverPhotoSection() {
-  return (
-    <SCoverPhotoSection></SCoverPhotoSection>
-  )
+  return <SCoverPhotoSection></SCoverPhotoSection>;
 }
 
-export default CoverPhotoSection
+export default CoverPhotoSection;

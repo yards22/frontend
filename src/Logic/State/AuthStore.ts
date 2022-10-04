@@ -7,6 +7,7 @@ export class AuthStore {
   @observable user: MAuth | null = null;
   @observable isLoading: boolean = false;
   @observable token: string | null = null;
+  @observable isNewUser: boolean = false;
 
   authRepo: AuthRepo;
 
@@ -19,6 +20,11 @@ export class AuthStore {
   @action
   SetUser = (user: MAuth | null) => {
     this.user = user;
+  };
+
+  @action
+  SetIsNewUser = (v: boolean) => {
+    this.isNewUser = v;
   };
 
   @action
@@ -102,6 +108,7 @@ export class AuthStore {
       );
       this.SetUser(user_data);
       this.SetToken(token);
+      this.SetIsNewUser(true);
     } catch (err) {
     } finally {
       this.SetLoading(false);

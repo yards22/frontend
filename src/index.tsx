@@ -22,10 +22,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-     <ProvidedApp>
-       <SIndex>
-           <App />
-       </SIndex>
-     </ProvidedApp>
+    <ProvidedApp>
+      <App />
+    </ProvidedApp>
   </React.StrictMode>
 );
