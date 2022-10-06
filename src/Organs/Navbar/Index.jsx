@@ -37,7 +37,7 @@ function NavBarIndex() {
                   { !appStore.isPhone ?
                     <>
                       <a href='/feed' style={{marginRight:"8px"}}>Feed</a>
-                      <a href='/network' style={{marginRight:"8px"}}>Network</a>
+                      <a href='/explore' style={{marginRight:"8px"}}>Explore</a>
                       <a href='/notification' style={{marginRight:"8px"}}>Notification</a>
                       <a href='/profile'style={{marginRight:"8px"}}>Profile</a>
                       <a href='/logout'style={{marginRight:"8px"}}>Logout</a>

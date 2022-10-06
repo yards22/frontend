@@ -37,7 +37,7 @@ const tempMatches: {
 
 function ScoreCarousalIndex() {
   return (
-    <div style={{ width: "300px", height: "200px",marginBottom:"15px"}}>
+    <div style={{ width: "100%", height: "200px",marginBottom:"15px"}}>
       <Carousel
         withIndicators
         styles={{
@@ -47,6 +47,7 @@ function ScoreCarousalIndex() {
               cursor: "default",
             },
           },
+          
         }}
         dragFree
         slideGap="md"

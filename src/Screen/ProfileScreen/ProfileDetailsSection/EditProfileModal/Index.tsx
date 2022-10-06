@@ -5,7 +5,7 @@ import { useStores } from "../../../../Logic/Providers/StoresProviders";
 import EditPageOne from "./EditPageOne/EditPageOne";
 import EditPageTwo from "./EditPageTwo/EditPageTwo";
 
-const SEditProfileIndex = styled.div`
+const SEditProfileModalIndex = styled.div`
    width : 100%;
    display : flex;
    flex-direction : column;
@@ -16,11 +16,11 @@ const SEditProfileIndex = styled.div`
    overflow: scroll;
 `
 
-interface EditProfileIndexProps{
+interface EditProfileIndexModalProps{
    profileInfo : MProfile | null,
 }
 
-function EditProfileModalIndex(props: EditProfileIndexProps) {
+function EditProfileModalIndex(props: EditProfileIndexModalProps) {
   const [currentEditPage,setCurrentEditPage] = useState(1);
   const [bio , setBio] = useState<string|null|undefined>("");
   const [username , setUserName] = useState<string|undefined>("");
@@ -51,7 +51,7 @@ function EditProfileModalIndex(props: EditProfileIndexProps) {
   }
 
   return (
-    <SEditProfileIndex>
+    <SEditProfileModalIndex>
       { currentEditPage === 1 
            && 
          <EditPageOne 
@@ -68,7 +68,7 @@ function EditProfileModalIndex(props: EditProfileIndexProps) {
             handleChangeTheCurrentPage = {handleChangeTheCurrentPage}
             handleSubmitNewUserDetails = {handleSubmitNewUserDetails}
          />}
-    </SEditProfileIndex>
+    </SEditProfileModalIndex>
   )
 }
 

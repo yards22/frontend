@@ -14,18 +14,22 @@ import NavBarIndex from "./Organs/Navbar/Index";
 import NavBarBottomIndex from "./Organs/NavbarBottom/Index";
 import NotificationIndex from "./Screen/NotificationScreen/Index";
 import FeedIndex from "./Screen/FeedScreen/Index";
+import TopBar from "./Organs/Navbar/TopBar";
+import BottomBar from "./Organs/Navbar/BottomBar";
 
 const SApp = styled.section`
   width : 100%;
   max-width : 600px;
   overflow : auto;
+  padding: 10px 20px 10px 20px;
 `
 
 function App() {
   const store = useStores();
 
   function handleScreenWidthChanges() {
-    if (window.innerWidth <= 650) {
+    store.appStore.setDeviceWidth(window.innerWidth)
+    if (window.innerWidth <= 700) {
       store.appStore.setIsPhone(true);
     } else if (window.innerWidth <= 1250) {
       store.appStore.setIsTablet(true);
@@ -45,7 +49,7 @@ function App() {
         const { appStore, authStore } = store;
         return (
           <>   
-              { authStore.user && <NavBarIndex/>}
+              { authStore.user && <TopBar/>}
               { authStore.user && appStore.isDesktop && <LeftFooterIndex/>}
               <SApp
                 style={{
@@ -56,7 +60,7 @@ function App() {
                     <Routes>
                       <Route path="/login" element={<LoginIndex />} />
                       <Route element={<ProtectedRoutes/>}>
-                          <Route path="network" element={<NetworkIndex />} />
+                          <Route path="explore" element={<NetworkIndex />} />
                           <Route path="profile" element={<ProfileIndex />} />
                           <Route path="logout" element={<LogoutIndex />} />
                           <Route path="notification" element={<NotificationIndex/>}/>
@@ -67,7 +71,7 @@ function App() {
                   </Router>
               </SApp>
               { authStore.user && !appStore.isPhone && <RightFooterIndex/>}
-              { authStore.user && appStore.isPhone && <NavBarBottomIndex/>}
+              { authStore.user && appStore.isPhone && <BottomBar/>}
           </>
         );
       }}

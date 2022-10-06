@@ -26,6 +26,10 @@ function TopBar() {
       <div
         style={{
           background: mantineTheme.colors[mantineTheme.primaryColor][6],
+          position : "fixed",
+          top : "0",
+          left : "0",
+          right : "0",
           height: "50px",
           width: "100%",
           display: "flex",
@@ -46,14 +50,17 @@ function TopBar() {
         return (
           <div
             style={{
+              position : "fixed",
+              top : "0",
+              left : "0",
+              right : "0",
               background: mantineTheme.colors["gray"][0],
-              border: "1px solid " + mantineTheme.colors["gray"][3],
+              border: "1px solid " + mantineTheme.colors["green"][3],
               display: "flex",
               justifyContent: "flex-end",
               alignItems: "center",
               height: "60px",
               width: "100%",
-              maxWidth: "600px",
             }}
           >
             <STopBar

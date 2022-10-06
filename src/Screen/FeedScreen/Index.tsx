@@ -6,7 +6,6 @@ import { useStores } from "../../Logic/Providers/StoresProviders";
 import NewPost from "./Post/NewPost";
 import NormalPost from "./Post/NormalPost";
 const SFeedIndex = styled.section`
-  height: 100%;
   width: 100%;
   max-width: 600px;
   border: 0.2px solid #bdbdbda0;

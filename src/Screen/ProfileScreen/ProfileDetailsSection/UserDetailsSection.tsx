@@ -1,22 +1,31 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Button, Modal } from "@mantine/core";
+import { Button, Modal, Menu, Center } from "@mantine/core";
 import IconWrapper from "../../../Atoms/IconWrapper";
 import { IconPencil } from "../../../Atoms/Icons";
 import { Observer } from "mobx-react-lite";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import EditProfileModalIndex from "./EditProfileModal/Index";
+import { MoreVertical , Trash2 } from "react-feather"
+
 
 const SUserDetailsSection = styled.div`
   padding: 0px 15px 20px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 `;
 
-const SEditButtonContainer = styled.div`
-  height: 70px;
+
+const SSubContainer = styled.div`
+  min-width: 40px;
+  width: 30%;
   display: flex;
-  justify-content: end;
-  padding-top: 25px;
-`;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+`
 
 function UserDetailsSection() {
   const [editProfileModal, setEditProfileModal] = useState(false);
@@ -31,9 +40,50 @@ function UserDetailsSection() {
         const { profileStore } = store;
         return (
           <SUserDetailsSection>
-            <SEditButtonContainer>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <h2 style={{ margin: "0px" }}>
+                {profileStore.profile?.username}
+              </h2>
+              <p style={{ margin: "0px" }}>{profileStore.profile?.email_id}</p>
+            </div>
+            <div
+              style={{
+                minWidth : "150px",
+                width : "95%",
+                display : "flex",
+                justifyContent : "center"           
+              }}
+            >
+              <SSubContainer>
+                 <h3 style={{margin: "0px"}}>600</h3>
+                 <p style={{margin: "0px"}}>Following</p>
+              </SSubContainer>
+              <SSubContainer>
+                 <h3 style={{margin: "0px"}}>600</h3>
+                 <p style={{margin: "0px"}}>Following</p>
+              </SSubContainer>
+              <SSubContainer>
+                 <h3 style={{margin: "0px"}}>{profileStore?.profile?.cric_index}</h3>
+                 <p style={{margin: "0px"}}>Cric-Index</p>
+              </SSubContainer>
+            </div>
+            <div
+              style={{
+                minWidth : "150px",
+                width : "90%",
+                display : "flex",
+                justifyContent : "center" ,
+                marginTop : "15px",
+              }}
+            >
               <Button
                 variant="outline"
+                fullWidth
                 rightIcon={<IconWrapper>{IconPencil}</IconWrapper>}
                 onClick={() => {
                   setEditProfileModal(true);
@@ -58,28 +108,27 @@ function UserDetailsSection() {
               >
                  <EditProfileModalIndex profileInfo={profileStore.profile}/>
               </Modal>
-            </SEditButtonContainer>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <h3 style={{ margin: "0px" }}>
-                {profileStore.profile?.username}
-              </h3>
-              <p style={{ margin: "0px" }}>{profileStore.profile?.email_id}</p>
-              <p style={{ margin: "0px" }}>{profileStore.profile?.bio}</p>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <p style={{ margin: "0px" }}>Created_At</p>
-                <p style={{ margin: "0px" }}>{profileStore.profile?.cric_index}</p>
-              </div>
-              <div></div>
+              <Menu shadow="md" width={200}>
+                 <Menu.Target>
+                    <Center>
+                      <MoreVertical 
+                        style={{
+                          border : "1px solid gray",
+                          height : "35px",
+                          paddingTop : "5px",
+                          paddingBottom : "5px",
+                          width : "30px",
+                          borderRadius : "5px",
+                          marginLeft : "8px",
+                          cursor : "pointer",
+                        }}
+                      />
+                    </Center>
+                 </Menu.Target>
+                 <Menu.Dropdown>
+                    <Menu.Item color="red" icon={<Trash2 size={20}/>}>Delete my account</Menu.Item>
+                 </Menu.Dropdown>
+              </Menu>
             </div>
           </SUserDetailsSection>
         );

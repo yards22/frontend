@@ -5,7 +5,9 @@ import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import ProfileDetailsSectionIndex from "./ProfileDetailsSection/Index";
 
-const SProfileIndex = styled.div``;
+const SProfileIndex = styled.div`
+  width: 100%;
+`;
 function ProfileIndex() {
   const store = useStores();
   useEffect(() => {

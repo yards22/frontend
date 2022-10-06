@@ -1,8 +1,10 @@
+import { Observer } from "mobx-react-lite";
 import styled from "styled-components";
+import { useStores } from "../../../Logic/Providers/StoresProviders";
 
 const SScoreCarousalCard = styled.div`
   height: 200px;
-  width: 300px;
+  width: ${(p: any)=>(p.theme.width >800 ? "300px" : `${p.theme.width * 36.5 / 100}px`)};
   border: 1px solid brown;
   margin: 0px;
   display: flex;
@@ -20,7 +22,25 @@ interface ScoreCarousalCardProps {
 }
 
 function ScoreCarousalCard(props: ScoreCarousalCardProps) {
-  return <SScoreCarousalCard>{props.battingTeam}</SScoreCarousalCard>;
+
+  const store = useStores();
+
+  return (
+    <Observer>
+      {
+        () =>{
+          return (
+            <SScoreCarousalCard
+               theme={{width : store.appStore.deviceWidth}}
+            >
+              {props.battingTeam}
+            </SScoreCarousalCard>
+          )
+        }
+      }
+    </Observer>
+   )
+  ;
 }
 
 export default ScoreCarousalCard;
