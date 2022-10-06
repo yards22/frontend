@@ -10,8 +10,6 @@ import RightFooterIndex from "./Organs/RightFooter/Index";
 import LeftFooterIndex from "./Organs/LeftFooter/Index";
 import styled from "styled-components";
 import { Observer } from "mobx-react-lite";
-import NavBarIndex from "./Organs/Navbar/Index";
-import NavBarBottomIndex from "./Organs/NavbarBottom/Index";
 import NotificationIndex from "./Screen/NotificationScreen/Index";
 import FeedIndex from "./Screen/FeedScreen/Index";
 import TopBar from "./Organs/Navbar/TopBar";
@@ -21,7 +19,6 @@ const SApp = styled.section`
   width : 100%;
   max-width : 600px;
   overflow : auto;
-  padding: 10px 20px 10px 20px;
 `
 
 function App() {

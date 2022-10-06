@@ -47,7 +47,10 @@ function EditProfileModalIndex(props: EditProfileIndexModalProps) {
   }
 
   const handleSubmitNewUserDetails = (interestsString : string)=>{
-    store.profileStore.UpdateProfile({username , bio, image : profileImageUri , token : store.authStore.token})
+    const formData = new FormData();
+    formData.append('image',profileImageUri)
+  
+    store.profileStore.UpdateProfile({username , bio, formData , token : store.authStore.token})
   }
 
   return (

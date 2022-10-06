@@ -81,6 +81,17 @@ function UserDetailsSection() {
                 marginTop : "15px",
               }}
             >
+              {profileStore?.profile?.bio}
+            </div>
+            <div
+              style={{
+                minWidth : "150px",
+                width : "90%",
+                display : "flex",
+                justifyContent : "center" ,
+                marginTop : "15px",
+              }}
+            >
               <Button
                 variant="outline"
                 fullWidth

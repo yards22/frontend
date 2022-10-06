@@ -23,7 +23,7 @@ root.render(
   <React.StrictMode>
     <ProvidedApp>
       <SIndex>
-      <App />
+        <App />
       </SIndex>
     </ProvidedApp>
   </React.StrictMode>

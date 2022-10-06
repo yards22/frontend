@@ -28,7 +28,8 @@ function BottomBar() {
         return (
           <SBottomBar
             style={{
-              background: mantineTheme.colors["gray"][0],
+              // background: mantineTheme.colors["gray"][0],
+              backgroundColor : "#ffffff",
               border: "1px solid " + mantineTheme.colors["gray"][3],
             }}
           >

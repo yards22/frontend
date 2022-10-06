@@ -24,12 +24,12 @@ function ProfileDetailsSectionIndex(props:ProfileDetailsSectionIndexProps) {
     >
         <div
           style={{
-            display : "flex",
-            justifyContent : "end",
-            width : "100%",
+            position : "absolute",
+            top : "10px",
+            right : "10px"
           }}
         >
-          <HoverCard width={250} shadow="md">
+          <HoverCard width={250} shadow="md" >
             <HoverCard.Target>
               <Info style={{
                 cursor : "pointer",
@@ -38,13 +38,13 @@ function ProfileDetailsSectionIndex(props:ProfileDetailsSectionIndexProps) {
               }}/>
             </HoverCard.Target>
             <HoverCard.Dropdown>
-               Circle around your profile pic shows your progress for upgrading to next tab
+               Circle around your profile pic shows your progress for upgrading to next slab
             </HoverCard.Dropdown>
           </HoverCard>
         </div>
         <RingProgress
           sections={ [{ value: 40, color: 'blue', tooltip: '40 of current tab reached' }]}
-          size = {160}
+          size = {140}
           thickness = {4}
           roundCaps = {true}
           label={

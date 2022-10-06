@@ -25,7 +25,11 @@ function ProvidedApp(props: ProvidedAppProps) {
     new ProfileRepo("http://localhost:4000/profile", rq)
   );
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor : "#e5e7eb"
+      }}
+    >
       <StoresContext.Provider value={{ appStore, authStore, profileStore }}>
         {
           <Observer>

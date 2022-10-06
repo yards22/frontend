@@ -30,7 +30,7 @@ function TopBar() {
           top : "0",
           left : "0",
           right : "0",
-          height: "50px",
+          height: "60px",
           width: "100%",
           display: "flex",
           justifyContent: "center",
@@ -54,62 +54,83 @@ function TopBar() {
               top : "0",
               left : "0",
               right : "0",
-              background: mantineTheme.colors["gray"][0],
-              border: "1px solid " + mantineTheme.colors["green"][3],
+              background: "#ffffff",
+              // border: "1px solid " + mantineTheme.colors["green"][3],
               display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
+              justifyContent: "center",
               height: "60px",
               width: "100%",
             }}
           >
-            <STopBar
-              theme={{
-                color:
-                  appStore.navigationState === 0
-                    ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                    : "gray",
+            <div
+              style={{
+                width : "100%",
+                maxWidth : "1400px",
+                display : "flex",
+                justifyContent : "space-between",
+                alignItems : "center",
+                paddingLeft : "25px",
+                paddingRight : "25px"
               }}
             >
-              <Home size={"20"} />
-              <Text size="xs">Home</Text>
-            </STopBar>
+               <Title color={"black"} order={2}>
+                  22 Yards
+                </Title>
+                <div
+                  style={{
+                    display : "flex",
+                    alignItems : "center"                    
+                  }}
+                >
+                  <STopBar
+                    theme={{
+                      color:
+                        appStore.navigationState === 0
+                          ? mantineTheme.colors[mantineTheme.primaryColor][7]
+                          : "gray",
+                    }}
+                  >
+                    <Home size={"20"} />
+                    <Text size="xs">Home</Text>
+                  </STopBar>
 
-            <STopBar
-              theme={{
-                color:
-                  appStore.navigationState === 1
-                    ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                    : "gray",
-              }}
-            >
-              <Search size={"20"} />
-              <Text size="xs">Search </Text>
-            </STopBar>
+                  <STopBar
+                    theme={{
+                      color:
+                        appStore.navigationState === 1
+                          ? mantineTheme.colors[mantineTheme.primaryColor][7]
+                          : "gray",
+                    }}
+                  >
+                    <Search size={"20"} />
+                    <Text size="xs">Search </Text>
+                  </STopBar>
 
-            <STopBar
-              theme={{
-                color:
-                  appStore.navigationState === 3
-                    ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                    : "gray",
-              }}
-            >
-              <Bell size={"20"} />
-              <Text size="xs">Notifications</Text>
-            </STopBar>
+                  <STopBar
+                    theme={{
+                      color:
+                        appStore.navigationState === 3
+                          ? mantineTheme.colors[mantineTheme.primaryColor][7]
+                          : "gray",
+                    }}
+                  >
+                    <Bell size={"20"} />
+                    <Text size="xs">Notifications</Text>
+                  </STopBar>
 
-            <STopBar
-              theme={{
-                color:
-                  appStore.navigationState === 4
-                    ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                    : "gray",
-              }}
-            >
-              <User size={"20"} />
-              <Text size="xs">Profile</Text>
-            </STopBar>
+                  <STopBar
+                    theme={{
+                      color:
+                        appStore.navigationState === 4
+                          ? mantineTheme.colors[mantineTheme.primaryColor][7]
+                          : "gray",
+                    }}
+                  >
+                    <User size={"20"} />
+                    <Text size="xs">Profile</Text>
+                  </STopBar>
+              </div>
+            </div>
           </div>
         );
       }}

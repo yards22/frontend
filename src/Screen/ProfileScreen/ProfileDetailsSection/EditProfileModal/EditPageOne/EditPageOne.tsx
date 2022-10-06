@@ -47,11 +47,11 @@ function EditPageOne(props:EditPageOneProps) {
 
   function handleProfilePicChange(e:any){
      setProfilePic(URL.createObjectURL(e.target.files[0]))
-    //  setProfilePicUri(e.target.files[0])
-    fileToDataUri(e.target.files[0])
-      .then(dataUri => {
-        setProfilePicUri(dataUri)
-    })
+     setProfilePicUri(e.target.files[0])
+    // fileToDataUri(e.target.files[0])
+    //   .then(dataUri => {
+    //     setProfilePicUri(dataUri)
+    // })
   }
 
   function handleFocusOutUserNameField(){
