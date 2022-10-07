@@ -1,48 +1,60 @@
+import { Group, Avatar, Text } from "@mantine/core";
 import { useEffect, useState } from "react";
 import styled from "styled-components"
 
 const SInterestsCard = styled.div`
-  padding: 4px;
-  height: 50px;
-  border-radius: 10px;
-  border: 1px solid brown;
-  margin: 3px;
+   cursor: pointer;
 `;
 
 interface InterestsCardProps{
-  name : string,
+  image: string,
+  label: string,
+  description: string,
   handleAddInterestToArray(interest: string) : void,
-  handleRemoveInterestFromArray(interest : string) : void ,
-  interestsArray : string[]
+  all : any
+  // handleRemoveInterestFromArray(interest : string) : void ,
+  // interestsArray : string[]
 }
 
 function InterestsCard(props:InterestsCardProps) {
   const [isInterestSelected , setIsInterestSelected] = useState(false);
 
   useEffect(()=>{
-    if(props.interestsArray.includes(props.name)){
-      setIsInterestSelected(true)
-    }
+    // if(props.interestsArray.includes(props.name)){
+    //   setIsInterestSelected(true)
+    // }
   })
   
   const handleInterestSelected = () =>{
-    if(isInterestSelected){
-        setIsInterestSelected(false)
-        props.handleRemoveInterestFromArray(props.name)
-    }else{
-        setIsInterestSelected(true)
-        props.handleAddInterestToArray(props.name)
-    }
+    // if(isInterestSelected){
+    //     setIsInterestSelected(false)
+    //     props.handleRemoveInterestFromArray(props.name)
+    // }else{
+    //     setIsInterestSelected(true)
+    //     props.handleAddInterestToArray(props.name)
+    // }
+    props.handleAddInterestToArray(props.label)
   }
   return (
     <SInterestsCard 
-        key={props.name}
+        key={props.label}
         onClick = {handleInterestSelected}
         style = {{
             backgroundColor : `${isInterestSelected ? "gray": ""}`
         }}
     >
-        {props.name}
+         <div>
+            <Group noWrap>
+              <Avatar src={props.image} />
+
+              <div>
+                <Text>{props.label}</Text>
+                <Text size="xs" color="dimmed">
+                  {props.description}
+                </Text>
+              </div>
+            </Group>
+          </div>
     </SInterestsCard>
   )
 }

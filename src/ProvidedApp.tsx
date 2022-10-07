@@ -27,7 +27,7 @@ function ProvidedApp(props: ProvidedAppProps) {
   return (
     <div
       style={{
-        backgroundColor : "#e5e7eb"
+        backgroundColor : "#E7F5FF"
       }}
     >
       <StoresContext.Provider value={{ appStore, authStore, profileStore }}>

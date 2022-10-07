@@ -19,6 +19,9 @@ const SApp = styled.section`
   width : 100%;
   max-width : 600px;
   overflow : auto;
+  ::-webkit-scrollbar{
+    display: none;
+  }
 `
 
 function App() {

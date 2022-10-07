@@ -3,6 +3,7 @@ import { Observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
+import InterestsSection from "./InterestsSection/InterestsSection";
 import ProfileDetailsSectionIndex from "./ProfileDetailsSection/Index";
 
 const SProfileIndex = styled.div`
@@ -21,6 +22,7 @@ function ProfileIndex() {
         return profileStore.profile ? (
           <SProfileIndex>
             <ProfileDetailsSectionIndex profileInfo={profileStore.profile}/>
+            <InterestsSection/>
           </SProfileIndex>
         ) : (
           <div
