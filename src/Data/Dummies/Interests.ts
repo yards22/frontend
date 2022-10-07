@@ -24,4 +24,22 @@ export const interestsDummyData = [
       value: 'Spongebob Squarepants',
       description: 'Not just a sponge',
     },
+    {
+      image: 'https://img.icons8.com/clouds/256/000000/futurama-bender.png',
+      label: 'Bender Bending Rodríguez2',
+      value: 'Bender Bending Rodríguez2',
+      description: 'Fascinated with cooking',
+    },
+    {
+      image: 'https://img.icons8.com/clouds/256/000000/futurama-bender.png',
+      label: 'Bender Bending Rodríguez33',
+      value: 'Bender Bending Rodríguez33',
+      description: 'Fascinated with cooking',
+    },
+    {
+      image: 'https://img.icons8.com/clouds/256/000000/futurama-bender.png',
+      label: 'Bender Bending Rodrdndíguez',
+      value: 'Bender Bending Rodrdndíguez',
+      description: 'Fascinated with cooking',
+    },
   ];

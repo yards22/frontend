@@ -18,9 +18,6 @@ interface ProfilePhotoProps{
 
 function ProfilePhoto(props:ProfilePhotoProps) {
 
-  useState(()=>{
-    console.log(props.profileImageUri)
-  })
   return (
       <SProfilePhoto>
         {props.profileImageUri ? 

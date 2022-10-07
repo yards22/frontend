@@ -11,9 +11,9 @@ const SEditProfileModalIndex = styled.div`
    flex-direction : column;
    align-items : center;
    position : relative;
-   min-height: 400px;
+   height: 400px;
    padding-bottom: 50px;
-   overflow: scroll;
+   overflow: hidden;
 `
 
 interface EditProfileIndexModalProps{
