@@ -11,13 +11,15 @@ import SignInWithGoogle from "./SignInWithGoogle";
 const SLeftPane = styled.section`
   width: 50%;
   padding: 40px;
+  padding-left: 100px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  @media (max-width: 700px) {
+  @media (max-width: 750px) {
     width: 100%;
+    padding-left: 40px;
   }
 `;
 function LeftPane() {
