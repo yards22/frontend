@@ -1,4 +1,4 @@
-import { Card, Image, Text, Badge, Button, Group, Textarea } from "@mantine/core";
+import { Card, Image, Text, Badge, Button, Group, Textarea, Divider } from "@mantine/core";
 import styled from "styled-components";
 const SNewsIndex = styled.div`
   width: 100%;
@@ -8,6 +8,10 @@ const SNewsIndex = styled.div`
 function NewsIndex() {
   return (
     <SNewsIndex>
+      <Text italic size={"md"} style={{marginLeft:"5px", marginTop:"10px"}}>
+           FeedBack
+       </Text>
+       <Divider my="sm" color={"black"} style={{ marginTop:"5px" }}/>
       <Card 
          shadow="sm" 
          p="lg" 

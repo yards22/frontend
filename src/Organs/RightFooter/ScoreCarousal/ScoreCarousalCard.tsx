@@ -35,7 +35,6 @@ function ScoreCarousalCard(props: ScoreCarousalCardProps) {
             <SScoreCarousalCard
                theme={{width : store.appStore.deviceWidth}}
             >
-              <Text size={"lg"}>Coming soon</Text>
               <img src={props.image} width={"100%"} height={"100%"}/>
             </SScoreCarousalCard>
           )

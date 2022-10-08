@@ -1,5 +1,6 @@
 import { Carousel } from "@mantine/carousel";
 import ScoreCarousalCard from "./ScoreCarousalCard";
+import { Text , Divider } from "@mantine/core";
 
 const tempMatches: {
   battingTeam: string;
@@ -42,6 +43,10 @@ const tempMatches: {
 function ScoreCarousalIndex() {
   return (
     <div style={{ width: "100%", height: "200px",marginBottom:"15px"}}>
+      <Text italic size={"md"} style={{marginLeft:"5px"}}>
+           Coming Soon...
+       </Text>
+       <Divider my="sm" color={"black"} style={{ marginTop:"5px" }}/>
       <Carousel
         withIndicators
         styles={{
