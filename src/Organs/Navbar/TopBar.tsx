@@ -1,6 +1,6 @@
 import { Title, Text, useMantineTheme } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
-import { Home, Bell, User, Search } from "react-feather";
+import { Home, Bell, User, Search, Globe } from "react-feather";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
@@ -32,6 +32,7 @@ function TopBar() {
           position : "fixed",
           top : "0",
           left : "0",
+          zIndex : "100",
           right : "0",
           height: "60px",
           width: "100%",
@@ -97,6 +98,19 @@ function TopBar() {
                   >
                     <Home size={"20"} />
                     <Text size="xs">Home</Text>
+                  </STopBar>
+
+                  <STopBar
+                    theme={{
+                      color:
+                        appStore.navigationState === 2
+                          ? mantineTheme.colors[mantineTheme.primaryColor][7]
+                          : "gray",
+                    }}
+                    onClick = {() => {navigate('/explore');appStore.setNavigationState(2)}}
+                  >
+                    <Globe size={"20"} />
+                    <Text size="xs">Explore</Text>
                   </STopBar>
                   
                   <STopBar

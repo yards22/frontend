@@ -4,7 +4,7 @@ import {  Image } from "@mantine/core";
 const SProfilePhoto = styled.div`
     width : 110px;
     height : 110px;
-    border-radius : 50px;
+    border-radius : 55px;
     background-color : red;
     border : 4px solid white;
     overflow: hidden;
@@ -21,8 +21,8 @@ function ProfilePhoto(props:ProfilePhotoProps) {
       <SProfilePhoto>
         {props.profileImageUri ? 
             <Image
-              width={"105px"}
-              height={"105px"}
+              width={"110px"}
+              height={"110px"}
               src={props.profileImageUri}
               withPlaceholder
           />
