@@ -1,5 +1,5 @@
 import { Card } from "@mantine/core"
-// import ProfilePhoto from "../../../Atoms/ProfilePhoto"
+import ProfilePhoto from "../../../Atoms/ProfilePhoto"
 
 function RecommendationsCard() {
   return (
@@ -14,7 +14,7 @@ function RecommendationsCard() {
           alignItems : "center"
         }}
     >     
-        {/* <ProfilePhoto userName="saichand" profileImageUri={"gy"}  height={"110px"}/> */}
+        <ProfilePhoto userName="saichand" profileImageUri={"gy"}  height={"110px"}/>
          
     </Card>
   )
