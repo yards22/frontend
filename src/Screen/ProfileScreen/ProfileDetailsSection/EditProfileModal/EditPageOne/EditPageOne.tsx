@@ -1,7 +1,7 @@
 import { Button, Input, Textarea } from "@mantine/core";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components"
-import ProfilePhoto from "../../ProfilePhoto";
+import ProfilePhoto from "../../../../../Atoms/ProfilePhoto";
 
 const SEditPageOne = styled.div`
    display: flex;
@@ -74,7 +74,13 @@ function EditPageOne(props:EditPageOneProps) {
                 padding: "0px 15px",
                 marginBottom : "20px"
              }}>
-             <ProfilePhoto profileImageUri={profilePic} userName={username}/>
+              
+                  <ProfilePhoto 
+                      profileImageUri={profilePic} 
+                      userName={username}
+                      height = {"110px"} 
+                    />
+          
              <div style={{
                 display: "flex",
                 justifyContent : "space-around",

@@ -3,7 +3,7 @@ import ProfileIndex from "./Screen/ProfileScreen/Index";
 import LogoutIndex from "./Screen/LogoutScreen/Index";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginIndex from "./Screen/LoginScreen/Index";
-import NetworkIndex from "./Screen/NetworkScreen/Index";
+import ExploreIndex from "./Screen/ExploreScreen/Index";
 import { useStores } from "./Logic/Providers/StoresProviders";
 import { useEffect } from "react";
 import RightFooterIndex from "./Organs/RightFooter/Index";
@@ -61,7 +61,7 @@ function App() {
                     <Routes>
                       <Route path="/login" element={<LoginIndex />} />
                       <Route element={<ProtectedRoutes/>}>
-                          <Route path="explore" element={<NetworkIndex />} />
+                          <Route path="explore" element={<ExploreIndex />} />
                           <Route path="profile" element={<ProfileIndex />} />
                           <Route path="logout" element={<LogoutIndex />} />
                           <Route path="notifications" element={<NotificationIndex/>}/>

@@ -6,6 +6,11 @@ import { useRef, useState } from "react";
 const SNewsIndex = styled.div`
   width: 100%;
   margin-top: 30px;
+  height: 100%;
+   overflow-y: auto;
+   ::-webkit-scrollbar {
+    display: none;
+   }
 `;
 
 function NewsIndex() {
@@ -78,7 +83,7 @@ function NewsIndex() {
               >
                  <p style={{fontSize:"15px",margin:"0px"}}>{selectedImageName}</p>
               </div>
-              <X size={16} style={{marginLeft :"5px"}} onClick={()=>{setSelectedImage("") ; setSelectedImageName("")}}/>
+              <X size={16} style={{marginLeft :"5px", cursor:"pointer"}} onClick={()=>{setSelectedImage("") ; setSelectedImageName("")}}/>
            </div>
          }
          <Button

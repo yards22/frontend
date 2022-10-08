@@ -13,24 +13,30 @@ const SProfilePhoto = styled.div`
 interface ProfilePhotoProps{
    userName : string | undefined,
    profileImageUri : string | null | undefined,
+   height : number | string,
 }
 
 function ProfilePhoto(props:ProfilePhotoProps) {
 
   return (
-      <SProfilePhoto>
-        {props.profileImageUri ? 
+      <>
+        {
+          props.profileImageUri ? 
             <Image
-              width={"105px"}
-              height={"105px"}
+              width={props.height}
+              height = {props.height}
               src={props.profileImageUri}
               withPlaceholder
+              radius={70}
           />
           :  
-        <h1
-          style={{color : "white"}}
-        > {props.userName?.charAt(0)}</h1>}
-      </SProfilePhoto>
+          <SProfilePhoto>
+              <h1
+                style={{color : "white"}}
+              > {props.userName?.charAt(0)}</h1>
+          </SProfilePhoto>         
+        } 
+      </>
   )
 }
 

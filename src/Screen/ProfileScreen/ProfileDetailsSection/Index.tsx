@@ -1,4 +1,4 @@
-import ProfilePhoto from "./ProfilePhoto"
+import ProfilePhoto from "../../../Atoms/ProfilePhoto"
 import UserDetailsSection from "./UserDetailsSection"
 import { Card, Center, HoverCard, RingProgress } from "@mantine/core"
 import { MProfile } from "../../../Logic/Model/MProfile"
@@ -49,7 +49,11 @@ function ProfileDetailsSectionIndex(props:ProfileDetailsSectionIndexProps) {
           roundCaps = {true}
           label={
             <Center>
-               <ProfilePhoto profileImageUri={props.profileInfo?.profile_image_uri} userName={props.profileInfo?.username}/>
+                <ProfilePhoto 
+                   profileImageUri={props.profileInfo?.profile_image_uri} 
+                   userName={props.profileInfo?.username} 
+                   height = {"110px"}
+                 />
             </Center>
           }
         />
