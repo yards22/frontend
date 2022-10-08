@@ -1,4 +1,4 @@
-import ProfilePhoto from "../../../Atoms/ProfilePhoto"
+import ProfilePhoto from "./ProfilePhoto";
 import UserDetailsSection from "./UserDetailsSection"
 import { Card, Center, HoverCard, RingProgress } from "@mantine/core"
 import { MProfile } from "../../../Logic/Model/MProfile"

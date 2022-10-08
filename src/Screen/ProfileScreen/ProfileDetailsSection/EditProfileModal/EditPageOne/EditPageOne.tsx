@@ -1,7 +1,7 @@
 import { Button, Input, Textarea } from "@mantine/core";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components"
-import ProfilePhoto from "../../../../../Atoms/ProfilePhoto";
+import ProfilePhoto from "../../ProfilePhoto";
 
 const SEditPageOne = styled.div`
    display: flex;
