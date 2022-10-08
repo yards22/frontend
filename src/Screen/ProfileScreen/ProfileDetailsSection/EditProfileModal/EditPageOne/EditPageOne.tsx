@@ -78,7 +78,6 @@ function EditPageOne(props:EditPageOneProps) {
                   <ProfilePhoto 
                       profileImageUri={profilePic} 
                       userName={username}
-                      height = {"110px"} 
                     />
           
              <div style={{

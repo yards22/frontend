@@ -7,23 +7,22 @@ const SNetworkIndex = styled.div`
   flex-direction: column;
   align-items: center;
 `
-
-const SExploreTopBar = styled.div`
-  width: 40%;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid black;
-  cursor: pointer;
-  margin-bottom: 10px;
-
+const SExploreSectionHeading = styled.div`
+   width: 100%;
+   /* background-color: #e0dcd1; */
+   border-bottom: 0.2em solid black;
+   color: black;
+   padding: 6px 10px;
+   margin-bottom: 2px;
 `
 
 function ExploreIndex() {
 
   return(
       <SNetworkIndex>
+         <SExploreSectionHeading>
+             Recommendations
+          </SExploreSectionHeading>
          <div
            style={{
              display : "flex",
@@ -31,8 +30,7 @@ function ExploreIndex() {
              justifyContent : "center"
            }}
          >
-           <PeopleRecommendationsSection/>
-           
+           <PeopleRecommendationsSection/> 
          </div>
       </SNetworkIndex>
   )

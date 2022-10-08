@@ -52,7 +52,6 @@ function ProfileDetailsSectionIndex(props:ProfileDetailsSectionIndexProps) {
                 <ProfilePhoto 
                    profileImageUri={props.profileInfo?.profile_image_uri} 
                    userName={props.profileInfo?.username} 
-                   height = {"110px"}
                  />
             </Center>
           }
