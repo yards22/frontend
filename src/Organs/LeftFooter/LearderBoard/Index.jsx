@@ -35,7 +35,7 @@ const rowsWeekly = leaderBoardDummyData.map((element) => (
 ));
 
 const rowsGlobal = leaderBoardDummyDataGlobal.map((element) => (
-  <tr key={element.name}>
+  <tr key={element.username}>
     <td style={{height:"22px",width:"100%"}}>{element.username}</td>
     <td style={{height:"22px",textAlign:"center"}}>{element.cricindex}</td>
   </tr>
