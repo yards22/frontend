@@ -1,6 +1,5 @@
-import { useState } from "react";
 import styled from "styled-components"
-import { Center, Image, RingProgress } from "@mantine/core";
+import {  Image } from "@mantine/core";
 
 const SProfilePhoto = styled.div`
     width : 110px;

@@ -1,9 +1,10 @@
 import { Title, Text, useMantineTheme } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
-import React from "react";
 import { Home, Bell, User, Search } from "react-feather";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
+
 const STopBar = styled.a`
   display: flex;
   flex-direction: column;
@@ -21,6 +22,8 @@ const STopBar = styled.a`
 function TopBar() {
   const stores = useStores();
   const mantineTheme = useMantineTheme();
+  const navigate = useNavigate();
+
   if (stores.appStore.isPhone) {
     return (
       <div
@@ -82,6 +85,7 @@ function TopBar() {
                     alignItems : "center"                    
                   }}
                 >
+                  
                   <STopBar
                     theme={{
                       color:
@@ -89,11 +93,12 @@ function TopBar() {
                           ? mantineTheme.colors[mantineTheme.primaryColor][7]
                           : "gray",
                     }}
+                    onClick = {() => {navigate('/feed');appStore.setNavigationState(0)}}
                   >
                     <Home size={"20"} />
                     <Text size="xs">Home</Text>
                   </STopBar>
-
+                  
                   <STopBar
                     theme={{
                       color:
@@ -113,6 +118,7 @@ function TopBar() {
                           ? mantineTheme.colors[mantineTheme.primaryColor][7]
                           : "gray",
                     }}
+                    onClick = {() => {navigate('/notifications');appStore.setNavigationState(3)}}
                   >
                     <Bell size={"20"} />
                     <Text size="xs">Notifications</Text>
@@ -125,6 +131,12 @@ function TopBar() {
                           ? mantineTheme.colors[mantineTheme.primaryColor][7]
                           : "gray",
                     }}
+                    onClick = {() => {navigate({
+                                        pathname : "/profile",
+                                        search : `${createSearchParams({user : `${stores.profileStore.profile?.username}`})}`
+                                    })
+                                    appStore.setNavigationState(4)
+                   }}
                   >
                     <User size={"20"} />
                     <Text size="xs">Profile</Text>

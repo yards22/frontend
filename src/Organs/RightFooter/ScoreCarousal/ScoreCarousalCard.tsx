@@ -1,4 +1,3 @@
-import { Text } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import styled from "styled-components";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
@@ -35,7 +34,7 @@ function ScoreCarousalCard(props: ScoreCarousalCardProps) {
             <SScoreCarousalCard
                theme={{width : store.appStore.deviceWidth}}
             >
-              <img src={props.image} width={"100%"} height={"100%"}/>
+              <img src={props.image} width={"100%"} height={"100%"} alt="Coming Soon"/>
             </SScoreCarousalCard>
           )
         }

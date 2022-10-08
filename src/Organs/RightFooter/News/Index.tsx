@@ -1,4 +1,4 @@
-import { Card, Image, Text, Badge, Button, Group, Textarea, Divider } from "@mantine/core";
+import { Card,  Text,  Button,  Textarea, Divider } from "@mantine/core";
 import styled from "styled-components";
 const SNewsIndex = styled.div`
   width: 100%;

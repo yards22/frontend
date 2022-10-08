@@ -49,7 +49,7 @@ function App() {
         const { appStore, authStore } = store;
         return (
           <>   
-              { authStore.user && <TopBar/>}
+             
               { authStore.user && appStore.isDesktop && <LeftFooterIndex/>}
               <SApp
                 style={{
@@ -57,13 +57,14 @@ function App() {
                 }}
               >
                   <Router>
+                   { authStore.user && <TopBar/>}
                     <Routes>
                       <Route path="/login" element={<LoginIndex />} />
                       <Route element={<ProtectedRoutes/>}>
                           <Route path="explore" element={<NetworkIndex />} />
                           <Route path="profile" element={<ProfileIndex />} />
                           <Route path="logout" element={<LogoutIndex />} />
-                          <Route path="notification" element={<NotificationIndex/>}/>
+                          <Route path="notifications" element={<NotificationIndex/>}/>
                           <Route path="feed" element={<FeedIndex/>} />
                       </Route>
                       <Route>404</Route>

@@ -100,7 +100,7 @@ function EditPageTwo(props:EditPageTwoProps) {
               interestsDummyData.map((each,index)=>{
                 return (
                    <InterestsCard
-                     key={each.image} 
+                     key={each.label} 
                      image = {each.image}
                      label = {each.label}
                      description = {each.description}

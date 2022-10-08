@@ -3,7 +3,6 @@ import { StoresContext } from "./Logic/Providers/StoresProviders";
 import { AuthRepo } from "./Logic/Repository/AuthRepo";
 import AppStore from "./Logic/State/AppStore";
 import { AuthStore } from "./Logic/State/AuthStore";
-import LoginIndex from "./Screen/LoginScreen/Index";
 import { ThemeProvider } from "styled-components";
 import { MantineProvider } from "@mantine/core";
 import { Observer } from "mobx-react-lite";

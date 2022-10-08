@@ -1,8 +1,6 @@
 import { Observer } from "mobx-react-lite";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
-import DarkThemeSwitch from "../../Organs/DarkThemeSwitch";
-import Logout from "./Logout";
 
 const SRightPane = styled.div`
   border: 1px solid black;

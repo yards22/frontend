@@ -43,7 +43,7 @@ export class ProfileStore {
   UpdateProfile = async (props : any) =>{
     this.SetLoading(true);
     try {
-      console.log("props",props)
+      console.log("props",...props.formData)
       const profile = await this.profileRepo.updateUserDetails(props);
       this.SetProfile(profile);
     } catch (err) {

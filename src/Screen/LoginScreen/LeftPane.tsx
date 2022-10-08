@@ -1,10 +1,9 @@
-import { Anchor, Button, Card, Modal, Title } from "@mantine/core";
-import React, { useState } from "react";
+import { Anchor, Modal } from "@mantine/core";
+import { useState } from "react";
 import styled from "styled-components";
 import DontHaveAnAccount from "./DontHaveAnAccount";
 import EmailPasswordLogin from "./EmailPasswordLogin";
 import NewAccount from "./NewAccount/Index";
-import ForgotPassword from "./ForgetPassword/Index";
 import OrLabel from "./OrLabel";
 import SignInWithGoogle from "./SignInWithGoogle";
 

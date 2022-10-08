@@ -1,5 +1,5 @@
-import { Group, Avatar, Text, Box } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { Avatar, Box } from "@mantine/core";
+import { useState } from "react";
 import styled from "styled-components"
 
 const SInterestsCard = styled.div`

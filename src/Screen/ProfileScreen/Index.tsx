@@ -1,4 +1,4 @@
-import { Loader, Skeleton } from "@mantine/core";
+import { Loader } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import styled from "styled-components";

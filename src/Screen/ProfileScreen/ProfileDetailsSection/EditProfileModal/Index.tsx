@@ -22,17 +22,23 @@ interface EditProfileIndexModalProps{
 
 function EditProfileModalIndex(props: EditProfileIndexModalProps) {
   const [currentEditPage,setCurrentEditPage] = useState(1);
-  const [bio , setBio] = useState<string|null|undefined>("");
-  const [username , setUserName] = useState<string|undefined>("");
-  const [profileImageUri, setProfileImageUri] = useState<any>(null)
+  const [bio , setBio] = useState("");
+  const [username , setUserName] = useState("");
+  const [profileImageUri, setProfileImageUri] = useState("")
   const [interests , setInterests] = useState("");
   const store = useStores();
 
   useEffect(()=>{
-    setBio(props.profileInfo?.bio)
-    setUserName(props.profileInfo?.username)
+    if(props.profileInfo?.bio){
+      setBio(props.profileInfo?.bio)
+    }
+    if(props.profileInfo?.username){
+      setUserName(props.profileInfo?.username)
+    }
    //  if(props.profileInfo?.interests) setInterests(props.profileInfo.interests)
-    setProfileImageUri(props.profileInfo?.profile_image_uri)
+    if(props.profileInfo?.profile_image_uri){
+       setProfileImageUri(props.profileInfo?.profile_image_uri)
+    }
   },[])
  
   const handleChangeTheCurrentPage = () =>{
@@ -48,9 +54,10 @@ function EditProfileModalIndex(props: EditProfileIndexModalProps) {
 
   const handleSubmitNewUserDetails = (interestsString : string)=>{
     const formData = new FormData();
+    formData.append('username',username)
     formData.append('image',profileImageUri)
-  
-    store.profileStore.UpdateProfile({username , bio, formData , token : store.authStore.token})
+    formData.append('bio',bio)
+    store.profileStore.UpdateProfile({formData, token : store.authStore.token})
   }
 
   return (

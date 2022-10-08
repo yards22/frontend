@@ -7,6 +7,7 @@ import { Observer } from "mobx-react-lite";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import EditProfileModalIndex from "./EditProfileModal/Index";
 import { MoreVertical , Trash2 } from "react-feather"
+import { useLocation } from "react-router-dom";
 
 
 const SUserDetailsSection = styled.div`
@@ -30,6 +31,8 @@ const SSubContainer = styled.div`
 function UserDetailsSection() {
   const [editProfileModal, setEditProfileModal] = useState(false);
   const store = useStores();
+  const search = useLocation().search
+  const currentUser = new URLSearchParams(search).get('user');
 
   useEffect(()=>{
     setEditProfileModal(false)
@@ -92,16 +95,25 @@ function UserDetailsSection() {
                 marginTop : "15px",
               }}
             >
-              <Button
-                variant="outline"
-                fullWidth
-                rightIcon={<IconWrapper>{IconPencil}</IconWrapper>}
-                onClick={() => {
-                  setEditProfileModal(true);
-                }}
-              >
-                Edit Profile
-              </Button>
+              { currentUser === profileStore.profile?.username ?
+                <Button
+                  variant="outline"
+                  fullWidth
+                  rightIcon={<IconWrapper>{IconPencil}</IconWrapper>}
+                  onClick={() => {
+                    setEditProfileModal(true);
+                  }}
+                >
+                  Edit Profile
+                </Button>
+                  :
+                  <Button
+                    variant="outline"
+                    fullWidth   
+                  >
+                    Follow
+                  </Button>
+              }
               <Modal
                 size={"450px"}
                 title="Profile Edit"

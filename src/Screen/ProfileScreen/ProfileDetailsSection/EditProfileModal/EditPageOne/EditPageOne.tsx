@@ -37,6 +37,7 @@ function EditPageOne(props:EditPageOneProps) {
     if(props.bio) setBio(props.bio);
     if(props.profilePhotoUri){
       setProfilePic(props.profilePhotoUri)
+      setProfilePicUri(props.profilePhotoUri)
     }
     if(props.username) setUserName(props.username)
   },[props])
