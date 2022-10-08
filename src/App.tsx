@@ -16,10 +16,10 @@ import NotificationIndex from "./Screen/NotificationScreen/Index";
 import FeedIndex from "./Screen/FeedScreen/Index";
 
 const SApp = styled.section`
-  width : 100%;
-  max-width : 600px;
-  overflow : auto;
-`
+  width: 100%;
+  max-width: 600px;
+  overflow: auto;
+`;
 
 function App() {
   const store = useStores();
@@ -44,30 +44,30 @@ function App() {
       {() => {
         const { appStore, authStore } = store;
         return (
-          <>   
-              { authStore.user && <NavBarIndex/>}
-              { authStore.user && appStore.isDesktop && <LeftFooterIndex/>}
-              <SApp
-                style={{
-                  "marginBottom" : `${appStore.isPhone ? "50px": "0px"}`
-                }}
-              >
-                  <Router>
-                    <Routes>
-                      <Route path="/login" element={<LoginIndex />} />
-                      <Route element={<ProtectedRoutes/>}>
-                          <Route path="network" element={<NetworkIndex />} />
-                          <Route path="profile" element={<ProfileIndex />} />
-                          <Route path="logout" element={<LogoutIndex />} />
-                          <Route path="notification" element={<NotificationIndex/>}/>
-                          <Route path="feed" element={<FeedIndex/>} />
-                      </Route>
-                      <Route>404</Route>
-                    </Routes>
-                  </Router>
-              </SApp>
-              { authStore.user && !appStore.isPhone && <RightFooterIndex/>}
-              { authStore.user && appStore.isPhone && <NavBarBottomIndex/>}
+          <>
+            {authStore.user && <NavBarIndex />}
+            {authStore.user && appStore.isDesktop && <LeftFooterIndex />}
+            <SApp
+              style={{
+                marginBottom: `${appStore.isPhone ? "50px" : "0px"}`,
+              }}
+            >
+              <Router>
+                <Routes>
+                  <Route path="/login" element={<LoginIndex />} />
+                  <Route element={<ProtectedRoutes />}>
+                    <Route path="network" element={<NetworkIndex />} />
+                    <Route path="profile" element={<ProfileIndex />} />
+                    <Route path="logout" element={<LogoutIndex />} />
+                    <Route path="feed" element={<FeedIndex />} />
+                  </Route>
+                  <Route path="notification" element={<NotificationIndex />} />
+                  <Route>404</Route>
+                </Routes>
+              </Router>
+            </SApp>
+            {authStore.user && !appStore.isPhone && <RightFooterIndex />}
+            {authStore.user && appStore.isPhone && <NavBarBottomIndex />}
           </>
         );
       }}
