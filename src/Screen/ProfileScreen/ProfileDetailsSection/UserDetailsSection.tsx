@@ -22,9 +22,9 @@ function UserDetailsSection() {
   const [editProfileModal, setEditProfileModal] = useState(false);
   const store = useStores();
 
-  useEffect(()=>{
-    setEditProfileModal(false)
-  },[store.profileStore.profile])
+  useEffect(() => {
+    setEditProfileModal(false);
+  }, [store.profileStore.profile]);
   return (
     <Observer>
       {() => {
@@ -56,7 +56,7 @@ function UserDetailsSection() {
                 }}
                 overflow="inside"
               >
-                 <EditProfileModalIndex profileInfo={profileStore.profile}/>
+                <EditProfileModalIndex profileInfo={profileStore.profile} />
               </Modal>
             </SEditButtonContainer>
             <div
@@ -77,7 +77,9 @@ function UserDetailsSection() {
                 }}
               >
                 <p style={{ margin: "0px" }}>Created_At</p>
-                <p style={{ margin: "0px" }}>{profileStore.profile?.cric_index}</p>
+                <p style={{ margin: "0px" }}>
+                  {profileStore.profile?.cric_index}
+                </p>
               </div>
               <div></div>
             </div>

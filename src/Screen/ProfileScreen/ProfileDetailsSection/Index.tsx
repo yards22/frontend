@@ -1,14 +1,14 @@
-import CoverPhotoSection from "./CoverPhotoSection"
-import ProfilePhoto from "./ProfilePhoto"
-import UserDetailsSection from "./UserDetailsSection"
-import { Card } from "@mantine/core"
-import { MProfile } from "../../../Logic/Model/MProfile"
+import CoverPhotoSection from "./CoverPhotoSection";
+import ProfilePhoto from "./ProfilePhoto";
+import UserDetailsSection from "./UserDetailsSection";
+import { Card } from "@mantine/core";
+import { MProfile } from "../../../Logic/Model/MProfile";
 
-interface ProfileDetailsSectionIndexProps{
-  profileInfo : MProfile | null;
+interface ProfileDetailsSectionIndexProps {
+  profileInfo: MProfile | null;
 }
 
-function ProfileDetailsSectionIndex(props:ProfileDetailsSectionIndexProps) {
+function ProfileDetailsSectionIndex(props: ProfileDetailsSectionIndexProps) {
   return (
     <Card
       shadow="sm"
@@ -20,11 +20,14 @@ function ProfileDetailsSectionIndex(props:ProfileDetailsSectionIndexProps) {
         padding: "0px",
       }}
     >
-        <CoverPhotoSection/>
-        <ProfilePhoto profileImageUri={props.profileInfo?.profile_image_uri} userName={props.profileInfo?.username}/>
-        <UserDetailsSection/>
+      <CoverPhotoSection />
+      <ProfilePhoto
+        profileImageUri={props.profileInfo?.profile_image_uri}
+        userName={props.profileInfo?.username}
+      />
+      <UserDetailsSection />
     </Card>
   );
 }
 
-export default ProfileDetailsSectionIndex
+export default ProfileDetailsSectionIndex;

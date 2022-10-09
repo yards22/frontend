@@ -6,14 +6,14 @@ function LogoutIndex() {
   const store = useStores();
   const navigator = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
     const logOutResponse = window.confirm("Are You sure want to logout");
-    if(logOutResponse){
+    if (logOutResponse) {
       store.authStore.LogoutUser().then(() => {
         navigator("/login");
       });
     }
-  },[])
+  }, []);
 
   return (
     <div

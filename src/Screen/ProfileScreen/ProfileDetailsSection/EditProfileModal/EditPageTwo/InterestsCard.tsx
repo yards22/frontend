@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components"
+import styled from "styled-components";
 
 const SInterestsCard = styled.div`
   padding: 4px;
@@ -9,42 +9,42 @@ const SInterestsCard = styled.div`
   margin: 3px;
 `;
 
-interface InterestsCardProps{
-  name : string,
-  handleAddInterestToArray(interest: string) : void,
-  handleRemoveInterestFromArray(interest : string) : void ,
-  interestsArray : string[]
+interface InterestsCardProps {
+  name: string;
+  handleAddInterestToArray(interest: string): void;
+  handleRemoveInterestFromArray(interest: string): void;
+  interestsArray: string[];
 }
 
-function InterestsCard(props:InterestsCardProps) {
-  const [isInterestSelected , setIsInterestSelected] = useState(false);
+function InterestsCard(props: InterestsCardProps) {
+  const [isInterestSelected, setIsInterestSelected] = useState(false);
 
-  useEffect(()=>{
-    if(props.interestsArray.includes(props.name)){
-      setIsInterestSelected(true)
+  useEffect(() => {
+    if (props.interestsArray.includes(props.name)) {
+      setIsInterestSelected(true);
     }
-  })
-  
-  const handleInterestSelected = () =>{
-    if(isInterestSelected){
-        setIsInterestSelected(false)
-        props.handleRemoveInterestFromArray(props.name)
-    }else{
-        setIsInterestSelected(true)
-        props.handleAddInterestToArray(props.name)
+  });
+
+  const handleInterestSelected = () => {
+    if (isInterestSelected) {
+      setIsInterestSelected(false);
+      props.handleRemoveInterestFromArray(props.name);
+    } else {
+      setIsInterestSelected(true);
+      props.handleAddInterestToArray(props.name);
     }
-  }
+  };
   return (
-    <SInterestsCard 
-        key={props.name}
-        onClick = {handleInterestSelected}
-        style = {{
-            backgroundColor : `${isInterestSelected ? "gray": ""}`
-        }}
+    <SInterestsCard
+      key={props.name}
+      onClick={handleInterestSelected}
+      style={{
+        backgroundColor: `${isInterestSelected ? "gray" : ""}`,
+      }}
     >
-        {props.name}
+      {props.name}
     </SInterestsCard>
-  )
+  );
 }
 
-export default InterestsCard
+export default InterestsCard;

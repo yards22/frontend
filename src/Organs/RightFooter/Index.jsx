@@ -4,12 +4,12 @@ import NewsIndex from "./News/Index";
 import ScoreCarousalIndex from "./ScoreCarousal/Index";
 
 const SRightFooter = styled.div`
-  display : flex;
-  flex-direction : column;
-  align-items : center;
-  width : 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
   margin-left: 30px;
-`
+`;
 
 function RightFooterIndex() {
   return (
