@@ -27,10 +27,10 @@ export class ProfileStore {
   };
 
   @action
-  GetProfile = async () => {
+  GetProfile = async (token:any) => {
     this.SetLoading(true);
     try {
-      const profile = await this.profileRepo.getProfile(this.token || "");
+      const profile = await this.profileRepo.getProfile(token || "");
       this.SetProfile(profile);
     } catch (err) {
       throw err;

@@ -12,7 +12,7 @@ const SProfileIndex = styled.div`
 function ProfileIndex() {
   const store = useStores();
   useEffect(() => {
-    store.profileStore.GetProfile();
+    store.profileStore.GetProfile(store.authStore.token);
   }, []);
 
   return (
