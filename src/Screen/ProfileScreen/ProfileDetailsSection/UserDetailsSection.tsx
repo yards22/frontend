@@ -6,8 +6,8 @@ import { IconPencil } from "../../../Atoms/Icons";
 import { Observer } from "mobx-react-lite";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import EditProfileModalIndex from "./EditProfileModal/Index";
-import { MoreVertical , Trash2 } from "react-feather"
-import { useLocation } from "react-router-dom";
+import { MoreVertical , Trash2, LogOut } from "react-feather"
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const SUserDetailsSection = styled.div`
@@ -33,10 +33,22 @@ function UserDetailsSection() {
   const store = useStores();
   const search = useLocation().search
   const currentUser = new URLSearchParams(search).get('user');
+  const navigate = useNavigate();
 
   useEffect(()=>{
     setEditProfileModal(false)
   },[store.profileStore.profile])
+
+
+  function handleLogout(){
+    const logOutResponse = window.confirm("Are You sure to logout");
+    if(logOutResponse){
+      store.authStore.LogoutUser().then(() => {
+        navigate("/login");
+      });
+    }
+  }
+
   return (
     <Observer>
       {() => {
@@ -149,6 +161,7 @@ function UserDetailsSection() {
                     </Center>
                  </Menu.Target>
                  <Menu.Dropdown>
+                    <Menu.Item icon={<LogOut size={20}/>} onClick = {handleLogout} >Logout</Menu.Item>
                     <Menu.Item color="red" icon={<Trash2 size={20}/>}>Delete my account</Menu.Item>
                  </Menu.Dropdown>
               </Menu>
