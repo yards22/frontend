@@ -20,7 +20,9 @@ function NotificationIndex() {
         return (
           <SNotificationIndex>
             {notificationStore.finalNotifications.map((item, index) => {
-              return <NotificationTile {...item} />;
+              return (
+                <NotificationTile {...item} key={"notification_" + index} />
+              );
             })}
           </SNotificationIndex>
         );
