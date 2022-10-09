@@ -1,6 +1,7 @@
 import { ActionIcon, useMantineTheme } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { Search, Home, User, Bell, PlusSquare } from "react-feather";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 
@@ -21,6 +22,8 @@ const SBottomBar = styled.div`
 function BottomBar() {
   const mantineTheme = useMantineTheme();
   const stores = useStores();
+  const navigate = useNavigate();
+
   return (
     <Observer>
       {() => {
@@ -39,6 +42,7 @@ function BottomBar() {
                   ? mantineTheme.colors[mantineTheme.primaryColor][9]
                   : "gray"
               }
+              onClick = {() => {navigate('/feed');appStore.setNavigationState(1)}}
             >
               <Home size={"20"} />
             </ActionIcon>
@@ -66,6 +70,7 @@ function BottomBar() {
                   ? mantineTheme.colors[mantineTheme.primaryColor][9]
                   : "gray"
               }
+              onClick = {() => {navigate('/notifications');appStore.setNavigationState(3)}}
             >
               <Bell size={"20"} />
             </ActionIcon>
@@ -75,6 +80,12 @@ function BottomBar() {
                   ? mantineTheme.colors[mantineTheme.primaryColor][9]
                   : "gray"
               }
+              onClick = {() => {navigate({
+                pathname : "/profile",
+                search : `${createSearchParams({user : `${stores.profileStore.profile?.username}`})}`
+              })
+              appStore.setNavigationState(4)
+}}
             >
               <User size={"20"} />
             </ActionIcon>

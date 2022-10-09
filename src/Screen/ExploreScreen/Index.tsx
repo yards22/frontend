@@ -14,6 +14,7 @@ const SExploreSectionHeading = styled.div`
    color: black;
    padding: 6px 10px;
    margin-bottom: 2px;
+   font-size: 20px;
 `
 
 function ExploreIndex() {
@@ -23,15 +24,10 @@ function ExploreIndex() {
          <SExploreSectionHeading>
              Recommendations
           </SExploreSectionHeading>
-         <div
-           style={{
-             display : "flex",
-             width : "100%",
-             justifyContent : "center"
-           }}
-         >
-           <PeopleRecommendationsSection/> 
-         </div>
+         <PeopleRecommendationsSection/> 
+         <SExploreSectionHeading>
+             Trending Posts
+         </SExploreSectionHeading>
       </SNetworkIndex>
   )
 }
