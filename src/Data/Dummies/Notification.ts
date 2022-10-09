@@ -76,7 +76,7 @@ export const dummyNotifications: {
   },
   {
     id: BigInt(3453445),
-    status: "unseen",
+    status: "read",
     metadata: {
       type: "NEW",
       content: "Explore our new feature.",
@@ -86,7 +86,7 @@ export const dummyNotifications: {
   },
   {
     id: BigInt(3453446),
-    status: "unseen",
+    status: "read",
     metadata: {
       type: "INFO",
       content: "We have updated our policies. Click to read it.",

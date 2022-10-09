@@ -1,5 +1,7 @@
+import { Observer } from "mobx-react-lite";
 import React from "react";
 import styled from "styled-components";
+import { useStores } from "../../Logic/Providers/StoresProviders";
 import NotificationTile from "./NotificationTile";
 
 const SNotificationIndex = styled.section`
@@ -8,44 +10,22 @@ const SNotificationIndex = styled.section`
   max-width: 600px;
   border: 0.2px solid #bdbdbda0;
 `;
-const notifications: {
-  id: BigInt;
-  status: "read" | "seen" | "unseen";
-  created_at: Date;
-  metadata: any;
-}[] = [
-  {
-    id: BigInt(354534),
-    status: "unseen",
-    metadata: {},
-    created_at: new Date(),
-  },
-  {
-    id: BigInt(354534),
-    status: "unseen",
-    metadata: {},
-    created_at: new Date(),
-  },
-  {
-    id: BigInt(354534),
-    status: "unseen",
-    metadata: {},
-    created_at: new Date(),
-  },
-  {
-    id: BigInt(354534),
-    status: "unseen",
-    metadata: {},
-    created_at: new Date(),
-  },
-];
+
 function NotificationIndex() {
+  const stores = useStores();
   return (
-    <SNotificationIndex>
-      {notifications.map((item, index) => {
-        return <NotificationTile />;
-      })}
-    </SNotificationIndex>
+    <Observer>
+      {() => {
+        const { notificationStore } = stores;
+        return (
+          <SNotificationIndex>
+            {notificationStore.finalNotifications.map((item, index) => {
+              return <NotificationTile {...item} />;
+            })}
+          </SNotificationIndex>
+        );
+      }}
+    </Observer>
   );
 }
 
