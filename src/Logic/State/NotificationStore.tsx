@@ -70,7 +70,7 @@ export class NotificationStore {
           <>
             {mapItem.map((eachNotification, eachNotificationIndex) => {
               stashes.push(eachNotification.id);
-              if (eachNotification.status === "unseen")
+              if (eachNotification.status === "Unseen")
                 finalStatus = eachNotification.status;
               if (eachNotification.created_at > finalDate)
                 finalDate = eachNotification.created_at;

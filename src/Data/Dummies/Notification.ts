@@ -1,13 +1,10 @@
+import { MNotification } from "../../Logic/Model/MNotification";
+
 const now = new Date().getTime();
-export const dummyNotifications: {
-  id: BigInt;
-  status: "read" | "seen" | "unseen";
-  created_at: Date;
-  metadata: any;
-}[] = [
+export const dummyNotifications: MNotification[] = [
   {
     id: BigInt(3453445),
-    status: "unseen",
+    status: "Unseen",
     metadata: {
       type: "FOLLOW",
       by: 3,
@@ -16,7 +13,7 @@ export const dummyNotifications: {
   },
   {
     id: BigInt(3453445),
-    status: "unseen",
+    status: "Unseen",
     metadata: {
       type: "FOLLOW",
       by: 5,
@@ -25,7 +22,7 @@ export const dummyNotifications: {
   },
   {
     id: BigInt(354534),
-    status: "unseen",
+    status: "Unseen",
     metadata: {
       type: "LIKE",
       by: 2,
@@ -35,7 +32,7 @@ export const dummyNotifications: {
   },
   {
     id: BigInt(3453445),
-    status: "unseen",
+    status: "Unseen",
     metadata: {
       type: "LIKE",
       by: 3,
@@ -46,7 +43,7 @@ export const dummyNotifications: {
 
   {
     id: BigInt(354534),
-    status: "unseen",
+    status: "Unseen",
     metadata: {
       type: "COMMENT",
       by: 2,
@@ -56,7 +53,7 @@ export const dummyNotifications: {
   },
   {
     id: BigInt(3453445),
-    status: "seen",
+    status: "Seen",
     metadata: {
       type: "COMMENT",
       by: 3,
@@ -66,7 +63,7 @@ export const dummyNotifications: {
   },
   {
     id: BigInt(3453445),
-    status: "unseen",
+    status: "Unseen",
     metadata: {
       type: "COMMENT",
       by: 4,
@@ -76,7 +73,7 @@ export const dummyNotifications: {
   },
   {
     id: BigInt(3453445),
-    status: "read",
+    status: "Read",
     metadata: {
       type: "NEW",
       content: "Explore our new feature.",
@@ -86,7 +83,7 @@ export const dummyNotifications: {
   },
   {
     id: BigInt(3453446),
-    status: "read",
+    status: "Read",
     metadata: {
       type: "INFO",
       content: "We have updated our policies. Click to read it.",
