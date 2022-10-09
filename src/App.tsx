@@ -1,6 +1,5 @@
 import ProtectedRoutes from "./ProtectedRoutes";
 import ProfileIndex from "./Screen/ProfileScreen/Index";
-import LogoutIndex from "./Screen/LogoutScreen/Index";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginIndex from "./Screen/LoginScreen/Index";
 import ExploreIndex from "./Screen/ExploreScreen/Index";
@@ -63,7 +62,6 @@ function App() {
                       <Route element={<ProtectedRoutes/>}>
                           <Route path="explore" element={<ExploreIndex />} />
                           <Route path="profile" element={<ProfileIndex />} />
-                          <Route path="logout" element={<LogoutIndex />} />
                           <Route path="notifications" element={<NotificationIndex/>}/>
                           <Route path="feed" element={<FeedIndex/>} />
                       </Route>
