@@ -1,8 +1,14 @@
 import { Observer } from "mobx-react-lite";
-import React from "react";
+import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
-import DarkThemeSwitch from "../../Organs/DarkThemeSwitch";
-import Logout from "./Logout";
+
+const SRightPane = styled.div`
+  border: 1px solid black;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 
 function RightPane() {
   const store = useStores();
@@ -11,11 +17,9 @@ function RightPane() {
       {() => {
         const { authStore } = store;
         return (
-          <div>
-            <DarkThemeSwitch />
-            {authStore.user?.mail_id}
-            {authStore.user && <Logout />}
-          </div>
+          <SRightPane>
+              Right Pane
+          </SRightPane>
         );
       }}
     </Observer>

@@ -7,8 +7,7 @@ import ProvidedApp from "./ProvidedApp";
 const SIndex = styled.div`
       display : flex;
       justify-content : center;
-      height : 100vh;
-      border : 1px solid black;
+      height : calc(100vh - 60px);
       padding : 10px;
       max-width : 1400px;
       margin-left : auto;
@@ -23,7 +22,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ProvidedApp>
-      <App />
+      <SIndex>
+        <App />
+      </SIndex>
     </ProvidedApp>
   </React.StrictMode>
 );

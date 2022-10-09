@@ -8,6 +8,7 @@ export default class AppStore {
   @observable isTablet: boolean = false;
   @observable isDesktop: boolean = true;
   @observable navigationState: number = 0;
+  @observable deviceWidth: number = 0;
 
   constructor() {
     makeAutoObservable(this);
@@ -47,4 +48,9 @@ export default class AppStore {
   setNavigationState = (state: number) => {
     this.navigationState = state;
   };
+
+  @action
+  setDeviceWidth = (state: number) =>{
+    this.deviceWidth = state
+  }
 }

@@ -3,7 +3,6 @@ import { StoresContext } from "./Logic/Providers/StoresProviders";
 import { AuthRepo } from "./Logic/Repository/AuthRepo";
 import AppStore from "./Logic/State/AppStore";
 import { AuthStore } from "./Logic/State/AuthStore";
-import LoginIndex from "./Screen/LoginScreen/Index";
 import { ThemeProvider } from "styled-components";
 import { MantineProvider } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
@@ -25,7 +24,11 @@ function ProvidedApp(props: ProvidedAppProps) {
     new ProfileRepo("http://localhost:4000/profile", rq)
   );
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor : "#E7F5FF"
+      }}
+    >
       <StoresContext.Provider value={{ appStore, authStore, profileStore }}>
         {
           <Observer>

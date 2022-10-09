@@ -5,34 +5,40 @@ import { useStores } from "../../../../Logic/Providers/StoresProviders";
 import EditPageOne from "./EditPageOne/EditPageOne";
 import EditPageTwo from "./EditPageTwo/EditPageTwo";
 
-const SEditProfileIndex = styled.div`
+const SEditProfileModalIndex = styled.div`
    width : 100%;
    display : flex;
    flex-direction : column;
    align-items : center;
    position : relative;
-   min-height: 400px;
+   height: 400px;
    padding-bottom: 50px;
-   overflow: scroll;
+   overflow: hidden;
 `
 
-interface EditProfileIndexProps{
+interface EditProfileIndexModalProps{
    profileInfo : MProfile | null,
 }
 
-function EditProfileModalIndex(props: EditProfileIndexProps) {
+function EditProfileModalIndex(props: EditProfileIndexModalProps) {
   const [currentEditPage,setCurrentEditPage] = useState(1);
-  const [bio , setBio] = useState<string|null|undefined>("");
-  const [username , setUserName] = useState<string|undefined>("");
-  const [profileImageUri, setProfileImageUri] = useState<any>(null)
+  const [bio , setBio] = useState("");
+  const [username , setUserName] = useState("");
+  const [profileImageUri, setProfileImageUri] = useState("")
   const [interests , setInterests] = useState("");
   const store = useStores();
 
   useEffect(()=>{
-    setBio(props.profileInfo?.bio)
-    setUserName(props.profileInfo?.username)
+    if(props.profileInfo?.bio){
+      setBio(props.profileInfo?.bio)
+    }
+    if(props.profileInfo?.username){
+      setUserName(props.profileInfo?.username)
+    }
    //  if(props.profileInfo?.interests) setInterests(props.profileInfo.interests)
-    setProfileImageUri(props.profileInfo?.profile_image_uri)
+    if(props.profileInfo?.profile_image_uri){
+       setProfileImageUri(props.profileInfo?.profile_image_uri)
+    }
   },[])
  
   const handleChangeTheCurrentPage = () =>{
@@ -47,11 +53,15 @@ function EditProfileModalIndex(props: EditProfileIndexProps) {
   }
 
   const handleSubmitNewUserDetails = (interestsString : string)=>{
-    store.profileStore.UpdateProfile({username , bio, image : profileImageUri , token : store.authStore.token})
+    const formData = new FormData();
+    formData.append('username',username)
+    formData.append('image',profileImageUri)
+    formData.append('bio',bio)
+    store.profileStore.UpdateProfile({formData, token : store.authStore.token})
   }
 
   return (
-    <SEditProfileIndex>
+    <SEditProfileModalIndex>
       { currentEditPage === 1 
            && 
          <EditPageOne 
@@ -68,7 +78,7 @@ function EditProfileModalIndex(props: EditProfileIndexProps) {
             handleChangeTheCurrentPage = {handleChangeTheCurrentPage}
             handleSubmitNewUserDetails = {handleSubmitNewUserDetails}
          />}
-    </SEditProfileIndex>
+    </SEditProfileModalIndex>
   )
 }
 

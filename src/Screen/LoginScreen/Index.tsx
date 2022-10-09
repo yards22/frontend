@@ -12,6 +12,8 @@ const SLoginIndex = styled.section`
   width: 100%;
   position: fixed;
   top: 0px;
+  left: 0;
+  background: #e5e7eb;
 `;
 
 const AUTH_INITIAL = 0;

@@ -1,23 +1,24 @@
-import { Anchor, Button, Card, Modal, Title } from "@mantine/core";
-import React, { useState } from "react";
+import { Anchor, Modal } from "@mantine/core";
+import { useState } from "react";
 import styled from "styled-components";
 import DontHaveAnAccount from "./DontHaveAnAccount";
 import EmailPasswordLogin from "./EmailPasswordLogin";
 import NewAccount from "./NewAccount/Index";
-import ForgotPassword from "./ForgetPassword/Index";
 import OrLabel from "./OrLabel";
 import SignInWithGoogle from "./SignInWithGoogle";
 
 const SLeftPane = styled.section`
   width: 50%;
   padding: 40px;
+  padding-left: 100px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  @media (max-width: 700px) {
+  @media (max-width: 750px) {
     width: 100%;
+    padding-left: 40px;
   }
 `;
 function LeftPane() {

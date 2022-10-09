@@ -42,11 +42,7 @@ export class ProfileRepo {
 
   async updateUserDetails(props:any): Promise<MProfile> {
     try {
-      const data = {
-        username : props.username,
-        bio : props.bio,
-        image : props.image
-      }
+      const data = props.formData
       const res = await this.rq.Put(`${this.baseUrl}/editProfile`,data,AuthHeaders(props.token));
       const { body } = await CheckResponse(res, 200);
       return {

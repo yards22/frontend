@@ -1,7 +1,7 @@
 import { Button, Input, Textarea } from "@mantine/core";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components"
-import EditProfilePicContainer from "./EditProfilePicContainer";
+import ProfilePhoto from "../../ProfilePhoto";
 
 const SEditPageOne = styled.div`
    display: flex;
@@ -37,6 +37,7 @@ function EditPageOne(props:EditPageOneProps) {
     if(props.bio) setBio(props.bio);
     if(props.profilePhotoUri){
       setProfilePic(props.profilePhotoUri)
+      setProfilePicUri(props.profilePhotoUri)
     }
     if(props.username) setUserName(props.username)
   },[props])
@@ -47,11 +48,11 @@ function EditPageOne(props:EditPageOneProps) {
 
   function handleProfilePicChange(e:any){
      setProfilePic(URL.createObjectURL(e.target.files[0]))
-    //  setProfilePicUri(e.target.files[0])
-    fileToDataUri(e.target.files[0])
-      .then(dataUri => {
-        setProfilePicUri(dataUri)
-    })
+     setProfilePicUri(e.target.files[0])
+    // fileToDataUri(e.target.files[0])
+    //   .then(dataUri => {
+    //     setProfilePicUri(dataUri)
+    // })
   }
 
   function handleFocusOutUserNameField(){
@@ -73,7 +74,12 @@ function EditPageOne(props:EditPageOneProps) {
                 padding: "0px 15px",
                 marginBottom : "20px"
              }}>
-             <EditProfilePicContainer profileImageUri={profilePic} username={username}/>
+              
+                  <ProfilePhoto 
+                      profileImageUri={profilePic} 
+                      userName={username}
+                    />
+          
              <div style={{
                 display: "flex",
                 justifyContent : "space-around",
