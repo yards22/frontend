@@ -1,15 +1,18 @@
-import { Loader, Skeleton } from "@mantine/core";
+import { Loader } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
+import InterestsSection from "./InterestsSection/InterestsSection";
 import ProfileDetailsSectionIndex from "./ProfileDetailsSection/Index";
 
-const SProfileIndex = styled.div``;
+const SProfileIndex = styled.div`
+  width: 100%;
+`;
 function ProfileIndex() {
   const store = useStores();
   useEffect(() => {
-    store.profileStore.GetProfile();
+    store.profileStore.GetProfile(store.authStore.token);
   }, []);
 
   return (
@@ -18,7 +21,8 @@ function ProfileIndex() {
         const { profileStore } = store;
         return profileStore.profile ? (
           <SProfileIndex>
-            <ProfileDetailsSectionIndex profileInfo={profileStore.profile} />
+            <ProfileDetailsSectionIndex profileInfo={profileStore.profile}/>
+            <InterestsSection/>
           </SProfileIndex>
         ) : (
           <div

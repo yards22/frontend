@@ -1,50 +1,52 @@
-import { useEffect, useState } from "react";
-import styled from "styled-components";
+import { Avatar, Box } from "@mantine/core";
+import { useState } from "react";
+import styled from "styled-components"
 
 const SInterestsCard = styled.div`
-  padding: 4px;
-  height: 50px;
-  border-radius: 10px;
-  border: 1px solid brown;
-  margin: 3px;
+   cursor: pointer;
 `;
 
-interface InterestsCardProps {
-  name: string;
-  handleAddInterestToArray(interest: string): void;
-  handleRemoveInterestFromArray(interest: string): void;
-  interestsArray: string[];
+interface InterestsCardProps{
+  image: string,
+  label: string,
+  description: string,
+  handleAddInterestToArray(interest: string) : void,
 }
 
-function InterestsCard(props: InterestsCardProps) {
-  const [isInterestSelected, setIsInterestSelected] = useState(false);
-
-  useEffect(() => {
-    if (props.interestsArray.includes(props.name)) {
-      setIsInterestSelected(true);
-    }
-  });
-
-  const handleInterestSelected = () => {
-    if (isInterestSelected) {
-      setIsInterestSelected(false);
-      props.handleRemoveInterestFromArray(props.name);
-    } else {
-      setIsInterestSelected(true);
-      props.handleAddInterestToArray(props.name);
-    }
-  };
+function InterestsCard(props:InterestsCardProps) {
+  const [isInterestSelected , setIsInterestSelected] = useState(false);
+  
+  const handleInterestSelected = () =>{
+    props.handleAddInterestToArray(props.label)
+  }
   return (
-    <SInterestsCard
-      key={props.name}
-      onClick={handleInterestSelected}
-      style={{
-        backgroundColor: `${isInterestSelected ? "gray" : ""}`,
-      }}
+    <SInterestsCard 
+        key={props.label}
+        onClick = {handleInterestSelected}
+        style = {{
+            backgroundColor : `${isInterestSelected ? "gray": ""}`
+        }}
     >
-      {props.name}
+          <Box 
+                style={{
+                  display: 'flex',
+                  cursor: 'default',
+                  alignItems: 'center',
+                  backgroundColor:  'white',
+                  border: `1px solid gray`,
+                  padding : "5px",
+                  paddingLeft: "10px",
+                  borderRadius: "4px",
+                  marginBottom : "8px"
+                }}
+          >
+            <Box mr={10}>
+              <Avatar size={"sm"} src={props.image} />
+            </Box>
+            <div>{props.label}</div>
+          </Box>
     </SInterestsCard>
-  );
+  )
 }
 
-export default InterestsCard;
+export default InterestsCard

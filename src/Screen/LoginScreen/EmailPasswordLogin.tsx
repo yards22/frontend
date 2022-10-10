@@ -1,7 +1,7 @@
 import { TextInput, Button, Modal, Alert } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import { IconEye, IconEyeOff } from "../../Atoms/Icons";
 import IconWrapper from "../../Atoms/IconWrapper";
 import { useStores } from "../../Logic/Providers/StoresProviders";
@@ -14,6 +14,18 @@ function EmailPasswordLogin() {
   const [errorText, setErrorText] = useState("");
   const store = useStores();
   const navigator = useNavigate();
+
+  async function handleRouteToProfile(){
+    console.log(store.authStore.token)
+     await store.profileStore.GetProfile(store.authStore.token);
+     navigator(
+        {
+          pathname : "/profile",
+          search : `${createSearchParams({user : `${store.profileStore.profile?.username}`})}`
+       })
+       store.appStore.setNavigationState(4)
+      
+  }
 
   return (
     <Observer>
@@ -115,9 +127,7 @@ function EmailPasswordLogin() {
                 authStore
                   .LoginUser(credentials.email, credentials.password)
                   .then(() => {
-                    if (store.authStore.user) {
-                      navigator("/profile");
-                    }
+                    handleRouteToProfile();
                   })
                   .catch((err) => {
                     setErrorText(err.message);
