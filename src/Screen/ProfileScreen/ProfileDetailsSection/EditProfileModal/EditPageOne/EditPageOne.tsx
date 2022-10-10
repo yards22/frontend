@@ -123,36 +123,6 @@ function EditPageOne(props: EditPageOneProps) {
       </div>
       <div
         style={{
-          display: "none",
-        }}
-        onChange={handleProfilePicChange}
-      />
-      <Button
-        onClick={() => {
-          setProfilePic("");
-        }}
-        color={"red"}
-      >
-        Remove Profile Pic
-      </Button>
-      <div
-        style={{
-          width: "100%",
-        }}
-      >
-        UserName
-        <Input
-          width={"100%"}
-          onBlur={handleFocusOutUserNameField}
-          type="text"
-          defaultValue={username}
-          onChange={(e: any) => {
-            setUserName(e.target.value);
-          }}
-        />
-      </div>
-      <div
-        style={{
           width: "100%",
           marginTop: "20px",
         }}

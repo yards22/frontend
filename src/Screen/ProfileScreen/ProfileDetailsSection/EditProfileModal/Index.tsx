@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { MProfile } from "../../../../Logic/Model/MProfile";
 import { useStores } from "../../../../Logic/Providers/StoresProviders";
@@ -27,6 +28,7 @@ function EditProfileModalIndex(props: EditProfileIndexModalProps) {
   const [profileImageUri, setProfileImageUri] = useState("");
   const [interests, setInterests] = useState("");
   const store = useStores();
+  const navigator = useNavigate();
 
   useEffect(() => {
     if (props.profileInfo?.bio) {
@@ -57,10 +59,16 @@ function EditProfileModalIndex(props: EditProfileIndexModalProps) {
     formData.append("username", username);
     formData.append("image", profileImageUri);
     formData.append("bio", bio);
-    store.profileStore.UpdateProfile({
-      formData,
-      token: store.authStore.token,
-    });
+    store.profileStore
+      .UpdateProfile({ formData, token: store.authStore.token })
+      .then(() => {
+        navigator({
+          pathname: "/profile",
+          search: `${createSearchParams({
+            user: `${store.profileStore.profile?.username}`,
+          })}`,
+        });
+      });
   };
 
   return (

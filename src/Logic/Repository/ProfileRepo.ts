@@ -19,7 +19,7 @@ export class ProfileRepo {
         bio: body.data.bio,
         cric_index: body.data.cric_index,
         email_id: body.data.email_id,
-        interests: body.data.user.Interests,
+        interests: body.data.interests,
         profile_image_uri: body.data.profile_image_uri,
         user_id: body.data.user_id,
         username: body.data.username,
@@ -44,13 +44,9 @@ export class ProfileRepo {
 
   async updateUserDetails(props: any): Promise<MProfile> {
     try {
-      const data = {
-        username: props.username,
-        bio: props.bio,
-        image: props.image,
-      };
+      const data = props.formData;
       const res = await this.rq.Put(
-        `${this.baseUrl}/editProfile`,
+        `${this.baseUrl}/`,
         data,
         AuthHeaders(props.token)
       );
@@ -59,7 +55,7 @@ export class ProfileRepo {
         bio: body.data.bio,
         cric_index: body.data.cric_index,
         email_id: body.data.email_id,
-        interests: [],
+        interests: body.data.interests,
         profile_image_uri: body.data.profile_image_uri,
         user_id: body.data.user_id,
         username: body.data.username,

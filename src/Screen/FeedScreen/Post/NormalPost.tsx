@@ -13,6 +13,9 @@ const SNormalPost = styled.div`
   min-height: 50px;
   padding: 20px;
   border-bottom: 0.2px solid #bdbdbda0;
+  background-color: white;
+  margin: 5px 0px;
+  border-radius: 8px;
   :hover {
     /* background: ${(p) => p.theme.bgColorOnHover}; */
   }

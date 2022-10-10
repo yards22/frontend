@@ -6,6 +6,7 @@ import { Info } from "react-feather";
 
 interface ProfileDetailsSectionIndexProps {
   profileInfo: MProfile | null;
+  handleCurrentRenderingInProfileRoute: (current: string) => void;
 }
 
 function ProfileDetailsSectionIndex(props: ProfileDetailsSectionIndexProps) {
@@ -61,7 +62,11 @@ function ProfileDetailsSectionIndex(props: ProfileDetailsSectionIndexProps) {
           </Center>
         }
       />
-      <UserDetailsSection />
+      <UserDetailsSection
+        handleCurrentRenderingInProfileRoute={
+          props.handleCurrentRenderingInProfileRoute
+        }
+      />
     </Card>
   );
 }
