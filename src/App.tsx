@@ -57,6 +57,7 @@ function App() {
               >
                   <Router>
                    { authStore.user && <TopBar/>}
+                   { authStore.user && appStore.isPhone && <BottomBar/>}
                     <Routes>
                       <Route path="/login" element={<LoginIndex />} />
                       <Route element={<ProtectedRoutes/>}>
@@ -70,7 +71,6 @@ function App() {
                   </Router>
               </SApp>
               { authStore.user && !appStore.isPhone && <RightFooterIndex/>}
-              { authStore.user && appStore.isPhone && <BottomBar/>}
           </>
         );
       }}
