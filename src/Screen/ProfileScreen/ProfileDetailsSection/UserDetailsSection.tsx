@@ -59,6 +59,7 @@ function UserDetailsSection() {
               style={{
                 display: "flex",
                 flexDirection: "column",
+                alignItems : "center"
               }}
             >
               <h2 style={{ margin: "0px" }}>

@@ -16,7 +16,6 @@ function EmailPasswordLogin() {
   const navigator = useNavigate();
 
   async function handleRouteToProfile(){
-    console.log(store.authStore.token)
      await store.profileStore.GetProfile(store.authStore.token);
      navigator(
         {
@@ -24,7 +23,6 @@ function EmailPasswordLogin() {
           search : `${createSearchParams({user : `${store.profileStore.profile?.username}`})}`
        })
        store.appStore.setNavigationState(4)
-      
   }
 
   return (

@@ -13,7 +13,6 @@ function SignInWithGoogle() {
   const navigator = useNavigate();
 
   async function handleRouteToProfile(){
-    console.log(store.authStore.token)
      await store.profileStore.GetProfile(store.authStore.token);
      navigator(
         {

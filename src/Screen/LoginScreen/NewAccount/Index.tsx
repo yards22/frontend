@@ -1,7 +1,7 @@
 import { TextInput, Button, NumberInput, Alert } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import { ValidateEmail } from "../../../Logic/Utils/Validation";
 const OTP_SEND_TIMEOUT = 10;
@@ -29,6 +29,17 @@ function NewAccount(props: NewAccountProps) {
     otp: "",
   });
   const navigator = useNavigate();
+
+  async function handleRouteToProfile(){
+    await store.profileStore.GetProfile(store.authStore.token);
+    navigator(
+       {
+         pathname : "/profile",
+         search : `${createSearchParams({user : `${store.profileStore.profile?.username}`})}`
+      })
+      store.appStore.setNavigationState(4)
+ }
+ 
   return (
     <>
       {stage === 0 && (
@@ -211,7 +222,7 @@ function NewAccount(props: NewAccountProps) {
                       .SignUpUser(data.mail_id, data.confirmPassword, data.otp)
                       .then(() => {
                         props.onClose();
-                        navigator("/profile");
+                        handleRouteToProfile()
                       })
                       .catch((err) => {
                         setErrorText(err.message);

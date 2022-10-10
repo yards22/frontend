@@ -13,6 +13,7 @@ function ProfileIndex() {
   const store = useStores();
   useEffect(() => {
     store.profileStore.GetProfile(store.authStore.token);
+    store.appStore.setNavigationState(4)
   }, []);
 
   return (

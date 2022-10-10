@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { createSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components"
 import { MProfile } from "../../../../Logic/Model/MProfile";
 import { useStores } from "../../../../Logic/Providers/StoresProviders";
@@ -27,6 +28,7 @@ function EditProfileModalIndex(props: EditProfileIndexModalProps) {
   const [profileImageUri, setProfileImageUri] = useState("")
   const [interests , setInterests] = useState("");
   const store = useStores();
+  const navigator = useNavigate();
 
   useEffect(()=>{
     if(props.profileInfo?.bio){
@@ -35,7 +37,7 @@ function EditProfileModalIndex(props: EditProfileIndexModalProps) {
     if(props.profileInfo?.username){
       setUserName(props.profileInfo?.username)
     }
-   //  if(props.profileInfo?.interests) setInterests(props.profileInfo.interests)
+    // if(props.profileInfo?.interests) setInterests(props.profileInfo.interests)
     if(props.profileInfo?.profile_image_uri){
        setProfileImageUri(props.profileInfo?.profile_image_uri)
     }
@@ -58,6 +60,13 @@ function EditProfileModalIndex(props: EditProfileIndexModalProps) {
     formData.append('image',profileImageUri)
     formData.append('bio',bio)
     store.profileStore.UpdateProfile({formData, token : store.authStore.token})
+    .then(()=>{
+      navigator(
+        {
+          pathname : "/profile",
+          search : `${createSearchParams({user : `${store.profileStore.profile?.username}`})}`
+       })
+    })
   }
 
   return (
