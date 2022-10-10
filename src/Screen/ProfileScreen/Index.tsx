@@ -21,8 +21,8 @@ function ProfileIndex() {
         const { profileStore } = store;
         return profileStore.profile ? (
           <SProfileIndex>
-            <ProfileDetailsSectionIndex profileInfo={profileStore.profile}/>
-            <InterestsSection/>
+            <ProfileDetailsSectionIndex profileInfo={profileStore.profile} />
+            <InterestsSection />
           </SProfileIndex>
         ) : (
           <div

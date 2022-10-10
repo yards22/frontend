@@ -50,7 +50,7 @@ export default class AppStore {
   };
 
   @action
-  setDeviceWidth = (state: number) =>{
-    this.deviceWidth = state
-  }
+  setDeviceWidth = (state: number) => {
+    this.deviceWidth = state;
+  };
 }

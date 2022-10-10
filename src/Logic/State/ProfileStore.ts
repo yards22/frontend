@@ -26,7 +26,7 @@ export class ProfileStore {
   };
 
   @action
-  GetProfile = async (token:any) => {
+  GetProfile = async (token: any) => {
     this.SetLoading(true);
     try {
       const profile = await this.profileRepo.getProfile(token || "");
@@ -42,7 +42,7 @@ export class ProfileStore {
   UpdateProfile = async (props: any) => {
     this.SetLoading(true);
     try {
-      console.log("props",...props.formData)
+      console.log("props", ...props.formData);
       const profile = await this.profileRepo.updateUserDetails(props);
       this.SetProfile(profile);
     } catch (err) {
