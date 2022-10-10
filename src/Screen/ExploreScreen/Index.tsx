@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import PeopleRecommendationsSection from "./PeopleRecommendationsSection/PeopleRecomendationsSection";
+import TrendingPostsSection from "./TrendingPostsSection/TrendingPostsSection";
 
 const SNetworkIndex = styled.div`
   width: 100%;
@@ -28,6 +29,7 @@ function ExploreIndex() {
          <SExploreSectionHeading>
              Trending Posts
          </SExploreSectionHeading>
+         <TrendingPostsSection/>
       </SNetworkIndex>
   )
 }
