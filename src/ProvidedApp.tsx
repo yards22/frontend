@@ -9,6 +9,7 @@ import { Observer } from "mobx-react-lite";
 import { Request } from "./Logic/Utils/Fetch";
 import { ProfileRepo } from "./Logic/Repository/ProfileRepo";
 import { ProfileStore } from "./Logic/State/ProfileStore";
+import { NotificationStore } from "./Logic/State/NotificationStore";
 
 interface ProvidedAppProps {
   children?: React.ReactNode;
@@ -23,13 +24,16 @@ function ProvidedApp(props: ProvidedAppProps) {
   const profileStore = new ProfileStore(
     new ProfileRepo("http://localhost:4000/profile", rq)
   );
+  const notificationStore = new NotificationStore();
   return (
     <div
       style={{
         backgroundColor: "#E7F5FF",
       }}
     >
-      <StoresContext.Provider value={{ appStore, authStore, profileStore }}>
+      <StoresContext.Provider
+        value={{ appStore, authStore, profileStore, notificationStore }}
+      >
         {
           <Observer>
             {() => {
