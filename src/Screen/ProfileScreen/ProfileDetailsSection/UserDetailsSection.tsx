@@ -39,8 +39,11 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setEditProfileModal(false);
-  }, [store.profileStore.profile]);
+    console.log(store.authStore.isNewUser);
+    if (store.authStore.isNewUser) {
+      setEditProfileModal(true);
+    }
+  }, []);
 
   function handleLogout() {
     const logOutResponse = window.confirm("Are You sure to logout");
@@ -49,6 +52,10 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
         navigate("/login");
       });
     }
+  }
+
+  function handleCloseTheEditModal() {
+    setEditProfileModal(false);
   }
 
   function handleChangeRendering(change: string) {
@@ -152,10 +159,16 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
                 opened={editProfileModal}
                 onClose={() => {
                   setEditProfileModal(false);
+                  if (store.authStore.isNewUser) {
+                    store.authStore.SetIsNewUser(false);
+                  }
                 }}
                 overflow="inside"
               >
-                <EditProfileModalIndex profileInfo={profileStore.profile} />
+                <EditProfileModalIndex
+                  profileInfo={profileStore.profile}
+                  handleCloseTheEditModal={handleCloseTheEditModal}
+                />
               </Modal>
               <Menu shadow="md" width={200}>
                 <Menu.Target>
