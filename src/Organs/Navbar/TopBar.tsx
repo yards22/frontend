@@ -29,11 +29,11 @@ function TopBar() {
       <div
         style={{
           background: mantineTheme.colors[mantineTheme.primaryColor][6],
-          position : "fixed",
-          top : "0",
-          left : "0",
-          zIndex : "100",
-          right : "0",
+          position: "fixed",
+          top: "0",
+          left: "0",
+          zIndex: "100",
+          right: "0",
           height: "60px",
           width: "100%",
           display: "flex",
@@ -54,10 +54,10 @@ function TopBar() {
         return (
           <div
             style={{
-              position : "fixed",
-              top : "0",
-              left : "0",
-              right : "0",
+              position: "fixed",
+              top: "0",
+              left: "0",
+              right: "0",
               background: "#ffffff",
               // border: "1px solid " + mantineTheme.colors["green"][3],
               display: "flex",
@@ -68,93 +68,104 @@ function TopBar() {
           >
             <div
               style={{
-                width : "100%",
-                maxWidth : "1400px",
-                display : "flex",
-                justifyContent : "space-between",
-                alignItems : "center",
-                paddingLeft : "25px",
-                paddingRight : "25px"
+                width: "100%",
+                maxWidth: "1400px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                paddingLeft: "25px",
+                paddingRight: "25px",
               }}
             >
-               <Title color={"black"} order={2}>
-                  22 Yards
-                </Title>
-                <div
-                  style={{
-                    display : "flex",
-                    alignItems : "center"                    
+              <Title color={"black"} order={2}>
+                22 Yards
+              </Title>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <STopBar
+                  theme={{
+                    color:
+                      appStore.navigationState === 0
+                        ? mantineTheme.colors[mantineTheme.primaryColor][7]
+                        : "gray",
+                  }}
+                  onClick={() => {
+                    navigate("/feed");
+                    appStore.setNavigationState(0);
                   }}
                 >
-                  
-                  <STopBar
-                    theme={{
-                      color:
-                        appStore.navigationState === 0
-                          ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                          : "gray",
-                    }}
-                    onClick = {() => {navigate('/feed');appStore.setNavigationState(0)}}
-                  >
-                    <Home size={"20"} />
-                    <Text size="xs">Home</Text>
-                  </STopBar>
+                  <Home size={"20"} />
+                  <Text size="xs">Home</Text>
+                </STopBar>
 
-                  <STopBar
-                    theme={{
-                      color:
-                        appStore.navigationState === 2
-                          ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                          : "gray",
-                    }}
-                    onClick = {() => {navigate('/explore');appStore.setNavigationState(2)}}
-                  >
-                    <Globe size={"20"} />
-                    <Text size="xs">Explore</Text>
-                  </STopBar>
-                  
-                  <STopBar
-                    theme={{
-                      color:
-                        appStore.navigationState === 1
-                          ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                          : "gray",
-                    }}
-                  >
-                    <Search size={"20"} />
-                    <Text size="xs">Search </Text>
-                  </STopBar>
+                <STopBar
+                  theme={{
+                    color:
+                      appStore.navigationState === 2
+                        ? mantineTheme.colors[mantineTheme.primaryColor][7]
+                        : "gray",
+                  }}
+                  onClick={() => {
+                    navigate("/explore");
+                    appStore.setNavigationState(2);
+                  }}
+                >
+                  <Globe size={"20"} />
+                  <Text size="xs">Explore</Text>
+                </STopBar>
 
-                  <STopBar
-                    theme={{
-                      color:
-                        appStore.navigationState === 3
-                          ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                          : "gray",
-                    }}
-                    onClick = {() => {navigate('/notifications');appStore.setNavigationState(3)}}
-                  >
-                    <Bell size={"20"} />
-                    <Text size="xs">Notifications</Text>
-                  </STopBar>
+                <STopBar
+                  theme={{
+                    color:
+                      appStore.navigationState === 1
+                        ? mantineTheme.colors[mantineTheme.primaryColor][7]
+                        : "gray",
+                  }}
+                >
+                  <Search size={"20"} />
+                  <Text size="xs">Search </Text>
+                </STopBar>
 
-                  <STopBar
-                    theme={{
-                      color:
-                        appStore.navigationState === 4
-                          ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                          : "gray",
-                    }}
-                    onClick = {() => {navigate({
-                                        pathname : "/profile",
-                                        search : `${createSearchParams({user : `${stores.profileStore.profile?.username}`})}`
-                                    })
-                                    appStore.setNavigationState(4)
-                   }}
-                  >
-                    <User size={"20"} />
-                    <Text size="xs">Profile</Text>
-                  </STopBar>
+                <STopBar
+                  theme={{
+                    color:
+                      appStore.navigationState === 3
+                        ? mantineTheme.colors[mantineTheme.primaryColor][7]
+                        : "gray",
+                  }}
+                  onClick={() => {
+                    navigate("/notifications");
+                    appStore.setNavigationState(3);
+                  }}
+                >
+                  <Bell size={"20"} />
+                  <Text size="xs">Notifications</Text>
+                </STopBar>
+
+                <STopBar
+                  theme={{
+                    color:
+                      appStore.navigationState === 4
+                        ? mantineTheme.colors[mantineTheme.primaryColor][7]
+                        : "gray",
+                  }}
+                  onClick={() => {
+                    navigate({
+                      pathname: "/profile",
+                      search: `${createSearchParams({
+                        user: `${stores.profileStore.profile?.username}`,
+                      })}`,
+                    });
+                    appStore.setNavigationState(4);
+                  }}
+                >
+                  <User size={"20"} />
+                  <Text size="xs">Profile</Text>
+                </STopBar>
               </div>
             </div>
           </div>

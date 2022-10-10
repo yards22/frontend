@@ -32,7 +32,7 @@ function BottomBar() {
           <SBottomBar
             style={{
               // background: mantineTheme.colors["gray"][0],
-              backgroundColor : "#ffffff",
+              backgroundColor: "#ffffff",
               border: "1px solid " + mantineTheme.colors["gray"][3],
             }}
           >
@@ -42,7 +42,10 @@ function BottomBar() {
                   ? mantineTheme.colors[mantineTheme.primaryColor][9]
                   : "gray"
               }
-              onClick = {() => {navigate('/feed');appStore.setNavigationState(1)}}
+              onClick={() => {
+                navigate("/feed");
+                appStore.setNavigationState(1);
+              }}
             >
               <Home size={"20"} />
             </ActionIcon>
@@ -70,7 +73,10 @@ function BottomBar() {
                   ? mantineTheme.colors[mantineTheme.primaryColor][9]
                   : "gray"
               }
-              onClick = {() => {navigate('/notifications');appStore.setNavigationState(3)}}
+              onClick={() => {
+                navigate("/notifications");
+                appStore.setNavigationState(3);
+              }}
             >
               <Bell size={"20"} />
             </ActionIcon>
@@ -80,12 +86,15 @@ function BottomBar() {
                   ? mantineTheme.colors[mantineTheme.primaryColor][9]
                   : "gray"
               }
-              onClick = {() => {navigate({
-                pathname : "/profile",
-                search : `${createSearchParams({user : `${stores.profileStore.profile?.username}`})}`
-              })
-              appStore.setNavigationState(4)
-}}
+              onClick={() => {
+                navigate({
+                  pathname: "/profile",
+                  search: `${createSearchParams({
+                    user: `${stores.profileStore.profile?.username}`,
+                  })}`,
+                });
+                appStore.setNavigationState(4);
+              }}
             >
               <User size={"20"} />
             </ActionIcon>

@@ -1,6 +1,6 @@
 import { Button, Input, Textarea } from "@mantine/core";
 import { useEffect, useRef, useState } from "react";
-import styled from "styled-components"
+import styled from "styled-components";
 import ProfilePhoto from "../../ProfilePhoto";
 
 const SEditPageOne = styled.div`
@@ -34,11 +34,11 @@ function EditPageOne(props: EditPageOneProps) {
   const [username, setUserName] = useState("");
   const editProfilePicRef: any = useRef(null);
 
-  useEffect(()=>{
-    if(props.bio) setBio(props.bio);
-    if(props.profilePhotoUri){
-      setProfilePic(props.profilePhotoUri)
-      setProfilePicUri(props.profilePhotoUri)
+  useEffect(() => {
+    if (props.bio) setBio(props.bio);
+    if (props.profilePhotoUri) {
+      setProfilePic(props.profilePhotoUri);
+      setProfilePicUri(props.profilePhotoUri);
     }
     if (props.username) setUserName(props.username);
   }, [props]);
@@ -47,9 +47,9 @@ function EditPageOne(props: EditPageOneProps) {
     editProfilePicRef.current.click();
   }
 
-  function handleProfilePicChange(e:any){
-     setProfilePic(URL.createObjectURL(e.target.files[0]))
-     setProfilePicUri(e.target.files[0])
+  function handleProfilePicChange(e: any) {
+    setProfilePic(URL.createObjectURL(e.target.files[0]));
+    setProfilePicUri(e.target.files[0]);
     // fileToDataUri(e.target.files[0])
     //   .then(dataUri => {
     //     setProfilePicUri(dataUri)
@@ -67,65 +67,29 @@ function EditPageOne(props: EditPageOneProps) {
 
   return (
     <SEditPageOne>
-         <div 
-             style={{
-                width : "100%",
-                display: "flex",
-                justifyContent : "space-around",
-                padding: "0px 15px",
-                marginBottom : "20px"
-             }}>
-              
-                  <ProfilePhoto 
-                      profileImageUri={profilePic} 
-                      userName={username}
-                    />
-          
-             <div style={{
-                display: "flex",
-                justifyContent : "space-around",
-                flexDirection : "column",
-             }}>
-               <Button 
-                 onClick={handleProfilePicChangeClick}
-               >
-                Choose Image
-               </Button>
-               <input 
-                  type={"file"} 
-                  accept="image/*" 
-                  ref={editProfilePicRef} 
-                  style={{
-                    display: "none"
-                  }}
-                  onChange={handleProfilePicChange}
-               />
-               <Button 
-                 onClick={()=>{
-                    setProfilePic("")
-                   
-                 }}
-                 color={"red"}
-                >Remove Profile Pic</Button>
-             </div>
-         </div>
-         <div 
-           style={{
-             width: "100%",
-           }}
-         >
-            UserName
-            <Input 
-              width={"100%"} 
-              onBlur={handleFocusOutUserNameField} 
-              type="text"
-              defaultValue={username}
-              onChange={(e:any)=>{
-                setUserName(e.target.value)
-              }}
-            />
-         </div>
-         <div
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-around",
+          padding: "0px 15px",
+          marginBottom: "20px",
+        }}
+      >
+        <ProfilePhoto profileImageUri={profilePic} userName={username} />
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            flexDirection: "column",
+          }}
+        >
+          <Button onClick={handleProfilePicChangeClick}>Choose Image</Button>
+          <input
+            type={"file"}
+            accept="image/*"
+            ref={editProfilePicRef}
             style={{
               display: "none",
             }}
@@ -139,6 +103,38 @@ function EditPageOne(props: EditPageOneProps) {
           >
             Remove Profile Pic
           </Button>
+        </div>
+      </div>
+      <div
+        style={{
+          width: "100%",
+        }}
+      >
+        UserName
+        <Input
+          width={"100%"}
+          onBlur={handleFocusOutUserNameField}
+          type="text"
+          defaultValue={username}
+          onChange={(e: any) => {
+            setUserName(e.target.value);
+          }}
+        />
+      </div>
+      <div
+        style={{
+          display: "none",
+        }}
+        onChange={handleProfilePicChange}
+      />
+      <Button
+        onClick={() => {
+          setProfilePic("");
+        }}
+        color={"red"}
+      >
+        Remove Profile Pic
+      </Button>
       <div
         style={{
           width: "100%",

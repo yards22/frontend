@@ -15,19 +15,19 @@ import TopBar from "./Organs/Navbar/TopBar";
 import BottomBar from "./Organs/Navbar/BottomBar";
 
 const SApp = styled.section`
-  width : 100%;
-  max-width : 600px;
-  overflow : auto;
-  ::-webkit-scrollbar{
+  width: 100%;
+  max-width: 600px;
+  overflow: auto;
+  ::-webkit-scrollbar {
     display: none;
   }
-`
+`;
 
 function App() {
   const store = useStores();
 
   function handleScreenWidthChanges() {
-    store.appStore.setDeviceWidth(window.innerWidth)
+    store.appStore.setDeviceWidth(window.innerWidth);
     if (window.innerWidth <= 700) {
       store.appStore.setIsPhone(true);
     } else if (window.innerWidth <= 1250) {
@@ -47,30 +47,32 @@ function App() {
       {() => {
         const { appStore, authStore } = store;
         return (
-          <>   
-             
-              { authStore.user && appStore.isDesktop && <LeftFooterIndex/>}
-              <SApp
-                style={{
-                  "marginBottom" : `${appStore.isPhone ? "50px": "0px"}`
-                }}
-              >
-                  <Router>
-                   { authStore.user && <TopBar/>}
-                    <Routes>
-                      <Route path="/login" element={<LoginIndex />} />
-                      <Route element={<ProtectedRoutes/>}>
-                          <Route path="explore" element={<ExploreIndex />} />
-                          <Route path="profile" element={<ProfileIndex />} />
-                          <Route path="notifications" element={<NotificationIndex/>}/>
-                          <Route path="feed" element={<FeedIndex/>} />
-                      </Route>
-                      <Route>404</Route>
-                    </Routes>
-                  </Router>
-              </SApp>
-              { authStore.user && !appStore.isPhone && <RightFooterIndex/>}
-              { authStore.user && appStore.isPhone && <BottomBar/>}
+          <>
+            {authStore.user && appStore.isDesktop && <LeftFooterIndex />}
+            <SApp
+              style={{
+                marginBottom: `${appStore.isPhone ? "50px" : "0px"}`,
+              }}
+            >
+              <Router>
+                {authStore.user && <TopBar />}
+                <Routes>
+                  <Route path="/login" element={<LoginIndex />} />
+                  <Route element={<ProtectedRoutes />}>
+                    <Route path="explore" element={<ExploreIndex />} />
+                    <Route path="profile" element={<ProfileIndex />} />
+                    <Route
+                      path="notifications"
+                      element={<NotificationIndex />}
+                    />
+                    <Route path="feed" element={<FeedIndex />} />
+                  </Route>
+                  <Route>404</Route>
+                </Routes>
+              </Router>
+            </SApp>
+            {authStore.user && !appStore.isPhone && <RightFooterIndex />}
+            {authStore.user && appStore.isPhone && <BottomBar />}
           </>
         );
       }}
