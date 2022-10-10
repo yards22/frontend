@@ -16,14 +16,15 @@ function EmailPasswordLogin() {
   const navigator = useNavigate();
 
   async function handleRouteToProfile() {
-    await store.profileStore.GetProfile(store.authStore.token);
-    navigator({
-      pathname: "/profile",
-      search: `${createSearchParams({
-        user: `${store.profileStore.profile?.username}`,
-      })}`,
-    });
-    store.appStore.setNavigationState(4);
+    // await store.profileStore.GetProfile(store.authStore.token);
+    // navigator({
+    //   pathname: "/profile",
+    //   search: `${createSearchParams({
+    //     user: `${store.profileStore.profile?.username}`,
+    //   })}`,
+    // });
+    store.appStore.setNavigationState(1);
+    navigator("/feed")
   }
 
   function handleLogin() {
