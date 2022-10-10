@@ -26,9 +26,14 @@ const SSubContainer = styled.div`
   align-items: center;
   flex-direction: column;
   margin-top: 10px;
+  cursor: pointer;
 `
 
-function UserDetailsSection() {
+interface UserDetailsSectionProps{
+  handleCurrentRenderingInProfileRoute : (changeRoute: string) => void
+}
+
+function UserDetailsSection(props : UserDetailsSectionProps) {
   const [editProfileModal, setEditProfileModal] = useState(false);
   const store = useStores();
   const search = useLocation().search
@@ -48,6 +53,12 @@ function UserDetailsSection() {
       });
     }
   }
+
+
+  function handleChangeRendering(change:string){
+    props.handleCurrentRenderingInProfileRoute(change)
+  }
+
 
   return (
     <Observer>
@@ -75,13 +86,13 @@ function UserDetailsSection() {
                 justifyContent : "center"           
               }}
             >
-              <SSubContainer>
+              <SSubContainer onClick={()=>{handleChangeRendering("Following")}}>
                  <h3 style={{margin: "0px"}}>600</h3>
                  <p style={{margin: "0px"}}>Following</p>
               </SSubContainer>
-              <SSubContainer>
+              <SSubContainer onClick={()=>{handleChangeRendering("Followers")}}>
                  <h3 style={{margin: "0px"}}>600</h3>
-                 <p style={{margin: "0px"}}>Following</p>
+                 <p style={{margin: "0px"}}>Followers</p>
               </SSubContainer>
               <SSubContainer>
                  <h3 style={{margin: "0px"}}>{profileStore?.profile?.cric_index}</h3>
