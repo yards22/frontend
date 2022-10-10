@@ -4,11 +4,11 @@ import { Card, Center, HoverCard, RingProgress } from "@mantine/core"
 import { MProfile } from "../../../Logic/Model/MProfile"
 import { Info } from "react-feather";
 
-interface ProfileDetailsSectionIndexProps{
-  profileInfo : MProfile | null;
+interface ProfileDetailsSectionIndexProps {
+  profileInfo: MProfile | null;
 }
 
-function ProfileDetailsSectionIndex(props:ProfileDetailsSectionIndexProps) {
+function ProfileDetailsSectionIndex(props: ProfileDetailsSectionIndexProps) {
   return (
     <Card
       shadow="md"
@@ -61,4 +61,4 @@ function ProfileDetailsSectionIndex(props:ProfileDetailsSectionIndexProps) {
   );
 }
 
-export default ProfileDetailsSectionIndex
+export default ProfileDetailsSectionIndex;

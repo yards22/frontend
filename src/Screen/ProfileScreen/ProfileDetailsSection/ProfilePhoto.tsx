@@ -10,9 +10,9 @@ const SProfilePhoto = styled.div`
     overflow: hidden;
 `;
 
-interface ProfilePhotoProps{
-   userName : string | undefined,
-   profileImageUri : string | null | undefined,
+interface ProfilePhotoProps {
+  userName: string | undefined;
+  profileImageUri: string | null | undefined;
 }
 
 function ProfilePhoto(props:ProfilePhotoProps) {
@@ -34,4 +34,4 @@ function ProfilePhoto(props:ProfilePhotoProps) {
   )
 }
 
-export default ProfilePhoto
+export default ProfilePhoto;

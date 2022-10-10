@@ -45,12 +45,12 @@ function EditPageTwo(props:EditPageTwoProps) {
       setInterestsArray([...w])
   }
 
-  const handleRemoveInterestFromArray = (interest:string) => {
-    var w = interestsArray.filter(each => each!== interest);
-    setInterestsArray([...w]); 
-  }
+  const handleRemoveInterestFromArray = (interest: string) => {
+    var w = interestsArray.filter((each) => each !== interest);
+    setInterestsArray([...w]);
+  };
 
-  const handleSubmitInterestsArray = ()=>{
+  const handleSubmitInterestsArray = () => {
     let interestsString = interestsArray.join(",");
     props.handleSubmitNewUserDetails(interestsString)
   }

@@ -1,7 +1,7 @@
 import { MProfile } from "../Model/MProfile";
 import { Request } from "../Utils/Fetch";
 import { CheckResponse, ThrowFor } from "../Utils/ResponseHandler";
-import {AuthHeaders} from "../../Atoms/Util"
+import { AuthHeaders } from "../../Atoms/Util";
 
 export class ProfileRepo {
   baseUrl: string;
@@ -32,18 +32,28 @@ export class ProfileRepo {
 
   async checkUserName(username: string): Promise<any> {
     try {
-      const res = await this.rq.Post(`${this.baseUrl}/checkUsername`,{username});
+      const res = await this.rq.Post(`${this.baseUrl}/checkUsername`, {
+        username,
+      });
       const { body } = await CheckResponse(res, 200);
-      console.log(body)
+      console.log(body);
     } catch (err: any) {
       throw ThrowFor(err, {});
     }
   }
 
-  async updateUserDetails(props:any): Promise<MProfile> {
+  async updateUserDetails(props: any): Promise<MProfile> {
     try {
-      const data = props.formData
-      const res = await this.rq.Put(`${this.baseUrl}/editProfile`,data,AuthHeaders(props.token));
+      const data = {
+        username: props.username,
+        bio: props.bio,
+        image: props.image,
+      };
+      const res = await this.rq.Put(
+        `${this.baseUrl}/editProfile`,
+        data,
+        AuthHeaders(props.token)
+      );
       const { body } = await CheckResponse(res, 200);
       return {
         bio: body.data.bio,
@@ -54,7 +64,7 @@ export class ProfileRepo {
         user_id: body.data.user_id,
         username: body.data.username,
         updated_at: body.data.updated_at,
-      }
+      };
     } catch (err: any) {
       throw ThrowFor(err, {});
     }

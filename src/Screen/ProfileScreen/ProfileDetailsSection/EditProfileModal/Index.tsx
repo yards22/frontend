@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import styled from "styled-components"
+import { useEffect, useState } from "react";
+import styled from "styled-components";
 import { MProfile } from "../../../../Logic/Model/MProfile";
 import { useStores } from "../../../../Logic/Providers/StoresProviders";
 import EditPageOne from "./EditPageOne/EditPageOne";
@@ -45,12 +45,12 @@ function EditProfileModalIndex(props: EditProfileIndexModalProps) {
     setCurrentEditPage(1); 
   }
 
-  const handleChangeEditPageOneDetails = (profileDetails:any)=>{
-    setBio(profileDetails.bio)
-    setUserName(profileDetails.username)
-    setProfileImageUri(profileDetails.profileImageUri)
+  const handleChangeEditPageOneDetails = (profileDetails: any) => {
+    setBio(profileDetails.bio);
+    setUserName(profileDetails.username);
+    setProfileImageUri(profileDetails.profileImageUri);
     setCurrentEditPage(2);
-  }
+  };
 
   const handleSubmitNewUserDetails = (interestsString : string)=>{
     const formData = new FormData();

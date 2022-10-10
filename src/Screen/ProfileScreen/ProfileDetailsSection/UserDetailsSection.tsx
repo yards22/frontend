@@ -141,7 +141,7 @@ function UserDetailsSection() {
                 }}
                 overflow="inside"
               >
-                 <EditProfileModalIndex profileInfo={profileStore.profile}/>
+                <EditProfileModalIndex profileInfo={profileStore.profile} />
               </Modal>
               <Menu shadow="md" width={200}>
                  <Menu.Target>
