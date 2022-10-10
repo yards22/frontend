@@ -1,12 +1,14 @@
 import { createContext, useContext } from "react";
 import AppStore from "../State/AppStore";
 import { AuthStore } from "../State/AuthStore";
+import { NotificationStore } from "../State/NotificationStore";
 import { ProfileStore } from "../State/ProfileStore";
 
 interface IStoresContext {
   appStore: AppStore;
   authStore: AuthStore;
   profileStore: ProfileStore;
+  notificationStore: NotificationStore;
 }
 
 export const StoresContext = createContext<IStoresContext>(

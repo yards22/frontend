@@ -37,7 +37,7 @@ function EditProfileModalIndex(props: EditProfileIndexModalProps) {
     if (props.profileInfo?.username) {
       setUserName(props.profileInfo?.username);
     }
-    // if(props.profileInfo?.interests) setInterests(props.profileInfo.interests)
+    //  if(props.profileInfo?.interests) setInterests(props.profileInfo.interests)
     if (props.profileInfo?.profile_image_uri) {
       setProfileImageUri(props.profileInfo?.profile_image_uri);
     }

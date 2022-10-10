@@ -31,6 +31,7 @@ interface UserDetailsSectionProps {
   handleCurrentRenderingInProfileRoute: (changeRoute: string) => void;
 }
 
+
 function UserDetailsSection(props: UserDetailsSectionProps) {
   const [editProfileModal, setEditProfileModal] = useState(false);
   const store = useStores();
