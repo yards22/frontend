@@ -15,25 +15,26 @@ function EmailPasswordLogin() {
   const store = useStores();
   const navigator = useNavigate();
 
-  async function handleRouteToProfile(){
-     await store.profileStore.GetProfile(store.authStore.token);
-     navigator(
-        {
-          pathname : "/profile",
-          search : `${createSearchParams({user : `${store.profileStore.profile?.username}`})}`
-       })
-       store.appStore.setNavigationState(4)
+  async function handleRouteToProfile() {
+    await store.profileStore.GetProfile(store.authStore.token);
+    navigator({
+      pathname: "/profile",
+      search: `${createSearchParams({
+        user: `${store.profileStore.profile?.username}`,
+      })}`,
+    });
+    store.appStore.setNavigationState(4);
   }
 
-  function handleLogin(){
+  function handleLogin() {
     store.authStore
-    .LoginUser(credentials.email, credentials.password)
-    .then(() => {
-      handleRouteToProfile();
-    })
-    .catch((err) => {
-      setErrorText(err.message);
-    });
+      .LoginUser(credentials.email, credentials.password)
+      .then(() => {
+        handleRouteToProfile();
+      })
+      .catch((err) => {
+        setErrorText(err.message);
+      });
   }
 
   return (
@@ -56,9 +57,9 @@ function EmailPasswordLogin() {
             <TextInput
               placeholder="Enter password"
               type={showPassword ? "text" : "password"}
-              onKeyDown={(e)=>{
-                if(e.key === "Enter"){
-                   handleLogin();
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleLogin();
                 }
               }}
               rightSection={

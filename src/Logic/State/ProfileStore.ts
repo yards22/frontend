@@ -3,7 +3,6 @@ import { MProfile } from "../Model/MProfile";
 import { ProfileRepo } from "../Repository/ProfileRepo";
 const TOKEN_KEY = "token";
 
-
 export class ProfileStore {
   @observable profile: MProfile | null = null;
   @observable isLoading: boolean = false;
@@ -27,7 +26,7 @@ export class ProfileStore {
   };
 
   @action
-  GetProfile = async (token:any) => {
+  GetProfile = async (token: any) => {
     this.SetLoading(true);
     try {
       const profile = await this.profileRepo.getProfile(token || "");
@@ -40,10 +39,10 @@ export class ProfileStore {
   };
 
   @action
-  UpdateProfile = async (props : any) =>{
+  UpdateProfile = async (props: any) => {
     this.SetLoading(true);
     try {
-      console.log("props",...props.formData)
+      console.log("props", ...props.formData);
       const profile = await this.profileRepo.updateUserDetails(props);
       this.SetProfile(profile);
     } catch (err) {
@@ -51,5 +50,5 @@ export class ProfileStore {
     } finally {
       this.SetLoading(false);
     }
-  }
+  };
 }

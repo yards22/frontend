@@ -8,7 +8,7 @@ const SRightPane = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 function RightPane() {
   const store = useStores();
@@ -16,11 +16,7 @@ function RightPane() {
     <Observer>
       {() => {
         const { authStore } = store;
-        return (
-          <SRightPane>
-              Right Pane
-          </SRightPane>
-        );
+        return <SRightPane>Right Pane</SRightPane>;
       }}
     </Observer>
   );

@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function NotificationIndex() {
-  return (
-    <div>NotificationIndex</div>
-  )
+  return <div>NotificationIndex</div>;
 }
 
-export default NotificationIndex
+export default NotificationIndex;

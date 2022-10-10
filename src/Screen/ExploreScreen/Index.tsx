@@ -7,31 +7,26 @@ const SNetworkIndex = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 const SExploreSectionHeading = styled.div`
-   width: 100%;
-   /* background-color: #e0dcd1; */
-   border-bottom: 0.2em solid black;
-   color: black;
-   padding: 6px 10px;
-   margin-bottom: 2px;
-   font-size: 20px;
-`
+  width: 100%;
+  /* background-color: #e0dcd1; */
+  border-bottom: 0.2em solid black;
+  color: black;
+  padding: 6px 10px;
+  margin-bottom: 2px;
+  font-size: 20px;
+`;
 
 function ExploreIndex() {
-
-  return(
-      <SNetworkIndex>
-         <SExploreSectionHeading>
-             Recommendations
-          </SExploreSectionHeading>
-         <PeopleRecommendationsSection/> 
-         <SExploreSectionHeading>
-             Trending Posts
-         </SExploreSectionHeading>
-         <TrendingPostsSection/>
-      </SNetworkIndex>
-  )
+  return (
+    <SNetworkIndex>
+      <SExploreSectionHeading>Recommendations</SExploreSectionHeading>
+      <PeopleRecommendationsSection />
+      <SExploreSectionHeading>Trending Posts</SExploreSectionHeading>
+      <TrendingPostsSection />
+    </SNetworkIndex>
+  );
 }
 
 export default ExploreIndex;

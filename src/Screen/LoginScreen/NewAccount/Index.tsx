@@ -16,8 +16,8 @@ interface NewAccountProps {
 
 function NewAccount(props: NewAccountProps) {
   const store = useStores();
-  const [showPassword , setShowPassword] = useState(false)
-  const [showConfrimPassword , setShowConfrimPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfrimPassword, setShowConfrimPassword] = useState(false);
   const [buttonName, setButtonName] = useState("Send OTP");
   const [stage, setStage] = useState(0);
   const [errorText, setErrorText] = useState("");
@@ -34,62 +34,63 @@ function NewAccount(props: NewAccountProps) {
   });
   const navigator = useNavigate();
 
-  async function handleRouteToProfile(){
+  async function handleRouteToProfile() {
     await store.profileStore.GetProfile(store.authStore.token);
-    navigator(
-       {
-         pathname : "/profile",
-         search : `${createSearchParams({user : `${store.profileStore.profile?.username}`})}`
+    navigator({
+      pathname: "/profile",
+      search: `${createSearchParams({
+        user: `${store.profileStore.profile?.username}`,
+      })}`,
+    });
+    store.appStore.setNavigationState(4);
+  }
+
+  function handleSendOTPClick() {
+    store.authStore
+      .SendSignUpOTP(data.mail_id)
+      .then(() => {
+        setErrorText("");
+        let i = OTP_SEND_TIMEOUT;
+        setButtonName(`Resend in ${i}s.`);
+        const timeout = setInterval(() => {
+          i--;
+          if (i === 0) {
+            clearInterval(timeout);
+            setButtonName("Resend OTP");
+          } else {
+            setButtonName(`Resend in ${i}s.`);
+          }
+        }, 1000);
       })
-      store.appStore.setNavigationState(4)
- }
+      .catch((err) => {
+        setErrorText(err.message);
+      });
+  }
 
- function handleSendOTPClick(){
+  function handleVerifyTheOTP() {
     store.authStore
-    .SendSignUpOTP(data.mail_id)
-    .then(() => {
-      setErrorText("");
-      let i = OTP_SEND_TIMEOUT;
-      setButtonName(`Resend in ${i}s.`);
-      const timeout = setInterval(() => {
-        i--;
-        if (i === 0) {
-          clearInterval(timeout);
-          setButtonName("Resend OTP");
-        } else {
-          setButtonName(`Resend in ${i}s.`);
-        }
-      }, 1000);
-    })
-    .catch((err) => {
-      setErrorText(err.message);
-    });
- }
+      .VerifySignUpOTP(data.mail_id, data.otp)
+      .then(() => {
+        setErrorText("");
+        setStage(1);
+      })
+      .catch((err) => {
+        setErrorText(err.message);
+      });
+  }
 
- function handleVerifyTheOTP(){
+  function handleSignUp() {
     store.authStore
-    .VerifySignUpOTP(data.mail_id, data.otp)
-    .then(() => {
-      setErrorText("");
-      setStage(1);
-    })
-    .catch((err) => {
-      setErrorText(err.message);
-    });
- }
+      .SignUpUser(data.mail_id, data.confirmPassword, data.otp)
+      .then(() => {
+        props.onClose();
+        handleRouteToProfile();
+      })
+      .catch((err) => {
+        setErrorText(err.message);
+      });
+  }
 
- function handleSignUp(){
-   store. authStore
-   .SignUpUser(data.mail_id, data.confirmPassword, data.otp)
-   .then(() => {
-     props.onClose();
-     handleRouteToProfile()
-   })
-   .catch((err) => {
-     setErrorText(err.message);
-   });
- }
- 
   return (
     <>
       {stage === 0 && (
@@ -118,9 +119,9 @@ function NewAccount(props: NewAccountProps) {
                     style={{ width: "100%", marginRight: "10px" }}
                     label="Email Address"
                     onKeyDown={(e) => {
-                       if(e.key === "Enter"){
-                         handleSendOTPClick();
-                       }
+                      if (e.key === "Enter") {
+                        handleSendOTPClick();
+                      }
                     }}
                     onChange={(e) => {
                       setData((p) => {
@@ -157,9 +158,9 @@ function NewAccount(props: NewAccountProps) {
                       placeholder="Enter OTP"
                       style={{ width: "100%", marginRight: "10px" }}
                       label="One Time Password (OTP)"
-                      onKeyDown={(e)=>{
-                        if(e.key === "Enter"){
-                           handleVerifyTheOTP();
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          handleVerifyTheOTP();
                         }
                       }}
                       description={`A ${
@@ -210,7 +211,7 @@ function NewAccount(props: NewAccountProps) {
               >
                 <h3>Set Password</h3>
                 <TextInput
-                  type={showPassword ? "text" :"password"}
+                  type={showPassword ? "text" : "password"}
                   withAsterisk
                   style={{ width: "100%", marginRight: "10px" }}
                   label="Password"
@@ -241,7 +242,7 @@ function NewAccount(props: NewAccountProps) {
                   }
                 />
                 <TextInput
-                  type={showConfrimPassword ? "text": "password"}
+                  type={showConfrimPassword ? "text" : "password"}
                   withAsterisk
                   style={{ width: "100%", marginRight: "10px" }}
                   label="Confirm Password"
@@ -251,9 +252,9 @@ function NewAccount(props: NewAccountProps) {
                       return { ...p, confirmPassword: e.target.value };
                     });
                   }}
-                  onKeyDown = {(e)=>{
-                    if(e.key === "Enter"){
-                       handleSignUp()
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleSignUp();
                     }
                   }}
                   rightSection={

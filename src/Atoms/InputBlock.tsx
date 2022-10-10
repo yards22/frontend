@@ -1,11 +1,7 @@
-import {Input} from "@mantine/core"
+import { Input } from "@mantine/core";
 
 function InputBlock() {
-  return (
-    <Input
-       
-    />
-  )
+  return <Input />;
 }
 
-export default InputBlock
+export default InputBlock;

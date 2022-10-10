@@ -12,15 +12,15 @@ function SignInWithGoogle() {
   const store = useStores();
   const navigator = useNavigate();
 
-  async function handleRouteToProfile(){
-     await store.profileStore.GetProfile(store.authStore.token);
-     navigator(
-        {
-          pathname : "/profile",
-          search : `${createSearchParams({user : `${store.profileStore.profile?.username}`})}`
-       })
-       store.appStore.setNavigationState(4)
-      
+  async function handleRouteToProfile() {
+    await store.profileStore.GetProfile(store.authStore.token);
+    navigator({
+      pathname: "/profile",
+      search: `${createSearchParams({
+        user: `${store.profileStore.profile?.username}`,
+      })}`,
+    });
+    store.appStore.setNavigationState(4);
   }
 
   return !didLoginFailed ? (
@@ -38,7 +38,7 @@ function SignInWithGoogle() {
                   store.authStore
                     .OAuthLoginUser(credentialResponse.credential)
                     .then(() => {
-                      handleRouteToProfile()
+                      handleRouteToProfile();
                     })
                     .catch((err) => setDidLoginFailed(true));
                 else setDidLoginFailed(true);

@@ -16,17 +16,18 @@ const SProfileIndex = styled.div`
 
 function ProfileIndex() {
   const store = useStores();
-  const [currentRenderingInProfileRoute, setCurrentRenderingInProfileRoute] = useState("Profile");
-  const [activePostsTab , setActivePostsTab] = useState("Posts")
+  const [currentRenderingInProfileRoute, setCurrentRenderingInProfileRoute] =
+    useState("Profile");
+  const [activePostsTab, setActivePostsTab] = useState("Posts");
 
   useEffect(() => {
     store.profileStore.GetProfile(store.authStore.token);
-    store.appStore.setNavigationState(4)
+    store.appStore.setNavigationState(4);
   }, []);
 
-  function handleCurrentRenderingInProfileRoute(current : string){
-     setCurrentRenderingInProfileRoute(current)
-  }  
+  function handleCurrentRenderingInProfileRoute(current: string) {
+    setCurrentRenderingInProfileRoute(current);
+  }
 
   return (
     <Observer>
@@ -34,39 +35,44 @@ function ProfileIndex() {
         const { profileStore } = store;
         return profileStore.profile ? (
           <SProfileIndex>
-            { currentRenderingInProfileRoute === "Profile" &&
+            {currentRenderingInProfileRoute === "Profile" && (
               <>
-                <ProfileDetailsSectionIndex 
-                  profileInfo={profileStore.profile} 
-                  handleCurrentRenderingInProfileRoute = {handleCurrentRenderingInProfileRoute}
-                  />
-                <InterestsSection/>
-                <Tabs value={activePostsTab} onTabChange={(e:any)=>setActivePostsTab(e)} mt={10}  variant="pills">
+                <ProfileDetailsSectionIndex
+                  profileInfo={profileStore.profile}
+                  handleCurrentRenderingInProfileRoute={
+                    handleCurrentRenderingInProfileRoute
+                  }
+                />
+                <InterestsSection />
+                <Tabs
+                  value={activePostsTab}
+                  onTabChange={(e: any) => setActivePostsTab(e)}
+                  mt={10}
+                  variant="pills"
+                >
                   <Tabs.List grow>
                     <Tabs.Tab value="Posts">Posts</Tabs.Tab>
                     <Tabs.Tab value="Favourites">Favourites</Tabs.Tab>
                   </Tabs.List>
                 </Tabs>
-                {
-                  activePostsTab === "Posts" && <UserPosts/>
-                }
-                {
-                   activePostsTab === "Favourites" && <UserFavourites/>
-                }
+                {activePostsTab === "Posts" && <UserPosts />}
+                {activePostsTab === "Favourites" && <UserFavourites />}
               </>
-            }
-            {
-               currentRenderingInProfileRoute === "Following" &&
-               <Following
-               handleCurrentRenderingInProfileRoute = {handleCurrentRenderingInProfileRoute}
-               /> 
-            }
-            {
-               currentRenderingInProfileRoute === "Followers" &&
-               <Followers
-               handleCurrentRenderingInProfileRoute = {handleCurrentRenderingInProfileRoute}
-               /> 
-            }
+            )}
+            {currentRenderingInProfileRoute === "Following" && (
+              <Following
+                handleCurrentRenderingInProfileRoute={
+                  handleCurrentRenderingInProfileRoute
+                }
+              />
+            )}
+            {currentRenderingInProfileRoute === "Followers" && (
+              <Followers
+                handleCurrentRenderingInProfileRoute={
+                  handleCurrentRenderingInProfileRoute
+                }
+              />
+            )}
           </SProfileIndex>
         ) : (
           <div
