@@ -33,11 +33,11 @@ function NotificationTile(props: NotificationTileProps) {
     <SNotificationTile
       theme={{
         bgColor:
-          props.status === "unseen"
+          props.status === "Unseen"
             ? mantineTheme.colors["blue"][0]
             : mantineTheme.colors["gray"][0],
         hoverColor:
-          props.status === "unseen"
+          props.status === "Unseen"
             ? mantineTheme.colors["blue"][1]
             : mantineTheme.colors["gray"][1],
       }}
@@ -45,7 +45,7 @@ function NotificationTile(props: NotificationTileProps) {
       <SBullDot
         theme={{
           bgColor:
-            props.status !== "read"
+            props.status !== "Read"
               ? mantineTheme.colors["blue"][8]
               : "transparent",
         }}
