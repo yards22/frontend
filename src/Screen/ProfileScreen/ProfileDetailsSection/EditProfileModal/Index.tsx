@@ -19,6 +19,7 @@ const SEditProfileModalIndex = styled.div`
 
 interface EditProfileIndexModalProps {
   profileInfo: MProfile | null;
+  handleCloseTheEditModal: () => void;
 }
 
 function EditProfileModalIndex(props: EditProfileIndexModalProps) {
@@ -55,6 +56,10 @@ function EditProfileModalIndex(props: EditProfileIndexModalProps) {
   };
 
   const handleSubmitNewUserDetails = (interestsString: string) => {
+    if (store.authStore.isNewUser) {
+      store.authStore.SetIsNewUser(false);
+    }
+    props.handleCloseTheEditModal();
     const formData = new FormData();
     formData.append("username", username);
     formData.append("image", profileImageUri);
