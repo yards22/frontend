@@ -19,7 +19,6 @@ function NewsIndex() {
   const feedBackImageRef: any = useRef(null);
 
   function handleFeedBackImageChange(e: any) {
-    console.log(e.target.files[0]);
     setSelectedImage(URL.createObjectURL(e.target.files[0]));
     setSelectedImageName(e.target.files[0].name);
   }

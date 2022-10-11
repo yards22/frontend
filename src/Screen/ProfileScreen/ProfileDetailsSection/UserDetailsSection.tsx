@@ -8,6 +8,7 @@ import { useStores } from "../../../Logic/Providers/StoresProviders";
 import EditProfileModalIndex from "./EditProfileModal/Index";
 import { MoreVertical, Trash2, LogOut } from "react-feather";
 import { useLocation, useNavigate } from "react-router-dom";
+import { MProfile } from "../../../Logic/Model/MProfile";
 
 const SUserDetailsSection = styled.div`
   padding: 0px 15px 20px 15px;
@@ -28,6 +29,7 @@ const SSubContainer = styled.div`
 `;
 
 interface UserDetailsSectionProps {
+  profileInfo : MProfile | null;
   handleCurrentRenderingInProfileRoute: (changeRoute: string) => void;
 }
 
@@ -40,7 +42,6 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(store.authStore.isNewUser);
     if (store.authStore.isNewUser) {
       setEditProfileModal(true);
     }
@@ -77,9 +78,9 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
               }}
             >
               <h2 style={{ margin: "0px" }}>
-                {profileStore.profile?.username}
+                {props.profileInfo?.username}
               </h2>
-              <p style={{ margin: "0px" }}>{profileStore.profile?.email_id}</p>
+              <p style={{ margin: "0px" }}>{props.profileInfo?.email_id}</p>
             </div>
             <div
               style={{

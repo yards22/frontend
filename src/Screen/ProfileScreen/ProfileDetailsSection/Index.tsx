@@ -66,6 +66,8 @@ function ProfileDetailsSectionIndex(props: ProfileDetailsSectionIndexProps) {
         handleCurrentRenderingInProfileRoute={
           props.handleCurrentRenderingInProfileRoute
         }
+        profileInfo = {props.profileInfo}
+        
       />
     </Card>
   );

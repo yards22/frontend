@@ -58,7 +58,6 @@ function EditPageOne(props: EditPageOneProps) {
 
   function handleFocusOutUserNameField() {
     //API CALL TO VERIFY WHETHER USERNAME IS PRESENT OR NOT
-    console.log("gyg");
   }
 
   const handleMoveToEditPageTwo = () => {

@@ -1,6 +1,7 @@
 import { Loader, Tabs } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import UserFavourites from "./Favourites/UserFavourites";
@@ -19,15 +20,28 @@ function ProfileIndex() {
   const [currentRenderingInProfileRoute, setCurrentRenderingInProfileRoute] =
     useState("Profile");
   const [activePostsTab, setActivePostsTab] = useState("Posts");
+  const [profileInfo, setProfileInfo] = useState<any>(null);
+  const search = useLocation().search;
+  const currentUser = new URLSearchParams(search).get("user");
 
   useEffect(() => {
-    store.profileStore.GetProfile(store.authStore.token);
+    getTheCurrentUser();
     store.appStore.setNavigationState(4);
-  }, []);
+  },[]);
+
+  async function getTheCurrentUser(){
+    await store.profileStore.GetProfile(store.authStore.token)
+  }
+
+  useEffect(()=>{
+    
+  },[profileInfo])
 
   function handleCurrentRenderingInProfileRoute(current: string) {
     setCurrentRenderingInProfileRoute(current);
   }
+
+
 
   return (
     <Observer>
@@ -38,7 +52,7 @@ function ProfileIndex() {
             {currentRenderingInProfileRoute === "Profile" && (
               <>
                 <ProfileDetailsSectionIndex
-                  profileInfo={profileStore.profile}
+                  profileInfo={store.profileStore.profile?.username === currentUser ? store.profileStore.profile : profileInfo}
                   handleCurrentRenderingInProfileRoute={
                     handleCurrentRenderingInProfileRoute
                   }
