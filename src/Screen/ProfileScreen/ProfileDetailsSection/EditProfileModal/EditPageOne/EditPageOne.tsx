@@ -1,6 +1,7 @@
-import { Button, Input, Textarea } from "@mantine/core";
+import { Button, Input, Textarea ,Text} from "@mantine/core";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { useStores } from "../../../../../Logic/Providers/StoresProviders";
 import ProfilePhoto from "../../ProfilePhoto";
 
 const SEditPageOne = styled.div`
@@ -32,7 +33,9 @@ function EditPageOne(props: EditPageOneProps) {
   const [profilePic, setProfilePic] = useState("");
   const [bio, setBio] = useState("");
   const [username, setUserName] = useState("");
+  const [userNameError, setUserNameError ] = useState("")
   const editProfilePicRef: any = useRef(null);
+  const stores = useStores();
 
   useEffect(() => {
     if (props.bio) setBio(props.bio);
@@ -56,12 +59,34 @@ function EditPageOne(props: EditPageOneProps) {
     // })
   }
 
-  function handleFocusOutUserNameField() {
-    //API CALL TO VERIFY WHETHER USERNAME IS PRESENT OR NOT
+  async function handleFocusOutUserNameField() {
+    if(username !== stores.profileStore.profile?.username && stores.authStore.token){
+      stores.profileStore.CheckUserNameAvailability({username,token :stores.authStore.token})
+      .then((res)=>{
+        console.log("username check response",res)
+        if(res === "username_exists"){
+          setUserNameError("Try Other UserName")
+        }else{
+          setUserNameError("")
+        }
+      })
+    }else{
+      setUserNameError("")
+    }
   }
 
   const handleMoveToEditPageTwo = () => {
-    props.handleChangeEditPageOneDetails({ bio, username, profileImageUri });
+    if(userNameError ==="" && stores.authStore.token){
+      stores.profileStore.CheckUserNameAvailability({username,token :stores.authStore.token})
+      .then((res)=>{
+        console.log("username check response",res)
+        if(res === "username_exists"){
+          setUserNameError("Try Other UserName")
+        }else{
+          props.handleChangeEditPageOneDetails({ bio, username, profileImageUri });
+        }
+      })
+    }
   };
 
   return (
@@ -119,6 +144,7 @@ function EditPageOne(props: EditPageOneProps) {
             setUserName(e.target.value);
           }}
         />
+        <Text color={"red"} mt={3} size="xs">{userNameError}</Text>
       </div>
       <div
         style={{

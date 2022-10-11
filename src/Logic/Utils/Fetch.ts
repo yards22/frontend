@@ -25,7 +25,7 @@ export class Request {
   async Post(
     url: string,
     data = {},
-    headers = { "Content-Type": "application/json" }
+    headers ?: { [key: string]: string }
   ) {
     return this.Raw(url, "POST", data, headers);
   }
