@@ -64,7 +64,7 @@ function EditPageOne(props: EditPageOneProps) {
       stores.profileStore.CheckUserNameAvailability({username,token :stores.authStore.token})
       .then((res)=>{
         console.log("username check response",res)
-        if(res === "username_exists"){
+        if(res === 200){
           setUserNameError("Try Other UserName")
         }else{
           setUserNameError("")
@@ -80,7 +80,7 @@ function EditPageOne(props: EditPageOneProps) {
       stores.profileStore.CheckUserNameAvailability({username,token :stores.authStore.token})
       .then((res)=>{
         console.log("username check response",res)
-        if(res === "username_exists"){
+        if(res === 200){
           setUserNameError("Try Other UserName")
         }else{
           props.handleChangeEditPageOneDetails({ bio, username, profileImageUri });

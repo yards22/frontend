@@ -30,14 +30,12 @@ export class ProfileRepo {
     }
   }
 
-  async checkUserName(props : {username : string,token : string}): Promise<{message : string }> {
+  async checkUserName(props : {username : string,token : string}): Promise<number> {
     try {
       const data = {username : props.username}
       const res = await this.rq.Post(`${this.baseUrl}/checkUsername`, data, { "Content-Type":"application/json", "Authorization":`Bearer ${props.token}`});
       const { body } = await CheckResponse(res, 200);
-      return {
-        message : body.message 
-      }
+      return body.statusCode
     } catch (err: any) {
       throw ThrowFor(err, {});
     }

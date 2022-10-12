@@ -57,7 +57,7 @@ export class ProfileStore {
     this.SetLoading(true)
     try{
       const res = await this.profileRepo.checkUserName(props);
-      return res.message
+      return res
     }catch (err){
       throw err
     }finally{
