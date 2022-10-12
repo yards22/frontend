@@ -58,7 +58,7 @@ function App() {
                 {authStore.user && <TopBar />}
 
                 {authStore.user && appStore.isPhone && <BottomBar />}
-    <Routes>
+                <Routes>
                   <Route path="/login" element={<LoginIndex />} />
                   <Route element={<ProtectedRoutes />}>
                     <Route path="explore" element={<ExploreIndex />} />
@@ -69,6 +69,7 @@ function App() {
                     />
                     <Route path="feed" element={<FeedIndex />} />
                   </Route>
+                  <Route path="/temp" element={<FeedIndex />} />
                   <Route>404</Route>
                 </Routes>
               </Router>
