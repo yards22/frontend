@@ -18,7 +18,6 @@ const SCommentContainer = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 5px 0;
 `;
 const SComment = styled.div`
   display: flex;
@@ -26,18 +25,20 @@ const SComment = styled.div`
   justify-content: center;
   align-items: flex-start;
   padding: 5px 10px;
-  background: #f4f4f481;
-  border-radius: 10px;
-  width: fit-content;
+  width: 100%;
   margin-left: 8px;
 `;
 function CommentTile(props: CommentProps) {
   return (
-    <SCommentContainer style={props.style}>
+    <SCommentContainer
+      style={props.style}
+      theme={{ isChild: props.isChildComment }}
+    >
       <Avatar
+        style={{ marginTop: "10px" }}
         src={props.profile_pic_uri}
         size={props.isChildComment ? "sm" : "md"}
-        radius={"xl"}
+        radius={"sm"}
       />
       <SComment>
         <LinkedUserName type="hard" username={props.username} order={6} />
