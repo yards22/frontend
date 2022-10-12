@@ -30,7 +30,6 @@ function AddComment(props: AddCommentProps) {
       </div>
       <Button
         style={{ marginLeft: "10px" }}
-        // variant="white"
         compact
         disabled={comment.length === 0}
       >

@@ -10,7 +10,7 @@ import { Heart, MessageCircle } from "react-feather";
 import Liked from "./Liked";
 import LinkedUserName from "../../../Atoms/LinkedUserName";
 import { useState } from "react";
-import Comments from "./Comments";
+import CommentThread from "./CommentThread";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import AddComment from "./AddComment";
 
@@ -133,9 +133,9 @@ function NormalPost(props: NormalPostProps) {
         >
           <AddComment isReply={false} />
           <Title order={6} style={{ marginTop: "20px" }}>
-            Comments
+            Comment
           </Title>
-          <Comments />
+          <CommentThread />
         </div>
       )}
     </Card>
