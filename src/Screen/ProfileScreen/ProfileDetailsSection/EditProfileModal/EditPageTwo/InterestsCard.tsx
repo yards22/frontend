@@ -1,51 +1,32 @@
-import { Avatar, Box } from "@mantine/core";
-import { useState } from "react";
-import styled from "styled-components";
+import { Avatar, Box, Button } from "@mantine/core";
 
-const SInterestsCard = styled.div`
-  cursor: pointer;
-`;
 
 interface InterestsCardProps {
   image: string;
   label: string;
-  description: string;
+  disable ?: boolean;
+  value : string;
   handleAddInterestToArray(interest: string): void;
 }
 
 function InterestsCard(props: InterestsCardProps) {
-  const [isInterestSelected, setIsInterestSelected] = useState(false);
-
+  
   const handleInterestSelected = () => {
-    props.handleAddInterestToArray(props.label);
+    props.handleAddInterestToArray(props.value);
   };
   return (
-    <SInterestsCard
-      key={props.label}
-      onClick={handleInterestSelected}
-      style={{
-        backgroundColor: `${isInterestSelected ? "gray" : ""}`,
-      }}
-    >
-      <Box
-        style={{
-          display: "flex",
-          cursor: "default",
-          alignItems: "center",
-          backgroundColor: "white",
-          border: `1px solid gray`,
-          padding: "5px",
-          paddingLeft: "10px",
-          borderRadius: "4px",
-          marginBottom: "8px",
-        }}
-      >
-        <Box mr={10}>
-          <Avatar size={"sm"} src={props.image} />
-        </Box>
-        <div>{props.label}</div>
-      </Box>
-    </SInterestsCard>
+        <Button
+          variant="outline"
+          style={{
+            borderRadius: "4px",
+            margin: "4px",
+          }}
+          disabled = {props.disable}
+          onClick = {handleInterestSelected}
+          leftIcon = {<Avatar src={props.image} size="xs"/>}
+        >
+           {props.label}
+        </Button>
   );
 }
 
