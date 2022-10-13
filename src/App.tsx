@@ -18,6 +18,7 @@ const SApp = styled.section`
   width: 100%;
   max-width: 600px;
   overflow: auto;
+  padding-top: 10px;
   ::-webkit-scrollbar {
     display: none;
   }

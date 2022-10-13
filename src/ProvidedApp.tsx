@@ -34,7 +34,7 @@ function ProvidedApp(props: ProvidedAppProps) {
   return (
     <div
       style={{
-        backgroundColor: "#ffffff",
+        backgroundColor: "#E7F5FF",
       }}
     >
       <StoresContext.Provider
