@@ -8,6 +8,7 @@ import { useStores } from "../../../Logic/Providers/StoresProviders";
 import EditProfileModalIndex from "./EditProfileModal/Index";
 import { MoreVertical, Trash2, LogOut } from "react-feather";
 import { useLocation, useNavigate } from "react-router-dom";
+import { MProfile } from "../../../Logic/Model/MProfile";
 
 const SUserDetailsSection = styled.div`
   padding: 0px 15px 20px 15px;
@@ -28,19 +29,20 @@ const SSubContainer = styled.div`
 `;
 
 interface UserDetailsSectionProps {
+  profileInfo : MProfile | null;
   handleCurrentRenderingInProfileRoute: (changeRoute: string) => void;
 }
 
 
 function UserDetailsSection(props: UserDetailsSectionProps) {
   const [editProfileModal, setEditProfileModal] = useState(false);
+  const [alreadyFollowingUser , setAlreadyFollowingUser] = useState(false)
   const store = useStores();
   const search = useLocation().search;
   const currentUser = new URLSearchParams(search).get("user");
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(store.authStore.isNewUser);
     if (store.authStore.isNewUser) {
       setEditProfileModal(true);
     }
@@ -63,6 +65,20 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
     props.handleCurrentRenderingInProfileRoute(change);
   }
 
+  async function handleActionOnFollow(){
+    if(alreadyFollowingUser && store.authStore.token){
+      const res = await store.exploreStore.DeleteNewConnection({user_id:1,token:store.authStore.token})
+      if(res === 200){
+        setAlreadyFollowingUser(false)
+      }
+    }else if(!alreadyFollowingUser && store.authStore.token){
+      const res = await store.exploreStore.MakeNewConnection({user_id:1,token:store.authStore.token})
+      if(res === 200){
+        setAlreadyFollowingUser(true)
+      }
+    }
+  }
+
   return (
     <Observer>
       {() => {
@@ -77,9 +93,9 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
               }}
             >
               <h2 style={{ margin: "0px" }}>
-                {profileStore.profile?.username}
+                {props.profileInfo?.username}
               </h2>
-              <p style={{ margin: "0px" }}>{profileStore.profile?.email_id}</p>
+              <p style={{ margin: "0px" }}>{props.profileInfo?.email_id}</p>
             </div>
             <div
               style={{
@@ -95,7 +111,14 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
                 }}
               >
                 <h3 style={{ margin: "0px" }}>600</h3>
-                <p style={{ margin: "0px" }}>Following</p>
+                <p 
+                  style={{ margin: "0px" }}
+                  onClick= {()=>{
+                    if(store.authStore.token){
+                       store.exploreStore.GetFollowing(store.authStore.token)
+                    }
+                  }}
+                  >Following</p>
               </SSubContainer>
               <SSubContainer
                 onClick={() => {
@@ -103,7 +126,14 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
                 }}
               >
                 <h3 style={{ margin: "0px" }}>600</h3>
-                <p style={{ margin: "0px" }}>Followers</p>
+                <p 
+                   style={{ margin: "0px" }} 
+                   onClick= {()=>{
+                      if(store.authStore.token){
+                         store.exploreStore.GetFollowers(store.authStore.token)
+                      }
+                    }}
+                  >Followers</p>
               </SSubContainer>
               <SSubContainer>
                 <h3 style={{ margin: "0px" }}>
@@ -144,8 +174,8 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
                   Edit Profile
                 </Button>
               ) : (
-                <Button variant="outline" fullWidth>
-                  Follow
+                <Button variant="outline" fullWidth onClick={handleActionOnFollow}>
+                  { alreadyFollowingUser ? "Unfollow" :  "Follow" }
                 </Button>
               )}
               <Modal

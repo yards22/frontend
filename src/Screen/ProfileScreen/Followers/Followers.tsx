@@ -1,7 +1,9 @@
-import { Button, Card, Text } from "@mantine/core";
+import { Button, Card, Skeleton, Text } from "@mantine/core";
+import { Observer } from "mobx-react-lite";
 import styled from "styled-components";
 import ProfileAvatar from "../../../Atoms/ProfileAvatar";
 import { DummyFollowingList } from "../../../Data/Dummies/Following";
+import { useStores } from "../../../Logic/Providers/StoresProviders";
 
 const SFollowers = styled.div`
   width: 100%;
@@ -13,34 +15,63 @@ interface FollowingProps {
 }
 
 function Followers(props: FollowingProps) {
+  const stores = useStores();
   return (
-    <SFollowers>
-      <Text
-        size={"md"}
-        style={{
-          cursor: "pointer",
-        }}
-        onClick={() => props.handleCurrentRenderingInProfileRoute("Profile")}
-      >
-        {"<- Back"}
-      </Text>
-      {DummyFollowingList.map(
-        (each: { username: string; profile_pic_uri: string }) => {
-          return (
-            <Card
-              style={{
-                display: "flex",
-                margin: "5px",
-                alignItems: "center",
-              }}
-            >
-              <ProfileAvatar imageUrl={each.profile_pic_uri} />
-              <Text ml={18}>{each.username}</Text>
-            </Card>
-          );
-        }
-      )}
-    </SFollowers>
+    <Observer>
+       {
+         () => {
+           const {exploreStore} = stores
+           return(
+            <SFollowers>
+                <Text
+                  size={"md"}
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  onClick={() => props.handleCurrentRenderingInProfileRoute("Profile")}
+                >
+                  {"<- Back"}
+                </Text>
+                  {!exploreStore && DummyFollowingList.map(
+                    (each: { username: string; profile_pic_uri: string }) => {
+                      return (
+                        <Card
+                          style={{
+                            display: "flex",
+                            margin: "5px",
+                            alignItems: "center",
+                          }}
+                          key = {each.username}
+                        >
+                          <ProfileAvatar imageUrl={each.profile_pic_uri} />
+                          <Text ml={18}>{each.username}</Text>
+                        </Card>
+                      );
+                    }
+                  )}
+                  {
+                    exploreStore.isLoading && 
+                    ([...Array(5)]).map(each => {
+                      return (
+                        <Card
+                          style={{
+                            display: "flex",
+                            margin: "5px",
+                            alignItems: "center",
+                          }}
+                          key = {each}
+                        >
+                          <Skeleton height={40} circle mb="xl" style={{margin:"0px",marginRight:"10px"}}/>
+                          <Skeleton height={15} width = "30%" radius="xl" />
+                       </Card>
+                      )
+                    })
+                  }
+              </SFollowers>
+           )
+         }
+       }
+    </Observer>
   );
 }
 

@@ -51,4 +51,17 @@ export class ProfileStore {
       this.SetLoading(false);
     }
   };
+
+  @action
+  CheckUserNameAvailability = async (props : {username : string,token : string})=>{
+    this.SetLoading(true)
+    try{
+      const res = await this.profileRepo.checkUserName(props);
+      return res
+    }catch (err){
+      throw err
+    }finally{
+      this.SetLoading(false)
+    }
+  } 
 }

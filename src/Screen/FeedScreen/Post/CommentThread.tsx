@@ -1,12 +1,13 @@
 import { DummyComments } from "../../../Data/Dummies/Comment";
 import CommentTile from "../../../Atoms/CommentTile";
 const comments = DummyComments;
-function Comments() {
+function CommentThread() {
   return (
     <div>
       {comments.map((item, index) => {
         return (
           <div
+            key={`post_comment_inside_${index}}`}
             style={{
               display: "flex",
               flexDirection: "column",
@@ -17,9 +18,10 @@ function Comments() {
             {item.replies.map((repItem, repIndex) => {
               return (
                 <CommentTile
+                  key={`post_comment_${index}_${repIndex}}`}
                   {...repItem}
                   isChildComment={true}
-                  style={{ marginLeft: "50px" }}
+                  style={{ marginLeft: "40px" }}
                 />
               );
             })}
@@ -30,4 +32,4 @@ function Comments() {
   );
 }
 
-export default Comments;
+export default CommentThread;

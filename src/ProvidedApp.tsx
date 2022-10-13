@@ -10,6 +10,8 @@ import { Request } from "./Logic/Utils/Fetch";
 import { ProfileRepo } from "./Logic/Repository/ProfileRepo";
 import { ProfileStore } from "./Logic/State/ProfileStore";
 import { NotificationStore } from "./Logic/State/NotificationStore";
+import { ExploreStore } from "./Logic/State/ExploreStore";
+import { ExploreRepo } from "./Logic/Repository/ExploreRepo";
 
 interface ProvidedAppProps {
   children?: React.ReactNode;
@@ -25,6 +27,10 @@ function ProvidedApp(props: ProvidedAppProps) {
     new ProfileRepo("http://localhost:4000/profile", rq)
   );
   const notificationStore = new NotificationStore();
+
+  const exploreStore = new ExploreStore(
+    new ExploreRepo("http://localhost:4000/network",rq)
+  );
   return (
     <div
       style={{
@@ -32,7 +38,7 @@ function ProvidedApp(props: ProvidedAppProps) {
       }}
     >
       <StoresContext.Provider
-        value={{ appStore, authStore, profileStore, notificationStore }}
+        value={{ appStore, authStore, profileStore, notificationStore,exploreStore }}
       >
         {
           <Observer>

@@ -18,6 +18,7 @@ const SApp = styled.section`
   width: 100%;
   max-width: 600px;
   overflow: auto;
+  padding-top: 10px;
   ::-webkit-scrollbar {
     display: none;
   }
@@ -58,7 +59,7 @@ function App() {
                 {authStore.user && <TopBar />}
 
                 {authStore.user && appStore.isPhone && <BottomBar />}
-    <Routes>
+                <Routes>
                   <Route path="/login" element={<LoginIndex />} />
                   <Route element={<ProtectedRoutes />}>
                     <Route path="explore" element={<ExploreIndex />} />

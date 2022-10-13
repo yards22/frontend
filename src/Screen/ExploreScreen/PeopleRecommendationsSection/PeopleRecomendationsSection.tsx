@@ -57,10 +57,8 @@ function PeopleRecommendationsSection() {
     } else {
       setIsHideEnabled(true);
     }
-    console.log(h, w);
     w = w / 170;
     h = h / 235;
-    console.log(h, w);
     if (h * w >= 6) {
       setIsShowMoreEnabled(false);
     } else {

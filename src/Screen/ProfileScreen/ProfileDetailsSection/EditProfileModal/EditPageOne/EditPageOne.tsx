@@ -1,6 +1,7 @@
-import { Button, Input, Textarea } from "@mantine/core";
+import { Button, Input, Textarea ,Text} from "@mantine/core";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { useStores } from "../../../../../Logic/Providers/StoresProviders";
 import ProfilePhoto from "../../ProfilePhoto";
 
 const SEditPageOne = styled.div`
@@ -31,8 +32,11 @@ function EditPageOne(props: EditPageOneProps) {
   const [profileImageUri, setProfilePicUri] = useState<any>(null);
   const [profilePic, setProfilePic] = useState("");
   const [bio, setBio] = useState("");
+  const [isUserNameCheckDone , setUserNameCheck] = useState(true)
   const [username, setUserName] = useState("");
+  const [userNameError, setUserNameError ] = useState("")
   const editProfilePicRef: any = useRef(null);
+  const stores = useStores();
 
   useEffect(() => {
     if (props.bio) setBio(props.bio);
@@ -50,19 +54,44 @@ function EditPageOne(props: EditPageOneProps) {
   function handleProfilePicChange(e: any) {
     setProfilePic(URL.createObjectURL(e.target.files[0]));
     setProfilePicUri(e.target.files[0]);
+    setUserNameCheck(false)
     // fileToDataUri(e.target.files[0])
     //   .then(dataUri => {
     //     setProfilePicUri(dataUri)
     // })
   }
 
-  function handleFocusOutUserNameField() {
-    //API CALL TO VERIFY WHETHER USERNAME IS PRESENT OR NOT
-    console.log("gyg");
+  async function handleFocusOutUserNameField() {
+    if(username !== stores.profileStore.profile?.username && stores.authStore.token){
+      stores.profileStore.CheckUserNameAvailability({username,token :stores.authStore.token})
+      .then((res)=>{
+        console.log("username check response",res)
+        setUserNameCheck(true)
+        if(res !== 200){
+          setUserNameError("Try Other UserName")
+        }else{
+          setUserNameError("")
+        }
+      })
+    }else{
+      setUserNameError("")
+    }
   }
 
   const handleMoveToEditPageTwo = () => {
-    props.handleChangeEditPageOneDetails({ bio, username, profileImageUri });
+    if(userNameError ==="" && stores.authStore.token && username !== stores.profileStore.profile?.username && !isUserNameCheckDone){
+      stores.profileStore.CheckUserNameAvailability({username,token :stores.authStore.token})
+      .then((res)=>{
+        if(res !== 200){
+          setUserNameError("Try Other UserName")
+        }else{
+          props.handleChangeEditPageOneDetails({ bio, username, profileImageUri });
+        }
+      })
+    }
+    else if(username === stores.profileStore.profile?.username || isUserNameCheckDone){
+      props.handleChangeEditPageOneDetails({ bio, username, profileImageUri })
+    }
   };
 
   return (
@@ -120,6 +149,7 @@ function EditPageOne(props: EditPageOneProps) {
             setUserName(e.target.value);
           }}
         />
+        <Text color={"red"} mt={3} size="xs">{userNameError}</Text>
       </div>
       <div
         style={{
@@ -133,6 +163,7 @@ function EditPageOne(props: EditPageOneProps) {
           onChange={(e: any) => {
             setBio(e.target.value);
           }}
+          minRows={4}
         />
       </div>
       <Button

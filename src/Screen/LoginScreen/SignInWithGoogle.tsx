@@ -13,14 +13,18 @@ function SignInWithGoogle() {
   const navigator = useNavigate();
 
   async function handleRouteToProfile() {
-    await store.profileStore.GetProfile(store.authStore.token);
-    navigator({
-      pathname: "/profile",
-      search: `${createSearchParams({
-        user: `${store.profileStore.profile?.username}`,
-      })}`,
-    });
-    store.appStore.setNavigationState(4);
+    if(store.authStore.isNewUser){
+        await store.profileStore.GetProfile(store.authStore.token);
+        navigator({
+          pathname: "/profile",
+          search: `${createSearchParams({
+            user: `${store.profileStore.profile?.username}`,
+          })}`,
+        });
+        store.appStore.setNavigationState(4);
+    }else{
+      navigator("/feed")
+    }
   }
 
   return !didLoginFailed ? (
