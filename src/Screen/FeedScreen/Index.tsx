@@ -8,7 +8,7 @@ import NormalPost from "./Post/NormalPost";
 const SFeedIndex = styled.section`
   width: 100%;
   max-width: 600px;
-  border: 0.2px solid #bdbdbda0;
+  padding: ${(p) => (p.theme.isPhone ? "0" : "8px")};
 `;
 
 const posts: MPost[] = DummyPosts;
@@ -18,7 +18,7 @@ function FeedIndex() {
     stores.appStore.setNavigationState(0);
   }, []);
   return (
-    <SFeedIndex>
+    <SFeedIndex theme={{ isPhone: stores.appStore.isPhone }}>
       <NewPost />
       {posts.map((item, index) => {
         return <NormalPost data={item} key={`normal_post_${index}`} />;

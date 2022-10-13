@@ -1,7 +1,14 @@
-import { Avatar, Text } from "@mantine/core";
-import React, { CSSProperties } from "react";
+import {
+  Avatar,
+  ColorSchemeProvider,
+  Text,
+  useMantineTheme,
+} from "@mantine/core";
+import React, { CSSProperties, useState } from "react";
 import styled from "styled-components";
 import LinkedUserName from "./LinkedUserName";
+import timeAgo from "s-ago";
+import AddComment from "../Screen/FeedScreen/Post/AddComment";
 
 interface CommentProps {
   content: string;
@@ -18,7 +25,6 @@ const SCommentContainer = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 5px 0;
 `;
 const SComment = styled.div`
   display: flex;
@@ -26,24 +32,59 @@ const SComment = styled.div`
   justify-content: center;
   align-items: flex-start;
   padding: 5px 10px;
-  background: #f4f4f481;
-  border-radius: 10px;
-  width: fit-content;
+  width: 100%;
   margin-left: 8px;
 `;
 function CommentTile(props: CommentProps) {
+  const { colors } = useMantineTheme();
+  const [showReply, setShowReply] = useState(false);
   return (
-    <SCommentContainer style={props.style}>
+    <SCommentContainer
+      style={props.style}
+      theme={{ isChild: props.isChildComment }}
+    >
       <Avatar
+        style={{ marginTop: "10px" }}
         src={props.profile_pic_uri}
         size={props.isChildComment ? "sm" : "md"}
-        radius={"xl"}
+        radius={"sm"}
       />
       <SComment>
-        <LinkedUserName type="hard" username={props.username} order={6} />
-        <Text color={"dimmed"} size="sm">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            width: "100%",
+          }}
+        >
+          <LinkedUserName type="hard" username={props.username} order={6} />
+          <Text size={"xs"} color={"dimmed"} style={{}}>
+            &nbsp; &nbsp;•&nbsp;&nbsp;
+            {timeAgo(new Date(new Date().getTime() - 1000 * 5 * 60))}
+          </Text>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          {!props.isChildComment && (
+            <Text
+              onClick={() => setShowReply((p) => !p)}
+              size={"sm"}
+              color="blue"
+              style={{
+                fontWeight: "bold",
+                cursor: "pointer",
+                userSelect: "none",
+                MozUserSelect: "none",
+                msUserSelect: "none",
+                WebkitUserSelect: "none",
+              }}
+            >
+              Reply
+            </Text>
+          )}
+        </div>
+        <Text color={colors.dark[4]} size="sm">
           {props.content}
         </Text>
+        {showReply && <AddComment isReply />}
       </SComment>
     </SCommentContainer>
   );

@@ -1,25 +1,18 @@
-import { ActionIcon, Avatar, Title, useMantineTheme } from "@mantine/core";
-import styled from "styled-components";
+import {
+  ActionIcon,
+  Avatar,
+  Card,
+  Title,
+  useMantineTheme,
+} from "@mantine/core";
 import MPost from "../../../Logic/Model/MPost";
 import { Heart, MessageCircle } from "react-feather";
 import Liked from "./Liked";
 import LinkedUserName from "../../../Atoms/LinkedUserName";
 import { useState } from "react";
-import Comments from "./Comments";
-
-const SNormalPost = styled.div`
-  width: 100%;
-  height: fit-content;
-  min-height: 50px;
-  padding: 20px;
-  border-bottom: 0.2px solid #bdbdbda0;
-  background-color: white;
-  margin: 5px 0px;
-  border-radius: 8px;
-  :hover {
-    /* background: ${(p) => p.theme.bgColorOnHover}; */
-  }
-`;
+import CommentThread from "./CommentThread";
+import { useStores } from "../../../Logic/Providers/StoresProviders";
+import AddComment from "./AddComment";
 
 interface NormalPostProps {
   data: MPost;
@@ -28,8 +21,22 @@ interface NormalPostProps {
 function NormalPost(props: NormalPostProps) {
   const mantineTheme = useMantineTheme();
   const [showComments, setShowComments] = useState(false);
+  const stores = useStores();
   return (
-    <SNormalPost theme={{ bgColorOnHover: mantineTheme.colors["gray"][0] }}>
+    <Card
+      shadow="sm"
+      p="lg"
+      radius="md"
+      withBorder
+      style={{
+        width: "100%",
+        height: "fit-content",
+        minHeight: "50px",
+        padding: "20px",
+        margin: "10px 0",
+        borderRadius: stores.appStore.isPhone ? "0" : "8px",
+      }}
+    >
       <div
         style={{
           display: "flex",
@@ -75,7 +82,7 @@ function NormalPost(props: NormalPostProps) {
           </Title>
         </div>
       </div>
-      <div style={{ marginLeft: "50px", marginTop: "10px" }}>
+      <div style={{ marginTop: "10px" }}>
         {props.data.content}
         <div
           style={{
@@ -95,8 +102,13 @@ function NormalPost(props: NormalPostProps) {
           >
             <ActionIcon color={"red"} variant="subtle" radius={"xl"} size="xl">
               <Heart
-                size={"16"}
-                fill={props.data.is_liked ? "red" : "transparent"}
+                color={mantineTheme.colors["red"][6]}
+                size={"20"}
+                fill={
+                  props.data.is_liked
+                    ? mantineTheme.colors["red"][3]
+                    : "transparent"
+                }
                 strokeWidth={"2"}
               />
             </ActionIcon>
@@ -108,7 +120,7 @@ function NormalPost(props: NormalPostProps) {
                 setShowComments((p) => !p);
               }}
             >
-              <MessageCircle size={"16"} />
+              <MessageCircle size={"20"} />
             </ActionIcon>
           </div>
         </div>
@@ -116,16 +128,17 @@ function NormalPost(props: NormalPostProps) {
       {showComments && (
         <div
           style={{
-            marginLeft: "50px",
-            marginTop: "20px",
-            marginBottom: "20px",
+            marginTop: "10px",
           }}
         >
-          <Title order={6}>Comments</Title>
-          <Comments />
+          <AddComment isReply={false} />
+          <Title order={6} style={{ marginTop: "20px" }}>
+            Comment
+          </Title>
+          <CommentThread />
         </div>
       )}
-    </SNormalPost>
+    </Card>
   );
 }
 
