@@ -23,8 +23,8 @@ export class ExploreStore{
     GetFollowing = async (token:string) => {
         this.SetLoading(true)
         try{
-            // const followingList = await this.exploreRepo.getFollowers(token);
-            // this.FollowingList = followerList
+            const followingList = await this.exploreRepo.getFollowing(token);
+            this.FollowingList = followingList
         }catch(err){
             throw err;
         }finally{
@@ -36,8 +36,8 @@ export class ExploreStore{
     GetFollowers = async (token:string) => {
         this.SetLoading(true)
         try{
-            // const followersList = await this.exploreRepo.getFollowers(token);
-            // this.FollowersList = followersList
+            const followersList = await this.exploreRepo.getFollowers(token);
+            this.FollowersList = followersList
         }catch(err){
             throw err;
         }finally{
@@ -49,8 +49,8 @@ export class ExploreStore{
     GetRecommendations = async (token:string) =>{
         this.SetLoading(true)
         try{
-            // const recommendationsList = await this.exploreRepo.getRecommendations(token);
-            // this.RecommendationsList = recommendationsList;
+            const recommendationsList = await this.exploreRepo.getRecommendations(token);
+            this.RecommendationsList = recommendationsList;
         }catch(err){
             throw err;
         }finally{

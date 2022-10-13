@@ -114,7 +114,7 @@ function LeaderBoardIndex() {
             },
           ]}
         />
-        <Table striped highlightOnHover withBorder withColumnBorders>
+        <Table striped highlightOnHover>
           <thead>{currentColumnNames}</thead>
           <tbody>{currentRows}</tbody>
         </Table>
