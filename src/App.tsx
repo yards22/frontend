@@ -69,7 +69,6 @@ function App() {
                     />
                     <Route path="feed" element={<FeedIndex />} />
                   </Route>
-                  <Route path="/temp" element={<FeedIndex />} />
                   <Route>404</Route>
                 </Routes>
               </Router>
