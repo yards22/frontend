@@ -32,6 +32,7 @@ function EditPageOne(props: EditPageOneProps) {
   const [profileImageUri, setProfilePicUri] = useState<any>(null);
   const [profilePic, setProfilePic] = useState("");
   const [bio, setBio] = useState("");
+  const [isUserNameCheckDone , setUserNameCheck] = useState(true)
   const [username, setUserName] = useState("");
   const [userNameError, setUserNameError ] = useState("")
   const editProfilePicRef: any = useRef(null);
@@ -53,6 +54,7 @@ function EditPageOne(props: EditPageOneProps) {
   function handleProfilePicChange(e: any) {
     setProfilePic(URL.createObjectURL(e.target.files[0]));
     setProfilePicUri(e.target.files[0]);
+    setUserNameCheck(false)
     // fileToDataUri(e.target.files[0])
     //   .then(dataUri => {
     //     setProfilePicUri(dataUri)
@@ -64,7 +66,8 @@ function EditPageOne(props: EditPageOneProps) {
       stores.profileStore.CheckUserNameAvailability({username,token :stores.authStore.token})
       .then((res)=>{
         console.log("username check response",res)
-        if(res === 200){
+        setUserNameCheck(true)
+        if(res !== 200){
           setUserNameError("Try Other UserName")
         }else{
           setUserNameError("")
@@ -76,16 +79,18 @@ function EditPageOne(props: EditPageOneProps) {
   }
 
   const handleMoveToEditPageTwo = () => {
-    if(userNameError ==="" && stores.authStore.token){
+    if(userNameError ==="" && stores.authStore.token && username !== stores.profileStore.profile?.username && !isUserNameCheckDone){
       stores.profileStore.CheckUserNameAvailability({username,token :stores.authStore.token})
       .then((res)=>{
-        console.log("username check response",res)
-        if(res === 200){
+        if(res !== 200){
           setUserNameError("Try Other UserName")
         }else{
           props.handleChangeEditPageOneDetails({ bio, username, profileImageUri });
         }
       })
+    }
+    else if(username === stores.profileStore.profile?.username || isUserNameCheckDone){
+      props.handleChangeEditPageOneDetails({ bio, username, profileImageUri })
     }
   };
 
@@ -158,6 +163,7 @@ function EditPageOne(props: EditPageOneProps) {
           onChange={(e: any) => {
             setBio(e.target.value);
           }}
+          minRows={4}
         />
       </div>
       <Button

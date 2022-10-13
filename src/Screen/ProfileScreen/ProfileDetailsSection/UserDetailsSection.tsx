@@ -36,6 +36,7 @@ interface UserDetailsSectionProps {
 
 function UserDetailsSection(props: UserDetailsSectionProps) {
   const [editProfileModal, setEditProfileModal] = useState(false);
+  const [alreadyFollowingUser , setAlreadyFollowingUser] = useState(false)
   const store = useStores();
   const search = useLocation().search;
   const currentUser = new URLSearchParams(search).get("user");
@@ -62,6 +63,20 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
 
   function handleChangeRendering(change: string) {
     props.handleCurrentRenderingInProfileRoute(change);
+  }
+
+  async function handleActionOnFollow(){
+    if(alreadyFollowingUser && store.authStore.token){
+      const res = await store.exploreStore.DeleteNewConnection({user_id:1,token:store.authStore.token})
+      if(res === 200){
+        setAlreadyFollowingUser(false)
+      }
+    }else if(!alreadyFollowingUser && store.authStore.token){
+      const res = await store.exploreStore.MakeNewConnection({user_id:1,token:store.authStore.token})
+      if(res === 200){
+        setAlreadyFollowingUser(true)
+      }
+    }
   }
 
   return (
@@ -96,7 +111,14 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
                 }}
               >
                 <h3 style={{ margin: "0px" }}>600</h3>
-                <p style={{ margin: "0px" }}>Following</p>
+                <p 
+                  style={{ margin: "0px" }}
+                  onClick= {()=>{
+                    if(store.authStore.token){
+                       store.exploreStore.GetFollowing(store.authStore.token)
+                    }
+                  }}
+                  >Following</p>
               </SSubContainer>
               <SSubContainer
                 onClick={() => {
@@ -104,7 +126,14 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
                 }}
               >
                 <h3 style={{ margin: "0px" }}>600</h3>
-                <p style={{ margin: "0px" }}>Followers</p>
+                <p 
+                   style={{ margin: "0px" }} 
+                   onClick= {()=>{
+                      if(store.authStore.token){
+                         store.exploreStore.GetFollowers(store.authStore.token)
+                      }
+                    }}
+                  >Followers</p>
               </SSubContainer>
               <SSubContainer>
                 <h3 style={{ margin: "0px" }}>
@@ -145,8 +174,8 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
                   Edit Profile
                 </Button>
               ) : (
-                <Button variant="outline" fullWidth>
-                  Follow
+                <Button variant="outline" fullWidth onClick={handleActionOnFollow}>
+                  { alreadyFollowingUser ? "Unfollow" :  "Follow" }
                 </Button>
               )}
               <Modal

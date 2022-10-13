@@ -4,7 +4,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 interface AvatarProps {
-  imageUrl?: string;
+  imageUrl?: string | null;
   initials?: string;
   toolTip?: string;
   size?: MantineSize;
