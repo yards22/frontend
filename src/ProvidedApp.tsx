@@ -17,19 +17,19 @@ interface ProvidedAppProps {
   children?: React.ReactNode;
 }
 
+const BASE_URL = "http://172.20.187.33:4000";
+
 function ProvidedApp(props: ProvidedAppProps) {
   const rq = new Request({ "Content-Type": "application/json" });
   const appStore = new AppStore();
-  const authStore = new AuthStore(
-    new AuthRepo("http://localhost:4000/auth", rq)
-  );
+  const authStore = new AuthStore(new AuthRepo(BASE_URL + "/auth", rq));
   const profileStore = new ProfileStore(
-    new ProfileRepo("http://localhost:4000/profile", rq)
+    new ProfileRepo(BASE_URL + "/profile", rq)
   );
   const notificationStore = new NotificationStore();
 
   const exploreStore = new ExploreStore(
-    new ExploreRepo("http://localhost:4000/network",rq)
+    new ExploreRepo(BASE_URL + "/network", rq)
   );
   return (
     <div
@@ -38,7 +38,13 @@ function ProvidedApp(props: ProvidedAppProps) {
       }}
     >
       <StoresContext.Provider
-        value={{ appStore, authStore, profileStore, notificationStore,exploreStore }}
+        value={{
+          appStore,
+          authStore,
+          profileStore,
+          notificationStore,
+          exploreStore,
+        }}
       >
         {
           <Observer>
