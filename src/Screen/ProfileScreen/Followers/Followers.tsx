@@ -3,6 +3,7 @@ import { Observer } from "mobx-react-lite";
 import styled from "styled-components";
 import ProfileAvatar from "../../../Atoms/ProfileAvatar";
 import { DummyFollowingList } from "../../../Data/Dummies/Following";
+import { MFollow } from "../../../Logic/Model/MExplore";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 
 const SFollowers = styled.div`
@@ -32,8 +33,8 @@ function Followers(props: FollowingProps) {
                 >
                   {"<- Back"}
                 </Text>
-                  {!exploreStore && DummyFollowingList.map(
-                    (each: { username: string; profile_pic_uri: string }) => {
+                  {!exploreStore.isLoading && exploreStore.FollowersList.map(
+                    (each: MFollow) => {
                       return (
                         <Card
                           style={{

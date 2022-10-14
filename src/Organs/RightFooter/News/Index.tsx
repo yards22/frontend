@@ -2,6 +2,7 @@ import { Card, Text, Button, Textarea, Divider } from "@mantine/core";
 import styled from "styled-components";
 import { Image, X } from "react-feather";
 import { useRef, useState } from "react";
+import { useStores } from "../../../Logic/Providers/StoresProviders";
 
 const SNewsIndex = styled.div`
   width: 100%;
@@ -16,7 +17,9 @@ const SNewsIndex = styled.div`
 function NewsIndex() {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedImageName, setSelectedImageName] = useState("");
+  const [feedback, setFeedback] = useState("")
   const feedBackImageRef: any = useRef(null);
+  const stores = useStores();
 
   function handleFeedBackImageChange(e: any) {
     setSelectedImage(URL.createObjectURL(e.target.files[0]));
@@ -25,6 +28,23 @@ function NewsIndex() {
 
   function handleFeedBackImageInputClick() {
     feedBackImageRef.current.click();
+  }
+
+  function handleSendFeedBack(){
+      if(feedback!="" && stores.authStore.token && stores.profileStore.profile?.username){
+         const formData = new FormData();
+         formData.append("content",feedback)
+         formData.append("username",stores.profileStore.profile?.username)
+         formData.append("images",selectedImage)
+         stores.miscStore.SendFeedback({data: formData,token:stores.authStore.token})
+         .then(res=>{
+            if(res===200){
+              setFeedback("");
+              setSelectedImage("")
+              setSelectedImageName("")
+            }
+         })
+      }
   }
 
   return (
@@ -55,6 +75,8 @@ function NewsIndex() {
           }}
           minRows={6}
           placeholder="Every word of you impacts this website"
+          value={feedback}
+          onChange = {(e)=>{setFeedback(e.target.value)}}
         />
         {selectedImage !== "" && (
           <div
@@ -98,7 +120,7 @@ function NewsIndex() {
             />
           </div>
         )}
-        <Button variant="filled">Send FeedBack</Button>
+        <Button variant="filled" onClick={handleSendFeedBack}>Send FeedBack</Button>
         <Image
           style={{
             position: "absolute",

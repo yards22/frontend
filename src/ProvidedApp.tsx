@@ -12,6 +12,8 @@ import { ProfileStore } from "./Logic/State/ProfileStore";
 import { NotificationStore } from "./Logic/State/NotificationStore";
 import { ExploreStore } from "./Logic/State/ExploreStore";
 import { ExploreRepo } from "./Logic/Repository/ExploreRepo";
+import { MiscStore } from "./Logic/State/MiscStore";
+import { MiscRepo } from "./Logic/Repository/MiscRep";
 
 interface ProvidedAppProps {
   children?: React.ReactNode;
@@ -31,6 +33,10 @@ function ProvidedApp(props: ProvidedAppProps) {
   const exploreStore = new ExploreStore(
     new ExploreRepo(BASE_URL + "/network", rq)
   );
+
+  const miscStore = new MiscStore(
+    new MiscRepo("http://localhost:4000/misc",rq)
+  )
   return (
     <div
       style={{

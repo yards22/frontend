@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import styled from "styled-components";
+import { useStores } from "../../Logic/Providers/StoresProviders";
 import PeopleRecommendationsSection from "./PeopleRecommendationsSection/PeopleRecomendationsSection";
 import TrendingPostsSection from "./TrendingPostsSection/TrendingPostsSection";
 
@@ -19,6 +21,12 @@ const SExploreSectionHeading = styled.div`
 `;
 
 function ExploreIndex() {
+  const stores = useStores();
+
+  useEffect(()=>{
+    stores.appStore.setNavigationState(2);
+  })
+
   return (
     <SNetworkIndex>
       <SExploreSectionHeading>Recommendations</SExploreSectionHeading>

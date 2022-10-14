@@ -1,6 +1,7 @@
-import { Button, Card, Skeleton, Text } from "@mantine/core";
+import { Button, Card, Center, Skeleton, Text } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ProfileAvatar from "../../../Atoms/ProfileAvatar";
 import { DummyFollowingList } from "../../../Data/Dummies/Following";
@@ -18,17 +19,22 @@ interface FollowingProps {
 
 function Following(props: FollowingProps) {
   const stores = useStores();
-  const [followingList , setFollowingList] = useState<MFollow[]>([])
+  const navigator = useNavigate();
 
-  useEffect(()=>{
-  //   if(stores.authStore.token){
-  //     stores.exploreStore.GetFollowing(stores.authStore.token)
-  //     .then(()=>{
-        
-  //     })
-  //  } 
-  setFollowingList(stores.exploreStore.FollowingList)
-  },[]);
+  function handleUnFollow(each:MFollow){
+    if(stores.authStore.token){
+      stores.exploreStore.DeleteNewConnection({user_id:each.user_id,token:stores.authStore.token})
+      .then(res=>{
+        console.log(res)
+        if(res === 200){
+          if(stores.authStore.token){
+            let w = stores.exploreStore.FollowingList.filter(x => x.user_id !== each.user_id);
+            stores.exploreStore.SetFollowing([...w])
+          }
+        }
+      })
+    }
+  }
 
   return (
     <Observer>
@@ -46,6 +52,31 @@ function Following(props: FollowingProps) {
                 >
                   {"<- Back"}
                 </Text>
+                { !exploreStore.isLoading && stores.exploreStore.FollowingList.length === 0 && 
+                  <Center>
+                   <Text>
+                      You are following no one.
+                      <br></br>
+                      Need to find some buddies. 
+                      <br></br>
+                      Don't worry of how, we are here to recommend.
+                      <br></br>
+                      <span 
+                         style={{
+                           cursor : "pointer",
+                           color : "blue",
+                           textDecoration : "underline"
+                         }}
+                         onClick={()=>{
+                           navigator("/explore")
+                         }}
+                       >
+                         Move to Explore Now
+                      </span>
+                      
+                   </Text>
+                   </Center>
+                }
                 { !exploreStore.isLoading && stores.exploreStore.FollowingList.map(
                   (each: MFollow) => {
                     return (
@@ -70,19 +101,7 @@ function Following(props: FollowingProps) {
                           <Button 
                             variant="light" 
                             size={"sm"}
-                            onClick = {()=>{
-                              if(stores.authStore.token){
-                                stores.exploreStore.DeleteNewConnection({user_id:each.user_id,token:stores.authStore.token})
-                                .then(res=>{
-                                  console.log(res)
-                                  if(res === 200){
-                                    if(stores.authStore.token){
-                                      stores.exploreStore.GetFollowing(stores.authStore.token);
-                                    }
-                                  }
-                                })
-                              }
-                            }}
+                            onClick = {()=>handleUnFollow(each)}
                           >
                             UnFollow
                           </Button>

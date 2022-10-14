@@ -20,11 +20,21 @@ export class ExploreStore{
     }
 
     @action
+    SetFollowing = (FollowingList:MFollow[])=>{
+        this.FollowingList = FollowingList
+    }
+
+    @action
+    SetRecommendations = (recommendationList : MRecommended[]) =>{
+        this.RecommendationsList = recommendationList
+    }
+
+    @action
     GetFollowing = async (token:string) => {
         this.SetLoading(true)
         try{
             const followingList = await this.exploreRepo.getFollowing(token);
-            this.FollowingList = followingList
+            this.SetFollowing(followingList)
         }catch(err){
             throw err;
         }finally{
@@ -50,7 +60,7 @@ export class ExploreStore{
         this.SetLoading(true)
         try{
             const recommendationsList = await this.exploreRepo.getRecommendations(token);
-            this.RecommendationsList = recommendationsList;
+            this.SetRecommendations(recommendationsList)
         }catch(err){
             throw err;
         }finally{

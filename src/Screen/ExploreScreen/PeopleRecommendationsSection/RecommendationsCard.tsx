@@ -1,7 +1,23 @@
 import { Avatar, Button, Card, Text } from "@mantine/core";
+import { MRecommended } from "../../../Logic/Model/MExplore";
+import { useStores } from "../../../Logic/Providers/StoresProviders";
 // import ProfilePhoto from "../../ProfileScreen/ProfileDetailsSection/ProfilePhoto"
 
 function RecommendationsCard() {
+  const stores = useStores();
+  
+  function handleFollow(user:MRecommended){
+    if(stores.authStore.token){
+        stores.exploreStore.MakeNewConnection({user_id:user.user_id,token:stores.authStore.token})
+        .then((res)=>{
+           if(res === 200){
+             let w = stores.exploreStore.RecommendationsList.filter(x => user.user_id)
+             stores.exploreStore.SetRecommendations([...w])
+           }
+        })
+    } 
+  }
+
   return (
     <Card
       style={{
@@ -21,7 +37,7 @@ function RecommendationsCard() {
       <Text mt={5} size={"sm"} mb={10}>
         CricIndex : 400
       </Text>
-      <Button size={"xs"}>Follow</Button>
+      <Button size={"xs"} onClick={()=>{handleFollow({user_id:1,cricindex:100,username:"Saichand",profile_pic_uri:""})}}>Follow</Button>
     </Card>
   );
 }
