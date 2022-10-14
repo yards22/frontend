@@ -12,6 +12,7 @@ const SBottomBar = styled.div`
   left: 0px;
   height: 60px;
   display: flex;
+  z-index: 100;
   justify-content: space-around;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
