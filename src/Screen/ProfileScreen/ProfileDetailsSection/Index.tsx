@@ -3,6 +3,7 @@ import UserDetailsSection from "./UserDetailsSection";
 import { Card, Center, HoverCard, RingProgress } from "@mantine/core";
 import { MProfile } from "../../../Logic/Model/MProfile";
 import { Info } from "react-feather";
+import { useStores } from "../../../Logic/Providers/StoresProviders";
 
 interface ProfileDetailsSectionIndexProps {
   profileInfo: MProfile | null;
@@ -10,17 +11,20 @@ interface ProfileDetailsSectionIndexProps {
 }
 
 function ProfileDetailsSectionIndex(props: ProfileDetailsSectionIndexProps) {
+  const stores = useStores();
   return (
     <Card
       shadow="md"
       p="lg"
-      radius="md"
-      withBorder
+      radius={"md"}
+      withBorder={!stores.appStore.isPhone}
       style={{
         position: "relative",
         display: "flex",
         flexDirection: "column",
+        borderRadius: stores.appStore.isPhone ? "0" : "",
         alignItems: "center",
+        marginTop: stores.appStore.isPhone ? "0" : "10px",
       }}
     >
       <div
@@ -66,8 +70,7 @@ function ProfileDetailsSectionIndex(props: ProfileDetailsSectionIndexProps) {
         handleCurrentRenderingInProfileRoute={
           props.handleCurrentRenderingInProfileRoute
         }
-        profileInfo = {props.profileInfo}
-        
+        profileInfo={props.profileInfo}
       />
     </Card>
   );
