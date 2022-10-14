@@ -108,32 +108,25 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
               <SSubContainer
                 onClick={() => {
                   handleChangeRendering("Following");
+                  if(store.authStore.token){
+                    store.exploreStore.GetFollowing(store.authStore.token)
+                 }
                 }}
               >
                 <h3 style={{ margin: "0px" }}>600</h3>
                 <p 
-                  style={{ margin: "0px" }}
-                  onClick= {()=>{
-                    if(store.authStore.token){
-                       store.exploreStore.GetFollowing(store.authStore.token)
-                    }
-                  }}
-                  >Following</p>
+                  style={{ margin: "0px" }}>Following</p>
               </SSubContainer>
               <SSubContainer
                 onClick={() => {
                   handleChangeRendering("Followers");
+                  if(store.authStore.token){
+                    store.exploreStore.GetFollowers(store.authStore.token)
+                 }
                 }}
               >
                 <h3 style={{ margin: "0px" }}>600</h3>
-                <p 
-                   style={{ margin: "0px" }} 
-                   onClick= {()=>{
-                      if(store.authStore.token){
-                         store.exploreStore.GetFollowers(store.authStore.token)
-                      }
-                    }}
-                  >Followers</p>
+                <p style={{ margin: "0px" }}>Followers</p>
               </SSubContainer>
               <SSubContainer>
                 <h3 style={{ margin: "0px" }}>
@@ -175,7 +168,7 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
                 </Button>
               ) : (
                 <Button variant="outline" fullWidth onClick={handleActionOnFollow}>
-                  { alreadyFollowingUser ? "Unfollow" :  "Follow" }
+                  { alreadyFollowingUser ? "UnFollow" :  "Follow" }
                 </Button>
               )}
               <Modal

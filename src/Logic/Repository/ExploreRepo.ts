@@ -43,7 +43,7 @@ export class ExploreRepo{
     
     async makeNewConnection(props :{user_id: number , token : string}): Promise<number>{
         try{
-            const res = await this.rq.Post(`${this.baseUrl}/`,{user_id : props.user_id},AuthHeaders(props.token));
+            const res = await this.rq.Post(`${this.baseUrl}/`,{following_id : props.user_id},AuthHeaders(props.token));
             const response = await CheckResponse(res,200);
             return response.status
         }catch(err:any){

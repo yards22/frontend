@@ -20,15 +20,29 @@ function Following(props: FollowingProps) {
   const stores = useStores();
   const [followingList , setFollowingList] = useState<MFollow[]>([])
 
-  useEffect(()=>{
+  // useEffect(()=>{
   //   if(stores.authStore.token){
-  //     stores.exploreStore.GetFollowing(stores.authStore.token)
-  //     .then(()=>{
-        
-  //     })
-  //  } 
-  setFollowingList(stores.exploreStore.FollowingList)
-  },[]);
+  //         stores.exploreStore.GetFollowing(stores.authStore.token)
+  //         .then(()=>{
+  //            console.log(stores.exploreStore.FollowingList)
+  //         })
+  //     } 
+  // },[])
+
+  function handleUnFollow(each:MFollow){
+    if(stores.authStore.token){
+      stores.exploreStore.DeleteNewConnection({user_id:each.user_id,token:stores.authStore.token})
+      .then(res=>{
+        console.log(res)
+        if(res === 200){
+          if(stores.authStore.token){
+            let w = stores.exploreStore.FollowingList.filter(x => x.user_id !== each.user_id);
+            stores.exploreStore.SetFollowing([...w])
+          }
+        }
+      })
+    }
+  }
 
   return (
     <Observer>
@@ -70,19 +84,7 @@ function Following(props: FollowingProps) {
                           <Button 
                             variant="light" 
                             size={"sm"}
-                            onClick = {()=>{
-                              if(stores.authStore.token){
-                                stores.exploreStore.DeleteNewConnection({user_id:each.user_id,token:stores.authStore.token})
-                                .then(res=>{
-                                  console.log(res)
-                                  if(res === 200){
-                                    if(stores.authStore.token){
-                                      stores.exploreStore.GetFollowing(stores.authStore.token);
-                                    }
-                                  }
-                                })
-                              }
-                            }}
+                            onClick = {()=>handleUnFollow(each)}
                           >
                             UnFollow
                           </Button>

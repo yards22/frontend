@@ -20,11 +20,16 @@ export class ExploreStore{
     }
 
     @action
+    SetFollowing = (FollowingList:MFollow[])=>{
+        this.FollowingList = FollowingList
+    }
+
+    @action
     GetFollowing = async (token:string) => {
         this.SetLoading(true)
         try{
             const followingList = await this.exploreRepo.getFollowing(token);
-            this.FollowingList = followingList
+            this.SetFollowing(followingList)
         }catch(err){
             throw err;
         }finally{
