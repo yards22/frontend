@@ -25,6 +25,11 @@ export class ExploreStore{
     }
 
     @action
+    SetRecommendations = (recommendationList : MRecommended[]) =>{
+        this.RecommendationsList = recommendationList
+    }
+
+    @action
     GetFollowing = async (token:string) => {
         this.SetLoading(true)
         try{
@@ -55,7 +60,7 @@ export class ExploreStore{
         this.SetLoading(true)
         try{
             const recommendationsList = await this.exploreRepo.getRecommendations(token);
-            this.RecommendationsList = recommendationsList;
+            this.SetRecommendations(recommendationsList)
         }catch(err){
             throw err;
         }finally{

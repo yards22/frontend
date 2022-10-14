@@ -1,6 +1,7 @@
-import { Button, Card, Skeleton, Text } from "@mantine/core";
+import { Button, Card, Center, Skeleton, Text } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ProfileAvatar from "../../../Atoms/ProfileAvatar";
 import { DummyFollowingList } from "../../../Data/Dummies/Following";
@@ -18,16 +19,7 @@ interface FollowingProps {
 
 function Following(props: FollowingProps) {
   const stores = useStores();
-  const [followingList , setFollowingList] = useState<MFollow[]>([])
-
-  // useEffect(()=>{
-  //   if(stores.authStore.token){
-  //         stores.exploreStore.GetFollowing(stores.authStore.token)
-  //         .then(()=>{
-  //            console.log(stores.exploreStore.FollowingList)
-  //         })
-  //     } 
-  // },[])
+  const navigator = useNavigate();
 
   function handleUnFollow(each:MFollow){
     if(stores.authStore.token){
@@ -60,6 +52,31 @@ function Following(props: FollowingProps) {
                 >
                   {"<- Back"}
                 </Text>
+                { !exploreStore.isLoading && stores.exploreStore.FollowingList.length === 0 && 
+                  <Center>
+                   <Text>
+                      You are following no one.
+                      <br></br>
+                      Need to find some buddies. 
+                      <br></br>
+                      Don't worry of how, we are here to recommend.
+                      <br></br>
+                      <span 
+                         style={{
+                           cursor : "pointer",
+                           color : "blue",
+                           textDecoration : "underline"
+                         }}
+                         onClick={()=>{
+                           navigator("/explore")
+                         }}
+                       >
+                         Move to Explore Now
+                      </span>
+                      
+                   </Text>
+                   </Center>
+                }
                 { !exploreStore.isLoading && stores.exploreStore.FollowingList.map(
                   (each: MFollow) => {
                     return (

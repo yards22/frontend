@@ -1,4 +1,5 @@
 import { Text } from "@mantine/core";
+import { Observer } from "mobx-react-lite";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
@@ -67,45 +68,53 @@ function PeopleRecommendationsSection() {
   };
 
   return (
-    <SPeopleRecommendationsSection>
-      <div
-        ref={recommendationDivRef}
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          overflow: "hidden",
-          height: `${currentHeight}px`,
-        }}
-      >
-        <RecommendationsCard />
-        <RecommendationsCard />
-        <RecommendationsCard />
-        <RecommendationsCard />
-        <RecommendationsCard />
-        <RecommendationsCard />
-      </div>
-
-      {isShowMoreEnabled && (
-        <SShowMore
-          onClick={() => {
-            setCurrentHeight(currentHeight + 235);
-          }}
-        >
-          Show More
-        </SShowMore>
-      )}
-      {isHideEnabled && (
-        <SHideMore
-          onClick={() => {
-            setCurrentHeight(currentHeight - 235);
-          }}
-        >
-          Hide
-        </SHideMore>
-      )}
-    </SPeopleRecommendationsSection>
+    <Observer>
+       {
+         ()=>{
+          return(
+            <SPeopleRecommendationsSection>
+              <div
+                ref={recommendationDivRef}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  flexWrap: "wrap",
+                  overflow: "hidden",
+                  height: `${currentHeight}px`,
+                }}
+              >
+                <RecommendationsCard />
+                <RecommendationsCard />
+                <RecommendationsCard />
+                <RecommendationsCard />
+                <RecommendationsCard />
+                <RecommendationsCard />
+              </div>
+        
+              {isShowMoreEnabled && (
+                <SShowMore
+                  onClick={() => {
+                    setCurrentHeight(currentHeight + 235);
+                  }}
+                >
+                  Show More
+                </SShowMore>
+              )}
+              {isHideEnabled && (
+                <SHideMore
+                  onClick={() => {
+                    setCurrentHeight(currentHeight - 235);
+                  }}
+                >
+                  Hide
+                </SHideMore>
+              )}
+            </SPeopleRecommendationsSection>
+          )
+         }
+       }
+    </Observer>
   );
 }
 
