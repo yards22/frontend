@@ -27,21 +27,17 @@ function ProfileIndex() {
   useEffect(() => {
     getTheCurrentUser();
     store.appStore.setNavigationState(4);
-  },[]);
+  }, []);
 
-  async function getTheCurrentUser(){
-    await store.profileStore.GetProfile(store.authStore.token)
+  async function getTheCurrentUser() {
+    await store.profileStore.GetProfile(store.authStore.token);
   }
 
-  useEffect(()=>{
-    
-  },[profileInfo])
+  useEffect(() => {}, [profileInfo]);
 
   function handleCurrentRenderingInProfileRoute(current: string) {
     setCurrentRenderingInProfileRoute(current);
   }
-
-
 
   return (
     <Observer>
@@ -52,7 +48,11 @@ function ProfileIndex() {
             {currentRenderingInProfileRoute === "Profile" && (
               <>
                 <ProfileDetailsSectionIndex
-                  profileInfo={store.profileStore.profile?.username === currentUser ? store.profileStore.profile : profileInfo}
+                  profileInfo={
+                    store.profileStore.profile?.username === currentUser
+                      ? store.profileStore.profile
+                      : profileInfo
+                  }
                   handleCurrentRenderingInProfileRoute={
                     handleCurrentRenderingInProfileRoute
                   }
@@ -66,11 +66,11 @@ function ProfileIndex() {
                 >
                   <Tabs.List grow>
                     <Tabs.Tab value="Posts">Posts</Tabs.Tab>
-                    <Tabs.Tab value="Favourites">Favourites</Tabs.Tab>
+                    <Tabs.Tab value="Favorites">Favorites</Tabs.Tab>
                   </Tabs.List>
                 </Tabs>
                 {activePostsTab === "Posts" && <UserPosts />}
-                {activePostsTab === "Favourites" && <UserFavourites />}
+                {activePostsTab === "Favorites" && <UserFavourites />}
               </>
             )}
             {currentRenderingInProfileRoute === "Following" && (
