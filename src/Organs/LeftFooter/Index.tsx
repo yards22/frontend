@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import EventsIndex from "./Events/Index";
 import LeaderBoardIndex from "./LearderBoard/Index";
+import PollIndex from "./Poll/Index";
 
 const SLeftFooter = styled.div`
   display: flex;
@@ -18,7 +19,7 @@ function LeftFooterIndex() {
   return (
     <SLeftFooter>
       <LeaderBoardIndex />
-      <EventsIndex />
+      <PollIndex />
     </SLeftFooter>
   );
 }
