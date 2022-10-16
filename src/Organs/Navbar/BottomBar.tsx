@@ -56,6 +56,10 @@ function BottomBar() {
                   ? mantineTheme.colors[mantineTheme.primaryColor][9]
                   : "gray"
               }
+              onClick={() => {
+                navigate("/explore");
+                appStore.setNavigationState(2);
+              }}
             >
               <Search size={"20"} />
             </ActionIcon>
