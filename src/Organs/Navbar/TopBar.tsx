@@ -4,7 +4,6 @@ import { Home, Bell, User, Search, Globe } from "react-feather";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
-import ProfileMenu from "./ProfileMenu";
 
 const STopBar = styled.a`
   display: flex;
