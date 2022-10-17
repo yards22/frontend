@@ -5,6 +5,7 @@ import InterestSectionCard from "./InterestSectionCard";
 
 const SInterestsSection = styled.div`
   margin-top: 20px;
+  padding: 0 10px;
 `;
 
 const SInterestCardsSection = styled.div`

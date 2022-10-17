@@ -1,4 +1,4 @@
-import { Loader, Tabs } from "@mantine/core";
+import { Loader, Tabs, Title } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -58,19 +58,24 @@ function ProfileIndex() {
                   }
                 />
                 <InterestsSection />
-                <Tabs
-                  value={activePostsTab}
-                  onTabChange={(e: any) => setActivePostsTab(e)}
-                  mt={10}
-                  variant="pills"
-                >
-                  <Tabs.List grow>
-                    <Tabs.Tab value="Posts">Posts</Tabs.Tab>
-                    <Tabs.Tab value="Favorites">Favorites</Tabs.Tab>
-                  </Tabs.List>
-                </Tabs>
-                {activePostsTab === "Posts" && <UserPosts />}
-                {activePostsTab === "Favorites" && <UserFavourites />}
+                <div style={{ padding: "0 10px" }}>
+                  <Tabs
+                    value={activePostsTab}
+                    onTabChange={(e: any) => setActivePostsTab(e)}
+                    style={{
+                      marginTop: "20px",
+                    }}
+                    mt={10}
+                    variant="pills"
+                  >
+                    <Tabs.List grow>
+                      <Tabs.Tab value="Posts">All Posts</Tabs.Tab>
+                      <Tabs.Tab value="Favorites">Favorite Posts</Tabs.Tab>
+                    </Tabs.List>
+                  </Tabs>
+                  {activePostsTab === "Posts" && <UserPosts />}
+                  {activePostsTab === "Favorites" && <UserFavourites />}
+                </div>
               </>
             )}
             {currentRenderingInProfileRoute === "Following" && (

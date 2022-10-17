@@ -2,7 +2,7 @@ import { Observer } from "mobx-react-lite";
 import React from "react";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
-import NewsIndex from "./News/Index";
+import FeedbackIndex from "./Feedback/Index";
 import ScoreCarousalIndex from "./ScoreCarousal/Index";
 
 const SRightFooter = styled.div`
@@ -24,7 +24,7 @@ function RightFooterIndex() {
         return (
           <SRightFooter theme={{ width: appStore.deviceWidth }}>
             <ScoreCarousalIndex />
-            <NewsIndex />
+            <FeedbackIndex />
           </SRightFooter>
         );
       }}

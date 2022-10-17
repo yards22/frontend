@@ -33,7 +33,7 @@ function NormalPost(props: NormalPostProps) {
         height: "fit-content",
         minHeight: "50px",
         padding: "20px",
-        margin: "10px 0",
+        margin: "5px 0",
         borderRadius: stores.appStore.isPhone ? "0" : "8px",
       }}
     >
