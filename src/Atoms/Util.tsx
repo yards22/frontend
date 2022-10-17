@@ -4,6 +4,13 @@ export function AuthHeaders(token: string) {
   };
 }
 
+export function HeadersMultiPart(token:string){
+  return {
+    'Content-Type': 'multipart/form-data',
+    'Authorization': `Bearer ${token}`
+  }
+}
+
 export interface MInterest{ 
   value : string,
   label : string, 
