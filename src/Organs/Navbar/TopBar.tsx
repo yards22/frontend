@@ -4,6 +4,7 @@ import { Home, Bell, User, Search, Globe } from "react-feather";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
+import ProfileMenu from "./ProfileMenu";
 
 const STopBar = styled.a`
   display: flex;
@@ -58,8 +59,7 @@ function TopBar() {
               top: "0",
               left: "0",
               right: "0",
-              background: "#ffffff",
-              // border: "1px solid " + mantineTheme.colors["green"][3],
+              borderBottom: "1px solid #eaeaea",
               display: "flex",
               justifyContent: "center",
               height: "60px",
