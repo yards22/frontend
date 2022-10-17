@@ -35,7 +35,7 @@ function NewAccount(props: NewAccountProps) {
   const navigator = useNavigate();
 
   async function handleRouteToProfile() {
-    await store.profileStore.GetProfile(store.authStore.token);
+    await store.profileStore.GetProfile(null, null);
     navigator({
       pathname: "/profile",
       search: `${createSearchParams({

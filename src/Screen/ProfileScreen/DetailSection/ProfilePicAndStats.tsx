@@ -1,6 +1,7 @@
 import { Title } from "@mantine/core";
-import React from "react";
+import { Observer } from "mobx-react-lite";
 import styled from "styled-components";
+import { useStores } from "../../../Logic/Providers/StoresProviders";
 import ProfilePhoto from "./ProfilePhoto";
 const SStats = styled.div`
   display: flex;
@@ -10,40 +11,46 @@ const SStats = styled.div`
   cursor: pointer;
 `;
 function ProfilePicAndStats() {
+  const { profileStore } = useStores();
   return (
-    <div
-      style={{
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
+    <Observer>
+      {() => {
+        const { viewProfile } = profileStore;
+        return (
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <ProfilePhoto
+              userName={viewProfile?.username}
+              profileImageUri={viewProfile?.profile_image_uri}
+            />
+            <SStats>
+              <Title order={5}>400</Title>
+              <Title order={6} color="dimmed">
+                Following
+              </Title>
+            </SStats>
+            <SStats>
+              <Title order={5}>145</Title>
+              <Title order={6} color="dimmed">
+                Followers
+              </Title>
+            </SStats>
+            <SStats>
+              <Title order={5}>27</Title>
+              <Title order={6} color="dimmed">
+                Cric Index
+              </Title>
+            </SStats>
+          </div>
+        );
       }}
-    >
-      <ProfilePhoto
-        userName="something"
-        profileImageUri={
-          "https://img.freepik.com/premium-photo/young-handsome-man-with-beard-isolated-keeping-arms-crossed-frontal-position_1368-132662.jpg?w=2000"
-        }
-      />
-      <SStats>
-        <Title order={5}>400</Title>
-        <Title order={6} color="dimmed">
-          Following
-        </Title>
-      </SStats>
-      <SStats>
-        <Title order={5}>145</Title>
-        <Title order={6} color="dimmed">
-          Followers
-        </Title>
-      </SStats>
-      <SStats>
-        <Title order={5}>27</Title>
-        <Title order={6} color="dimmed">
-          Cric Index
-        </Title>
-      </SStats>
-    </div>
+    </Observer>
   );
 }
 

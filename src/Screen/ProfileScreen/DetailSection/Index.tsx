@@ -1,16 +1,10 @@
 import { Card } from "@mantine/core";
-import { MProfile } from "../../../Logic/Model/MProfile";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import InterestsAndBio from "./UsernameInterestsAndBio";
 import ProfilePicAndStats from "./ProfilePicAndStats";
 import ProfileCardButtons from "./ProfileCardButtons";
 
-interface ProfileDetailsSectionIndexProps {
-  profileInfo: MProfile | null;
-  handleCurrentRenderingInProfileRoute: (current: string) => void;
-}
-
-function ProfileDetailsSectionIndex(props: ProfileDetailsSectionIndexProps) {
+function DetailSectionIndex() {
   const stores = useStores();
   return (
     <Card
@@ -34,4 +28,4 @@ function ProfileDetailsSectionIndex(props: ProfileDetailsSectionIndexProps) {
   );
 }
 
-export default ProfileDetailsSectionIndex;
+export default DetailSectionIndex;

@@ -6,5 +6,5 @@ export interface MProfile {
   bio: string | null;
   cric_index: number;
   updated_at: Date;
-  interests: string | null;
+  interests: string[];
 }

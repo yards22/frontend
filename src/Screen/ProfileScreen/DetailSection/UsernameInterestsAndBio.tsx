@@ -9,37 +9,32 @@ const SDetails = styled.div`
 `;
 
 function Details() {
-  const store = useStores();
+  const { profileStore } = useStores();
 
   return (
     <Observer>
       {() => {
-        const { profileStore } = store;
+        const { viewProfile } = profileStore;
         return (
           <SDetails>
             <Title order={6} style={{ marginTop: "10px" }}>
-              itsmehs07_044
+              {viewProfile?.username}
             </Title>
             <Text color="dimmed" size={"sm"}>
-              itsmehs07@gmail.com
+              {viewProfile?.email_id}
             </Text>
             <div style={{ display: "flex", flexWrap: "wrap" }}>
-              {[
-                "India",
-                "Chennai Super Kings",
-                "U19 Cricket",
-                "Women Cricket",
-                "U19 Cricket",
-              ].map((item, index) => {
-                return (
-                  <Badge
-                    color={"blue"}
-                    style={{ marginRight: "10px", marginTop: "8px" }}
-                  >
-                    {item}
-                  </Badge>
-                );
-              })}
+              {viewProfile?.interests &&
+                viewProfile?.interests.map((item, index) => {
+                  return (
+                    <Badge
+                      color={"blue"}
+                      style={{ marginRight: "10px", marginTop: "8px" }}
+                    >
+                      {item}
+                    </Badge>
+                  );
+                })}
             </div>
             <Spoiler
               maxHeight={50}
