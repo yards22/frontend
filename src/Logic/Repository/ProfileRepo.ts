@@ -43,15 +43,12 @@ export class ProfileRepo {
     }
   }
 
-  async checkUserName(props: {
-    username: string;
-    token: string;
-  }): Promise<number> {
+  async checkUserName(username: string, token: string): Promise<number> {
     try {
-      const data = { username: props.username };
+      const data = { username: username };
       const res = await this.rq.Post(`${this.baseUrl}/checkUsername`, data, {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${props.token}`,
+        Authorization: `Bearer ${token}`,
       });
       const response = await CheckResponse(res, 200);
       return response.status;
