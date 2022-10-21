@@ -34,6 +34,8 @@ export class ProfileRepo {
         profile_image_uri: body.data.profile_image_uri,
         user_id: body.data.user_id,
         username: body.data.username,
+        followers: body.data.followers,
+        following: body.data.following,
         updated_at: body.data.updated_at,
       };
     } catch (err: any) {
@@ -72,7 +74,9 @@ export class ProfileRepo {
         cric_index: body.data.cric_index,
         email_id: body.data.email_id,
         interests: body.data.interests,
+        followers: body.data.followers,
         profile_image_uri: body.data.profile_image_uri,
+        following: body.data.following,
         user_id: body.data.user_id,
         username: body.data.username,
         updated_at: body.data.updated_at,

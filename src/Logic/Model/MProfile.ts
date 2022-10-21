@@ -5,6 +5,8 @@ export interface MProfile {
   profile_image_uri: string | null;
   bio: string | null;
   cric_index: number;
+  followers: number;
+  following: number;
   updated_at: Date;
   interests: string[];
 }
