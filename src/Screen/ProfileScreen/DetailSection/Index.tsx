@@ -1,6 +1,6 @@
 import { Card } from "@mantine/core";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
-import InterestsAndBio from "./UsernameInterestsAndBio";
+import UsernameInterestsAndBio from "./UsernameInterestsAndBio";
 import ProfilePicAndStats from "./ProfilePicAndStats";
 import ProfileCardButtons from "./ProfileCardButtons";
 
@@ -22,7 +22,7 @@ function DetailSectionIndex() {
       }}
     >
       <ProfilePicAndStats />
-      <InterestsAndBio />
+      <UsernameInterestsAndBio />
       <ProfileCardButtons />
     </Card>
   );
