@@ -26,9 +26,6 @@ function ProfileIndex() {
       if (!store.profileStore.profile) doFetch = true;
     }
 
-    console.log("DoFetch", doFetch);
-    console.log(store.profileStore.profile?.interests.map((item) => item));
-
     if (doFetch)
       store.profileStore
         .GetProfile(Number(queryUserId), queryUsername)
