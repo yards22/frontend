@@ -43,7 +43,12 @@ function ProfileCardButtons() {
                   </Center>
                 </Menu.Target>
                 <Menu.Dropdown>
-                  <Menu.Item icon={<Edit2 size={16} />} onClick={() => {}}>
+                  <Menu.Item
+                    icon={<Edit2 size={16} />}
+                    onClick={() => {
+                      navigate("/profile/edit");
+                    }}
+                  >
                     Edit Profile
                   </Menu.Item>
                   <Menu.Item

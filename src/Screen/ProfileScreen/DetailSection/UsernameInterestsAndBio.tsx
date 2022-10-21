@@ -2,21 +2,22 @@ import styled from "styled-components";
 import { Title, Text, Badge, Spoiler } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
-const SDetails = styled.div`
+const SUsernameInterestsAndBio = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
 
-function Details() {
+function UsernameInterestsAndBio() {
   const { profileStore } = useStores();
 
   return (
     <Observer>
       {() => {
         const { viewProfile } = profileStore;
+
         return (
-          <SDetails>
+          <SUsernameInterestsAndBio>
             <Title order={6} style={{ marginTop: "10px" }}>
               {viewProfile?.username}
             </Title>
@@ -52,11 +53,11 @@ function Details() {
                 enim fugit velit voluptates, ipsum ea dicta.
               </Text>
             </Spoiler>
-          </SDetails>
+          </SUsernameInterestsAndBio>
         );
       }}
     </Observer>
   );
 }
 
-export default Details;
+export default UsernameInterestsAndBio;
