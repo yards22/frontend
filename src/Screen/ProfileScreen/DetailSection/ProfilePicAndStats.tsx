@@ -2,7 +2,7 @@ import { Title } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import styled from "styled-components";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
-import ProfilePhoto from "./ProfilePhoto";
+import ProfilePhoto from "../../../Atoms/ProfilePhoto";
 const SStats = styled.div`
   display: flex;
   align-items: center;
@@ -30,19 +30,19 @@ function ProfilePicAndStats() {
               profileImageUri={viewProfile?.profile_image_uri}
             />
             <SStats>
-              <Title order={5}>400</Title>
+              <Title order={5}>{viewProfile?.following}</Title>
               <Title order={6} color="dimmed">
                 Following
               </Title>
             </SStats>
             <SStats>
-              <Title order={5}>145</Title>
+              <Title order={5}>{viewProfile?.followers}</Title>
               <Title order={6} color="dimmed">
                 Followers
               </Title>
             </SStats>
             <SStats>
-              <Title order={5}>27</Title>
+              <Title order={5}>{viewProfile?.cric_index}</Title>
               <Title order={6} color="dimmed">
                 Cric Index
               </Title>
