@@ -6,6 +6,7 @@ import {
   dummyNotifications,
   dummyUserIdUsername,
 } from "../../Data/Dummies/Notification";
+import { NotificationRepo } from "../Repository/NotificationRepo";
 
 const TOKEN_KEY = "token";
 
@@ -14,12 +15,15 @@ export class NotificationStore {
   uid_uname: Map<number, string>;
   @observable finalNotifications: MUINotification[] = [];
   @observable isLoading: boolean = false;
+  notificationRepo : NotificationRepo ;
+  @observable token: string | null = null;
 
-  constructor() {
+  constructor(notificationRepo : NotificationRepo ) {
     makeAutoObservable(this);
     this.uid_uname = dummyUserIdUsername;
     this.rawNotifications = dummyNotifications;
-
+    this.notificationRepo = notificationRepo;
+    this.token = window.localStorage.getItem(TOKEN_KEY);
     this.GetNotifications();
   }
 
@@ -32,6 +36,8 @@ export class NotificationStore {
   GetNotifications = async () => {
     // network call here to get raw notifications
 
+    const rawNotifications = this.notificationRepo.getNotifications(this.token || "");
+    // this.rawNotifications = rawNotifications;
     await this.GetUserNamesFor(
       this.rawNotifications.map((item) => item.metadata.by)
     );
