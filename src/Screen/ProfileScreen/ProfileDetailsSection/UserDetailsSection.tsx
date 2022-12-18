@@ -49,9 +49,11 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
   }, []);
 
   function handleLogout() {
+    console.log('Iam at logout 1');
     const logOutResponse = window.confirm("Are You sure to logout");
     if (logOutResponse) {
       store.authStore.LogoutUser().then(() => {
+        console.log("Iam here after clicking logout 2");
         navigate("/");
       });
     }

@@ -78,7 +78,7 @@ function ProfileCardButtons() {
                   color="red"
                   onClick={() => {
                     authStore.LogoutUser().then(() => {
-                      navigate("/login");
+                      navigate("/");
                     });
                   }}
                 >

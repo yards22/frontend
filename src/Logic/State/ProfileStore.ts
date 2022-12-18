@@ -1,7 +1,6 @@
 import { action, makeAutoObservable, observable } from "mobx";
 import { MProfile } from "../Model/MProfile";
 import { ProfileRepo } from "../Repository/ProfileRepo";
-const TOKEN_KEY = "token";
 
 export class ProfileStore {
   @observable profile: MProfile | null = null;
@@ -13,7 +12,8 @@ export class ProfileStore {
   constructor(profileRepo: ProfileRepo) {
     makeAutoObservable(this);
     this.profileRepo = profileRepo;
-    this.token = window.localStorage.getItem(TOKEN_KEY);
+    console.log(window.localStorage.getItem("token"))
+    this.token = window.localStorage.getItem("token");
   }
 
   @action
@@ -35,6 +35,7 @@ export class ProfileStore {
   GetProfile = async (user_id: number | null, username: string | null) => {
     this.SetLoading(true);
     try {
+      this.token = window.localStorage.getItem("token");
       const profile = await this.profileRepo.getProfile(this.token || "");
       return profile;
     } catch (err) {

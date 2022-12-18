@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import DetailSectionIndex from "./DetailSection/Index";
+import { profile } from "console";
 
 function ProfileIndex() {
   const store = useStores();
@@ -43,6 +44,7 @@ function ProfileIndex() {
     <Observer>
       {() => {
         const { profileStore } = store;
+        console.log(profileStore);
         return profileStore.viewProfile ? (
           <>
             <DetailSectionIndex />

@@ -1,4 +1,5 @@
 import { useStores } from "../../Logic/Providers/StoresProviders";
+import { MProfile } from "../../Logic/Model/MProfile";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { Observer } from "mobx-react-lite";
 import { useState } from "react";
@@ -10,11 +11,13 @@ const CLIENT_ID =
 function SignInWithGoogle() {
   const [didLoginFailed, setDidLoginFailed] = useState(false);
   const store = useStores();
+
   const navigator = useNavigate();
 
   async function handleRouteToProfile() {
+    const profile : MProfile  = await store.profileStore.GetProfile(null, null);
+    store.profileStore.SetProfile(profile);
     if (store.authStore.isNewUser) {
-      await store.profileStore.GetProfile(null, null);
       navigator({
         pathname: "/profile",
         search: `${createSearchParams({
