@@ -1,94 +1,52 @@
-import { Loader, Tabs } from "@mantine/core";
+import { Loader } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
-import UserFavourites from "./Favourites/UserFavourites";
-import Followers from "./Followers/Followers";
-import Following from "./Following/Following";
-import InterestsSection from "./InterestsSection/InterestsSection";
-import ProfileDetailsSectionIndex from "./ProfileDetailsSection/Index";
-import UserPosts from "./UserPosts/UserPosts";
-
-const SProfileIndex = styled.div`
-  width: 100%;
-`;
+import DetailSectionIndex from "./DetailSection/Index";
 
 function ProfileIndex() {
   const store = useStores();
-  const [currentRenderingInProfileRoute, setCurrentRenderingInProfileRoute] =
-    useState("Profile");
-  const [activePostsTab, setActivePostsTab] = useState("Posts");
-  const [profileInfo, setProfileInfo] = useState<any>(null);
   const search = useLocation().search;
-  const currentUser = new URLSearchParams(search).get("user");
-  console.log("current User",currentUser);
+  const queryUsername = new URLSearchParams(search).get("username");
+  const queryUserId = new URLSearchParams(search).get("user_id");
 
   useEffect(() => {
-    getTheCurrentUser();
     store.appStore.setNavigationState(4);
-  },[]);
 
-  async function getTheCurrentUser(){
-    await store.profileStore.GetProfile(store.authStore.token)
-  }
+    let doFetch = false;
+    let ownView = false;
 
-  // useEffect(()=>{
-    
-  // },[profileInfo])
+    if (
+      !(queryUserId || queryUsername) ||
+      Number(queryUserId) === store.authStore.user?.user_id
+    ) {
+      // requesting for own profile
+      ownView = true;
+      if (!store.profileStore.profile) doFetch = true;
+    }
 
-  function handleCurrentRenderingInProfileRoute(current: string) {
-    setCurrentRenderingInProfileRoute(current);
-  }
+    if (doFetch)
+      store.profileStore
+        .GetProfile(Number(queryUserId), queryUsername)
+        .then((profile) => {
+          if (profile?.user_id === store.authStore.user?.user_id) {
+            store.profileStore.SetProfile(profile);
+          }
+          store.profileStore.SetViewProfile(profile);
+        });
 
+    if (ownView) store.profileStore.SetViewProfile(store.profileStore.profile);
+  }, []);
 
-  console.log(89,store.profileStore.profile?.username);
   return (
     <Observer>
       {() => {
         const { profileStore } = store;
-        return profileStore.profile ? (
-          <SProfileIndex>
-            {currentRenderingInProfileRoute === "Profile" && (
-              <>
-                <ProfileDetailsSectionIndex
-                  profileInfo={store.profileStore.profile?.username === currentUser ? store.profileStore.profile : profileInfo}
-                  handleCurrentRenderingInProfileRoute={
-                    handleCurrentRenderingInProfileRoute
-                  }
-                />
-                <InterestsSection />
-                <Tabs
-                  value={activePostsTab}
-                  onTabChange={(e: any) => setActivePostsTab(e)}
-                  mt={10}
-                  variant="pills"
-                >
-                  <Tabs.List grow>
-                    <Tabs.Tab value="Posts">Posts</Tabs.Tab>
-                    <Tabs.Tab value="Favourites">Favourites</Tabs.Tab>
-                  </Tabs.List>
-                </Tabs>
-                {activePostsTab === "Posts" && <UserPosts />}
-                {activePostsTab === "Favourites" && <UserFavourites />}
-              </>
-            )}
-            {currentRenderingInProfileRoute === "Following" && (
-              <Following
-                handleCurrentRenderingInProfileRoute={
-                  handleCurrentRenderingInProfileRoute
-                }
-              />
-            )}
-            {currentRenderingInProfileRoute === "Followers" && (
-              <Followers
-                handleCurrentRenderingInProfileRoute={
-                  handleCurrentRenderingInProfileRoute
-                }
-              />
-            )}
-          </SProfileIndex>
+        return profileStore.viewProfile ? (
+          <>
+            <DetailSectionIndex />
+          </>
         ) : (
           <div
             style={{

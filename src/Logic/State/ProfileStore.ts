@@ -5,6 +5,7 @@ const TOKEN_KEY = "token";
 
 export class ProfileStore {
   @observable profile: MProfile | null = null;
+  @observable viewProfile: MProfile | null = null;
   @observable isLoading: boolean = false;
   @observable token: string | null = null;
   profileRepo: ProfileRepo;
@@ -21,18 +22,21 @@ export class ProfileStore {
   };
 
   @action
+  SetViewProfile = (profile: MProfile | null) => {
+    this.viewProfile = profile;
+  };
+
+  @action
   SetLoading = (v: boolean) => {
     this.isLoading = v;
   };
 
   @action
-  GetProfile = async (token: any) => {
+  GetProfile = async (user_id: number | null, username: string | null) => {
     this.SetLoading(true);
     try {
-      // console.log("in Get profile Action");
-      const profile = await this.profileRepo.getProfile(token || "");
-      // console.log(profile);
-      this.SetProfile(profile);
+      const profile = await this.profileRepo.getProfile(this.token || "");
+      return profile;
     } catch (err) {
       throw err;
     } finally {
@@ -56,15 +60,18 @@ export class ProfileStore {
   };
 
   @action
-  CheckUserNameAvailability = async (props : {username : string,token : string})=>{
-    this.SetLoading(true)
-    try{
-      const res = await this.profileRepo.checkUserName(props);
-      return res
-    }catch (err){
-      throw err
-    }finally{
-      this.SetLoading(false)
+  CheckUserNameAvailability = async (username: string) => {
+    this.SetLoading(true);
+    try {
+      const res = await this.profileRepo.checkUserName(
+        username,
+        this.token || ""
+      );
+      return res;
+    } catch (err) {
+      throw err;
+    } finally {
+      this.SetLoading(false);
     }
-  } 
+  };
 }

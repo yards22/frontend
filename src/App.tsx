@@ -13,12 +13,12 @@ import NotificationIndex from "./Screen/NotificationScreen/Index";
 import FeedIndex from "./Screen/FeedScreen/Index";
 import TopBar from "./Organs/Navbar/TopBar";
 import BottomBar from "./Organs/Navbar/BottomBar";
+import EditProfileIndex from "./Screen/EditProfileScreen/Index";
 
 const SApp = styled.section`
   width: 100%;
   max-width: 600px;
   overflow: auto;
-  padding-top: 10px;
   ::-webkit-scrollbar {
     display: none;
   }
@@ -64,6 +64,7 @@ function App() {
                   <Route element={<ProtectedRoutes />}>
                     <Route path="explore" element={<ExploreIndex />} />
                     <Route path="profile" element={<ProfileIndex />} />
+                    <Route path="profile/edit" element={<EditProfileIndex />} />
                     <Route
                       path="notifications"
                       element={<NotificationIndex />}

@@ -12,33 +12,44 @@ import { ProfileStore } from "./Logic/State/ProfileStore";
 import { NotificationStore } from "./Logic/State/NotificationStore";
 import { ExploreStore } from "./Logic/State/ExploreStore";
 import { ExploreRepo } from "./Logic/Repository/ExploreRepo";
+import { NotificationRepo } from "./Logic/Repository/NotificationRepo";
 
 interface ProvidedAppProps {
   children?: React.ReactNode;
 }
 
+const BASE_URL = "http://localhost:4000";
+
 function ProvidedApp(props: ProvidedAppProps) {
   const rq = new Request({ "Content-Type": "application/json" });
   const appStore = new AppStore();
-  const authStore = new AuthStore(
-    new AuthRepo("http://localhost:4000/auth", rq)
-  );
+  const authStore = new AuthStore(new AuthRepo(BASE_URL + "/auth", rq));
   const profileStore = new ProfileStore(
-    new ProfileRepo("http://localhost:4000/profile", rq)
+    new ProfileRepo(BASE_URL + "/profile", rq)
   );
-  const notificationStore = new NotificationStore();
+  const notificationStore = new NotificationStore(
+    new NotificationRepo(BASE_URL+"/notification",rq) 
+  );
 
   const exploreStore = new ExploreStore(
-    new ExploreRepo("http://localhost:4000/network",rq)
+    new ExploreRepo(BASE_URL + "/network", rq)
   );
   return (
     <div
-      style={{
-        backgroundColor: "#E7F5FF",
-      }}
+      style={
+        {
+          // backgroundColor: "#E7F5FF",
+        }
+      }
     >
       <StoresContext.Provider
-        value={{ appStore, authStore, profileStore, notificationStore,exploreStore }}
+        value={{
+          appStore,
+          authStore,
+          profileStore,
+          notificationStore,
+          exploreStore,
+        }}
       >
         {
           <Observer>

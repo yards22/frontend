@@ -5,7 +5,7 @@ import IconWrapper from "../../../Atoms/IconWrapper";
 import { IconPencil } from "../../../Atoms/Icons";
 import { Observer } from "mobx-react-lite";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
-import EditProfileModalIndex from "./EditProfileModal/Index";
+// import EditProfileModalIndex from "./EditProfileModal/Index";
 import { MoreVertical, Trash2, LogOut } from "react-feather";
 import { useLocation, useNavigate } from "react-router-dom";
 import { MProfile } from "../../../Logic/Model/MProfile";
@@ -196,10 +196,10 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
                 }}
                 overflow="inside"
               >
-                <EditProfileModalIndex
+                {/* <EditProfileModalIndex
                   profileInfo={profileStore.profile}
                   handleCloseTheEditModal={handleCloseTheEditModal}
-                />
+                /> */}
               </Modal>
               <Menu shadow="md" width={200}>
                 <Menu.Target>

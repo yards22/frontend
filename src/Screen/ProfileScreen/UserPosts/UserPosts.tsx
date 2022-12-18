@@ -5,7 +5,6 @@ import NormalPost from "../../FeedScreen/Post/NormalPost";
 const SUserPosts = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 5px;
 `;
 
 function UserPosts() {
