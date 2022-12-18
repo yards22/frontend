@@ -50,7 +50,7 @@ function ProtectedRoutes(props: ProtectedRoutesProps) {
     );
   }
   if (authStage === AUTH_INITIAL) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
   return <Outlet />;
 }

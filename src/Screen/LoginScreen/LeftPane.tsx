@@ -1,4 +1,4 @@
-import { Anchor, Modal } from "@mantine/core";
+import { Anchor, Card, Center, Modal } from "@mantine/core";
 import { useState } from "react";
 import styled from "styled-components";
 import DontHaveAnAccount from "./DontHaveAnAccount";
@@ -25,8 +25,8 @@ function LeftPane() {
   const [newAccountModal, setNewAccountModal] = useState(false);
   return (
     <SLeftPane>
-      <h1 style={{ fontWeight: "100", margin: "0" }}>Log in</h1>
-      <span style={{ opacity: "0.6", marginBottom: "30px" }}>
+      <h1 style={{ fontWeight: "500", marginBottom: "10px",marginTop:"0px"}}>22 Yards</h1>
+      <span style={{ opacity: "0.6", marginBottom: "30px",textAlign:"center" }}>
         Cricket mainz one step away. Login to get started now.
       </span>
 
@@ -39,6 +39,7 @@ function LeftPane() {
           maxWidth: "300px",
         }}
       >
+        <Card shadow="sm" p="lg" radius="md" withBorder>
         <SignInWithGoogle />
         <OrLabel />
         <EmailPasswordLogin />
@@ -66,7 +67,9 @@ function LeftPane() {
             }}
           />
         </Modal>
-        <span style={{ fontSize: "12px", maxWidth: "300px" }}>
+        </Card>
+
+        <span style={{ marginTop: "30px",fontSize: "12px", maxWidth: "300px" }}>
           By signing up, you agree to the
           <Anchor> Terms of Service </Anchor>
           and

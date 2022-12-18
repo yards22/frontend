@@ -23,6 +23,7 @@ function ProfileIndex() {
   const [profileInfo, setProfileInfo] = useState<any>(null);
   const search = useLocation().search;
   const currentUser = new URLSearchParams(search).get("user");
+  console.log("current User",currentUser);
 
   useEffect(() => {
     getTheCurrentUser();
@@ -33,16 +34,16 @@ function ProfileIndex() {
     await store.profileStore.GetProfile(store.authStore.token)
   }
 
-  useEffect(()=>{
+  // useEffect(()=>{
     
-  },[profileInfo])
+  // },[profileInfo])
 
   function handleCurrentRenderingInProfileRoute(current: string) {
     setCurrentRenderingInProfileRoute(current);
   }
 
 
-
+  console.log(89,store.profileStore.profile?.username);
   return (
     <Observer>
       {() => {

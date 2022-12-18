@@ -10,6 +10,7 @@ interface ProfileDetailsSectionIndexProps {
 }
 
 function ProfileDetailsSectionIndex(props: ProfileDetailsSectionIndexProps) {
+  console.log(props.profileInfo); 
   return (
     <Card
       shadow="md"

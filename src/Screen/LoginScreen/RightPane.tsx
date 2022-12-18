@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 
 const SRightPane = styled.div`
-  border: 1px solid black;
+  // border: 1px solid black;
   width: 100%;
   display: flex;
   align-items: center;
@@ -16,7 +16,7 @@ function RightPane() {
     <Observer>
       {() => {
         const { authStore } = store;
-        return <SRightPane>Right Pane</SRightPane>;
+        return <SRightPane>Listen to IPL cricket commentary.</SRightPane>;
       }}
     </Observer>
   );

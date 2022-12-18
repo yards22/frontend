@@ -60,7 +60,7 @@ function App() {
 
                 {authStore.user && appStore.isPhone && <BottomBar />}
                 <Routes>
-                  <Route path="/login" element={<LoginIndex />} />
+                  <Route path="/" element={<LoginIndex />} />
                   <Route element={<ProtectedRoutes />}>
                     <Route path="explore" element={<ExploreIndex />} />
                     <Route path="profile" element={<ProfileIndex />} />

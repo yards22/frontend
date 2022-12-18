@@ -52,7 +52,7 @@ function UserDetailsSection(props: UserDetailsSectionProps) {
     const logOutResponse = window.confirm("Are You sure to logout");
     if (logOutResponse) {
       store.authStore.LogoutUser().then(() => {
-        navigate("/login");
+        navigate("/");
       });
     }
   }

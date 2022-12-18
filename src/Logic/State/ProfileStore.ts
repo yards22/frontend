@@ -29,7 +29,9 @@ export class ProfileStore {
   GetProfile = async (token: any) => {
     this.SetLoading(true);
     try {
+      // console.log("in Get profile Action");
       const profile = await this.profileRepo.getProfile(token || "");
+      // console.log(profile);
       this.SetProfile(profile);
     } catch (err) {
       throw err;
@@ -40,9 +42,10 @@ export class ProfileStore {
 
   @action
   UpdateProfile = async (props: any) => {
+    // console.log(props);
     this.SetLoading(true);
     try {
-      console.log("props", ...props.formData);
+      // console.log("props", ...props.formData);
       const profile = await this.profileRepo.updateUserDetails(props);
       this.SetProfile(profile);
     } catch (err) {

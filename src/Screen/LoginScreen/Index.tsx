@@ -16,6 +16,7 @@ const SLoginIndex = styled.section`
   background: #e5e7eb;
 `;
 
+
 const AUTH_INITIAL = 0;
 const CHECKING_AUTH = 1;
 const CHECKED_AUTH_LOGGED_IN = 2;

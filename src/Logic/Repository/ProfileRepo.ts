@@ -11,10 +11,12 @@ export class ProfileRepo {
     this.baseUrl = baseUrl;
   }
 
-  async getProfile(token: string): Promise<MProfile> {
+  async  getProfile(token: string): Promise<MProfile> {
     try {
+      // console.log("in Get profile fetch");
       const res = await this.rq.Get(`${this.baseUrl}/`, AuthHeaders(token));
       const { body } = await CheckResponse(res, 200);
+      // console.log(body);
       return {
         bio: body.data.bio,
         cric_index: body.data.cric_index,
