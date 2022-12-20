@@ -24,7 +24,7 @@ function ProfileIndex() {
     ) {
       // requesting for own profile
       ownView = true;
-      if (!store.profileStore.profile) doFetch = true;
+      if (!store.profileStore.profile || store.profileStore.profile.user_id !== store.authStore.user?.user_id) doFetch = true;
     }
 
     if (doFetch)
