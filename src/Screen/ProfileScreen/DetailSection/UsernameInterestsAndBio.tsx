@@ -15,7 +15,7 @@ function UsernameInterestsAndBio() {
     <Observer>
       {() => {
         const { viewProfile } = profileStore;
-
+        {console.log(viewProfile)}
         return (
           <SUsernameInterestsAndBio>
             <Title order={6} style={{ marginTop: "10px" }}>
@@ -47,10 +47,7 @@ function UsernameInterestsAndBio() {
               }}
             >
               <Text style={{ fontSize: "16px" }} color="dimmed">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-                tenetur reprehenderit magnam velit deserunt repellat. Dolor
-                numquam officiis rerum architecto doloremque, sint perferendis
-                enim fugit velit voluptates, ipsum ea dicta.
+                 {viewProfile?.bio}
               </Text>
             </Spoiler>
           </SUsernameInterestsAndBio>

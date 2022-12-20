@@ -44,7 +44,7 @@ function ProfileIndex() {
     <Observer>
       {() => {
         const { profileStore } = store;
-        console.log(profileStore);
+        // console.log(profileStore);
         return profileStore.viewProfile ? (
           <>
             <DetailSectionIndex />
