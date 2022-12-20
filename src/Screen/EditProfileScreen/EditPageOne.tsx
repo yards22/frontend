@@ -1,6 +1,8 @@
 import { Textarea, Text, TextInput, Button, Divider } from "@mantine/core";
+import { showNotification } from "@mantine/notifications";
 import { Observer } from "mobx-react-lite";
 import { useState } from "react";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import EditInterest from "./EditInterest";
@@ -17,6 +19,7 @@ const SEditPageOne = styled.div`
 
 function EditPageOne() {
   const stores = useStores();
+  const navigate = useNavigate();
   const [username, setUserName] = useState(
     stores.profileStore.profile?.username || ""
   );
@@ -89,7 +92,28 @@ function EditPageOne() {
                 disabled={userNameError !== "" || !isUserNameCheckDone}
                 style={{ width: "100%" }}
                 onClick={() => {
-                  profileStore.UpdateProfile(profileStore.profile);
+                  const editedDetails = {
+                    ...profileStore.profile,
+                    username : username,
+                    interests : profileStore.profile?.interests.toString()
+                  }
+                  profileStore.UpdateProfile(editedDetails)
+                  .then((res)=>{
+                     console.log(res)
+                     showNotification({
+                      title:"Profile Details Updated",
+                      message : "",
+                      autoClose: 2500,
+                      color: 'green'
+                     })
+                     navigate({
+                      pathname: "/profile",
+                      search: `${createSearchParams({
+                        user: `${stores.profileStore.profile?.username}`,
+                      })}`,
+                    });
+                    stores.appStore.setNavigationState(4);
+                  });
                 }}
               >
                 Save Profile

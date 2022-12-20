@@ -51,8 +51,9 @@ export class ProfileStore {
     this.SetLoading(true);
     try {
       // console.log("props", ...props.formData);
-      const profile = await this.profileRepo.updateUserDetails(props);
+      const profile = await this.profileRepo.updateUserDetails({formData:props,token:this.token});
       this.SetProfile(profile);
+      return profile;
     } catch (err) {
       throw err;
     } finally {
