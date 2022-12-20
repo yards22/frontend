@@ -13,6 +13,7 @@ import { NotificationStore } from "./Logic/State/NotificationStore";
 import { ExploreStore } from "./Logic/State/ExploreStore";
 import { ExploreRepo } from "./Logic/Repository/ExploreRepo";
 import { NotificationRepo } from "./Logic/Repository/NotificationRepo";
+import { NotificationsProvider } from "@mantine/notifications";
 
 interface ProvidedAppProps {
   children?: React.ReactNode;
@@ -65,7 +66,9 @@ function ProvidedApp(props: ProvidedAppProps) {
                       colorScheme: appStore.theme,
                     }}
                   >
-                    {props.children}
+                    <NotificationsProvider position="top-right" zIndex={2077}>
+                      {props.children}
+                    </NotificationsProvider>
                   </MantineProvider>
                 </ThemeProvider>
               );
