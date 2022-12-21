@@ -60,13 +60,23 @@ export class ProfileRepo {
 
   async updateUserDetails(props: any): Promise<MProfile> {
     try {
-      const data = props.formData;
-      // data.set('interests',"")
-      // console.log("jnin",data.get('interests'))
-      const res = await this.rq.Put(
+      const data = new FormData();
+  
+      data.append("username",props.data.username)
+      
+      if(props.data.bio){data.append("bio",props.data.bio)}
+      if(props.data.interests){data.append("interests",props.data.interests)}
+      if(props.data.profile_image_uri){data.append("image",props.data.image)}
+      console.log("update",[...data])
+
+      const res = await fetch(
         `${this.baseUrl}/`,
-        data,
-        AuthHeaders(props.token)
+         {
+           method : "PUT",
+           body : data,
+           headers :  {...AuthHeaders(props.token)}
+         }
+  
       );
       const { body } = await CheckResponse(res, 200);
       let interests = [];

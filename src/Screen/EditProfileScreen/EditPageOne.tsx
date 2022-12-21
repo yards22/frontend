@@ -26,6 +26,8 @@ function EditPageOne() {
 
   const [isUserNameCheckDone, setUserNameCheck] = useState(true);
   const [userNameError, setUserNameError] = useState("");
+  const [profileImage,setProfileImage] = useState(stores.profileStore.profile?.username || null)
+  const [profileImageFile,setProfileImageFile] = useState(stores.profileStore.profile?.username || null)
 
   async function handleUsernameBlur() {
     if (username === "") setUserNameError("Username cannot be empty.");
@@ -59,7 +61,14 @@ function EditPageOne() {
                 marginBottom: "20px",
               }}
             >
-              <EditProfileImage />
+              <EditProfileImage profileImage = {profileImage}  
+                   handleProfilePicChange={(e)=>{
+                      setProfileImage(e)
+                   }}
+                   handleProfilePicFileChange={(e)=>{
+                    setProfileImageFile(e)
+                 }}
+              />
               <TextInput
                 style={{ width: "100%" }}
                 onBlur={handleUsernameBlur}
@@ -95,8 +104,10 @@ function EditPageOne() {
                   const editedDetails = {
                     ...profileStore.profile,
                     username : username,
-                    interests : profileStore.profile?.interests.toString()
+                    interests : profileStore.profile?.interests.toString(),
+                    image : profileImageFile
                   }
+                  console.log(editedDetails)
                   profileStore.UpdateProfile(editedDetails)
                   .then((res)=>{
                      console.log(res)
