@@ -19,7 +19,8 @@ interface ProvidedAppProps {
   children?: React.ReactNode;
 }
 
-const BASE_URL = "http://localhost:4000";
+const BASE_URL =
+  "https://83libq0p22.execute-api.ap-south-1.amazonaws.com/stage";
 
 function ProvidedApp(props: ProvidedAppProps) {
   const rq = new Request({ "Content-Type": "application/json" });
@@ -29,7 +30,7 @@ function ProvidedApp(props: ProvidedAppProps) {
     new ProfileRepo(BASE_URL + "/profile", rq)
   );
   const notificationStore = new NotificationStore(
-    new NotificationRepo(BASE_URL+"/notification",rq) 
+    new NotificationRepo(BASE_URL + "/notification", rq)
   );
 
   const exploreStore = new ExploreStore(
