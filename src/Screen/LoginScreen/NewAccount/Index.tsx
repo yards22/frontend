@@ -35,11 +35,12 @@ function NewAccount(props: NewAccountProps) {
   const navigator = useNavigate();
 
   async function handleRouteToProfile() {
-    await store.profileStore.GetProfile(null, null);
+    const profile = await store.profileStore.GetProfile(null, null);
+    store.profileStore.SetViewProfile(profile)
     navigator({
       pathname: "/profile",
       search: `${createSearchParams({
-        user: `${store.profileStore.profile?.username}`,
+        user: `${profile?.username}`,
       })}`,
     });
     store.appStore.setNavigationState(4);

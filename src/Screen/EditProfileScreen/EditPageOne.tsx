@@ -1,6 +1,8 @@
 import { Textarea, Text, TextInput, Button, Divider } from "@mantine/core";
+import { showNotification } from "@mantine/notifications";
 import { Observer } from "mobx-react-lite";
 import { useState } from "react";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import EditInterest from "./EditInterest";
@@ -17,12 +19,15 @@ const SEditPageOne = styled.div`
 
 function EditPageOne() {
   const stores = useStores();
+  const navigate = useNavigate();
   const [username, setUserName] = useState(
     stores.profileStore.profile?.username || ""
   );
 
   const [isUserNameCheckDone, setUserNameCheck] = useState(true);
   const [userNameError, setUserNameError] = useState("");
+  const [profileImage,setProfileImage] = useState(stores.profileStore.profile?.username || null)
+  const [profileImageFile,setProfileImageFile] = useState(stores.profileStore.profile?.username || null)
 
   async function handleUsernameBlur() {
     if (username === "") setUserNameError("Username cannot be empty.");
@@ -56,7 +61,14 @@ function EditPageOne() {
                 marginBottom: "20px",
               }}
             >
-              <EditProfileImage />
+              <EditProfileImage profileImage = {profileImage}  
+                   handleProfilePicChange={(e)=>{
+                      setProfileImage(e)
+                   }}
+                   handleProfilePicFileChange={(e)=>{
+                    setProfileImageFile(e)
+                 }}
+              />
               <TextInput
                 style={{ width: "100%" }}
                 onBlur={handleUsernameBlur}
@@ -89,7 +101,30 @@ function EditPageOne() {
                 disabled={userNameError !== "" || !isUserNameCheckDone}
                 style={{ width: "100%" }}
                 onClick={() => {
-                  profileStore.UpdateProfile(profileStore.profile);
+                  const editedDetails = {
+                    ...profileStore.profile,
+                    username : username,
+                    interests : profileStore.profile?.interests.toString(),
+                    image : profileImageFile
+                  }
+                  console.log(editedDetails)
+                  profileStore.UpdateProfile(editedDetails)
+                  .then((res)=>{
+                     console.log(res)
+                     showNotification({
+                      title:"Profile Details Updated",
+                      message : "",
+                      autoClose: 2500,
+                      color: 'green'
+                     })
+                     navigate({
+                      pathname: "/profile",
+                      search: `${createSearchParams({
+                        user: `${stores.profileStore.profile?.username}`,
+                      })}`,
+                    });
+                    stores.appStore.setNavigationState(4);
+                  });
                 }}
               >
                 Save Profile
