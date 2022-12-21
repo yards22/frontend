@@ -26,8 +26,10 @@ function EditPageOne() {
 
   const [isUserNameCheckDone, setUserNameCheck] = useState(true);
   const [userNameError, setUserNameError] = useState("");
-  const [profileImage,setProfileImage] = useState(stores.profileStore.profile?.username || null)
-  const [profileImageFile,setProfileImageFile] = useState(stores.profileStore.profile?.username || null)
+  const [profileImage, setProfileImage] = useState<any>(null);
+  const [profileImageFile, setProfileImageFile] = useState(
+    stores.profileStore.profile?.username || null
+  );
 
   async function handleUsernameBlur() {
     if (username === "") setUserNameError("Username cannot be empty.");
@@ -61,13 +63,14 @@ function EditPageOne() {
                 marginBottom: "20px",
               }}
             >
-              <EditProfileImage profileImage = {profileImage}  
-                   handleProfilePicChange={(e)=>{
-                      setProfileImage(e)
-                   }}
-                   handleProfilePicFileChange={(e)=>{
-                    setProfileImageFile(e)
-                 }}
+              <EditProfileImage
+                profileImage={profileImage}
+                handleProfilePicChange={(e) => {
+                  setProfileImage(e);
+                }}
+                handleProfilePicFileChange={(e) => {
+                  setProfileImageFile(e);
+                }}
               />
               <TextInput
                 style={{ width: "100%" }}
@@ -103,21 +106,19 @@ function EditPageOne() {
                 onClick={() => {
                   const editedDetails = {
                     ...profileStore.profile,
-                    username : username,
-                    interests : profileStore.profile?.interests.toString(),
-                    image : profileImageFile
-                  }
-                  console.log(editedDetails)
-                  profileStore.UpdateProfile(editedDetails)
-                  .then((res)=>{
-                     console.log(res)
-                     showNotification({
-                      title:"Profile Details Updated",
-                      message : "",
+                    username: username,
+                    interests: profileStore.profile?.interests.toString(),
+                    image: profileImageFile,
+                  };
+
+                  profileStore.UpdateProfile(editedDetails).then((res) => {
+                    showNotification({
+                      title: "Profile Details Updated",
+                      message: "",
                       autoClose: 2500,
-                      color: 'green'
-                     })
-                     navigate({
+                      color: "green",
+                    });
+                    navigate({
                       pathname: "/profile",
                       search: `${createSearchParams({
                         user: `${stores.profileStore.profile?.username}`,

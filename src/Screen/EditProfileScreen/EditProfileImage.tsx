@@ -5,37 +5,34 @@ import { Edit2, Plus, Repeat, Trash2 } from "react-feather";
 import ProfilePhoto from "../../Atoms/ProfilePhoto";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 
-interface IEditProfileImage{
-  profileImage : any,
-  handleProfilePicChange : (a:any)=>void
-  handleProfilePicFileChange : (a:any)=>void
+interface IEditProfileImage {
+  profileImage: any;
+  handleProfilePicChange: (a: any) => void;
+  handleProfilePicFileChange: (a: any) => void;
 }
 
-const fileToDataUri = (file:any) => new Promise((resolve, reject) => {
-  const reader = new FileReader();
-  reader.onload = (event) => {
-    resolve(event.target?.result)
-  };
-  reader.readAsDataURL(file);
-  })
+const fileToDataUri = (file: any) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      resolve(event.target?.result);
+    };
+    reader.readAsDataURL(file);
+  });
 
-
-function EditProfileImage(props:IEditProfileImage) {
+function EditProfileImage(props: IEditProfileImage) {
   const editProfilePicRef: any = useRef(null);
   const stores = useStores();
-  // const [profileImage, ]
 
   function handleProfilePicChangeClick() {
     editProfilePicRef.current.click();
   }
 
   function handleProfilePicChange(e: any) {
-    fileToDataUri(e.target.files[0])
-      .then(dataUri => {
-        props.handleProfilePicChange(dataUri)
-        props.handleProfilePicFileChange(e.target.files[0])
-      })
-    
+    fileToDataUri(e.target.files[0]).then((dataUri) => {
+      props.handleProfilePicChange(dataUri);
+      props.handleProfilePicFileChange(e.target.files[0]);
+    });
   }
   return (
     <Observer>
@@ -93,7 +90,10 @@ function EditProfileImage(props:IEditProfileImage) {
               )}
             </div>
             <ProfilePhoto
-              profileImageUri={props.profileImage}
+              profileImageUri={
+                props.profileImage ??
+                stores.profileStore.profile?.profile_image_uri
+              }
               userName={profileStore.profile?.username}
               style={{ height: "200px", width: "200px" }}
             />
@@ -104,7 +104,7 @@ function EditProfileImage(props:IEditProfileImage) {
               style={{
                 display: "none",
               }}
-              onChange={(e)=>handleProfilePicChange(e)}
+              onChange={(e) => handleProfilePicChange(e)}
             />
           </div>
         );
