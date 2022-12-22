@@ -5,6 +5,7 @@ import { Home, Bell, User, Search, Globe } from "react-feather";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
+import NavBarMobile from "./NavbarMobile/Index";
 
 const STopBar = styled.a`
   display: flex;
@@ -21,19 +22,6 @@ const STopBar = styled.a`
   }
 `;
 
-const SMobileBar = styled.a`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  margin: 8px 0px;
-  color: ${(p) => p.theme.color};
-  cursor: pointer;
-  transition: all 0.3s;
-  :hover {
-    color: #525252;
-  }
-`;
 function TopBar() {
   const stores = useStores();
   const mantineTheme = useMantineTheme();
@@ -74,103 +62,8 @@ function TopBar() {
               22 Yards
             </Title>
           { isNavBarOpened && 
-            <div 
-              style={{
-                background: 'white',
-                position : "fixed",
-                top : "60px",
-                left : "0px",
-                right : "0px",
-                bottom : "0px",
-                zIndex : "101",
-                display : "flex",
-                flexDirection : "column",
-                alignItems : 'start',
-                padding : "20px 13px"
-              }}
-            > 
-              <SMobileBar
-                theme={{
-                  color:
-                    appStore.navigationState === 5
-                      ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                      : "gray",
-                }}
-                onClick={() => {
-                  navigate("/profile");
-                  appStore.setNavigationState(5);
-                  setIsNavBarOpened(false)
-                }}
-              >
-                {/* <Home size={"25"} /> */}
-                <Text style={{fontSize : "20px"}} ml={"sm"}>Profile</Text>
-              </SMobileBar>
-              <SMobileBar
-                theme={{
-                  color:
-                    appStore.navigationState === 6
-                      ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                      : "gray",
-                }}
-                onClick={() => {
-                  navigate("/leaderBoard");
-                  appStore.setNavigationState(6);
-                  setIsNavBarOpened(false)
-                }}
-              >
-                {/* <Home size={"25"} /> */}
-                <Text style={{fontSize : "20px"}} ml={"sm"}>LeaderBoard</Text>
-              </SMobileBar>
-              <SMobileBar
-                theme={{
-                  color:
-                    appStore.navigationState === 7
-                      ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                      : "gray",
-                }}
-                onClick={() => {
-                  navigate("/polls");
-                  appStore.setNavigationState(7);
-                  setIsNavBarOpened(false)
-                }}
-              >
-                {/* <Home size={"25"} /> */}
-                <Text style={{fontSize : "20px"}} ml={"sm"}>Polls</Text>
-              </SMobileBar>
-              <SMobileBar
-                theme={{
-                  color:
-                    appStore.navigationState === 8
-                      ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                      : "gray",
-                }}
-                onClick={() => {
-                  navigate("/comingSoon");
-                  appStore.setNavigationState(8);
-                  setIsNavBarOpened(false)
-                }}
-              >
-                {/* <Home size={"25"} /> */}
-                <Text style={{fontSize : "20px"}} ml={"sm"}>Coming Soon</Text>
-              </SMobileBar>
-              <SMobileBar
-                theme={{
-                  color:
-                    appStore.navigationState === 9
-                      ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                      : "gray",
-                }}
-                onClick={() => {
-                  navigate("/feedback");
-                  appStore.setNavigationState(9);
-                  setIsNavBarOpened(false)
-                }}
-              >
-                {/* <Home size={"25"} /> */}
-                <Text style={{fontSize : "20px"}} ml={"sm"}>Feed Back</Text>
-              </SMobileBar>
-          </div>
-        }
+            <NavBarMobile setIsNavBarOpened={(x:boolean)=>setIsNavBarOpened(x)}/>   
+          }
           </div>
         )
       }}
