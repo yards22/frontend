@@ -82,13 +82,13 @@ function TopBarDesktop() {
                         <STopBar
                             theme={{
                                 color:
-                                appStore.navigationState === 2
+                                appStore.navigationState === 1
                                     ? mantineTheme.colors[mantineTheme.primaryColor][7]
                                     : "gray",
                             }}
                             onClick={() => {
                                 navigate("/explore");
-                                appStore.setNavigationState(2);
+                                appStore.setNavigationState(1);
                             }}
                             >
                             <Globe size={"20"} />
@@ -97,7 +97,7 @@ function TopBarDesktop() {
                         <STopBar
                             theme={{
                                 color:
-                                appStore.navigationState === 1
+                                appStore.navigationState === 2
                                     ? mantineTheme.colors[mantineTheme.primaryColor][7]
                                     : "gray",
                             }}

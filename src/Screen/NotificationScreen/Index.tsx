@@ -1,5 +1,5 @@
 import { Observer } from "mobx-react-lite";
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import NotificationTile from "./NotificationTile";
@@ -13,6 +13,11 @@ const SNotificationIndex = styled.section`
 
 function NotificationIndex() {
   const stores = useStores();
+
+  useEffect(()=>{
+    stores.appStore.setNavigationState(3)
+  })
+  
   return (
     <Observer>
       {() => {
