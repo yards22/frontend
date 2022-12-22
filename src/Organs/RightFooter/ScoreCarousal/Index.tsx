@@ -45,7 +45,7 @@ const tempMatches: {
 
 function ScoreCarousalIndex() {
   return (
-    <div style={{ width: "100%", height: "200px", marginBottom: "15px" }}>
+    <div style={{ width: "100%", height: "200px", marginBottom: "55px" }}>
       <Text italic size={"md"} style={{ marginLeft: "5px" }}>
         Coming Soon...
       </Text>
