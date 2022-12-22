@@ -2,10 +2,10 @@ import { Button, Card, Skeleton, Text } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import ProfileAvatar from "../../../Atoms/ProfileAvatar";
-import { DummyFollowingList } from "../../../Data/Dummies/Following";
-import { MFollow } from "../../../Logic/Model/MExplore";
-import { useStores } from "../../../Logic/Providers/StoresProviders";
+import ProfileAvatar from "../../../../Atoms/ProfileAvatar";
+import { DummyFollowingList } from "../../../../Data/Dummies/Following";
+import { MFollow } from "../../../../Logic/Model/MExplore";
+import { useStores } from "../../../../Logic/Providers/StoresProviders";
 
 const SFollowing = styled.div`
   width: 100%;
