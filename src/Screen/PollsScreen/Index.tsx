@@ -6,7 +6,7 @@ function PollsScreenIndex() {
     const stores = useStores();
 
     useEffect(()=>{
-        stores.appStore.setNavigationState(7)
+        stores.appStore.setNavigationState(6)
     })
 
     return (
