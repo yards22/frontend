@@ -1,5 +1,6 @@
-import { Title, Text, useMantineTheme } from "@mantine/core";
+import { Title, Text, useMantineTheme, Burger } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
+import { useState } from "react";
 import { Home, Bell, User, Search, Globe } from "react-feather";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -19,32 +20,161 @@ const STopBar = styled.a`
     color: #525252;
   }
 `;
+
+const SMobileBar = styled.a`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin: 8px 0px;
+  color: ${(p) => p.theme.color};
+  cursor: pointer;
+  transition: all 0.3s;
+  :hover {
+    color: #525252;
+  }
+`;
 function TopBar() {
   const stores = useStores();
   const mantineTheme = useMantineTheme();
   const navigate = useNavigate();
+  const [isNavBarOpened, setIsNavBarOpened] = useState(false)
 
   if (stores.appStore.isPhone) {
     return (
-      <div
-        style={{
-          background: mantineTheme.colors[mantineTheme.primaryColor][6],
-          position: "fixed",
-          top: "0",
-          left: "0",
-          zIndex: "100",
-          right: "0",
-          height: "60px",
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Title color={"white"} order={5}>
-          22 Yards
-        </Title>
-      </div>
+      <Observer>
+      {()=>{
+        const { appStore } = stores;
+        return(
+          <div
+            style={{
+              background: mantineTheme.colors[mantineTheme.primaryColor][6],
+              position: "fixed",
+              top: "0",
+              left: "0",
+              zIndex: "100",
+              right: "0",
+              height: "60px",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Burger 
+              opened={isNavBarOpened}
+              color = {'white'}
+              style = {{
+                position : "absolute",
+                left : "13px"
+              }}
+              onClick = {()=>{setIsNavBarOpened(!isNavBarOpened)}}
+            />
+            <Title color={"white"} order={5}>
+              22 Yards
+            </Title>
+          { isNavBarOpened && 
+            <div 
+              style={{
+                background: 'white',
+                position : "fixed",
+                top : "60px",
+                left : "0px",
+                right : "0px",
+                bottom : "0px",
+                zIndex : "101",
+                display : "flex",
+                flexDirection : "column",
+                alignItems : 'start',
+                padding : "20px 13px"
+              }}
+            > 
+              <SMobileBar
+                theme={{
+                  color:
+                    appStore.navigationState === 5
+                      ? mantineTheme.colors[mantineTheme.primaryColor][7]
+                      : "gray",
+                }}
+                onClick={() => {
+                  navigate("/profile");
+                  appStore.setNavigationState(5);
+                  setIsNavBarOpened(false)
+                }}
+              >
+                {/* <Home size={"25"} /> */}
+                <Text style={{fontSize : "20px"}} ml={"sm"}>Profile</Text>
+              </SMobileBar>
+              <SMobileBar
+                theme={{
+                  color:
+                    appStore.navigationState === 6
+                      ? mantineTheme.colors[mantineTheme.primaryColor][7]
+                      : "gray",
+                }}
+                onClick={() => {
+                  navigate("/leaderBoard");
+                  appStore.setNavigationState(6);
+                  setIsNavBarOpened(false)
+                }}
+              >
+                {/* <Home size={"25"} /> */}
+                <Text style={{fontSize : "20px"}} ml={"sm"}>LeaderBoard</Text>
+              </SMobileBar>
+              <SMobileBar
+                theme={{
+                  color:
+                    appStore.navigationState === 7
+                      ? mantineTheme.colors[mantineTheme.primaryColor][7]
+                      : "gray",
+                }}
+                onClick={() => {
+                  navigate("/polls");
+                  appStore.setNavigationState(7);
+                  setIsNavBarOpened(false)
+                }}
+              >
+                {/* <Home size={"25"} /> */}
+                <Text style={{fontSize : "20px"}} ml={"sm"}>Polls</Text>
+              </SMobileBar>
+              <SMobileBar
+                theme={{
+                  color:
+                    appStore.navigationState === 8
+                      ? mantineTheme.colors[mantineTheme.primaryColor][7]
+                      : "gray",
+                }}
+                onClick={() => {
+                  navigate("/comingSoon");
+                  appStore.setNavigationState(8);
+                  setIsNavBarOpened(false)
+                }}
+              >
+                {/* <Home size={"25"} /> */}
+                <Text style={{fontSize : "20px"}} ml={"sm"}>Coming Soon</Text>
+              </SMobileBar>
+              <SMobileBar
+                theme={{
+                  color:
+                    appStore.navigationState === 9
+                      ? mantineTheme.colors[mantineTheme.primaryColor][7]
+                      : "gray",
+                }}
+                onClick={() => {
+                  navigate("/feedback");
+                  appStore.setNavigationState(9);
+                  setIsNavBarOpened(false)
+                }}
+              >
+                {/* <Home size={"25"} /> */}
+                <Text style={{fontSize : "20px"}} ml={"sm"}>Feed Back</Text>
+              </SMobileBar>
+          </div>
+        }
+          </div>
+        )
+      }}
+      </Observer>
     );
   }
   return (
