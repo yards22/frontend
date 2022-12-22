@@ -5,6 +5,20 @@ import { createSearchParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useStores } from '../../Logic/Providers/StoresProviders';
 
+const STopBarContainer = styled.div`
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 25px;
+    height: 60px;
+    width: 100%;
+`
+
 const STopBar = styled.a`
   display: flex;
   flex-direction: column;
@@ -29,20 +43,8 @@ function TopBarDesktop() {
         {() => {
             const { appStore } = stores;
             return (
-            <div
-                style={{
-                position: "fixed",
-                top: "0",
-                left: "0",
-                right: "0",
-                borderBottom: "1px solid #eaeaea",
-                display: "flex",
-                justifyContent: "center",
-                height: "60px",
-                width: "100%",
-                }}
-            >
-                <div
+            <STopBarContainer>
+                {/* <div
                     style={{
                         width: "100%",
                         maxWidth: "1400px",
@@ -52,7 +54,7 @@ function TopBarDesktop() {
                         paddingLeft: "25px",
                         paddingRight: "25px",
                     }}
-                    >
+                    > */}
                     <Title color={"black"} order={2}>
                         22 Yards
                     </Title>
@@ -139,8 +141,8 @@ function TopBarDesktop() {
                             <Text size="xs">Profile</Text>
                         </STopBar>
                     </div>
-                </div>
-            </div>
+                {/* </div> */}
+            </STopBarContainer>
             );
         }}
         </Observer>

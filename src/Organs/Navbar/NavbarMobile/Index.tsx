@@ -4,6 +4,20 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 
+const SNavBarMobile = styled.div`
+  background: white;
+  position : fixed;
+  top : 60px;
+  left : 0px;
+  right : 0px;
+  bottom : 0px;
+  z-index : 101;
+  display : flex;
+  flex-direction : column;
+  align-items : start;
+  padding : 20px 13px;
+`
+
 const SMobileBar = styled.a`
   display: flex;
   justify-content: center;
@@ -32,21 +46,7 @@ function NavBarMobile({setIsNavBarOpened}:INavBarMobile) {
       { 
         ()=>{
           return(
-            <div 
-              style={{
-                background: 'white',
-                position : "fixed",
-                top : "60px",
-                left : "0px",
-                right : "0px",
-                bottom : "0px",
-                zIndex : "101",
-                display : "flex",
-                flexDirection : "column",
-                alignItems : 'start',
-                padding : "20px 13px"
-              }}
-            > 
+            <SNavBarMobile> 
               <SMobileBar
                 theme={{
                   color:
@@ -127,7 +127,7 @@ function NavBarMobile({setIsNavBarOpened}:INavBarMobile) {
                 {/* <Home size={"25"} /> */}
                 <Text style={{fontSize : "20px"}} ml={"sm"}>Feed Back</Text>
               </SMobileBar>
-           </div>
+           </SNavBarMobile>
           )
         }
 
