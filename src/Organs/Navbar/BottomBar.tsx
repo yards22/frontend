@@ -1,6 +1,6 @@
 import { ActionIcon, useMantineTheme } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
-import { Search, Home, User, Bell, PlusSquare } from "react-feather";
+import { Search, Home, User, Bell, PlusSquare, Globe } from "react-feather";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
@@ -45,7 +45,7 @@ function BottomBar() {
               }
               onClick={() => {
                 navigate("/feed");
-                appStore.setNavigationState(1);
+                appStore.setNavigationState(0);
               }}
             >
               <Home size={"20"} />
@@ -58,10 +58,10 @@ function BottomBar() {
               }
               onClick={() => {
                 navigate("/explore");
-                appStore.setNavigationState(2);
+                appStore.setNavigationState(1);
               }}
             >
-              <Search size={"20"} />
+              <Globe size={"20"} />
             </ActionIcon>
             <ActionIcon
               color={

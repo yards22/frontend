@@ -14,6 +14,10 @@ import FeedIndex from "./Screen/FeedScreen/Index";
 import TopBar from "./Organs/Navbar/TopBar";
 import BottomBar from "./Organs/Navbar/BottomBar";
 import EditProfileIndex from "./Screen/EditProfileScreen/Index";
+import FeedbackIndex from "./Organs/RightFooter/Feedback/Index";
+import PollIndex from "./Organs/LeftFooter/Poll/Index";
+import ScoreCarousalIndex from "./Organs/RightFooter/ScoreCarousal/Index";
+import LeaderBoardIndex from "./Organs/LeftFooter/LearderBoard/Index";
 
 const SApp = styled.section`
   width: 100%;
@@ -56,9 +60,10 @@ function App() {
               }}
             >
               <Router>
+                {authStore.user && appStore.isPhone && <BottomBar />}
                 {authStore.user && <TopBar />}
 
-                {authStore.user && appStore.isPhone && <BottomBar />}
+                
                 <Routes>
                   <Route path="/" element={<LoginIndex />} />
                   <Route element={<ProtectedRoutes />}>
@@ -70,6 +75,10 @@ function App() {
                       element={<NotificationIndex />}
                     />
                     <Route path="feed" element={<FeedIndex />} />
+                    <Route path="feedback" element={<FeedbackIndex/>} />
+                    <Route path="polls" element={<PollIndex/>} />
+                    <Route path="comingSoon" element={<ScoreCarousalIndex/>} />
+                    <Route path="leaderBoard" element={<LeaderBoardIndex/>} />
                   </Route>
                   <Route>404</Route>
                 </Routes>
