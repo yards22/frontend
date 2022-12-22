@@ -50,13 +50,13 @@ function NavBarMobile({setIsNavBarOpened}:INavBarMobile) {
               <SMobileBar
                 theme={{
                   color:
-                    appStore.navigationState === 5
+                    appStore.navigationState === 4
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
                       : "gray",
                 }}
                 onClick={() => {
                   navigate("/profile");
-                  appStore.setNavigationState(5);
+                  appStore.setNavigationState(4);
                   setIsNavBarOpened(false)
                 }}
               >
@@ -66,13 +66,13 @@ function NavBarMobile({setIsNavBarOpened}:INavBarMobile) {
               <SMobileBar
                 theme={{
                   color:
-                    appStore.navigationState === 6
+                    appStore.navigationState === 5
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
                       : "gray",
                 }}
                 onClick={() => {
                   navigate("/leaderBoard");
-                  appStore.setNavigationState(6);
+                  appStore.setNavigationState(5);
                   setIsNavBarOpened(false)
                 }}
               >
@@ -82,13 +82,13 @@ function NavBarMobile({setIsNavBarOpened}:INavBarMobile) {
               <SMobileBar
                 theme={{
                   color:
-                    appStore.navigationState === 7
+                    appStore.navigationState === 6
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
                       : "gray",
                 }}
                 onClick={() => {
                   navigate("/polls");
-                  appStore.setNavigationState(7);
+                  appStore.setNavigationState(6);
                   setIsNavBarOpened(false)
                 }}
               >
@@ -98,13 +98,13 @@ function NavBarMobile({setIsNavBarOpened}:INavBarMobile) {
               <SMobileBar
                 theme={{
                   color:
-                    appStore.navigationState === 8
+                    appStore.navigationState === 7
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
                       : "gray",
                 }}
                 onClick={() => {
                   navigate("/comingSoon");
-                  appStore.setNavigationState(8);
+                  appStore.setNavigationState(7);
                   setIsNavBarOpened(false)
                 }}
               >
@@ -114,13 +114,13 @@ function NavBarMobile({setIsNavBarOpened}:INavBarMobile) {
               <SMobileBar
                 theme={{
                   color:
-                    appStore.navigationState === 9
+                    appStore.navigationState === 8
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
                       : "gray",
                 }}
                 onClick={() => {
                   navigate("/feedback");
-                  appStore.setNavigationState(9);
+                  appStore.setNavigationState(8);
                   setIsNavBarOpened(false)
                 }}
               >

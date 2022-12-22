@@ -122,13 +122,13 @@ function TopBarTablet() {
                         <STopBar
                             theme={{
                                 color:
-                                appStore.navigationState === 7
+                                appStore.navigationState === 6
                                     ? mantineTheme.colors[mantineTheme.primaryColor][7]
                                     : "gray",
                             }}
                             onClick={() => {
                                 navigate("/polls");
-                                appStore.setNavigationState(7);
+                                appStore.setNavigationState(6);
                             }}
                             >
                             <BarChart2 size={"20"} />
@@ -137,13 +137,13 @@ function TopBarTablet() {
                         <STopBar
                             theme={{
                                 color:
-                                appStore.navigationState === 6
+                                appStore.navigationState === 5
                                     ? mantineTheme.colors[mantineTheme.primaryColor][7]
                                     : "gray",
                             }}
                             onClick={() => {
                                 navigate("/leaderBoard");
-                                appStore.setNavigationState(6);
+                                appStore.setNavigationState(5);
                             }}
                             >
                             <Award size={"20"} />

@@ -1,6 +1,7 @@
 import { Burger, Title, useMantineTheme } from '@mantine/core';
 import { Observer } from 'mobx-react-lite';
 import React, { useState } from 'react'
+import { Search } from 'react-feather';
 import { useStores } from '../../Logic/Providers/StoresProviders';
 import NavBarMobile from './NavbarMobile/Index';
 
@@ -33,14 +34,21 @@ function TopBarMobile() {
                 opened={isNavBarOpened}
                 color = {'white'}
                 style = {{
-                position : "absolute",
-                left : "13px"
+                    position : "absolute",
+                    left : "13px"
                 }}
                 onClick = {()=>{setIsNavBarOpened(!isNavBarOpened)}}
             />
             <Title color={"white"} order={5}>
                 22 Yards
             </Title>
+            <Search
+                style={{
+                    position : "absolute",
+                    right : "13px",
+                    color: "white",
+                }}
+            />
             { isNavBarOpened && 
             <NavBarMobile setIsNavBarOpened={(x:boolean)=>setIsNavBarOpened(x)}/>   
             }
