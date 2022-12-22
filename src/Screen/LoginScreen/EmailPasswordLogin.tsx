@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IconEye, IconEyeOff } from "../../Atoms/Icons";
 import IconWrapper from "../../Atoms/IconWrapper";
+import { MProfile } from "../../Logic/Model/MProfile";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import { ValidateEmail } from "../../Logic/Utils/Validation";
 import ForgotPassword from "./ForgetPassword/Index";
@@ -15,8 +16,10 @@ function EmailPasswordLogin() {
   const store = useStores();
   const navigator = useNavigate();
 
-  async function handleRouteToProfile() {
+  async function handleRouteToFeed() {
     store.appStore.setNavigationState(1);
+    const profile : MProfile  = await store.profileStore.GetProfile(null, null);
+    store.profileStore.SetProfile(profile);
     navigator("/feed");
   }
 
@@ -24,7 +27,7 @@ function EmailPasswordLogin() {
     store.authStore
       .LoginUser(credentials.email, credentials.password)
       .then(() => {
-        handleRouteToProfile();
+        handleRouteToFeed();
       })
       .catch((err) => {
         setErrorText(err.message);
