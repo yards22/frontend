@@ -21,6 +21,21 @@ const STopBar = styled.a`
   }
 `;
 
+const STopBarContainer = styled.div`
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 25px;
+    height: 60px;
+    width: 100%;
+`
+
+
 function TopBarTablet() {
     const stores = useStores();
     const mantineTheme = useMantineTheme();
@@ -30,20 +45,8 @@ function TopBarTablet() {
         {() => {
             const { appStore } = stores;
             return (
-            <div
-                style={{
-                position: "fixed",
-                top: "0",
-                left: "0",
-                right: "0",
-                borderBottom: "1px solid #eaeaea",
-                display: "flex",
-                justifyContent: "center",
-                height: "60px",
-                width: "100%",
-                }}
-            >
-                <div
+            <STopBarContainer>
+                {/* <div
                     style={{
                         width: "100%",
                         maxWidth: "1400px",
@@ -53,7 +56,7 @@ function TopBarTablet() {
                         paddingLeft: "25px",
                         paddingRight: "25px",
                     }}
-                    >
+                    > */}
                     <Title color={"black"} order={2}>
                         22 Yards
                     </Title>
@@ -122,13 +125,13 @@ function TopBarTablet() {
                         <STopBar
                             theme={{
                                 color:
-                                appStore.navigationState === 7
+                                appStore.navigationState === 6
                                     ? mantineTheme.colors[mantineTheme.primaryColor][7]
                                     : "gray",
                             }}
                             onClick={() => {
                                 navigate("/polls");
-                                appStore.setNavigationState(7);
+                                appStore.setNavigationState(6);
                             }}
                             >
                             <BarChart2 size={"20"} />
@@ -137,13 +140,13 @@ function TopBarTablet() {
                         <STopBar
                             theme={{
                                 color:
-                                appStore.navigationState === 6
+                                appStore.navigationState === 5
                                     ? mantineTheme.colors[mantineTheme.primaryColor][7]
                                     : "gray",
                             }}
                             onClick={() => {
                                 navigate("/leaderBoard");
-                                appStore.setNavigationState(6);
+                                appStore.setNavigationState(5);
                             }}
                             >
                             <Award size={"20"} />
@@ -170,8 +173,8 @@ function TopBarTablet() {
                             <Text size="xs">Profile</Text>
                         </STopBar>
                     </div>
-                </div>
-            </div>
+                {/* </div> */}
+            </STopBarContainer>
             );
         }}
         </Observer>

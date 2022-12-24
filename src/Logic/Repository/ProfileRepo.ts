@@ -15,8 +15,8 @@ export class ProfileRepo {
 
   async getProfile(
     token: string,
-    user_id?: BigInt,
-    username?: string
+    user_id?: Number| null,
+    username?: string | null
   ): Promise<MProfile> {
     try {
       let url = `${this.baseUrl}`;

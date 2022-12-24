@@ -14,10 +14,10 @@ import FeedIndex from "./Screen/FeedScreen/Index";
 import TopBar from "./Organs/Navbar/TopBar";
 import BottomBar from "./Organs/Navbar/BottomBar";
 import EditProfileIndex from "./Screen/EditProfileScreen/Index";
-import FeedbackIndex from "./Organs/RightFooter/Feedback/Index";
-import PollIndex from "./Organs/LeftFooter/Poll/Index";
-import ScoreCarousalIndex from "./Organs/RightFooter/ScoreCarousal/Index";
-import LeaderBoardIndex from "./Organs/LeftFooter/LearderBoard/Index";
+import ComingSoonScreenIndex from "./Screen/ComingScoonScreen/Index";
+import LeaderBoardScreenIndex from "./Screen/LeaderBoardScreen/Index";
+import PollsScreenIndex from "./Screen/PollsScreen/Index";
+import FeedBackScreenIndex from "./Screen/FeedbackScreen/Index";
 
 const SApp = styled.section`
   width: 100%;
@@ -75,10 +75,10 @@ function App() {
                       element={<NotificationIndex />}
                     />
                     <Route path="feed" element={<FeedIndex />} />
-                    <Route path="feedback" element={<FeedbackIndex/>} />
-                    <Route path="polls" element={<PollIndex/>} />
-                    <Route path="comingSoon" element={<ScoreCarousalIndex/>} />
-                    <Route path="leaderBoard" element={<LeaderBoardIndex/>} />
+                    <Route path="feedback" element={<FeedBackScreenIndex/>} />
+                    <Route path="polls" element={<PollsScreenIndex/>} />
+                    <Route path="comingSoon" element={<ComingSoonScreenIndex/>} />
+                    <Route path="leaderBoard" element={<LeaderBoardScreenIndex/>} />
                   </Route>
                   <Route>404</Route>
                 </Routes>

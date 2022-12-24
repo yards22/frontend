@@ -12,7 +12,6 @@ export class ProfileStore {
   constructor(profileRepo: ProfileRepo) {
     makeAutoObservable(this);
     this.profileRepo = profileRepo;
-    console.log(window.localStorage.getItem("token"))
     this.token = window.localStorage.getItem("token");
   }
 
@@ -32,11 +31,11 @@ export class ProfileStore {
   };
 
   @action
-  GetProfile = async (user_id: number | null, username: string | null) => {
+  GetProfile = async (user_id: Number | null, username: string | null) => {
     this.SetLoading(true);
     try {
       this.token = window.localStorage.getItem("token");
-      const profile = await this.profileRepo.getProfile(this.token || "");
+      const profile = await this.profileRepo.getProfile(this.token || "",user_id,username);
       return profile;
     } catch (err) {
       throw err;
