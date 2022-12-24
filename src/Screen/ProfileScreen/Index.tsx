@@ -4,12 +4,12 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import DetailSectionIndex from "./DetailSection/Index";
-import { profile } from "console";
+import PostsSectionIndex from "./PostsSection/Index";
 
 function ProfileIndex() {
   const store = useStores();
   const search = useLocation().search;
-  const queryUsername = new URLSearchParams(search).get("username");
+  const queryUsername = new URLSearchParams(search).get("user");
   const queryUserId = new URLSearchParams(search).get("user_id");
 
   useEffect(() => {
@@ -18,15 +18,15 @@ function ProfileIndex() {
     let doFetch = false;
     let ownView = false;
 
-    if (
-      !(queryUserId || queryUsername) ||
-      Number(queryUserId) === store.authStore.user?.user_id
-    ) {
+    if (store.profileStore.profile && store.profileStore.profile.username === queryUsername) {
       // requesting for own profile
       ownView = true;
-      if (!store.profileStore.profile || store.profileStore.profile.user_id !== store.authStore.user?.user_id) doFetch = true;
     }
 
+    if (!store.profileStore.profile || store.profileStore.profile.username !== queryUsername ) {
+      doFetch = true
+    };
+    
     if (doFetch)
       store.profileStore
         .GetProfile(Number(queryUserId), queryUsername)
@@ -48,6 +48,7 @@ function ProfileIndex() {
         return profileStore.viewProfile ? (
           <>
             <DetailSectionIndex />
+            <PostsSectionIndex />
           </>
         ) : (
           <div

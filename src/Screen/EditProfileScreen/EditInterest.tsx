@@ -25,11 +25,10 @@ function EditInterest() {
   useEffect(() => {
     if(isInitialInterestSet){
       const newInterests: string[] = [];
-      console.log(ifInterestedIn)
-      ifInterestedIn.forEach((_, key) => {
-        newInterests.push(key);
+      ifInterestedIn.forEach((isKeyIncluded, key) => {
+        if(isKeyIncluded) newInterests.push(key);
       });
-      console.log("new",newInterests)
+      // console.log("new",newInterests)
       stores.profileStore.SetProfile({
         ...stores.profileStore.profile,
         interests: newInterests,
@@ -52,6 +51,7 @@ function EditInterest() {
                 const p: Map<string, boolean> = new Map(ifInterestedIn);
                 const current = p.has(item.value) ? p.get(item.value) : false;
                 p.set(item.value, !current);
+                // console.log("current",p)
                 setIfInterestedIn(p);
               }}
               size="lg"

@@ -65,7 +65,7 @@ function BottomBar() {
             </ActionIcon>
             <ActionIcon
               color={
-                appStore.navigationState === 2
+                appStore.navigationState === 8
                   ? mantineTheme.colors[mantineTheme.primaryColor][9]
                   : "gray"
               }

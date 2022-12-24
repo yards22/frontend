@@ -1,9 +1,9 @@
 import { Button, Card, Skeleton, Text } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import styled from "styled-components";
-import ProfileAvatar from "../../../Atoms/ProfileAvatar";
-import { DummyFollowingList } from "../../../Data/Dummies/Following";
-import { useStores } from "../../../Logic/Providers/StoresProviders";
+import ProfileAvatar from "../../../../Atoms/ProfileAvatar";
+import { DummyFollowingList } from "../../../../Data/Dummies/Following";
+import { useStores } from "../../../../Logic/Providers/StoresProviders";
 
 const SFollowers = styled.div`
   width: 100%;

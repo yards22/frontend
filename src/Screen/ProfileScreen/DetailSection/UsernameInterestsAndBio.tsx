@@ -15,7 +15,7 @@ function UsernameInterestsAndBio() {
     <Observer>
       {() => {
         const { viewProfile } = profileStore;
-        {console.log(viewProfile)}
+
         return (
           <SUsernameInterestsAndBio>
             <Title order={6} style={{ marginTop: "10px" }}>
