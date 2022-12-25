@@ -21,7 +21,7 @@ export class ProfileRepo {
     try {
       let url = `${this.baseUrl}`;
       if (user_id) url += `?user_id=${user_id}`;
-      else if (username) url += `?username=${username}`;
+      else if (username) url += `?user=${username}`;
       const res = await this.rq.Get(url, AuthHeaders(token));
       const { body } = await CheckResponse(res, 200);
       let interests = [];
