@@ -16,6 +16,8 @@ import { NotificationRepo } from "./Logic/Repository/NotificationRepo";
 import { NotificationsProvider } from "@mantine/notifications";
 import { PostStore } from "./Logic/State/PostStore";
 import { PostRepo } from "./Logic/Repository/PostRepo";
+import { MiscStore } from "./Logic/State/MiscStore";
+import { MiscRepo } from "./Logic/Repository/MiscRepo";
 
 interface ProvidedAppProps {
   children?: React.ReactNode;
@@ -41,6 +43,7 @@ function ProvidedApp(props: ProvidedAppProps) {
   const exploreStore = new ExploreStore(
     new ExploreRepo(BASE_URL + "/network", rq)
   );
+  const miscStore = new MiscStore(new MiscRepo(BASE_URL + "/misc", rq));
   return (
     <div
       style={
@@ -57,6 +60,7 @@ function ProvidedApp(props: ProvidedAppProps) {
           notificationStore,
           exploreStore,
           postStore,
+          miscStore,
         }}
       >
         {
