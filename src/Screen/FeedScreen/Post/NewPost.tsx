@@ -189,6 +189,12 @@ function NewPost() {
                           autoClose: 2500,
                           color: "green",
                         });
+
+                        // cleaning
+                        setFiles([]);
+                        setFilePaths([]);
+                        setIsFocus(false);
+                        setContent("");
                       })
                       .catch((err) => {
                         showNotification({
