@@ -14,6 +14,8 @@ import { ExploreStore } from "./Logic/State/ExploreStore";
 import { ExploreRepo } from "./Logic/Repository/ExploreRepo";
 import { NotificationRepo } from "./Logic/Repository/NotificationRepo";
 import { NotificationsProvider } from "@mantine/notifications";
+import { PostStore } from "./Logic/State/PostStore";
+import { PostRepo } from "./Logic/Repository/PostRepo";
 
 interface ProvidedAppProps {
   children?: React.ReactNode;
@@ -33,7 +35,9 @@ function ProvidedApp(props: ProvidedAppProps) {
   const notificationStore = new NotificationStore(
     new NotificationRepo(BASE_URL + "/notification", rq)
   );
-
+  const postStore = new PostStore(
+    new PostRepo(BASE_URL + "/post", BASE_URL_FOR_IMAGES, rq)
+  );
   const exploreStore = new ExploreStore(
     new ExploreRepo(BASE_URL + "/network", rq)
   );
@@ -52,6 +56,7 @@ function ProvidedApp(props: ProvidedAppProps) {
           profileStore,
           notificationStore,
           exploreStore,
+          postStore,
         }}
       >
         {
