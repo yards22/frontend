@@ -24,7 +24,9 @@ export class PostRepo {
 
       // append images to form data
       if (props.data.images) {
-        data.append("images", props.data.images);
+        (props.data.images as any[]).forEach((item) => {
+          data.append("images", item);
+        });
       }
 
       const res = await fetch(`${this.baseUrl}`, {
