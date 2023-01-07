@@ -88,7 +88,6 @@ export class ProfileRepo {
       let interests = [];
       if (body.data.interests) {
         interests = body.data.interests.split(",");
-        // interests = JSON.parse(body.data.interests) as string[];
       }
 
       return {
