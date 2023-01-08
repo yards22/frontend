@@ -79,7 +79,6 @@ function FeedbackIndex() {
           variant="light"
           style={{ width: "100%" }}
           onClick={() => {
-            console.log(feedback);
             store.miscStore
               .CreateFeedback(feedback.content, feedback.image)
               .then(() => {

@@ -64,7 +64,6 @@ export class ProfileStore {
 
   @action
   UpdateProfile = async (props: any) => {
-    // console.log(props);
     this.SetLoading(true);
     try {
       const profile = await this.profileRepo.updateUserDetails({
