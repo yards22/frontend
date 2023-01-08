@@ -14,6 +14,7 @@ const SFeedIndex = styled.section`
 const posts: MPost[] = DummyPosts;
 function FeedIndex() {
   const stores = useStores();
+  if (!stores.profileStore.profile) stores.profileStore.GetMyProfile();
   useEffect(() => {
     stores.appStore.setNavigationState(0);
   }, []);

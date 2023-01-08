@@ -17,6 +17,9 @@ export default interface MPost {
   // if that particular user has liked the post
   is_liked: boolean;
 
+  // if the particular post has been favorite
+  is_favorite: boolean;
+
   // will contain user name of people liked the post
   liked_by: string[];
 

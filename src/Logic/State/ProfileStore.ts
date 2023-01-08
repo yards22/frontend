@@ -35,8 +35,26 @@ export class ProfileStore {
     this.SetLoading(true);
     try {
       this.token = window.localStorage.getItem("token");
-      const profile = await this.profileRepo.getProfile(this.token || "",user_id,username);
+      const profile = await this.profileRepo.getProfile(
+        this.token || "",
+        user_id,
+        username
+      );
       return profile;
+    } catch (err) {
+      throw err;
+    } finally {
+      this.SetLoading(false);
+    }
+  };
+
+  @action
+  GetMyProfile = async () => {
+    this.SetLoading(true);
+    try {
+      this.token = window.localStorage.getItem("token");
+      const profile = await this.profileRepo.getProfile(this.token || "");
+      this.SetProfile(profile);
     } catch (err) {
       throw err;
     } finally {
@@ -49,8 +67,10 @@ export class ProfileStore {
     // console.log(props);
     this.SetLoading(true);
     try {
-      // console.log("props", ...props.formData);
-      const profile = await this.profileRepo.updateUserDetails({data:props,token:this.token});
+      const profile = await this.profileRepo.updateUserDetails({
+        data: props,
+        token: this.token,
+      });
       this.SetProfile(profile);
       return profile;
     } catch (err) {

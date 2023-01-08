@@ -15,13 +15,14 @@ export class ProfileRepo {
 
   async getProfile(
     token: string,
-    user_id?: Number| null,
+    user_id?: Number | null,
     username?: string | null
   ): Promise<MProfile> {
     try {
       let url = `${this.baseUrl}`;
       if (user_id) url += `?user_id=${user_id}`;
       else if (username) url += `?username=${username}`;
+
       const res = await this.rq.Get(url, AuthHeaders(token));
       const { body } = await CheckResponse(res, 200);
       let interests = [];
@@ -29,6 +30,7 @@ export class ProfileRepo {
         interests = body.data.interests.split(",");
         // interests = JSON.parse(body.data.interests) as string[];
       }
+
       return {
         bio: body.data.bio,
         cric_index: body.data.cric_index,
@@ -86,7 +88,6 @@ export class ProfileRepo {
       let interests = [];
       if (body.data.interests) {
         interests = body.data.interests.split(",");
-        // interests = JSON.parse(body.data.interests) as string[];
       }
 
       return {

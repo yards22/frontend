@@ -6,7 +6,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import MPost from "../../../Logic/Model/MPost";
-import { Heart, MessageCircle } from "react-feather";
+import { Heart, MessageCircle, Star } from "react-feather";
 import Liked from "./Liked";
 import LinkedUserName from "../../../Atoms/LinkedUserName";
 import { useState } from "react";
@@ -107,6 +107,18 @@ function NormalPost(props: NormalPostProps) {
                 fill={
                   props.data.is_liked
                     ? mantineTheme.colors["red"][3]
+                    : "transparent"
+                }
+                strokeWidth={"2"}
+              />
+            </ActionIcon>
+            <ActionIcon color={"red"} variant="subtle" radius={"xl"} size="xl">
+              <Star
+                color={mantineTheme.colors["yellow"][6]}
+                size={"20"}
+                fill={
+                  props.data.is_favorite
+                    ? mantineTheme.colors["yellow"][3]
                     : "transparent"
                 }
                 strokeWidth={"2"}
