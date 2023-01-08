@@ -1,3 +1,4 @@
+import { Carousel } from "@mantine/carousel";
 import { Text } from "@mantine/core";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
@@ -9,7 +10,9 @@ const SPeopleRecommendationsSection = styled.div`
   flex-direction: column;
   width: 100%;
   position: relative;
-  padding-bottom: 30px;
+  /* padding-bottom: 30px; */
+  /* border: 1px solid black; */
+  /* height: 300px; */
 `;
 
 const SShowMore = styled.div`
@@ -41,12 +44,12 @@ function PeopleRecommendationsSection() {
   const recommendationDivRef: any = useRef(null);
 
   useEffect(() => {
-    handleDivSizeChanges();
-    window.addEventListener("resize", handleDivSizeChanges);
+    // handleDivSizeChanges();
+    // window.addEventListener("resize", handleDivSizeChanges);
   }, []);
 
   useEffect(() => {
-    handleDivSizeChanges();
+    // handleDivSizeChanges();
   }, [currentHeight]);
 
   const handleDivSizeChanges = () => {
@@ -67,44 +70,85 @@ function PeopleRecommendationsSection() {
   };
 
   return (
-    <SPeopleRecommendationsSection>
-      <div
-        ref={recommendationDivRef}
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          overflow: "hidden",
-          height: `${currentHeight}px`,
-        }}
-      >
-        <RecommendationsCard />
-        <RecommendationsCard />
-        <RecommendationsCard />
-        <RecommendationsCard />
-        <RecommendationsCard />
-        <RecommendationsCard />
-      </div>
+    // <SPeopleRecommendationsSection>
+    //   <div
+    //     ref={recommendationDivRef}
+    //     style={{
+    //       display: "flex",
+    //       flexDirection: "row",
+    //       justifyContent: "space-between",
+    //       flexWrap: "wrap",
+    //       overflow: "hidden",
+    //       // height: `${currentHeight}px`,
+    //     }}
+    //   >
+    //     <RecommendationsCard />
+    //     <RecommendationsCard />
+    //     <RecommendationsCard />
+    //     <RecommendationsCard />
+    //     <RecommendationsCard />
+    //     <RecommendationsCard />
+    //   </div>
 
-      {isShowMoreEnabled && (
-        <SShowMore
-          onClick={() => {
-            setCurrentHeight(currentHeight + 235);
-          }}
-        >
-          Show More
-        </SShowMore>
-      )}
-      {isHideEnabled && (
-        <SHideMore
-          onClick={() => {
-            setCurrentHeight(currentHeight - 235);
-          }}
-        >
-          Hide
-        </SHideMore>
-      )}
+    //   {/* {isShowMoreEnabled && (
+    //     <SShowMore
+    //       onClick={() => {
+    //         setCurrentHeight(currentHeight + 235);
+    //       }}
+    //     >
+    //       Show More
+    //     </SShowMore>
+    //   )}
+    //   {isHideEnabled && (
+    //     <SHideMore
+    //       onClick={() => {
+    //         setCurrentHeight(currentHeight - 235);
+    //       }}
+    //     >
+    //       Hide
+    //     </SHideMore>
+    //   )} */}
+    // </SPeopleRecommendationsSection>
+    <SPeopleRecommendationsSection>
+    <Carousel
+      slideSize="33.333333%"
+      slideGap="md"
+      loop
+      align="start"
+      slidesToScroll={3}
+      dragFree
+    > 
+      <Carousel.Slide>
+         <RecommendationsCard/>
+      </Carousel.Slide>
+      <Carousel.Slide>
+      <RecommendationsCard/>
+      </Carousel.Slide>
+      <Carousel.Slide>
+      <RecommendationsCard/>
+      </Carousel.Slide>
+      <Carousel.Slide>
+      <RecommendationsCard/>
+      </Carousel.Slide>
+      <Carousel.Slide>
+      <RecommendationsCard/>
+      </Carousel.Slide>
+      <Carousel.Slide>
+      <RecommendationsCard/>
+      </Carousel.Slide>
+      <Carousel.Slide>
+      <RecommendationsCard/>
+      </Carousel.Slide>
+      <Carousel.Slide>
+      <RecommendationsCard/>
+      </Carousel.Slide>
+      {/* <Carousel.Slide>
+          <RecommendationsCard/>  
+      </Carousel.Slide>
+      <Carousel.Slide>2</Carousel.Slide>
+      <Carousel.Slide>3</Carousel.Slide> */}
+      {/* ...other slides */}
+    </Carousel>
     </SPeopleRecommendationsSection>
   );
 }
