@@ -29,6 +29,7 @@ function UsernameInterestsAndBio() {
                 viewProfile?.interests.map((item, index) => {
                   return (
                     <Badge
+                      key={"interest" + viewProfile.user_id + index}
                       color={"blue"}
                       style={{ marginRight: "10px", marginTop: "8px" }}
                     >
@@ -47,7 +48,7 @@ function UsernameInterestsAndBio() {
               }}
             >
               <Text style={{ fontSize: "16px" }} color="dimmed">
-                 {viewProfile?.bio}
+                {viewProfile?.bio}
               </Text>
             </Spoiler>
           </SUsernameInterestsAndBio>
