@@ -24,7 +24,7 @@ const Flag = styled.div`
   top: 20px;
   z-index: 10;
   width: 150px;
-  background: #ff5b5b;
+  background: ${(p) => p.theme.bgColor};
   display: flex;
   justify-content: center;
   color: white;
@@ -41,9 +41,11 @@ function PollCard(props: PollCardProps) {
         shadow="lg"
         p="lg"
         withBorder
-        style={{ padding: "0", width: "300px" }}
+        style={{ padding: "0", width: "100%" }}
       >
-        <Flag>Poll</Flag>
+        <Flag theme={{ bgColor: props.hasPolled ? "#4ec04a" : "#ff5b5b" }}>
+          {props.hasPolled ? "Polled" : "Poll"}
+        </Flag>
         <div
           style={{
             background: colors.blue[8],

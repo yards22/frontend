@@ -49,17 +49,19 @@ function PollCarousal() {
               slideGap="md"
               align="start"
             >
-              {miscStore.polls.map((each) => {
-                return (
-                  <Carousel.Slide key={"poll_" + each.poll.poll_id}>
-                    <PollCard
-                      hasPolled={each.hasPolled}
-                      pollId={each.poll.poll_id}
-                      question={each.poll.poll_question}
-                      options={getOptions(each)}
-                    />
-                  </Carousel.Slide>
-                );
+              {miscStore.polls.map((each, index) => {
+                if (index <= 2)
+                  return (
+                    <Carousel.Slide key={"poll_" + each.poll.poll_id}>
+                      <PollCard
+                        hasPolled={each.hasPolled}
+                        pollId={each.poll.poll_id}
+                        question={each.poll.poll_question}
+                        options={getOptions(each)}
+                      />
+                    </Carousel.Slide>
+                  );
+                return null;
               })}
             </Carousel>
           </div>
