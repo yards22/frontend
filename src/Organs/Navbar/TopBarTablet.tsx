@@ -152,7 +152,7 @@ function TopBarTablet() {
                       : "gray",
                 }}
                 onClick={() => {
-                  navigate("/leaderBoard");
+                  navigate("/leaderboard");
                   appStore.setNavigationState(5);
                 }}
               >

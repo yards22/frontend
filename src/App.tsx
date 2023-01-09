@@ -81,7 +81,7 @@ function App() {
                       element={<ComingSoonScreenIndex />}
                     />
                     <Route
-                      path="leaderBoard"
+                      path="leaderboard"
                       element={<LeaderBoardScreenIndex />}
                     />
                   </Route>
