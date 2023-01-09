@@ -1,11 +1,12 @@
 import { action, makeAutoObservable, observable } from "mobx";
+import { MLeaderboard } from "../Model/MLeaderboard";
 import { MPoll } from "../Model/MPoll";
 import { MiscRepo } from "../Repository/MiscRepo";
 
 export class MiscStore {
   @observable token: string | null = null;
   @observable polls: MPoll[] | null = null;
-
+  @observable leaderboard: MLeaderboard[] | null = null;
   miscRepo: MiscRepo;
 
   constructor(miscRepo: MiscRepo) {
@@ -62,6 +63,16 @@ export class MiscStore {
         }
         this.SetPolls(polls);
       }
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  @action
+  GetLeaderboard = async () => {
+    try {
+      const lb = await this.miscRepo.getLeaderBoard(this.token || "");
+      this.leaderboard = lb;
     } catch (err) {
       throw err;
     }

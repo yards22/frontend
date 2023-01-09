@@ -60,4 +60,17 @@ export class MiscRepo {
       throw err;
     }
   }
+
+  async getLeaderBoard(token: string) {
+    try {
+      const res = await this.rq.Get(
+        `${this.baseUrl}/leaderboard?limit=50`,
+        AuthHeaders(token)
+      );
+      const { body } = await CheckResponse(res, 200);
+      return body.data;
+    } catch (err: any) {
+      throw err;
+    }
+  }
 }
