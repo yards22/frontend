@@ -1,10 +1,4 @@
-import {
-  Title,
-  TitleProps,
-  Text,
-  useMantineTheme,
-  TextProps,
-} from "@mantine/core";
+import { Title, TitleProps, Text, useMantineTheme } from "@mantine/core";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 const SLinkedUserNameHard = styled(Title)`
@@ -16,21 +10,12 @@ const SLinkedUserNameHard = styled(Title)`
   }
 `;
 
-interface LinkedUserNamePropsForHard extends TitleProps {
+interface LinkedUserNameProps extends TitleProps {
   username: string;
-  user_id?: number;
   type?: "hard" | "soft";
 }
 
-interface LinkedUserNamePropsForSoft extends TextProps {
-  username: string;
-  user_id?: number;
-  type?: "hard" | "soft";
-}
-
-function LinkedUserName(
-  props: LinkedUserNamePropsForSoft | LinkedUserNamePropsForHard
-) {
+function LinkedUserName(props: LinkedUserNameProps) {
   const mantineTheme = useMantineTheme();
   if (props.type === "hard")
     return (
@@ -45,7 +30,10 @@ function LinkedUserName(
     );
 
   return (
-    <Link to={""} style={{ textDecoration: "none" }}>
+    <Link
+      to={"/profile?username=" + props.username}
+      style={{ textDecoration: "none" }}
+    >
       <Text
         style={{ display: "inline-block", cursor: "pointer" }}
         {...(props as any)}
