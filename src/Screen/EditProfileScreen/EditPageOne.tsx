@@ -26,10 +26,7 @@ function EditPageOne() {
 
   const [isUserNameCheckDone, setUserNameCheck] = useState(true);
   const [userNameError, setUserNameError] = useState("");
-  const [profileImage, setProfileImage] = useState<any>(null);
-  const [profileImageFile, setProfileImageFile] = useState(
-    stores.profileStore.profile?.username || null
-  );
+  const [newProfileImage, setNewProfileImage] = useState<any>(null);
 
   async function handleUsernameBlur() {
     if (username === "") setUserNameError("Username cannot be empty.");
@@ -64,12 +61,8 @@ function EditPageOne() {
               }}
             >
               <EditProfileImage
-                profileImage={profileImage}
-                handleProfilePicChange={(e) => {
-                  setProfileImage(e);
-                }}
-                handleProfilePicFileChange={(e) => {
-                  setProfileImageFile(e);
+                onImageChange={(e) => {
+                  setNewProfileImage(e);
                 }}
               />
               <TextInput
@@ -104,23 +97,23 @@ function EditPageOne() {
                 disabled={userNameError !== "" || !isUserNameCheckDone}
                 style={{ width: "100%" }}
                 onClick={() => {
-                  const editedDetails = {
-                    ...profileStore.profile,
-                    username: username,
-                    interests: profileStore.profile?.interests.toString(),
-                    image: profileImageFile,
-                  };
-
-                  profileStore.UpdateProfile(editedDetails).then((res) => {
-                    showNotification({
-                      title: "Profile Details Updated",
-                      message: "",
-                      autoClose: 2500,
-                      color: "green",
+                  profileStore
+                    .UpdateProfile(
+                      username,
+                      profileStore.profile?.bio || undefined,
+                      profileStore.profile?.interests,
+                      newProfileImage
+                    )
+                    .then((res) => {
+                      showNotification({
+                        title: "Profile Details Updated",
+                        message: "",
+                        autoClose: 2500,
+                        color: "green",
+                      });
+                      navigate("/profile");
+                      stores.appStore.setNavigationState(4);
                     });
-                    navigate("/profile");
-                    stores.appStore.setNavigationState(4);
-                  });
                 }}
               >
                 Save Profile
