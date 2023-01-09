@@ -25,6 +25,10 @@ export class MiscStore {
 
   @action
   SetPolls(polls: MPoll[]) {
+    // sorting poll so that unpolled is set to first
+    polls.sort((a, b) => {
+      return a.hasPolled ? 1 : -1;
+    });
     this.polls = polls;
   }
 

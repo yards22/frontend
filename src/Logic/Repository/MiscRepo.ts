@@ -1,7 +1,7 @@
 import { AuthHeaders } from "../../Atoms/Util";
 import { MPoll } from "../Model/MPoll";
 import { Request } from "../Utils/Fetch";
-import { CheckResponse, ThrowFor } from "../Utils/ResponseHandler";
+import { CheckResponse } from "../Utils/ResponseHandler";
 export class MiscRepo {
   baseUrl: string;
   rq: Request;
