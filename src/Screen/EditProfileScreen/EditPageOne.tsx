@@ -2,7 +2,7 @@ import { Textarea, Text, TextInput, Button, Divider } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { Observer } from "mobx-react-lite";
 import { useState } from "react";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import EditInterest from "./EditInterest";
@@ -118,12 +118,7 @@ function EditPageOne() {
                       autoClose: 2500,
                       color: "green",
                     });
-                    navigate({
-                      pathname: "/profile",
-                      search: `${createSearchParams({
-                        user: `${stores.profileStore.profile?.username}`,
-                      })}`,
-                    });
+                    navigate("/profile");
                     stores.appStore.setNavigationState(4);
                   });
                 }}

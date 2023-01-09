@@ -44,7 +44,7 @@ function ProfileIndex() {
         });
 
     if (ownView) store.profileStore.SetViewProfile(store.profileStore.profile);
-  }, []);
+  }, [queryUsername, queryUserId]);
 
   return (
     <Observer>
