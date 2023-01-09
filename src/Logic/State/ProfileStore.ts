@@ -63,14 +63,21 @@ export class ProfileStore {
   };
 
   @action
-  UpdateProfile = async (props: any) => {
-    // console.log(props);
+  UpdateProfile = async (
+    username?: string,
+    bio?: string,
+    intr?: string[],
+    image?: File
+  ) => {
     this.SetLoading(true);
     try {
-      const profile = await this.profileRepo.updateUserDetails({
-        data: props,
-        token: this.token,
-      });
+      const profile = await this.profileRepo.updateUserDetails(
+        this.token || "",
+        username,
+        bio,
+        intr,
+        image
+      );
       this.SetProfile(profile);
       return profile;
     } catch (err) {

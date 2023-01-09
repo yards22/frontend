@@ -79,7 +79,6 @@ function Following(props: FollowingProps) {
                                 token: stores.authStore.token,
                               })
                               .then((res) => {
-                                console.log(res);
                                 if (res === 200) {
                                   if (stores.authStore.token) {
                                     stores.exploreStore.GetFollowing(

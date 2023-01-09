@@ -1,39 +1,28 @@
-import { Center, ActionIcon, Menu } from "@mantine/core";
+import { Center, ActionIcon, Menu, FileInput } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Edit2, Plus, Repeat, Trash2 } from "react-feather";
 import ProfilePhoto from "../../Atoms/ProfilePhoto";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 
 interface IEditProfileImage {
-  profileImage: any;
-  handleProfilePicChange: (a: any) => void;
-  handleProfilePicFileChange: (a: any) => void;
+  onImageChange: (image: File) => void;
 }
 
-const fileToDataUri = (file: any) =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      resolve(event.target?.result);
-    };
-    reader.readAsDataURL(file);
-  });
-
 function EditProfileImage(props: IEditProfileImage) {
-  const editProfilePicRef: any = useRef(null);
+  const fileInputRef: any = useRef(null);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [selectedImageViewUri, setSelectedImageViewUri] = useState<any>(null);
+  useEffect(() => {
+    if (window.FileReader && selectedImage) {
+      const fr = new FileReader();
+      fr.onloadend = function (e) {
+        if (e.target?.result) setSelectedImageViewUri(e.target.result);
+      };
+      fr.readAsDataURL(selectedImage);
+    }
+  }, [selectedImage]);
   const stores = useStores();
-
-  function handleProfilePicChangeClick() {
-    editProfilePicRef.current.click();
-  }
-
-  function handleProfilePicChange(e: any) {
-    fileToDataUri(e.target.files[0]).then((dataUri) => {
-      props.handleProfilePicChange(dataUri);
-      props.handleProfilePicFileChange(e.target.files[0]);
-    });
-  }
   return (
     <Observer>
       {() => {
@@ -74,7 +63,9 @@ function EditProfileImage(props: IEditProfileImage) {
                   <Menu.Dropdown>
                     <Menu.Item
                       icon={<Repeat size={16} />}
-                      onClick={handleProfilePicChangeClick}
+                      onClick={() => {
+                        if (fileInputRef) fileInputRef.current.click();
+                      }}
                     >
                       Change
                     </Menu.Item>
@@ -91,20 +82,22 @@ function EditProfileImage(props: IEditProfileImage) {
             </div>
             <ProfilePhoto
               profileImageUri={
-                props.profileImage ??
+                selectedImageViewUri ??
                 stores.profileStore.profile?.profile_image_uri
               }
               userName={profileStore.profile?.username}
               style={{ height: "200px", width: "200px" }}
             />
-            <input
-              type={"file"}
+            <FileInput
               accept="image/*"
-              ref={editProfilePicRef}
+              ref={fileInputRef}
               style={{
                 display: "none",
               }}
-              onChange={(e) => handleProfilePicChange(e)}
+              onChange={(e) => {
+                setSelectedImage(e);
+                if (e) props.onImageChange(e);
+              }}
             />
           </div>
         );

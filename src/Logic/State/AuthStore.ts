@@ -73,12 +73,12 @@ export class AuthStore {
   OAuthLoginUser = async (id_token: string) => {
     this.SetLoading(true);
     try {
-      const { user_data, token,is_exists } = await this.authRepo.oauthLogin(id_token);
-      console.log("response token",token);
-      console.log(user_data);
+      const { user_data, token, is_exists } = await this.authRepo.oauthLogin(
+        id_token
+      );
       this.SetUser(user_data);
       this.SetToken(token);
-      if(!is_exists){
+      if (!is_exists) {
         this.SetIsNewUser(true);
       }
     } catch (err) {

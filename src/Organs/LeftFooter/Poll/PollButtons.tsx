@@ -1,8 +1,10 @@
-import { Button, useMantineColorScheme, useMantineTheme } from "@mantine/core";
+import { useMantineTheme } from "@mantine/core";
 import React, { useMemo, useState } from "react";
 import styled from "styled-components";
 interface PollButtonsProps {
   buttons: { title: string; votes: number }[];
+  onPoll: (index: number) => void;
+  selected: boolean;
 }
 
 const MainBox = styled.button`
@@ -35,27 +37,42 @@ const PercentageBackground = styled.div`
 `;
 
 function PollButtons(props: PollButtonsProps) {
-  const [selected, setSelected] = useState<number | null>(null);
+  const [selected, setSelected] = useState<number | null>(
+    props.selected ? -1 : null
+  );
+  const [votes, setVotes] = useState<number[]>(
+    props.buttons.map((item) => item.votes)
+  );
   const { colors } = useMantineTheme();
   const totalVotes = useMemo(() => {
     let temp = 0;
-    props.buttons.forEach((item) => {
-      temp += item.votes;
+    votes.forEach((item) => {
+      temp += item;
     });
     return temp;
-  }, [props.buttons]);
+  }, [votes]);
   return (
     <>
       {props.buttons.map((item, index) => {
         return (
           <MainBox
+            key={"poll_button" + props.buttons[index].title}
             style={{
               border: "1px dashed " + colors.blue[5],
               color: colors.blue[8],
               cursor: selected == null ? "pointer" : "not-allowed",
             }}
             onClick={() => {
-              if (selected == null) setSelected(index);
+              if (selected == null) {
+                setVotes((p) =>
+                  p.map((pItem, pIndex) => {
+                    if (pIndex === index) return pItem + 1;
+                    else return pItem;
+                  })
+                );
+                setSelected(index);
+                props.onPoll(index);
+              }
             }}
           >
             <PercentageBackground
@@ -66,14 +83,14 @@ function PollButtons(props: PollButtonsProps) {
               }}
               theme={{
                 percentage:
-                  selected != null ? (item.votes / totalVotes) * 100 : 0,
+                  selected != null ? (votes[index] / totalVotes) * 100 : 0,
               }}
             />
             <p style={{ zIndex: "3", position: "absolute", left: "10px" }}>
               {item.title}
               {"  "}
               {selected !== null && selected != null
-                ? `(${Math.round((item.votes / totalVotes) * 100)+"%"})`
+                ? `(${Math.round((votes[index] / totalVotes) * 100) + "%"})`
                 : ""}
             </p>
           </MainBox>
