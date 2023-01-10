@@ -57,58 +57,18 @@ export class PostRepo {
     try {
       // first part
       let res = await this.rq.Get(
-        `${this.baseUrl}?limit=${limit}&offset=${offset}`,
+        `${this.baseUrl}/feed?limit=${limit}&offset=${offset}`,
         AuthHeaders(token)
       );
       let { body } = await CheckResponse(res, 200);
-
-      const firstPart = body.data as any[];
-
-      const postMap = new Map();
-      const post_ids = firstPart.map((item) => {
-        item.media = (item.media as any[]).map((m) => {
-          return this.baseUrlForProfilePic + m;
-        });
-        postMap.set(Number(item.post_id), item);
-        return Number(item.post_id);
-      });
-
-      // second part
-      res = await this.rq.Post(
-        `${this.baseUrl}/postMeta`,
-        {
-          post_ids,
-        },
-        AuthHeaders(token)
-      );
-      body = (await CheckResponse(res, 200)).body;
-      const secondPart = body.data as {
-        isLiked: any[];
-        isFavourite: any[];
-        likedUsers: any[];
-      };
-
-      // now combine both first and second part
-      secondPart.isLiked.forEach((item) => {
-        const postFromMap = postMap.get(item.postId);
-        postFromMap.is_liked = item.likeStatus;
-        postMap.set(item.postId, postFromMap);
-      });
-      secondPart.isFavourite.forEach((item) => {
-        const postFromMap = postMap.get(item.postId);
-        postFromMap.is_favorite = item.favouriteStatus;
-        postMap.set(item.postId, postFromMap);
-      });
-      secondPart.likedUsers.forEach((item) => {
-        const postFromMap = postMap.get(item.postId);
-        postFromMap.liked_by = item.username;
-        postMap.set(item.postId, postFromMap);
-      });
-
+      const rawPosts = body.data as MPost[];
       const finalPosts: MPost[] = [];
-      postMap.forEach((v) => {
+      rawPosts.forEach((v) => {
         finalPosts.push({
           ...v,
+          media: v.media
+            ? v.media?.map((item) => this.baseUrlForProfilePic + item)
+            : null,
           created_at: new Date(v.created_at),
           updated_at: new Date(v.updated_at),
           profile_pic_ref: v.profile_pic_ref

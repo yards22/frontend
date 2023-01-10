@@ -9,7 +9,7 @@ export default interface MPost {
   username: string;
 
   // profile pic of the person who created the post
-  profile_pic_ref?: string;
+  profile_pic_ref: string | null;
 
   // total number of likes
   likes: number;
