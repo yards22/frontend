@@ -18,6 +18,8 @@ import { PostStore } from "./Logic/State/PostStore";
 import { PostRepo } from "./Logic/Repository/PostRepo";
 import { MiscStore } from "./Logic/State/MiscStore";
 import { MiscRepo } from "./Logic/Repository/MiscRepo";
+import { NetworkStore } from "./Logic/State/NetworkStore";
+import { NetworkRepo } from "./Logic/Repository/NetworkRepo";
 
 interface ProvidedAppProps {
   children?: React.ReactNode;
@@ -44,6 +46,7 @@ function ProvidedApp(props: ProvidedAppProps) {
     new ExploreRepo(BASE_URL + "/network", rq)
   );
   const miscStore = new MiscStore(new MiscRepo(BASE_URL + "/misc", rq));
+  const networkStore = new NetworkStore(new NetworkRepo(BASE_URL, rq));
   return (
     <div
       style={
@@ -61,6 +64,7 @@ function ProvidedApp(props: ProvidedAppProps) {
           exploreStore,
           postStore,
           miscStore,
+          networkStore,
         }}
       >
         {
