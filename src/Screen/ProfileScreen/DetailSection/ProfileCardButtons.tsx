@@ -5,15 +5,27 @@ import { Button } from "@mantine/core";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import { Observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
+import { showNotification } from "@mantine/notifications";
 
 function ProfileCardButtons() {
-  const { profileStore, authStore } = useStores();
   const navigate = useNavigate();
+  const { profileStore, authStore, networkStore } = useStores();
+  networkStore.GetFollowersAndFollowing();
   const [logoutModal, setLogoutModal] = useState(false);
   return (
     <Observer>
       {() => {
         const { viewProfile, profile } = profileStore;
+        const { following } = networkStore;
+        let doesFollow = false;
+        if (viewProfile)
+          doesFollow = networkStore.IfFollows(viewProfile.user_id);
+
+        let buttonName = "Loading...";
+        if (viewProfile?.user_id === profile?.user_id)
+          buttonName = "Edit Profile";
+        else if (following) buttonName = doesFollow ? "Un-follow" : "Follow";
+
         return (
           <div
             style={{
@@ -29,12 +41,63 @@ function ProfileCardButtons() {
               variant="light"
               style={{ width: "100%", maxWidth: "300px" }}
               onClick={() => {
-                navigate("/profile/edit");
+                if (viewProfile?.user_id === profile?.user_id)
+                  navigate("/profile/edit");
+                else if (viewProfile) {
+                  if (!doesFollow)
+                    networkStore
+                      .Follow(
+                        viewProfile?.user_id,
+                        viewProfile.username,
+                        viewProfile.profile_image_uri
+                      )
+                      .then(() => {
+                        showNotification({
+                          message: (
+                            <p>
+                              Started following <b>{viewProfile.username}</b>
+                            </p>
+                          ),
+                          color: "green",
+                        });
+                      })
+                      .catch((err) => {
+                        showNotification({
+                          message: (
+                            <p>
+                              Could not follow <b>{viewProfile.username}</b>
+                            </p>
+                          ),
+                          color: "red",
+                        });
+                      });
+                  else
+                    networkStore
+                      .UnFollow(viewProfile?.user_id)
+                      .then(() => {
+                        showNotification({
+                          message: (
+                            <p>
+                              Un-followed <b>{viewProfile.username}</b>
+                            </p>
+                          ),
+                          color: "green",
+                        });
+                      })
+                      .catch((err) => {
+                        showNotification({
+                          message: (
+                            <p>
+                              Could not un-follow <b>{viewProfile.username}</b>
+                            </p>
+                          ),
+                          color: "red",
+                        });
+                      });
+                }
               }}
             >
-              {viewProfile?.user_id === profile?.user_id
-                ? "Edit Profile"
-                : "Follow"}
+              {buttonName}
             </Button>
 
             {viewProfile?.user_id === profile?.user_id && (
