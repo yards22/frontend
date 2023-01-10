@@ -32,7 +32,6 @@ function PollCarousal() {
           >
             <Carousel
               loop
-              dragFree
               withControls={false}
               withIndicators
               styles={{
