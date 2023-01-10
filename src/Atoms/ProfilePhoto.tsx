@@ -16,8 +16,11 @@ function ProfilePhoto(props: ProfilePhotoProps) {
     <Avatar
       size={"lg"}
       src={props.profileImageUri}
+      color="cyan"
       style={{ ...props.style, borderRadius: "100000px" }}
-    />
+    >
+      {props.userName?.substring(0, 2).toUpperCase()}
+    </Avatar>
   );
 }
 

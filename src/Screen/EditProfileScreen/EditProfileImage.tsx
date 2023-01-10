@@ -43,6 +43,9 @@ function EditProfileImage(props: IEditProfileImage) {
                   color={"blue"}
                   size={"lg"}
                   radius="lg"
+                  onClick={() => {
+                    if (fileInputRef) fileInputRef.current.click();
+                  }}
                 >
                   <Plus size={16} />
                 </ActionIcon>

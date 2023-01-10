@@ -19,7 +19,10 @@ function LinkedUserName(props: LinkedUserNameProps) {
   const mantineTheme = useMantineTheme();
   if (props.type === "hard")
     return (
-      <Link to={""} style={{ textDecoration: "none" }}>
+      <Link
+        to={"/profile?username=" + props.username}
+        style={{ textDecoration: "none" }}
+      >
         <SLinkedUserNameHard
           {...props}
           theme={{ linkHover: mantineTheme.colors["blue"][7] }}

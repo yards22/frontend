@@ -4,6 +4,7 @@ import { PostRepo } from "../Repository/PostRepo";
 
 export class PostStore {
   @observable myPosts: MPost[] = [];
+  @observable feedPosts: MPost[] | null = [];
   @observable isLoading: boolean = false;
   @observable token: string | null = null;
   postRepo: PostRepo;
@@ -32,6 +33,15 @@ export class PostStore {
       throw err;
     } finally {
       this.SetLoading(false);
+    }
+  };
+
+  @action
+  GetFeedPosts = async () => {
+    try {
+      this.feedPosts = await this.postRepo.getFeedPost(this.token || "", 10, 0);
+    } catch (err) {
+      throw err;
     }
   };
 }
