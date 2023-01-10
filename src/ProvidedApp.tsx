@@ -46,7 +46,9 @@ function ProvidedApp(props: ProvidedAppProps) {
     new ExploreRepo(BASE_URL + "/network", rq)
   );
   const miscStore = new MiscStore(new MiscRepo(BASE_URL + "/misc", rq));
-  const networkStore = new NetworkStore(new NetworkRepo(BASE_URL, rq));
+  const networkStore = new NetworkStore(
+    new NetworkRepo(BASE_URL, BASE_URL_FOR_IMAGES, rq)
+  );
   return (
     <div
       style={
@@ -81,7 +83,10 @@ function ProvidedApp(props: ProvidedAppProps) {
                       colorScheme: appStore.theme,
                     }}
                   >
-                    <NotificationsProvider position="top-right" zIndex={2077}>
+                    <NotificationsProvider
+                      position={appStore.isPhone ? "top-right" : "bottom-right"}
+                      zIndex={2077}
+                    >
                       {props.children}
                     </NotificationsProvider>
                   </MantineProvider>
