@@ -35,8 +35,12 @@ export class AuthRepo {
         token: body.data.token as string,
       };
     } catch (err: any) {
-      err.message = "Email/Password combination mismatch.";
-      throw err;
+      throw ThrowFor(err, {
+        405: "The account is associated with Login With Google.",
+        404: "No such user account exists.",
+        401: "Email/Password combination mismatch.",
+        400: "Email/Password missing.",
+      });
     }
   }
 
