@@ -1,10 +1,4 @@
-import {
-  ActionIcon,
-  Avatar,
-  Card,
-  Title,
-  useMantineTheme,
-} from "@mantine/core";
+import { ActionIcon, Card, Title, useMantineTheme } from "@mantine/core";
 import MPost from "../../../Logic/Model/MPost";
 import { Heart, MessageCircle, Star } from "react-feather";
 import Liked from "./Liked";
@@ -13,7 +7,9 @@ import { useState } from "react";
 import CommentThread from "./CommentThread";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import AddComment from "./AddComment";
-
+import ProfileAvatar from "../../../Atoms/ProfileAvatar";
+import sAgo from "s-ago";
+import NormalPostMedia from "./NormalPostMedia";
 interface NormalPostProps {
   data: MPost;
 }
@@ -44,9 +40,10 @@ function NormalPost(props: NormalPostProps) {
           alignItems: "center",
         }}
       >
-        <Avatar size="md" variant="gradient" radius={"xl"}>
-          HS
-        </Avatar>
+        <ProfileAvatar
+          imageUrl={props.data.profile_pic_ref}
+          initials={props.data.username.substring(0, 2).toUpperCase()}
+        />
         <div
           style={{
             display: "flex",
@@ -78,12 +75,13 @@ function NormalPost(props: NormalPostProps) {
               marginTop: "0",
             }}
           >
-            4h
+            {sAgo(props.data.created_at)}
           </Title>
         </div>
       </div>
       <div style={{ marginTop: "10px" }}>
         {props.data.content}
+        {props.data.media && <NormalPostMedia media={props.data.media} />}
         <div
           style={{
             marginTop: "10px",
