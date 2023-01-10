@@ -35,8 +35,9 @@ export class ProfileRepo {
         cric_index: body.data.cric_index,
         email_id: body.data.email_id,
         interests: interests,
-        profile_image_uri:
-          this.baseUrlForProfilePic + body.data.profile_image_uri,
+        profile_image_uri: body.data.profile_image_uri
+          ? this.baseUrlForProfilePic + body.data.profile_image_uri
+          : null,
         user_id: body.data.user_id,
         username: body.data.username,
         followers: body.data.followers,
