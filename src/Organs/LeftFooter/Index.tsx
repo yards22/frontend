@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useStores } from "../../Logic/Providers/StoresProviders";
-import EventsIndex from "./Events/Index";
 import LeaderBoardIndex from "./LearderBoard/Index";
 import PollIndex from "./Poll/Index";
 
@@ -15,11 +13,10 @@ const SLeftFooter = styled.div`
 `;
 
 function LeftFooterIndex() {
-  const store = useStores();
   return (
     <SLeftFooter>
-      <LeaderBoardIndex />
       <PollIndex />
+      <LeaderBoardIndex />
     </SLeftFooter>
   );
 }

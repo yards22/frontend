@@ -1,5 +1,16 @@
-import { Card, Button, Textarea, useMantineTheme, Title } from "@mantine/core";
+import {
+  Card,
+  Button,
+  Textarea,
+  useMantineTheme,
+  Title,
+  FileInput,
+} from "@mantine/core";
+import { showNotification } from "@mantine/notifications";
+import { useState } from "react";
+import { Image } from "react-feather";
 import styled from "styled-components";
+import { useStores } from "../../../Logic/Providers/StoresProviders";
 
 const SFeedback = styled.div`
   width: 100%;
@@ -14,6 +25,11 @@ const SFeedback = styled.div`
 
 function FeedbackIndex() {
   const mantineTheme = useMantineTheme();
+  const [feedback, setFeedback] = useState<{ content: string; image?: File }>({
+    content: "",
+    image: undefined,
+  });
+  const store = useStores();
 
   return (
     <SFeedback>
@@ -38,9 +54,50 @@ function FeedbackIndex() {
             fontSize: "25px",
           }}
           minRows={6}
+          value={feedback.content}
+          onChange={(e) => {
+            setFeedback((p) => {
+              return { ...p, content: e.target.value };
+            });
+          }}
           placeholder="Every suggestion helps us deliver better."
         />
-        <Button variant="light" style={{ width: "100%" }}>
+        <FileInput
+          style={{ margin: "10px 0", width: "100%" }}
+          value={feedback.image}
+          accept="image/png,image/jpeg"
+          placeholder="Attach some screenshot, if necessary."
+          onChange={(file) => {
+            if (file)
+              setFeedback((p) => {
+                return { ...p, image: file };
+              });
+          }}
+          icon={<Image size={14} />}
+        />
+        <Button
+          variant="light"
+          style={{ width: "100%" }}
+          onClick={() => {
+            store.miscStore
+              .CreateFeedback(feedback.content, feedback.image)
+              .then(() => {
+                showNotification({
+                  title: "Feedback Submitted.",
+                  message: "Thank you for your valuable feedback.",
+                  color: "green",
+                });
+                setFeedback({ content: "", image: undefined });
+              })
+              .catch((err) => {
+                showNotification({
+                  title: "Feedback Not Submitted.",
+                  message: "Something went wrong, please try again.",
+                  color: "red",
+                });
+              });
+          }}
+        >
           Send Feedback
         </Button>
       </Card>

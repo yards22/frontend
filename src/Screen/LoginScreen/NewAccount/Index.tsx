@@ -1,7 +1,7 @@
 import { TextInput, Button, NumberInput, Alert } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useState } from "react";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IconEyeOff, IconEye } from "../../../Atoms/Icons";
 import IconWrapper from "../../../Atoms/IconWrapper";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
@@ -36,13 +36,8 @@ function NewAccount(props: NewAccountProps) {
 
   async function handleRouteToProfile() {
     const profile = await store.profileStore.GetProfile(null, null);
-    store.profileStore.SetViewProfile(profile)
-    navigator({
-      pathname: "/profile",
-      search: `${createSearchParams({
-        user: `${profile?.username}`,
-      })}`,
-    });
+    store.profileStore.SetViewProfile(profile);
+    navigator("/profile");
     store.appStore.setNavigationState(4);
   }
 

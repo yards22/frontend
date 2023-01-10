@@ -1,7 +1,7 @@
 import { ActionIcon, useMantineTheme } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
-import { Search, Home, User, Bell, PlusSquare, Globe } from "react-feather";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import { Home, User, Bell, PlusSquare, Globe } from "react-feather";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 
@@ -92,12 +92,7 @@ function BottomBar() {
                   : "gray"
               }
               onClick={() => {
-                navigate({
-                  pathname: "/profile",
-                  search: `${createSearchParams({
-                    user: `${stores.profileStore.profile?.username}`,
-                  })}`,
-                });
+                navigate("/profile");
                 appStore.setNavigationState(4);
               }}
             >

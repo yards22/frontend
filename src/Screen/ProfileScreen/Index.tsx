@@ -9,7 +9,7 @@ import PostsSectionIndex from "./PostsSection/Index";
 function ProfileIndex() {
   const store = useStores();
   const search = useLocation().search;
-  const queryUsername = new URLSearchParams(search).get("user");
+  const queryUsername = new URLSearchParams(search).get("username");
   const queryUserId = new URLSearchParams(search).get("user_id");
 
   useEffect(() => {
@@ -18,15 +18,21 @@ function ProfileIndex() {
     let doFetch = false;
     let ownView = false;
 
-    if (store.profileStore.profile && store.profileStore.profile.username === queryUsername) {
+    if (
+      store.profileStore.profile &&
+      store.profileStore.profile.username === queryUsername
+    ) {
       // requesting for own profile
       ownView = true;
     }
 
-    if (!store.profileStore.profile || store.profileStore.profile.username !== queryUsername ) {
-      doFetch = true
-    };
-    
+    if (
+      !store.profileStore.profile ||
+      store.profileStore.profile.username !== queryUsername
+    ) {
+      doFetch = true;
+    }
+
     if (doFetch)
       store.profileStore
         .GetProfile(Number(queryUserId), queryUsername)
@@ -38,13 +44,12 @@ function ProfileIndex() {
         });
 
     if (ownView) store.profileStore.SetViewProfile(store.profileStore.profile);
-  }, []);
+  }, [queryUsername, queryUserId]);
 
   return (
     <Observer>
       {() => {
         const { profileStore } = store;
-        // console.log(profileStore);
         return profileStore.viewProfile ? (
           <>
             <DetailSectionIndex />

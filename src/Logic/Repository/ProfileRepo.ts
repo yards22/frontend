@@ -15,27 +15,28 @@ export class ProfileRepo {
 
   async getProfile(
     token: string,
-    user_id?: Number| null,
+    user_id?: Number | null,
     username?: string | null
   ): Promise<MProfile> {
     try {
       let url = `${this.baseUrl}`;
       if (user_id) url += `?user_id=${user_id}`;
-      else if (username) url += `?user=${username}`;
+      else if (username) url += `?username=${username}`;
       const res = await this.rq.Get(url, AuthHeaders(token));
       const { body } = await CheckResponse(res, 200);
       let interests = [];
       if (body.data.interests) {
         interests = body.data.interests.split(",");
-        // interests = JSON.parse(body.data.interests) as string[];
       }
+
       return {
         bio: body.data.bio,
         cric_index: body.data.cric_index,
         email_id: body.data.email_id,
         interests: interests,
-        profile_image_uri:
-          this.baseUrlForProfilePic + body.data.profile_image_uri,
+        profile_image_uri: body.data.profile_image_uri
+          ? this.baseUrlForProfilePic + body.data.profile_image_uri
+          : null,
         user_id: body.data.user_id,
         username: body.data.username,
         followers: body.data.followers,
@@ -61,32 +62,29 @@ export class ProfileRepo {
     }
   }
 
-  async updateUserDetails(props: any): Promise<MProfile> {
+  async updateUserDetails(
+    token: string,
+    username?: string,
+    bio?: string,
+    intr?: string[],
+    image?: File
+  ): Promise<MProfile> {
     try {
       const data = new FormData();
-
-      data.append("username", props.data.username);
-
-      if (props.data.bio) {
-        data.append("bio", props.data.bio);
-      }
-      if (props.data.interests) {
-        data.append("interests", props.data.interests);
-      }
-      if (props.data.profile_image_uri) {
-        data.append("image", props.data.image);
-      }
+      if (username) data.append("username", username);
+      if (bio) data.append("bio", bio);
+      if (intr) data.append("interests", intr.toString());
+      if (image) data.append("image", image);
 
       const res = await fetch(`${this.baseUrl}/`, {
         method: "PUT",
         body: data,
-        headers: { ...AuthHeaders(props.token) },
+        headers: { ...AuthHeaders(token) },
       });
       const { body } = await CheckResponse(res, 200);
       let interests = [];
       if (body.data.interests) {
         interests = body.data.interests.split(",");
-        // interests = JSON.parse(body.data.interests) as string[];
       }
 
       return {

@@ -4,7 +4,7 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { Observer } from "mobx-react-lite";
 import { useState } from "react";
 import { Button } from "@mantine/core";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const CLIENT_ID =
   "442538559529-bm10qpqtcg3k06rrgnc4i0pqnc3fee4s.apps.googleusercontent.com";
 
@@ -15,15 +15,10 @@ function SignInWithGoogle() {
   const navigator = useNavigate();
 
   async function handleRouteToProfile() {
-    const profile : MProfile  = await store.profileStore.GetProfile(null, null);
+    const profile: MProfile = await store.profileStore.GetProfile(null, null);
     store.profileStore.SetProfile(profile);
     if (store.authStore.isNewUser) {
-      navigator({
-        pathname: "/profile",
-        search: `${createSearchParams({
-          user: `${store.profileStore.profile?.username}`,
-        })}`,
-      });
+      navigator("/profile");
       store.appStore.setNavigationState(4);
     } else {
       navigator("/feed");

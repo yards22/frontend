@@ -35,8 +35,12 @@ export class AuthRepo {
         token: body.data.token as string,
       };
     } catch (err: any) {
-      err.message = "Email/Password combination mismatch.";
-      throw err;
+      throw ThrowFor(err, {
+        405: "The account is associated with Login With Google.",
+        404: "No such user account exists.",
+        401: "Email/Password combination mismatch.",
+        400: "Email/Password missing.",
+      });
     }
   }
 
@@ -45,12 +49,11 @@ export class AuthRepo {
       const res = await this.rq.Post(`${this.baseUrl}/oauth`, {
         id_token,
       });
-      console.log('response',res);
       const { body } = await CheckResponse(res, 200);
       return {
         user_data: body.data.user_data as MAuth,
         token: body.data.token as string,
-        is_exists:body.data.is_exists as boolean
+        is_exists: body.data.is_exists as boolean,
       };
     } catch (err: any) {
       err.message = "Email/Password combination mismatch.";
@@ -148,7 +151,6 @@ export class AuthRepo {
         {},
         { Authorization: `Bearer ${token}` }
       );
-      console.log("response",res);
       await CheckResponse(res, 200);
       return;
     } catch (err) {

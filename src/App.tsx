@@ -52,18 +52,17 @@ function App() {
       {() => {
         const { appStore, authStore } = store;
         return (
-          <>
+          <Router>
             {authStore.user && appStore.isDesktop && <LeftFooterIndex />}
             <SApp
               style={{
                 marginBottom: `${appStore.isPhone ? "50px" : "0px"}`,
               }}
             >
-              <Router>
+              <>
                 {authStore.user && appStore.isPhone && <BottomBar />}
                 {authStore.user && <TopBar />}
 
-                
                 <Routes>
                   <Route path="/" element={<LoginIndex />} />
                   <Route element={<ProtectedRoutes />}>
@@ -75,17 +74,23 @@ function App() {
                       element={<NotificationIndex />}
                     />
                     <Route path="feed" element={<FeedIndex />} />
-                    <Route path="feedback" element={<FeedBackScreenIndex/>} />
-                    <Route path="polls" element={<PollsScreenIndex/>} />
-                    <Route path="comingSoon" element={<ComingSoonScreenIndex/>} />
-                    <Route path="leaderBoard" element={<LeaderBoardScreenIndex/>} />
+                    <Route path="feedback" element={<FeedBackScreenIndex />} />
+                    <Route path="polls" element={<PollsScreenIndex />} />
+                    <Route
+                      path="comingSoon"
+                      element={<ComingSoonScreenIndex />}
+                    />
+                    <Route
+                      path="leaderboard"
+                      element={<LeaderBoardScreenIndex />}
+                    />
                   </Route>
                   <Route>404</Route>
                 </Routes>
-              </Router>
+              </>
             </SApp>
             {authStore.user && !appStore.isPhone && <RightFooterIndex />}
-          </>
+          </Router>
         );
       }}
     </Observer>
