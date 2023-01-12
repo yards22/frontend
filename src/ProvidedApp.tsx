@@ -26,7 +26,7 @@ interface ProvidedAppProps {
 }
 
 const BASE_URL =
-  "https://83libq0p22.execute-api.ap-south-1.amazonaws.com/stage";
+  "https://83libq0p22.execute-api.ap-south-1.amazonaws.com/stage/node";
 const BASE_URL_FOR_IMAGES =
   "https://22yards-image-bucket.s3.ap-south-1.amazonaws.com/";
 
