@@ -35,15 +35,29 @@ export class PostStore {
   };
 
   @action
-  GetPosts = async (type: "feed" | "mine" | "trending" | "fav") => {
+  GetPosts = async (
+    type: "feed" | "mine" | "trending" | "fav",
+    userId?: Number,
+    sort: "asc" | "desc" = "desc"
+  ) => {
     this.viewPosts = null;
     try {
-      this.viewPosts = await this.postRepo.getFeedPost(
+      const posts = await this.postRepo.getFeedPost(
         this.token || "",
         type,
         10,
-        0
+        0,
+        userId
       );
+
+      //sorting post
+      posts.sort((a, b) => {
+        if (sort === "desc")
+          return b.created_at.getTime() - a.created_at.getTime();
+        return 1;
+      });
+
+      this.viewPosts = posts;
     } catch (err) {
       throw err;
     }
