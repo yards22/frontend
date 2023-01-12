@@ -15,17 +15,17 @@ function FeedIndex() {
   if (!stores.profileStore.profile) stores.profileStore.GetMyProfile();
   useEffect(() => {
     stores.appStore.setNavigationState(0);
-    stores.postStore.GetFeedPosts();
+    stores.postStore.GetPosts("feed");
   }, []);
   return (
     <Observer>
       {() => {
         const { postStore } = stores;
-        if (!postStore.feedPosts) return <p>Loading</p>;
+        if (!postStore.viewPosts) return <p>Loading</p>;
         return (
           <SFeedIndex theme={{ isPhone: stores.appStore.isPhone }}>
             <NewPost />
-            {postStore.feedPosts.map((item, index) => {
+            {postStore.viewPosts.map((item, index) => {
               return <NormalPost data={item} key={`normal_post_${index}`} />;
             })}
           </SFeedIndex>

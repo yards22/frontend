@@ -51,16 +51,19 @@ export class PostRepo {
 
   async getFeedPost(
     token: string,
+    type: string,
     limit: number,
-    offset: number
+    offset: number,
+    user_id?: Number
   ): Promise<MPost[]> {
     try {
-      // first part
-      let res = await this.rq.Get(
-        `${this.baseUrl}/feed?limit=${limit}&offset=${offset}`,
-        AuthHeaders(token)
-      );
+      let url = `${this.baseUrl}/${type}?limit=${limit}&offset=${offset}`;
+      if (user_id) url += `&user_id=${user_id}`;
+      console.log(url);
+
+      let res = await this.rq.Get(url, AuthHeaders(token));
       let { body } = await CheckResponse(res, 200);
+
       const rawPosts = body.data as MPost[];
       const finalPosts: MPost[] = [];
       rawPosts.forEach((v) => {
