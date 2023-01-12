@@ -81,7 +81,9 @@ function NormalPost(props: NormalPostProps) {
       </div>
       <div style={{ marginTop: "10px" }}>
         {props.data.content}
-        {props.data.media && <NormalPostMedia media={props.data.media} />}
+        {props.data.media && props.data.media.length > 0 && (
+          <NormalPostMedia media={props.data.media} />
+        )}
         <div
           style={{
             marginTop: "10px",
