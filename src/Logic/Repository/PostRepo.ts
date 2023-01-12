@@ -51,13 +51,14 @@ export class PostRepo {
 
   async getFeedPost(
     token: string,
+    type: string,
     limit: number,
     offset: number
   ): Promise<MPost[]> {
     try {
       // first part
       let res = await this.rq.Get(
-        `${this.baseUrl}/feed?limit=${limit}&offset=${offset}`,
+        `${this.baseUrl}/${type}?limit=${limit}&offset=${offset}`,
         AuthHeaders(token)
       );
       let { body } = await CheckResponse(res, 200);

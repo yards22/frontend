@@ -3,8 +3,7 @@ import MPost from "../Model/MPost";
 import { PostRepo } from "../Repository/PostRepo";
 
 export class PostStore {
-  @observable myPosts: MPost[] = [];
-  @observable feedPosts: MPost[] | null = [];
+  @observable viewPosts: MPost[] | null = [];
   @observable isLoading: boolean = false;
   @observable token: string | null = null;
   postRepo: PostRepo;
@@ -24,11 +23,10 @@ export class PostStore {
   CreatePost = async (props: any) => {
     this.SetLoading(true);
     try {
-      const post = await this.postRepo.createPost({
+      await this.postRepo.createPost({
         data: props,
         token: this.token,
       });
-      this.myPosts.push(post);
     } catch (err) {
       throw err;
     } finally {
@@ -37,9 +35,15 @@ export class PostStore {
   };
 
   @action
-  GetFeedPosts = async () => {
+  GetPosts = async (type: "feed" | "mine" | "trending" | "fav") => {
+    this.viewPosts = null;
     try {
-      this.feedPosts = await this.postRepo.getFeedPost(this.token || "", 10, 0);
+      this.viewPosts = await this.postRepo.getFeedPost(
+        this.token || "",
+        type,
+        10,
+        0
+      );
     } catch (err) {
       throw err;
     }
