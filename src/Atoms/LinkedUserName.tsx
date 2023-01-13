@@ -5,6 +5,10 @@ const SLinkedUserNameHard = styled(Title)`
   cursor: pointer;
   color: #282828;
   text-decoration: none;
+  width: 180px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   :hover {
     color: ${(p) => p.theme.linkHover};
   }
@@ -21,7 +25,9 @@ function LinkedUserName(props: LinkedUserNameProps) {
     return (
       <Link
         to={"/profile?username=" + props.username}
-        style={{ textDecoration: "none" }}
+        style={{
+          textDecoration: "none",
+        }}
       >
         <SLinkedUserNameHard
           {...props}
@@ -35,10 +41,19 @@ function LinkedUserName(props: LinkedUserNameProps) {
   return (
     <Link
       to={"/profile?username=" + props.username}
-      style={{ textDecoration: "none" }}
+      style={{
+        textDecoration: "none",
+      }}
     >
       <Text
-        style={{ display: "inline-block", cursor: "pointer" }}
+        style={{
+          display: "inline-block",
+          cursor: "pointer",
+          width: "180px",
+          textOverflow: "ellipsis",
+          overflow: "hidden",
+          whiteSpace: "nowrap",
+        }}
         {...(props as any)}
         variant="link"
       >
