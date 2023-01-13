@@ -1,13 +1,8 @@
-import {
-  ActionIcon,
-  Button,
-  FileButton,
-  Textarea,
-  useMantineTheme,
-} from "@mantine/core";
+import { ActionIcon, Button, FileButton, Textarea } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { Observer } from "mobx-react-lite";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { IconPlus, IconX } from "../../../Atoms/Icons";
 import IconWrapper from "../../../Atoms/IconWrapper";
@@ -18,22 +13,40 @@ import NewPostImageView from "./NewPostImageView";
 const MAX_FILES_ALLOWED = 4;
 
 const SNewPost = styled.div`
-  border-bottom: 1px
-    ${(p) => (p.theme.isFocus ? "dashed " : "solid ") + p.theme.borderColor};
+  border: 1.5px solid #229bff;
   padding: 12px;
+  border-radius: 8px;
   display: flex;
-  transition: all 0.5s;
-  min-height: ${(p) => (p.theme.isFocus ? "160px" : "0px")};
+  transition: all 0.5s ease-in-out;
+  background: #f8fcff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   position: relative;
+  :focus-within {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    margin: 10px 5px;
+    min-height: 200px;
+  }
+
+  @media (max-width: 700px) {
+    border-radius: 0;
+
+    :focus-within {
+      margin: 10px 0;
+    }
+  }
 `;
 
 function NewPost() {
   const { postStore, profileStore } = useStores();
-  const mantineTheme = useMantineTheme();
   const [files, setFiles] = useState<File[]>([]);
   const [filePaths, setFilePaths] = useState<(string | ArrayBuffer)[]>([]);
-  const [isFocus, setIsFocus] = useState(false);
   const [content, setContent] = useState("");
+  const location = useLocation();
+  const inputRef = useRef(null);
+  if (location.search.includes("inputFocus=true") && inputRef.current) {
+    (inputRef.current as any).focus();
+  }
 
   const handleImageSelect = (incomingFiles: File[]) => {
     let finalFiles = [...files, ...incomingFiles];
@@ -59,14 +72,7 @@ function NewPost() {
       {() => {
         const { profile } = profileStore;
         return (
-          <SNewPost
-            theme={{
-              isFocus,
-              borderColor: isFocus
-                ? mantineTheme.colors[mantineTheme.primaryColor][3]
-                : mantineTheme.colors["gray"][3],
-            }}
-          >
+          <SNewPost>
             <ProfileAvatar imageUrl={profile?.profile_image_uri} />
             <div
               style={{
@@ -77,11 +83,10 @@ function NewPost() {
               }}
             >
               <Textarea
+                ref={inputRef}
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 variant="unstyled"
-                onFocus={() => setIsFocus(true)}
-                onBlur={() => setIsFocus(false)}
                 autosize
                 minRows={2}
                 placeholder="Have Thoughts? Bowl It Out 🏏"
@@ -193,7 +198,6 @@ function NewPost() {
                         // cleaning
                         setFiles([]);
                         setFilePaths([]);
-                        setIsFocus(false);
                         setContent("");
                       })
                       .catch((err) => {
