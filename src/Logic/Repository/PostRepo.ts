@@ -29,7 +29,7 @@ export class PostRepo {
         });
       }
 
-      const res = await fetch(`${this.baseUrl}`, {
+      const res = await fetch(`${this.baseUrl}/post`, {
         method: "POST",
         body: data,
         headers: { ...AuthHeaders(props.token) },
@@ -57,9 +57,8 @@ export class PostRepo {
     user_id?: Number
   ): Promise<MPost[]> {
     try {
-      let url = `${this.baseUrl}/${type}?limit=${limit}&offset=${offset}`;
+      let url = `${this.baseUrl}/post/${type}?limit=${limit}&offset=${offset}`;
       if (user_id) url += `&user_id=${user_id}`;
-      console.log(url);
 
       let res = await this.rq.Get(url, AuthHeaders(token));
       let { body } = await CheckResponse(res, 200);
@@ -80,6 +79,30 @@ export class PostRepo {
         });
       });
       return finalPosts;
+    } catch (err: any) {
+      throw err;
+    }
+  }
+
+  async likePost(token: string, post_id: bigint, is_like: boolean) {
+    try {
+      await this.rq.Put(
+        `${this.baseUrl}/like`,
+        { post_id, is_like },
+        AuthHeaders(token)
+      );
+    } catch (err: any) {
+      throw err;
+    }
+  }
+
+  async favPost(token: string, post_id: bigint, is_fav: boolean) {
+    try {
+      await this.rq.Put(
+        `${this.baseUrl}/post/favourite`,
+        { post_id, is_fav },
+        AuthHeaders(token)
+      );
     } catch (err: any) {
       throw err;
     }
