@@ -18,22 +18,19 @@ const SNewPost = styled.div`
   border-radius: 8px;
   display: flex;
   transition: all 0.5s ease-in-out;
-  background: #f8fcff;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  box-shadow: rgba(98, 161, 255, 0.2) 0px 1px 4px;
+  background: #fafdff;
+  min-height: 0;
   position: relative;
   :focus-within {
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-    margin: 10px 5px;
+    box-shadow: rgba(98, 161, 255, 0.25) 0px 13px 27px -5px,
+      rgba(98, 161, 255, 0.3) 0px 8px 16px -8px;
+    margin: 10px 0px;
     min-height: 200px;
   }
 
   @media (max-width: 700px) {
     border-radius: 0;
-
-    :focus-within {
-      margin: 10px 0;
-    }
   }
 `;
 
