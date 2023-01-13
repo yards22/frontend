@@ -7,7 +7,7 @@ import NormalPost from "./Post/NormalPost";
 const SFeedIndex = styled.section`
   width: 100%;
   max-width: 600px;
-  padding: ${(p) => (p.theme.isPhone ? "0" : "8px")};
+  padding: 8px;
 `;
 
 function FeedIndex() {
