@@ -46,7 +46,7 @@ function Liked(props: LikedProps) {
         onClose={() => setShowModal(false)}
         title="Likes"
       >
-        <LikeList />
+        <LikeList likedBy={props.data} />
       </Modal>
       <Text color="dimmed" weight={"500"} size="sm">
         <LinkedUserName
