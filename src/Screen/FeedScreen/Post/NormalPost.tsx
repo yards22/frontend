@@ -100,7 +100,18 @@ function NormalPost(props: NormalPostProps) {
               alignItems: "center",
             }}
           >
-            <ActionIcon color={"red"} variant="subtle" radius={"xl"} size="xl">
+            <ActionIcon
+              color={"red"}
+              variant="subtle"
+              radius={"xl"}
+              size="xl"
+              onClick={() => {
+                stores.postStore.ToggleLike(
+                  props.data.post_id,
+                  stores.profileStore.profile?.username || ""
+                );
+              }}
+            >
               <Heart
                 color={mantineTheme.colors["red"][6]}
                 size={"20"}
@@ -112,7 +123,15 @@ function NormalPost(props: NormalPostProps) {
                 strokeWidth={"2"}
               />
             </ActionIcon>
-            <ActionIcon color={"red"} variant="subtle" radius={"xl"} size="xl">
+            <ActionIcon
+              color={"red"}
+              variant="subtle"
+              radius={"xl"}
+              size="xl"
+              onClick={() => {
+                stores.postStore.ToggleFav(props.data.post_id);
+              }}
+            >
               <Star
                 color={mantineTheme.colors["yellow"][6]}
                 size={"20"}
