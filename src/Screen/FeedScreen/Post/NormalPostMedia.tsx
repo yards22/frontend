@@ -7,12 +7,17 @@ interface NormalPostMediaProps {
 
 const SFeedPostImage = styled.img`
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  max-height: 400px;
 `;
 function NormalPostMedia(props: NormalPostMediaProps) {
   const stores = useStores();
   return (
-    <div style={{ margin: "10px 0", background: "black" }}>
+    <div
+      style={{
+        margin: "10px 0",
+      }}
+    >
       <Carousel
         withControls={stores.appStore.isDesktop}
         withIndicators
@@ -34,7 +39,13 @@ function NormalPostMedia(props: NormalPostMediaProps) {
         {props.media.map((each, index) => {
           return (
             <Carousel.Slide key={each}>
-              <div style={{ display: "flex", justifyContent: "center" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 <SFeedPostImage src={each} />
               </div>
             </Carousel.Slide>
