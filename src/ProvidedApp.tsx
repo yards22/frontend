@@ -40,7 +40,7 @@ function ProvidedApp(props: ProvidedAppProps) {
     new NotificationRepo(BASE_URL + "/notification", rq)
   );
   const postStore = new PostStore(
-    new PostRepo(BASE_URL + "/post", BASE_URL_FOR_IMAGES, rq)
+    new PostRepo(BASE_URL, BASE_URL_FOR_IMAGES, rq)
   );
   const exploreStore = new ExploreStore(
     new ExploreRepo(BASE_URL + "/network", rq)
