@@ -69,6 +69,9 @@ function BottomBar() {
                   ? mantineTheme.colors[mantineTheme.primaryColor][9]
                   : "gray"
               }
+              onClick={() => {
+                navigate("/feed?inputFocus=true");
+              }}
             >
               <PlusSquare size={"20"} />
             </ActionIcon>

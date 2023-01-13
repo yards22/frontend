@@ -29,7 +29,11 @@ function EditPageOne() {
   const [newProfileImage, setNewProfileImage] = useState<any>(null);
 
   async function handleUsernameBlur() {
-    if (username === "") setUserNameError("Username cannot be empty.");
+    const regex = new RegExp("^[A-Za-z][A-Za-z0-9_]{7,29}$");
+    if (!regex.test(username))
+      setUserNameError(
+        "Username cannot be empty, must be 6 to 18 characters long, cannot have spaces or any special characters."
+      );
     else if (
       username !== stores.profileStore.profile?.username &&
       stores.authStore.token
@@ -72,7 +76,7 @@ function EditPageOne() {
                 value={username}
                 label="Username"
                 onChange={(e: any) => {
-                  setUserName(e.target.value);
+                  setUserName(e.target.value.trim());
                 }}
               />
               <Text color={"red"} mt={3} size="xs">
