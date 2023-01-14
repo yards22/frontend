@@ -78,4 +78,23 @@ export class NetworkRepo {
       throw err;
     }
   }
+
+  async getRecommendation(token: string): Promise<MConnection[]> {
+    try {
+      const res = await this.rq.Get(
+        `${this.baseUrl}/network`,
+        AuthHeaders(token)
+      );
+      const { body } = await CheckResponse(res, 200);
+
+      return (body.data as MConnection[]).map((item) => {
+        return {
+          ...item,
+          profile_pic_uri: this.baseUrlForProfilePic + item.profile_pic_uri,
+        };
+      });
+    } catch (err: any) {
+      throw err;
+    }
+  }
 }
