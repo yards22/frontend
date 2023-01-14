@@ -5,6 +5,7 @@ import { NetworkRepo } from "../Repository/NetworkRepo";
 export class NetworkStore {
   @observable followers: MConnection[] | null = null;
   @observable following: MConnection[] | null = null;
+  @observable recommendation: MConnection[] | null = null;
   networkRepo: NetworkRepo;
   token: string | null;
 
@@ -18,11 +19,17 @@ export class NetworkStore {
   Follow = async (
     user_id: number,
     username: string,
-    profile_pic_uri: string | null
+    cric_index: number,
+    profile_image_uri: string | null
   ) => {
     try {
       await this.networkRepo.follow(this.token || "", user_id);
-      this.following?.push({ user_id, username, profile_pic_uri });
+      this.following?.push({
+        user_id,
+        username,
+        cric_index,
+        profile_image_uri,
+      });
     } catch (err) {
       throw err;
     }
@@ -34,6 +41,17 @@ export class NetworkStore {
       await this.networkRepo.removeFollow(this.token || "", user_id);
       this.following =
         this.following?.filter((v) => user_id !== v.user_id) || [];
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  @action
+  GetRecommendation = async () => {
+    try {
+      this.recommendation = await this.networkRepo.getRecommendation(
+        this.token || ""
+      );
     } catch (err) {
       throw err;
     }

@@ -52,7 +52,9 @@ export class NetworkRepo {
       return (body.data as MConnection[]).map((item) => {
         return {
           ...item,
-          profile_pic_uri: this.baseUrlForProfilePic + item.profile_pic_uri,
+          profile_image_uri: item.profile_image_uri
+            ? this.baseUrlForProfilePic + item.profile_image_uri
+            : null,
         };
       });
     } catch (err: any) {
@@ -71,7 +73,30 @@ export class NetworkRepo {
       return (body.data as MConnection[]).map((item) => {
         return {
           ...item,
-          profile_pic_uri: this.baseUrlForProfilePic + item.profile_pic_uri,
+          profile_image_uri: item.profile_image_uri
+            ? this.baseUrlForProfilePic + item.profile_image_uri
+            : null,
+        };
+      });
+    } catch (err: any) {
+      throw err;
+    }
+  }
+
+  async getRecommendation(token: string): Promise<MConnection[]> {
+    try {
+      const res = await this.rq.Get(
+        `${this.baseUrl}/network`,
+        AuthHeaders(token)
+      );
+      const { body } = await CheckResponse(res, 200);
+
+      return (body.data as MConnection[]).map((item) => {
+        return {
+          ...item,
+          profile_image_uri: item.profile_image_uri
+            ? this.baseUrlForProfilePic + item.profile_image_uri
+            : null,
         };
       });
     } catch (err: any) {

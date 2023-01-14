@@ -14,7 +14,7 @@ interface CommentProps {
   content: string;
   created_at: Date;
   username: string;
-  profile_pic_uri: string;
+  profile_image_uri: string;
   isChildComment: boolean;
   menu?: React.ReactNode;
   style?: CSSProperties;
@@ -45,7 +45,7 @@ function CommentTile(props: CommentProps) {
     >
       <Avatar
         style={{ marginTop: "10px" }}
-        src={props.profile_pic_uri}
+        src={props.profile_image_uri}
         size={props.isChildComment ? "sm" : "md"}
         radius={"sm"}
       />

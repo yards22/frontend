@@ -1,4 +1,4 @@
-import { Card, Table, Text, Divider, Button } from "@mantine/core";
+import { Card, Table, Button } from "@mantine/core";
 import styled from "styled-components";
 import LinkedUserName from "../../../Atoms/LinkedUserName";
 import { Observer } from "mobx-react-lite";

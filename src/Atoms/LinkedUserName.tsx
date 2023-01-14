@@ -5,10 +5,10 @@ const SLinkedUserNameHard = styled(Title)`
   cursor: pointer;
   color: #282828;
   text-decoration: none;
-  width: 180px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  font-size: 15px;
   :hover {
     color: ${(p) => p.theme.linkHover};
   }

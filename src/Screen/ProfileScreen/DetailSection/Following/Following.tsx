@@ -58,7 +58,7 @@ function Following(props: FollowingProps) {
                     }}
                     key={each.username}
                   >
-                    <ProfileAvatar imageUrl={each.profile_pic_uri} />
+                    <ProfileAvatar imageUrl={each.profile_image_uri} />
                     <div
                       style={{
                         width: "100%",
