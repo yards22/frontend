@@ -49,6 +49,7 @@ function ProfileCardButtons() {
                       .Follow(
                         viewProfile?.user_id,
                         viewProfile.username,
+                        viewProfile.cric_index,
                         viewProfile.profile_image_uri
                       )
                       .then(() => {
