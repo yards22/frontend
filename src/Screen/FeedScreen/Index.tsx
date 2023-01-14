@@ -8,6 +8,9 @@ const SFeedIndex = styled.section`
   width: 100%;
   max-width: 600px;
   padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 `;
 
 function FeedIndex() {
