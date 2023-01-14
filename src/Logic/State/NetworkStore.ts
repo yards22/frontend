@@ -20,11 +20,16 @@ export class NetworkStore {
     user_id: number,
     username: string,
     cric_index: number,
-    profile_pic_uri: string | null
+    profile_image_uri: string | null
   ) => {
     try {
       await this.networkRepo.follow(this.token || "", user_id);
-      this.following?.push({ user_id, username, cric_index, profile_pic_uri });
+      this.following?.push({
+        user_id,
+        username,
+        cric_index,
+        profile_image_uri,
+      });
     } catch (err) {
       throw err;
     }

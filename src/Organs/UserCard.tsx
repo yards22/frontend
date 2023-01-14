@@ -22,7 +22,7 @@ interface UserCardProps {
   user_id: number;
   username: string;
   cric_index: number;
-  profile_pic_uri: string | null;
+  profile_image_uri: string | null;
 }
 
 function RecommendationsCard(props: UserCardProps) {
@@ -33,7 +33,7 @@ function RecommendationsCard(props: UserCardProps) {
   return (
     <SUserCard>
       <ProfilePhoto
-        profileImageUri={props.profile_pic_uri}
+        profileImageUri={props.profile_image_uri}
         userName={props.username}
       />
       <LinkedUserName username={props.username} type="hard" />
@@ -50,7 +50,7 @@ function RecommendationsCard(props: UserCardProps) {
                 props.user_id,
                 props.username,
                 props.cric_index,
-                props.profile_pic_uri
+                props.profile_image_uri
               )
               .then(() => {
                 setDoesFollow(true);

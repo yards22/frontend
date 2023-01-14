@@ -52,7 +52,7 @@ export class NetworkRepo {
       return (body.data as MConnection[]).map((item) => {
         return {
           ...item,
-          profile_pic_uri: this.baseUrlForProfilePic + item.profile_pic_uri,
+          profile_image_uri: this.baseUrlForProfilePic + item.profile_image_uri,
         };
       });
     } catch (err: any) {
@@ -71,7 +71,7 @@ export class NetworkRepo {
       return (body.data as MConnection[]).map((item) => {
         return {
           ...item,
-          profile_pic_uri: this.baseUrlForProfilePic + item.profile_pic_uri,
+          profile_image_uri: this.baseUrlForProfilePic + item.profile_image_uri,
         };
       });
     } catch (err: any) {
@@ -90,7 +90,7 @@ export class NetworkRepo {
       return (body.data as MConnection[]).map((item) => {
         return {
           ...item,
-          profile_pic_uri: this.baseUrlForProfilePic + item.profile_pic_uri,
+          profile_image_uri: this.baseUrlForProfilePic + item.profile_image_uri,
         };
       });
     } catch (err: any) {
