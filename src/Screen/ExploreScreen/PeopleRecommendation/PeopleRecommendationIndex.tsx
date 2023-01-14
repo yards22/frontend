@@ -11,6 +11,7 @@ const SPeopleRecommendationIndex = styled.div`
   flex-direction: column;
   width: 100%;
   position: relative;
+  margin-bottom: 30px;
 `;
 
 function PeopleRecommendationIndex() {
@@ -25,6 +26,7 @@ function PeopleRecommendationIndex() {
       {() => {
         const { recommendation } = networkStore;
         if (!recommendation) return <p>Loading</p>;
+        if (recommendation.length === 0) return <></>;
         return (
           <SPeopleRecommendationIndex>
             <Text weight={"bold"}>Suggested Users For You</Text>
@@ -36,7 +38,9 @@ function PeopleRecommendationIndex() {
               dragFree
             >
               {recommendation.map((item) => {
-                return <UsersCard {...item} />;
+                return (
+                  <UsersCard {...item} key={"recom_user" + item.user_id} />
+                );
               })}
             </Carousel>
           </SPeopleRecommendationIndex>
