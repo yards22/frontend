@@ -5,14 +5,6 @@ import Loading from "../../Atoms/Loading";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import NewPost from "./Post/NewPost";
 import NormalPost from "./Post/NormalPost";
-const SFeedIndex = styled.section`
-  width: 100%;
-  max-width: 600px;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-`;
 
 function FeedIndex() {
   const stores = useStores();
@@ -26,13 +18,21 @@ function FeedIndex() {
       {() => {
         const { postStore } = stores;
         if (!postStore.viewPosts) return <Loading />;
+
         return (
-          <SFeedIndex theme={{ isPhone: stores.appStore.isPhone }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              padding: "10px",
+              gap: "5px",
+            }}
+          >
             <NewPost />
             {postStore.viewPosts.map((item, index) => {
               return <NormalPost data={item} key={`normal_post_${index}`} />;
             })}
-          </SFeedIndex>
+          </div>
         );
       }}
     </Observer>
