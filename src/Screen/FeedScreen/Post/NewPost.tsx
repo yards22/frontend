@@ -36,6 +36,7 @@ const SNewPost = styled.div`
 
 function NewPost() {
   const { postStore, profileStore } = useStores();
+  const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
   const [filePaths, setFilePaths] = useState<(string | ArrayBuffer)[]>([]);
   const [content, setContent] = useState("");
@@ -174,9 +175,12 @@ function NewPost() {
                   </FileButton>
                 )}
                 <Button
+                  disabled={content === "" && files.length === 0}
+                  loading={loading}
                   style={{ marginLeft: "20px" }}
                   radius="xl"
                   onClick={() => {
+                    setLoading(true);
                     const postDetails = {
                       content,
                       images: files,
@@ -196,8 +200,10 @@ function NewPost() {
                         setFiles([]);
                         setFilePaths([]);
                         setContent("");
+                        setLoading(false);
                       })
                       .catch((err) => {
+                        setLoading(false);
                         showNotification({
                           title: "Could not create post.",
                           message: "",
