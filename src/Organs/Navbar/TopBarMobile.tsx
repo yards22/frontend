@@ -1,62 +1,63 @@
-import { Burger, Title, useMantineTheme } from '@mantine/core';
-import { Observer } from 'mobx-react-lite';
-import React, { useState } from 'react'
-import { Search } from 'react-feather';
-import { useStores } from '../../Logic/Providers/StoresProviders';
-import NavBarMobile from './NavbarMobile/Index';
+import { Burger, Title, useMantineTheme } from "@mantine/core";
+import { Observer } from "mobx-react-lite";
+import React, { useState } from "react";
+import { Search } from "react-feather";
+import NavBarMobile from "./NavbarMobile/Index";
 
 function TopBarMobile() {
-    const stores = useStores();
-    const mantineTheme = useMantineTheme();
-    const [isNavBarOpened, setIsNavBarOpened] = useState(false)
-    
-    return (
-        <Observer>
-        {()=>{
-        const { appStore } = stores;
-        return(
-            <div
+  const mantineTheme = useMantineTheme();
+  const [isNavBarOpened, setIsNavBarOpened] = useState(false);
+
+  return (
+    <Observer>
+      {() => {
+        return (
+          <div
             style={{
-                background: mantineTheme.colors[mantineTheme.primaryColor][6],
-                position: "fixed",
-                top: "0",
-                left: "0",
-                zIndex: "100",
-                right: "0",
-                height: "60px",
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+              background: mantineTheme.colors[mantineTheme.primaryColor][6],
+              position: "fixed",
+              top: "0",
+              left: "0",
+              zIndex: "100",
+              right: "0",
+              height: "60px",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
-            >
-            <Burger 
-                opened={isNavBarOpened}
-                color = {'white'}
-                style = {{
-                    position : "absolute",
-                    left : "13px"
-                }}
-                onClick = {()=>{setIsNavBarOpened(!isNavBarOpened)}}
+          >
+            <Burger
+              opened={isNavBarOpened}
+              color={"white"}
+              style={{
+                position: "absolute",
+                left: "13px",
+              }}
+              onClick={() => {
+                setIsNavBarOpened(!isNavBarOpened);
+              }}
             />
             <Title color={"white"} order={5}>
-                22 Yards
+              22 Yards
             </Title>
             <Search
-                style={{
-                    position : "absolute",
-                    right : "13px",
-                    color: "white",
-                }}
+              style={{
+                position: "absolute",
+                right: "13px",
+                color: "white",
+              }}
             />
-            { isNavBarOpened && 
-            <NavBarMobile setIsNavBarOpened={(x:boolean)=>setIsNavBarOpened(x)}/>   
-            }
-            </div>
-        )
-        }}
-        </Observer>
-    )
+            {isNavBarOpened && (
+              <NavBarMobile
+                setIsNavBarOpened={(x: boolean) => setIsNavBarOpened(x)}
+              />
+            )}
+          </div>
+        );
+      }}
+    </Observer>
+  );
 }
 
-export default TopBarMobile
+export default TopBarMobile;
