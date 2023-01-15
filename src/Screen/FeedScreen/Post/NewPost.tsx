@@ -41,9 +41,9 @@ function NewPost() {
   const [filePaths, setFilePaths] = useState<(string | ArrayBuffer)[]>([]);
   const [content, setContent] = useState("");
   const location = useLocation();
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   if (location.search.includes("inputFocus=true") && inputRef.current) {
-    (inputRef.current as any).focus();
+    inputRef.current.focus();
   }
 
   const handleImageSelect = (incomingFiles: File[]) => {
