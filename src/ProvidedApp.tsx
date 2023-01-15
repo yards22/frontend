@@ -50,13 +50,7 @@ function ProvidedApp(props: ProvidedAppProps) {
     new NetworkRepo(BASE_URL, BASE_URL_FOR_IMAGES, rq)
   );
   return (
-    <div
-      style={
-        {
-          // backgroundColor: "#E7F5FF",
-        }
-      }
-    >
+    <div>
       <StoresContext.Provider
         value={{
           appStore,
@@ -78,7 +72,6 @@ function ProvidedApp(props: ProvidedAppProps) {
                     withGlobalStyles
                     withNormalizeCSS
                     theme={{
-                      loader: "dots",
                       colors: {},
                       colorScheme: appStore.theme,
                     }}
