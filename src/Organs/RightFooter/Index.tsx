@@ -1,5 +1,4 @@
 import { Observer } from "mobx-react-lite";
-import React from "react";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import FeedbackIndex from "./Feedback/Index";
@@ -20,7 +19,8 @@ function RightFooterIndex() {
   return (
     <Observer>
       {() => {
-        const { appStore } = store;
+        const { appStore, authStore } = store;
+        if (!authStore.user) return <></>;
         return (
           <SRightFooter theme={{ width: appStore.deviceWidth }}>
             <ScoreCarousalIndex />

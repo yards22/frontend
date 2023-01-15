@@ -1,7 +1,6 @@
 import { TextInput, Button, NumberInput, Alert } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { IconEyeOff, IconEye } from "../../../Atoms/Icons";
 import IconWrapper from "../../../Atoms/IconWrapper";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
@@ -17,7 +16,7 @@ interface NewAccountProps {
 function NewAccount(props: NewAccountProps) {
   const store = useStores();
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfrimPassword, setShowConfrimPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [buttonName, setButtonName] = useState("Send OTP");
   const [stage, setStage] = useState(0);
   const [errorText, setErrorText] = useState("");
@@ -32,14 +31,6 @@ function NewAccount(props: NewAccountProps) {
     confirmPassword: "",
     otp: "",
   });
-  const navigator = useNavigate();
-
-  async function handleRouteToProfile() {
-    const profile = await store.profileStore.GetProfile(null, null);
-    store.profileStore.SetViewProfile(profile);
-    navigator("/profile");
-    store.appStore.setNavigationState(4);
-  }
 
   function handleSendOTPClick() {
     store.authStore
@@ -80,7 +71,6 @@ function NewAccount(props: NewAccountProps) {
       .SignUpUser(data.mail_id, data.confirmPassword, data.otp)
       .then(() => {
         props.onClose();
-        handleRouteToProfile();
       })
       .catch((err) => {
         setErrorText(err.message);
@@ -238,7 +228,7 @@ function NewAccount(props: NewAccountProps) {
                   }
                 />
                 <TextInput
-                  type={showConfrimPassword ? "text" : "password"}
+                  type={showConfirmPassword ? "text" : "password"}
                   withAsterisk
                   style={{ width: "100%", marginRight: "10px" }}
                   label="Confirm Password"
@@ -263,11 +253,11 @@ function NewAccount(props: NewAccountProps) {
                           alignItems: "center",
                         }}
                         onClick={() => {
-                          setShowConfrimPassword((p) => !p);
+                          setShowConfirmPassword((p) => !p);
                         }}
                       >
                         <IconWrapper>
-                          {showConfrimPassword ? IconEyeOff : IconEye}
+                          {showConfirmPassword ? IconEyeOff : IconEye}
                         </IconWrapper>
                       </div>
                     )

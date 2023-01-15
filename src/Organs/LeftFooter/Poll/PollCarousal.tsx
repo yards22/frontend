@@ -1,5 +1,6 @@
 import { Carousel } from "@mantine/carousel";
 import { Observer } from "mobx-react-lite";
+import Loading from "../../../Atoms/Loading";
 import { MPoll } from "../../../Logic/Model/MPoll";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import PollCard from "./PollCard";
@@ -22,7 +23,7 @@ function PollCarousal() {
     <Observer>
       {() => {
         const { miscStore } = stores;
-        if (!miscStore.polls) return <p>Loading</p>;
+        if (!miscStore.polls) return <Loading />;
         return (
           <div
             style={{

@@ -5,6 +5,7 @@ import { Observer } from "mobx-react-lite";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Loading from "../../../Atoms/Loading";
 
 const SLeaderBoardIndex = styled.div`
   width: 100%;
@@ -28,7 +29,7 @@ function LeaderBoardIndex() {
     <Observer>
       {() => {
         const { miscStore } = stores;
-        if (!miscStore.leaderboard) return <p>Loading</p>;
+        if (!miscStore.leaderboard) return <Loading />;
         return (
           <SLeaderBoardIndex>
             <div

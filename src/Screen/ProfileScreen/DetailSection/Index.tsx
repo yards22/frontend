@@ -18,7 +18,7 @@ function DetailSectionIndex() {
         flexDirection: "column",
         borderRadius: stores.appStore.isPhone ? "0" : "",
         alignItems: "center",
-        marginTop: stores.appStore.isPhone ? "0" : "10px",
+        margin: stores.appStore.isPhone ? "0" : "10px",
       }}
     >
       <ProfilePicAndStats />
