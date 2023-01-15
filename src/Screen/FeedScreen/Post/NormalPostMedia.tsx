@@ -18,40 +18,44 @@ function NormalPostMedia(props: NormalPostMediaProps) {
         margin: "10px 0",
       }}
     >
-      <Carousel
-        withControls={stores.appStore.isDesktop}
-        withIndicators
-        styles={{
-          indicator: {
-            width: 12,
-            height: 4,
-            transition: "width 250ms ease",
-            background: "gray",
-            "&[data-active]": {
-              width: 40,
+      {props.media.length === 1 ? (
+        <SFeedPostImage src={props.media[0]} />
+      ) : (
+        <Carousel
+          withControls={stores.appStore.isDesktop}
+          withIndicators
+          styles={{
+            indicator: {
+              width: 12,
+              height: 4,
+              transition: "width 250ms ease",
+              background: "gray",
+              "&[data-active]": {
+                width: 40,
+              },
             },
-          },
-          controls: {
-            opacity: 0.2,
-          },
-        }}
-      >
-        {props.media.map((each, index) => {
-          return (
-            <Carousel.Slide key={each}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <SFeedPostImage src={each} />
-              </div>
-            </Carousel.Slide>
-          );
-        })}
-      </Carousel>
+            controls: {
+              opacity: 0.2,
+            },
+          }}
+        >
+          {props.media.map((each, index) => {
+            return (
+              <Carousel.Slide key={each}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <SFeedPostImage src={each} />
+                </div>
+              </Carousel.Slide>
+            );
+          })}
+        </Carousel>
+      )}
     </div>
   );
 }
