@@ -1,29 +1,14 @@
 import { useStores } from "../../Logic/Providers/StoresProviders";
-import { MProfile } from "../../Logic/Model/MProfile";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { Observer } from "mobx-react-lite";
 import { useState } from "react";
 import { Button } from "@mantine/core";
-import { useNavigate } from "react-router-dom";
 const CLIENT_ID =
   "442538559529-bm10qpqtcg3k06rrgnc4i0pqnc3fee4s.apps.googleusercontent.com";
 
 function SignInWithGoogle() {
   const [didLoginFailed, setDidLoginFailed] = useState(false);
   const store = useStores();
-
-  const navigator = useNavigate();
-
-  async function handleRouteToProfile() {
-    const profile: MProfile = await store.profileStore.GetProfile(null, null);
-    store.profileStore.SetProfile(profile);
-    if (store.authStore.isNewUser) {
-      navigator("/profile");
-      store.appStore.setNavigationState(4);
-    } else {
-      navigator("/feed");
-    }
-  }
 
   return !didLoginFailed ? (
     <GoogleOAuthProvider clientId={CLIENT_ID}>
@@ -39,9 +24,7 @@ function SignInWithGoogle() {
                 if (credentialResponse.credential)
                   store.authStore
                     .OAuthLoginUser(credentialResponse.credential)
-                    .then(() => {
-                      handleRouteToProfile();
-                    })
+                    .then(() => {})
                     .catch((err) => setDidLoginFailed(true));
                 else setDidLoginFailed(true);
               }}

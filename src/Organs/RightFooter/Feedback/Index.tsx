@@ -14,13 +14,6 @@ import { useStores } from "../../../Logic/Providers/StoresProviders";
 
 const SFeedback = styled.div`
   width: 100%;
-  margin-top: 30px;
-  height: 100%;
-  overflow-y: auto;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
 `;
 
 function FeedbackIndex() {

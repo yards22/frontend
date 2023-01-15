@@ -1,10 +1,8 @@
 import { TextInput, Button, Modal, Alert } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { IconEye, IconEyeOff } from "../../Atoms/Icons";
 import IconWrapper from "../../Atoms/IconWrapper";
-import { MProfile } from "../../Logic/Model/MProfile";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import { ValidateEmail } from "../../Logic/Utils/Validation";
 import ForgotPassword from "./ForgetPassword/Index";
@@ -14,21 +12,11 @@ function EmailPasswordLogin() {
   const [forgotPasswordModal, setForgotPasswordModal] = useState(false);
   const [errorText, setErrorText] = useState("");
   const store = useStores();
-  const navigator = useNavigate();
-
-  async function handleRouteToFeed() {
-    store.appStore.setNavigationState(1);
-    const profile : MProfile  = await store.profileStore.GetProfile(null, null);
-    store.profileStore.SetProfile(profile);
-    navigator("/feed");
-  }
 
   function handleLogin() {
     store.authStore
       .LoginUser(credentials.email, credentials.password)
-      .then(() => {
-        handleRouteToFeed();
-      })
+      .then(() => {})
       .catch((err) => {
         setErrorText(err.message);
       });

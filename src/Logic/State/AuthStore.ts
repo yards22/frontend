@@ -37,8 +37,14 @@ export class AuthStore {
     let validToken: string | null = null;
     if (!token) validToken = null;
     else if (token !== "") validToken = token;
-    if (validToken) window.localStorage.setItem(TOKEN_KEY, validToken);
-    else window.localStorage.removeItem(TOKEN_KEY);
+    if (validToken) {
+      if (this.isNewUser) {
+        window.location.pathname = "/profile";
+      } else {
+        window.location.pathname = "/feed";
+      }
+      window.localStorage.setItem(TOKEN_KEY, validToken);
+    } else window.localStorage.removeItem(TOKEN_KEY);
     this.token = validToken;
   };
 
@@ -76,11 +82,11 @@ export class AuthStore {
       const { user_data, token, is_exists } = await this.authRepo.oauthLogin(
         id_token
       );
-      this.SetUser(user_data);
-      this.SetToken(token);
       if (!is_exists) {
         this.SetIsNewUser(true);
       }
+      this.SetUser(user_data);
+      this.SetToken(token);
     } catch (err) {
       throw err;
     } finally {
@@ -111,9 +117,9 @@ export class AuthStore {
         password,
         otp
       );
+      this.SetIsNewUser(true);
       this.SetUser(user_data);
       this.SetToken(token);
-      this.SetIsNewUser(true);
     } catch (err) {
     } finally {
       this.SetLoading(false);

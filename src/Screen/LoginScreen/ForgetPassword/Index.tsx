@@ -1,7 +1,6 @@
 import { TextInput, Button, NumberInput, Alert } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import { ValidateEmail } from "../../../Logic/Utils/Validation";
 const OTP_SEND_TIMEOUT = 10;
@@ -28,7 +27,6 @@ function NewAccount(props: NewAccountProps) {
     confirmPassword: "",
     otp: "",
   });
-  const navigator = useNavigate();
   return (
     <>
       {stage === 0 && (
@@ -215,7 +213,6 @@ function NewAccount(props: NewAccountProps) {
                       )
                       .then(() => {
                         props.onClose();
-                        navigator("/profile");
                       })
                       .catch((err) => {
                         setErrorText(err.message);
