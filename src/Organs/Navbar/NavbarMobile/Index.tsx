@@ -1,8 +1,10 @@
-import { useMantineTheme, Text } from "@mantine/core";
+import { useMantineTheme } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
+import { Award, BarChart2, Clock, Edit, User } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
+import NavbarMobileItem from "./NavbarMobileItem";
 
 const SNavBarMobile = styled.div`
   background: white;
@@ -23,6 +25,7 @@ const SMobileBar = styled.a`
   justify-content: center;
   align-items: center;
   text-decoration: none;
+  width: 100%;
   margin: 8px 0px;
   color: ${(p) => p.theme.color};
   cursor: pointer;
@@ -59,10 +62,7 @@ function NavBarMobile({ setIsNavBarOpened }: INavBarMobile) {
                 setIsNavBarOpened(false);
               }}
             >
-              {/* <Home size={"25"} /> */}
-              <Text style={{ fontSize: "20px" }} ml={"sm"}>
-                Profile
-              </Text>
+              <NavbarMobileItem title="Profile" icon={<User />} />
             </SMobileBar>
             <SMobileBar
               theme={{
@@ -77,10 +77,7 @@ function NavBarMobile({ setIsNavBarOpened }: INavBarMobile) {
                 setIsNavBarOpened(false);
               }}
             >
-              {/* <Home size={"25"} /> */}
-              <Text style={{ fontSize: "20px" }} ml={"sm"}>
-                LeaderBoard
-              </Text>
+              <NavbarMobileItem title="Leaderboard" icon={<Award />} />
             </SMobileBar>
             <SMobileBar
               theme={{
@@ -95,28 +92,7 @@ function NavBarMobile({ setIsNavBarOpened }: INavBarMobile) {
                 setIsNavBarOpened(false);
               }}
             >
-              {/* <Home size={"25"} /> */}
-              <Text style={{ fontSize: "20px" }} ml={"sm"}>
-                Polls
-              </Text>
-            </SMobileBar>
-            <SMobileBar
-              theme={{
-                color:
-                  appStore.navigationState === 7
-                    ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                    : "gray",
-              }}
-              onClick={() => {
-                navigate("/comingSoon");
-                appStore.setNavigationState(7);
-                setIsNavBarOpened(false);
-              }}
-            >
-              {/* <Home size={"25"} /> */}
-              <Text style={{ fontSize: "20px" }} ml={"sm"}>
-                Coming Soon
-              </Text>
+              <NavbarMobileItem title="Polls" icon={<BarChart2 />} />
             </SMobileBar>
             <SMobileBar
               theme={{
@@ -131,10 +107,22 @@ function NavBarMobile({ setIsNavBarOpened }: INavBarMobile) {
                 setIsNavBarOpened(false);
               }}
             >
-              {/* <Home size={"25"} /> */}
-              <Text style={{ fontSize: "20px" }} ml={"sm"}>
-                Feed Back
-              </Text>
+              <NavbarMobileItem title="Feedback" icon={<Edit />} />
+            </SMobileBar>
+            <SMobileBar
+              theme={{
+                color:
+                  appStore.navigationState === 7
+                    ? mantineTheme.colors[mantineTheme.primaryColor][7]
+                    : "gray",
+              }}
+              onClick={() => {
+                navigate("/comingSoon");
+                appStore.setNavigationState(7);
+                setIsNavBarOpened(false);
+              }}
+            >
+              <NavbarMobileItem title="Coming Soon" icon={<Clock />} />
             </SMobileBar>
           </SNavBarMobile>
         );
