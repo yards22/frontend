@@ -78,6 +78,7 @@ function ProvidedApp(props: ProvidedAppProps) {
                     }}
                   >
                     <NotificationsProvider
+                      autoClose={2500}
                       position={appStore.isPhone ? "top-right" : "bottom-right"}
                       zIndex={2077}
                     >

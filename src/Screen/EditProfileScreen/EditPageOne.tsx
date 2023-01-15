@@ -27,6 +27,7 @@ function EditPageOne() {
   const [isUserNameCheckDone, setUserNameCheck] = useState(true);
   const [userNameError, setUserNameError] = useState("");
   const [newProfileImage, setNewProfileImage] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
 
   async function handleUsernameBlur() {
     const regex = new RegExp("^[A-Za-z][A-Za-z0-9_]{7,29}$");
@@ -98,9 +99,11 @@ function EditPageOne() {
               <EditInterest />
               <Divider my="sm" style={{ marginTop: "30px", width: "100%" }} />
               <Button
+                loading={loading}
                 disabled={userNameError !== "" || !isUserNameCheckDone}
                 style={{ width: "100%" }}
                 onClick={() => {
+                  setLoading(true);
                   profileStore
                     .UpdateProfile(
                       username,
@@ -108,15 +111,21 @@ function EditPageOne() {
                       profileStore.profile?.interests,
                       newProfileImage
                     )
-                    .then((res) => {
+                    .then(() => {
+                      setLoading(false);
                       showNotification({
-                        title: "Profile Details Updated",
-                        message: "",
-                        autoClose: 2500,
+                        message: "Profile Details Updated",
                         color: "green",
                       });
                       navigate("/profile");
                       stores.appStore.setNavigationState(4);
+                    })
+                    .catch(() => {
+                      setLoading(false);
+                      showNotification({
+                        message: "Profile Details Not Updated",
+                        color: "red",
+                      });
                     });
                 }}
               >

@@ -16,6 +16,7 @@ const SUserCard = styled.div`
   max-width: 200px;
   border-radius: 8px;
   border: 1px solid #e7e7e7;
+  margin-right: 10px;
 `;
 
 interface UserCardProps {
@@ -25,7 +26,7 @@ interface UserCardProps {
   profile_image_uri: string | null;
 }
 
-function RecommendationsCard(props: UserCardProps) {
+function UserCard(props: UserCardProps) {
   const { networkStore } = useStores();
   const [doesFollow, setDoesFollow] = useState(
     networkStore.IfFollows(props.user_id)
@@ -105,4 +106,4 @@ function RecommendationsCard(props: UserCardProps) {
   );
 }
 
-export default RecommendationsCard;
+export default UserCard;
