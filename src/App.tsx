@@ -53,7 +53,7 @@ function App() {
         const { appStore, authStore } = store;
         return (
           <Router>
-            {authStore.user && appStore.isDesktop && <LeftFooterIndex />}
+            {authStore.user && appStore.isDesktop && <RightFooterIndex />}
             <SApp
               style={{
                 marginBottom: `${appStore.isPhone ? "50px" : "0px"}`,
@@ -89,7 +89,7 @@ function App() {
                 </Routes>
               </>
             </SApp>
-            {authStore.user && !appStore.isPhone && <RightFooterIndex />}
+            {authStore.user && !appStore.isPhone && <LeftFooterIndex />}
           </Router>
         );
       }}
