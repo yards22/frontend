@@ -32,7 +32,7 @@ function PeopleRecommendationIndex() {
           <SPeopleRecommendationIndex>
             <Text weight={"bold"}>Suggested Users For You</Text>
             <Carousel
-              slideSize="33.333333%"
+              slideSize="100%"
               slideGap="md"
               align="start"
               slidesToScroll={3}
