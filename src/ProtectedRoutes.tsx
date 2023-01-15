@@ -39,13 +39,13 @@ function ProtectedRoutes(props: ProtectedRoutesProps) {
       <section
         style={{
           height: "100vh",
-          width: "100vh",
+          width: "100vw",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <Loader variant="bars" size={"sm"} />
+        <Loader size={"sm"} />
       </section>
     );
   }
