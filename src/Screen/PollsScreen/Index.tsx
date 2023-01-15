@@ -1,5 +1,6 @@
 import { Observer } from "mobx-react-lite";
 import React, { useEffect } from "react";
+import Loading from "../../Atoms/Loading";
 import { MPoll } from "../../Logic/Model/MPoll";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import PollCard from "../../Organs/LeftFooter/Poll/PollCard";
@@ -27,7 +28,7 @@ function PollsScreenIndex() {
     <Observer>
       {() => {
         const { miscStore } = stores;
-        if (!miscStore.polls) return <p>Loading</p>;
+        if (!miscStore.polls) return <Loading />;
         return (
           <div style={{ display: "flex", flexDirection: "column" }}>
             {miscStore.polls.map((each) => {

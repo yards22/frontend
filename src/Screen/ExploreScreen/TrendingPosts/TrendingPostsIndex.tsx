@@ -32,7 +32,7 @@ function TrendingPostsIndex() {
       <Observer>
         {() => {
           const { postStore } = stores;
-          if (!postStore.viewPosts) return <p>Loading</p>;
+          if (!postStore.viewPosts) return <></>;
           return (
             <div
               style={{

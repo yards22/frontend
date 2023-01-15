@@ -3,6 +3,7 @@ import { Text } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import styled from "styled-components";
+import Loading from "../../../Atoms/Loading";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import UsersCard from "../../../Organs/UserCard";
 
@@ -25,7 +26,7 @@ function PeopleRecommendationIndex() {
     <Observer>
       {() => {
         const { recommendation } = networkStore;
-        if (!recommendation) return <p>Loading</p>;
+        if (!recommendation) return <Loading />;
         if (recommendation.length === 0) return <></>;
         return (
           <SPeopleRecommendationIndex>
