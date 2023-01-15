@@ -22,6 +22,7 @@ function FeedbackIndex() {
     content: "",
     image: undefined,
   });
+  const [loading, setLoading] = useState(false);
   const store = useStores();
 
   return (
@@ -69,12 +70,16 @@ function FeedbackIndex() {
           icon={<Image size={14} />}
         />
         <Button
+          loading={loading}
+          disabled={feedback.content === "" && feedback.image === undefined}
           variant="light"
           style={{ width: "100%" }}
           onClick={() => {
+            setLoading(true);
             store.miscStore
               .CreateFeedback(feedback.content, feedback.image)
               .then(() => {
+                setLoading(false);
                 showNotification({
                   title: "Feedback Submitted.",
                   message: "Thank you for your valuable feedback.",
@@ -83,6 +88,7 @@ function FeedbackIndex() {
                 setFeedback({ content: "", image: undefined });
               })
               .catch((err) => {
+                setLoading(false);
                 showNotification({
                   title: "Feedback Not Submitted.",
                   message: "Something went wrong, please try again.",
