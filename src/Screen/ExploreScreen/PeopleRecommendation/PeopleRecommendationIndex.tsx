@@ -1,5 +1,5 @@
 import { Carousel } from "@mantine/carousel";
-import { Text } from "@mantine/core";
+import { createStyles, Text } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import styled from "styled-components";
@@ -15,8 +15,25 @@ const SPeopleRecommendationIndex = styled.div`
   margin-bottom: 30px;
 `;
 
+const useStyles = createStyles((_theme, _params, getRef) => ({
+  controls: {
+    ref: getRef("controls"),
+    transition: "opacity 150ms ease",
+    opacity: 0,
+  },
+
+  root: {
+    "&:hover": {
+      [`& .${getRef("controls")}`]: {
+        opacity: 1,
+      },
+    },
+  },
+}));
+
 function PeopleRecommendationIndex() {
   const { networkStore } = useStores();
+  const { classes } = useStyles();
 
   useEffect(() => {
     networkStore.GetRecommendation();
@@ -32,11 +49,12 @@ function PeopleRecommendationIndex() {
           <SPeopleRecommendationIndex>
             <Text weight={"bold"}>Suggested Users For You</Text>
             <Carousel
-              slideSize="100%"
               slideGap="md"
               align="start"
-              slidesToScroll={3}
+              controlsOffset="xs"
               dragFree
+              draggable
+              classNames={classes}
             >
               {recommendation.map((item) => {
                 return (
