@@ -1,7 +1,7 @@
 import { ActionIcon, Button, FileButton, Textarea } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { Observer } from "mobx-react-lite";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { IconPlus, IconX } from "../../../Atoms/Icons";
@@ -42,12 +42,9 @@ function NewPost() {
   const [content, setContent] = useState("");
   const location = useLocation();
   const inputRef = useRef<HTMLTextAreaElement>(null);
-
-  useEffect(() => {
-    if (location.search.includes("inputFocus=true") && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [location.search]);
+  if (location.search.includes("inputFocus=true") && inputRef.current) {
+    inputRef.current.focus();
+  }
 
   const handleImageSelect = (incomingFiles: File[]) => {
     let finalFiles = [...files, ...incomingFiles];

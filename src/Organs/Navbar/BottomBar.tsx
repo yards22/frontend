@@ -1,5 +1,6 @@
 import { ActionIcon, useMantineTheme } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
+import { useRef } from "react";
 import { Home, User, Bell, PlusSquare, Globe } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -24,6 +25,7 @@ function BottomBar() {
   const mantineTheme = useMantineTheme();
   const stores = useStores();
   const navigate = useNavigate();
+  const plusButtonRef = useRef<HTMLButtonElement>(null);
 
   return (
     <Observer>
@@ -64,12 +66,14 @@ function BottomBar() {
               <Globe size={"20"} />
             </ActionIcon>
             <ActionIcon
+              ref={plusButtonRef}
               color={
                 appStore.navigationState === 8
                   ? mantineTheme.colors[mantineTheme.primaryColor][9]
                   : "gray"
               }
               onClick={() => {
+                plusButtonRef.current?.blur();
                 navigate("/feed?inputFocus=true");
               }}
             >
