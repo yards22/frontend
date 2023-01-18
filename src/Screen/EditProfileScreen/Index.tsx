@@ -1,12 +1,14 @@
 import { Loader } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import BackPage from "../../Atoms/BackPage";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import EditPageOne from "./EditPageOne";
 
 function EditProfileIndex() {
   const store = useStores();
-
+  const navigate = useNavigate();
   useEffect(() => {
     store.appStore.setNavigationState(4);
     if (!store.profileStore.profile)
@@ -24,6 +26,12 @@ function EditProfileIndex() {
         const { profileStore } = store;
         return profileStore.viewProfile ? (
           <>
+            <BackPage
+              title="Profile"
+              onClick={() => {
+                navigate("/profile");
+              }}
+            />
             <EditPageOne />
           </>
         ) : (
