@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import styled from "styled-components";
 import App from "./App";
 import ProvidedApp from "./ProvidedApp";
+import "./index.css";
 
 const SIndex = styled.div`
   display: flex;
