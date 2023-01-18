@@ -12,12 +12,17 @@ function EditProfileIndex() {
   useEffect(() => {
     store.appStore.setNavigationState(4);
     if (!store.profileStore.profile)
-      store.profileStore.GetProfile(null, null).then((profile) => {
-        if (profile?.user_id === store.authStore.user?.user_id) {
-          store.profileStore.SetProfile(profile);
-        }
-        store.profileStore.SetViewProfile(profile);
-      });
+      store.profileStore
+        .GetProfile(null, null)
+        .then((profile) => {
+          if (
+            profile?.user_id ===
+            store.authStore.user?.user_id
+          ) {
+            store.profileStore.SetProfile(profile);
+          }
+          store.profileStore.SetViewProfile(profile);
+        });
   }, []);
 
   return (
@@ -27,7 +32,7 @@ function EditProfileIndex() {
         return profileStore.viewProfile ? (
           <>
             <BackPage
-              title="Profile"
+              title="Edit Profile"
               onClick={() => {
                 navigate("/profile");
               }}
