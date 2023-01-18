@@ -3,6 +3,7 @@ import { Observer } from "mobx-react-lite";
 import styled from "styled-components";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import ProfilePhoto from "../../../Atoms/ProfilePhoto";
+import { useNavigate } from "react-router-dom";
 const SStats = styled.div`
   display: flex;
   align-items: center;
@@ -11,11 +12,12 @@ const SStats = styled.div`
   cursor: pointer;
 `;
 function ProfilePicAndStats() {
+  const navigate = useNavigate();
   const { profileStore } = useStores();
   return (
     <Observer>
       {() => {
-        const { viewProfile } = profileStore;
+        const { viewProfile, profile } = profileStore;
         return (
           <div
             style={{
@@ -27,22 +29,52 @@ function ProfilePicAndStats() {
           >
             <ProfilePhoto
               userName={viewProfile?.username}
-              profileImageUri={viewProfile?.profile_image_uri}
+              profileImageUri={
+                viewProfile?.profile_image_uri
+              }
             />
-            <SStats>
-              <Title order={5}>{viewProfile?.following}</Title>
+            <SStats
+              onClick={() => {
+                if (
+                  viewProfile?.user_id !== profile?.user_id
+                )
+                  navigate(
+                    "/following?username=" +
+                      viewProfile?.username,
+                  );
+                else navigate("/following");
+              }}
+            >
+              <Title order={5}>
+                {viewProfile?.following}
+              </Title>
               <Title order={6} color="dimmed">
                 Following
               </Title>
             </SStats>
-            <SStats>
-              <Title order={5}>{viewProfile?.followers}</Title>
+            <SStats
+              onClick={() => {
+                if (
+                  viewProfile?.user_id !== profile?.user_id
+                )
+                  navigate(
+                    "/followers?username=" +
+                      viewProfile?.username,
+                  );
+                else navigate("/followers");
+              }}
+            >
+              <Title order={5}>
+                {viewProfile?.followers}
+              </Title>
               <Title order={6} color="dimmed">
                 Followers
               </Title>
             </SStats>
             <SStats>
-              <Title order={5}>{viewProfile?.cric_index}</Title>
+              <Title order={5}>
+                {viewProfile?.cric_index}
+              </Title>
               <Title order={6} color="dimmed">
                 Cric Index
               </Title>
