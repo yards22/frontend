@@ -13,7 +13,7 @@ export class PostRepo {
   constructor(
     baseUrl: string,
     baseUrlForProfilePic: string,
-    rq: Request,
+    rq: Request
   ) {
     this.rq = rq;
     this.baseUrl = baseUrl;
@@ -48,9 +48,9 @@ export class PostRepo {
         (JSON.parse(body.data.media) as string[]).forEach(
           (item) => {
             images.push(
-              this.baseUrlForProfilePic + "/" + item,
+              this.baseUrlForProfilePic + "/" + item
             );
-          },
+          }
         );
         body.data.media = images;
       }
@@ -65,7 +65,7 @@ export class PostRepo {
     type: string,
     limit: number,
     offset: number,
-    user_id?: Number,
+    user_id?: Number
   ): Promise<MPost[]> {
     try {
       let url = `${this.baseUrl}/post/${type}?limit=${limit}&offset=${offset}`;
@@ -81,7 +81,7 @@ export class PostRepo {
           ...v,
           media: v.media
             ? v.media?.map(
-                (item) => this.baseUrlForProfilePic + item,
+                (item) => this.baseUrlForProfilePic + item
               )
             : null,
           created_at: new Date(v.created_at),
@@ -100,13 +100,13 @@ export class PostRepo {
   async likePost(
     token: string,
     post_id: bigint,
-    is_like: boolean,
+    is_like: boolean
   ) {
     try {
       await this.rq.Put(
         `${this.baseUrl}/like`,
         { post_id, is_like },
-        AuthHeaders(token),
+        AuthHeaders(token)
       );
     } catch (err: any) {
       throw err;
@@ -116,13 +116,13 @@ export class PostRepo {
   async favPost(
     token: string,
     post_id: bigint,
-    is_fav: boolean,
+    is_fav: boolean
   ) {
     try {
       await this.rq.Put(
         `${this.baseUrl}/post/favourite`,
         { post_id, is_fav },
-        AuthHeaders(token),
+        AuthHeaders(token)
       );
     } catch (err: any) {
       throw err;
@@ -131,16 +131,27 @@ export class PostRepo {
 
   async getPostById(
     token: string,
-    post_id: bigint,
+    post_id: bigint
   ): Promise<MPost | null> {
     try {
       const res = await this.rq.Get(
-        `${this.baseUrl}/post/byID?post_id=${post_id}`,
-        AuthHeaders(token),
+        `${this.baseUrl}/post/get-by-id?post_id=${post_id}`,
+        AuthHeaders(token)
       );
-
       const { body } = await CheckResponse(res, 200);
-      return body.data;
+      const post: MPost = body.data;
+      post.created_at = new Date(post.created_at);
+
+      if (post.media)
+        post.media = post.media?.map(
+          (v) => this.baseUrlForProfilePic + v
+        );
+
+      post.profile_pic_ref = post.profile_pic_ref
+        ? this.baseUrlForProfilePic + post.profile_pic_ref
+        : null;
+
+      return post;
     } catch (err: any) {
       throw err;
     }
