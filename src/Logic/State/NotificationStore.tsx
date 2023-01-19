@@ -15,6 +15,8 @@ const TOKEN_KEY = "token";
 
 export class NotificationStore {
   uid_uname: Map<number, string>;
+  @observable rawNotifications: MNotification[] | null =
+    null;
   @observable finalNotifications: MUINotification[] = [];
   @observable isLoading: boolean = false;
   notificationRepo: NotificationRepo;
@@ -35,20 +37,23 @@ export class NotificationStore {
 
   @action
   GetNotifications = async () => {
-    // network call here to get raw notifications
-
-    const rawNotifications =
+    this.rawNotifications =
       (await this.notificationRepo.getNotifications(
         this.token || "",
       )) || [];
     await this.GetUserNamesFor(
-      rawNotifications.map(
+      this.rawNotifications.map(
         (item) => item.triggered_by_id || 0,
       ),
     );
+    this.FormUI();
+  };
 
+  @action
+  FormUI() {
+    if (!this.rawNotifications) return;
     const temp: Map<string, MNotification[]> = new Map();
-    rawNotifications.forEach((item, index) => {
+    this.rawNotifications.forEach((item, index) => {
       let namespace = `${item.type}`;
       if (item.type === "POST")
         namespace += `_${item.entity_identifier}`;
@@ -157,7 +162,7 @@ export class NotificationStore {
         return a.happened > b.happened ? 1 : 0;
       });
     });
-  };
+  }
 
   @action
   GetUserNamesFor = async (ids: number[]) => {
@@ -166,8 +171,6 @@ export class NotificationStore {
       if (!this.uid_uname.has(item))
         fetchUsernameFor.push(item);
     });
-
-    // network call to get username of fetchUsernameFor
 
     const res: {
       user_id: number;
@@ -185,5 +188,22 @@ export class NotificationStore {
   @action
   MarkAsRead = (ids: BigInt[]) => {
     // network call to make it read
+  };
+
+  MarkAsSeen = () => {
+    const ids: bigint[] = [];
+    if (this.rawNotifications)
+      this.rawNotifications = this.rawNotifications.map(
+        (v) => {
+          ids.push(v.id);
+          return { ...v, status: "Seen" };
+        },
+      );
+
+    this.notificationRepo.updateNotification(
+      this.token || "",
+      "Seen",
+      ids,
+    );
   };
 }

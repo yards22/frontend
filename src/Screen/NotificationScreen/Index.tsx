@@ -14,21 +14,30 @@ const SNotificationIndex = styled.section`
 function NotificationIndex() {
   const stores = useStores();
 
-  useEffect(()=>{
-    stores.appStore.setNavigationState(3)
-  })
-  
+  useEffect(() => {
+    if (!stores.notificationStore.finalNotifications) {
+      stores.notificationStore.GetNotifications();
+    }
+    stores.notificationStore.MarkAsSeen();
+    stores.appStore.setNavigationState(3);
+  });
+
   return (
     <Observer>
       {() => {
         const { notificationStore } = stores;
         return (
           <SNotificationIndex>
-            {notificationStore.finalNotifications.map((item, index) => {
-              return (
-                <NotificationTile {...item} key={"notification_" + index} />
-              );
-            })}
+            {notificationStore.finalNotifications.map(
+              (item, index) => {
+                return (
+                  <NotificationTile
+                    {...item}
+                    key={"notification_" + index}
+                  />
+                );
+              },
+            )}
           </SNotificationIndex>
         );
       }}

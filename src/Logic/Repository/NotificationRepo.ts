@@ -48,5 +48,21 @@ export class NotificationRepo {
     }
   }
 
-  async updateNotification() {}
+  async updateNotification(
+    token: string,
+    status: "Read" | "Seen",
+    ids: bigint[],
+  ) {
+    try {
+      await this.rq.Put(
+        `${this.baseUrl}?status=${status}`,
+        {
+          ids,
+        },
+        AuthHeaders(token),
+      );
+    } catch (err: any) {
+      ThrowFor(err, {});
+    }
+  }
 }
