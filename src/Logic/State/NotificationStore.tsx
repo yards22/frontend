@@ -9,7 +9,6 @@ import {
 } from "../Model/MNotification";
 import LinkedUserName from "../../Atoms/LinkedUserName";
 import ago from "s-ago";
-import { dummyUserIdUsername } from "../../Data/Dummies/Notification";
 import { NotificationRepo } from "../Repository/NotificationRepo";
 
 const TOKEN_KEY = "token";
