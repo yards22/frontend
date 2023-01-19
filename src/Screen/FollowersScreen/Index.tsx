@@ -10,13 +10,14 @@ import { useStores } from "../../Logic/Providers/StoresProviders";
 
 function FollowersScreenIndex() {
   const navigate = useNavigate();
-  const { networkStore } = useStores();
+  const { networkStore, appStore } = useStores();
   const search = useLocation().search;
   const queryUsername = new URLSearchParams(search).get(
     "username",
   );
 
   useEffect(() => {
+    appStore.setNavigationState(4);
     networkStore.GetFollowersAndFollowing(
       queryUsername || undefined,
     );
