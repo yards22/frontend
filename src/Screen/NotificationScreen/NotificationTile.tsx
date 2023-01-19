@@ -1,4 +1,5 @@
 import { Text, useMantineTheme } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { MUINotification } from "../../Logic/Model/MNotification";
 import { getIcon } from "./IconForNotification";
@@ -28,8 +29,12 @@ const SBullDot = styled.div`
 `;
 function NotificationTile(props: NotificationTileProps) {
   const mantineTheme = useMantineTheme();
+  const navigate = useNavigate();
   return (
     <SNotificationTile
+      onClick={() => {
+        navigate("/followers");
+      }}
       theme={{
         bgColor:
           props.status === "Unseen"
