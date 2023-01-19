@@ -53,7 +53,7 @@ export class NotificationStore {
   FormUI() {
     if (!this.rawNotifications) return;
     const buckets: Map<string, MNotification[]> = new Map();
-    this.rawNotifications.forEach((item, index) => {
+    this.rawNotifications.forEach((item) => {
       // type = LIKE COMMENT
       let namespace = `${item.type}`;
       if (item.entity === "POST")
@@ -62,8 +62,6 @@ export class NotificationStore {
 
       if (item.type === "NEW")
         namespace += item.id.toString();
-
-      console.log(namespace);
 
       const bucketItem = buckets.get(namespace) || [];
       bucketItem.push(item);
