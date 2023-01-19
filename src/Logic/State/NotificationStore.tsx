@@ -52,23 +52,25 @@ export class NotificationStore {
   @action
   FormUI() {
     if (!this.rawNotifications) return;
-    const temp: Map<string, MNotification[]> = new Map();
-    this.rawNotifications.forEach((item, index) => {
+    const buckets: Map<string, MNotification[]> = new Map();
+    this.rawNotifications.forEach((item) => {
+      // type = LIKE COMMENT
       let namespace = `${item.type}`;
-      if (item.type === "POST")
-        namespace += `_${item.entity_identifier}`;
+      if (item.entity === "POST")
+        // entity = POST      identifier = 1, 2, 3
+        namespace += `_${item.entity}_${item.entity_identifier}`;
 
       if (item.type === "NEW")
         namespace += item.id.toString();
 
-      const existing = temp.get(namespace) || [];
-      existing.push(item);
-      temp.set(namespace, existing);
+      const bucketItem = buckets.get(namespace) || [];
+      bucketItem.push(item);
+      buckets.set(namespace, bucketItem);
     });
 
     this.finalNotifications = [];
     // now create ui notification out of raw notifications
-    temp.forEach((mapItem, mapKey) => {
+    buckets.forEach((mapItem) => {
       let finalStatus = mapItem[0].status;
       let finalDate = mapItem[0].created_at;
       let stashes: BigInt[] = [];

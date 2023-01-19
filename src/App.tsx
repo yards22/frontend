@@ -24,6 +24,7 @@ import PollsScreenIndex from "./Screen/PollsScreen/Index";
 import FeedBackScreenIndex from "./Screen/FeedbackScreen/Index";
 import FollowingScreenIndex from "./Screen/FollowingScreen/Index";
 import FollowersScreenIndex from "./Screen/FollowersScreen/Index";
+import PostIndex from "./Screen/PostScreen/Index";
 
 const SApp = styled.section`
   width: 100%;
@@ -52,7 +53,7 @@ function App() {
     handleScreenWidthChanges();
     window.addEventListener(
       "resize",
-      handleScreenWidthChanges,
+      handleScreenWidthChanges
     );
   }, []);
 
@@ -128,6 +129,10 @@ function App() {
                     <Route
                       path="followers"
                       element={<FollowersScreenIndex />}
+                    />
+                    <Route
+                      path="post"
+                      element={<PostIndex />}
                     />
                   </Route>
                   <Route>404</Route>

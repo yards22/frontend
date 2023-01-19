@@ -36,7 +36,7 @@ function NotificationIndex() {
                     key={"notification_" + index}
                   />
                 );
-              },
+              }
             )}
           </SNotificationIndex>
         );
