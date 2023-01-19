@@ -33,7 +33,9 @@ function NotificationTile(props: NotificationTileProps) {
   return (
     <SNotificationTile
       onClick={() => {
-        navigate("/followers");
+        if (props.extra.post_id)
+          navigate(`/post?post_id=${props.extra.post_id}`);
+        else navigate("/followers");
       }}
       theme={{
         bgColor:
