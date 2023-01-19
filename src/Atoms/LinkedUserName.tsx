@@ -1,4 +1,9 @@
-import { Title, TitleProps, Text, useMantineTheme } from "@mantine/core";
+import {
+  Title,
+  TitleProps,
+  Text,
+  useMantineTheme,
+} from "@mantine/core";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 const SLinkedUserNameHard = styled(Title)`
@@ -31,7 +36,9 @@ function LinkedUserName(props: LinkedUserNameProps) {
       >
         <SLinkedUserNameHard
           {...props}
-          theme={{ linkHover: mantineTheme.colors["blue"][7] }}
+          theme={{
+            linkHover: mantineTheme.colors["blue"][7],
+          }}
         >
           {props.username}
         </SLinkedUserNameHard>
@@ -46,14 +53,7 @@ function LinkedUserName(props: LinkedUserNameProps) {
       }}
     >
       <Text
-        style={{
-          display: "inline-block",
-          cursor: "pointer",
-          width: "180px",
-          textOverflow: "ellipsis",
-          overflow: "hidden",
-          whiteSpace: "nowrap",
-        }}
+        className="inline-block cursor-pointer text-ellipsis"
         {...(props as any)}
         variant="link"
       >
