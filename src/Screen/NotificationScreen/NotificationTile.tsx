@@ -1,5 +1,4 @@
 import { Text, useMantineTheme } from "@mantine/core";
-import React from "react";
 import styled from "styled-components";
 import { MUINotification } from "../../Logic/Model/MNotification";
 import { getIcon } from "./IconForNotification";
@@ -62,9 +61,16 @@ function NotificationTile(props: NotificationTileProps) {
       >
         {getIcon(props.type, mantineTheme)}
       </div>
-      <div style={{ marginLeft: "10px", width: "100%" }}> {props.content}</div>
+      <div style={{ marginLeft: "10px", width: "100%" }}>
+        {" "}
+        {props.content}
+      </div>
       <Text
-        style={{ marginLeft: "10px", minWidth: "10%", textAlign: "center" }}
+        style={{
+          marginLeft: "10px",
+          minWidth: "10%",
+          textAlign: "center",
+        }}
         color="dimmed"
         size={"xs"}
       >

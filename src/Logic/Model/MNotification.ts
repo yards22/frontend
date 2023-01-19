@@ -1,8 +1,12 @@
 export interface MNotification {
-  id: BigInt;
+  id: bigint;
+  triggered_by_id: number | null;
+  entity: string;
+  entity_identifier: string | null;
+  type: string;
+  extra: any;
   status: "Read" | "Seen" | "Unseen";
   created_at: Date;
-  metadata: any;
 }
 
 export interface MUINotification {

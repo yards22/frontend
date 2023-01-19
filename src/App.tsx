@@ -71,11 +71,7 @@ function App() {
                   appStore.isPhone ? "50px" : "0px"
                 }`,
               }}
-              className={
-                !appStore.isPhone
-                  ? "border-x border-solid border-transparent border-x-gray-200"
-                  : ""
-              }
+              className={!appStore.isPhone ? "mx-3 " : ""}
             >
               <>
                 {authStore.user && appStore.isPhone && (
