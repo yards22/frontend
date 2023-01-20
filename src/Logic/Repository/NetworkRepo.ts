@@ -6,11 +6,7 @@ export class NetworkRepo {
   baseUrlForProfilePic: string;
   baseUrl: string;
   rq: Request;
-  constructor(
-    baseUrl: string,
-    baseUrlForProfilePic: string,
-    rq: Request,
-  ) {
+  constructor(baseUrl: string, baseUrlForProfilePic: string, rq: Request) {
     this.rq = rq;
     this.baseUrl = baseUrl;
     this.baseUrlForProfilePic = baseUrlForProfilePic;
@@ -21,9 +17,9 @@ export class NetworkRepo {
       const res = await this.rq.Post(
         `${this.baseUrl}/network`,
         {
-          following_id: user_id,
+          following_id: user_id
         },
-        AuthHeaders(token),
+        AuthHeaders(token)
       );
       await CheckResponse(res, 201);
     } catch (err: any) {
@@ -36,9 +32,9 @@ export class NetworkRepo {
       const res = await this.rq.Delete(
         `${this.baseUrl}/network`,
         {
-          following_id: user_id,
+          following_id: user_id
         },
-        AuthHeaders(token),
+        AuthHeaders(token)
       );
       await CheckResponse(res, 200);
     } catch (err: any) {
@@ -46,25 +42,18 @@ export class NetworkRepo {
     }
   }
 
-  async getFollowing(
-    token: string,
-    username?: string,
-  ): Promise<MConnection[]> {
+  async getFollowing(token: string, username?: string): Promise<MConnection[]> {
     try {
       let url = `${this.baseUrl}/network/whoAmIFollowing`;
       if (username) url += `?username=${username}`;
-      const res = await this.rq.Get(
-        url,
-        AuthHeaders(token),
-      );
+      const res = await this.rq.Get(url, AuthHeaders(token));
       const { body } = await CheckResponse(res, 200);
       return (body.data as MConnection[]).map((item) => {
         return {
           ...item,
           profile_image_uri: item.profile_image_uri
-            ? this.baseUrlForProfilePic +
-              item.profile_image_uri
-            : null,
+            ? this.baseUrlForProfilePic + item.profile_image_uri
+            : null
         };
       });
     } catch (err: any) {
@@ -72,26 +61,19 @@ export class NetworkRepo {
     }
   }
 
-  async getFollowers(
-    token: string,
-    username?: string,
-  ): Promise<MConnection[]> {
+  async getFollowers(token: string, username?: string): Promise<MConnection[]> {
     try {
       let url = `${this.baseUrl}/network/myfollowers`;
       if (username) url += `?username=${username}`;
 
-      const res = await this.rq.Get(
-        url,
-        AuthHeaders(token),
-      );
+      const res = await this.rq.Get(url, AuthHeaders(token));
       const { body } = await CheckResponse(res, 200);
       return (body.data as MConnection[]).map((item) => {
         return {
           ...item,
           profile_image_uri: item.profile_image_uri
-            ? this.baseUrlForProfilePic +
-              item.profile_image_uri
-            : null,
+            ? this.baseUrlForProfilePic + item.profile_image_uri
+            : null
         };
       });
     } catch (err: any) {
@@ -99,23 +81,39 @@ export class NetworkRepo {
     }
   }
 
-  async getRecommendation(
-    token: string,
-  ): Promise<MConnection[]> {
+  async getRecommendation(token: string): Promise<MConnection[]> {
     try {
       const res = await this.rq.Get(
         `${this.baseUrl}/network`,
-        AuthHeaders(token),
+        AuthHeaders(token)
       );
       const { body } = await CheckResponse(res, 200);
-
       return (body.data as MConnection[]).map((item) => {
         return {
           ...item,
           profile_image_uri: item.profile_image_uri
-            ? this.baseUrlForProfilePic +
-              item.profile_image_uri
-            : null,
+            ? this.baseUrlForProfilePic + item.profile_image_uri
+            : null
+        };
+      });
+    } catch (err: any) {
+      throw err;
+    }
+  }
+
+  async getSearch(token: string, search: string): Promise<MConnection[]> {
+    try {
+      const res = await this.rq.Get(
+        `${this.baseUrl}/network/search?search=${search}`,
+        AuthHeaders(token)
+      );
+      const { body } = await CheckResponse(res, 200);
+      return (body.data as MConnection[]).map((item) => {
+        return {
+          ...item,
+          profile_image_uri: item.profile_image_uri
+            ? this.baseUrlForProfilePic + item.profile_image_uri
+            : null
         };
       });
     } catch (err: any) {
