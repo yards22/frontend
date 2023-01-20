@@ -41,54 +41,31 @@ function NormalPost(props: NormalPostProps) {
       p="lg"
       radius="md"
       withBorder
-      className="w-full, h-fit min-h-[50] p-5 hover:border-blue-300"
-      style={{
-        borderRadius: stores.appStore.isPhone ? "0" : "8px"
-      }}
+      className={`w-full, h-fit min-h-[50] p-5 ${
+        stores.appStore.isPhone
+          ? "rounded-none"
+          : "rounded-lg"
+      }`}
     >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "center"
-        }}
-      >
+      <div className="flex items-center justify-start">
         <ProfileAvatar
           imageUrl={props.data.profile_pic_ref}
           initials={props.data.username
             .substring(0, 2)
             .toUpperCase()}
         />
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column"
-          }}
-        >
+        <div className="flex flex-col justify-center">
           <LinkedUserName
             type="hard"
             order={5}
-            style={{
-              textDecoration: "none",
-              marginLeft: "10px",
-              padding: "0",
-              marginTop: "0",
-              marginBottom: "0",
-              cursor: "pointer"
-            }}
+            className="ml-2 mt-0 mb-0 cursor-pointer p-0 no-underline"
             username={props.data.username}
           />
 
           <Title
             order={6}
             color="dimmed"
-            style={{
-              marginLeft: "10px",
-              fontWeight: "300",
-              padding: "0",
-              marginTop: "0"
-            }}
+            className="ml-2 mt-0 p-0 font-medium"
           >
             {sAgo(props.data.created_at)}
           </Title>
@@ -100,22 +77,9 @@ function NormalPost(props: NormalPostProps) {
           props.data.media.length > 0 && (
             <NormalPostMedia media={props.data.media} />
           )}
-        <div
-          style={{
-            marginTop: "10px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center"
-          }}
-        >
+        <div className="mt-2 flex items-center justify-between">
           <Liked data={props.data.liked_by} />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center"
-            }}
-          >
+          <div className="mt-2 flex items-center justify-between">
             <ActionIcon
               color={"red"}
               variant="subtle"
@@ -197,13 +161,9 @@ function NormalPost(props: NormalPostProps) {
         </div>
       </div>
       {showComments && (
-        <div
-          style={{
-            marginTop: "10px"
-          }}
-        >
+        <div className="mt-3">
           <AddComment isReply={false} />
-          <Title order={6} style={{ marginTop: "20px" }}>
+          <Title order={6} className="mt-5">
             Comment
           </Title>
           <CommentThread />
