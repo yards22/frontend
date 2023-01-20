@@ -1,6 +1,6 @@
 import { ActionIcon, Card, Title, useMantineTheme } from "@mantine/core";
 import MPost from "../../../Logic/Model/MPost";
-import { Heart, MessageCircle, Star } from "react-feather";
+import { Heart, Link2, MessageCircle, Star } from "react-feather";
 import Liked from "./Liked";
 import LinkedUserName from "../../../Atoms/LinkedUserName";
 import { useState } from "react";
@@ -10,6 +10,8 @@ import AddComment from "./AddComment";
 import ProfileAvatar from "../../../Atoms/ProfileAvatar";
 import sAgo from "s-ago";
 import NormalPostMedia from "./NormalPostMedia";
+import { CopyToClipboard, GetHostUrl } from "../../../Logic/Utils/Common";
+import { showNotification } from "@mantine/notifications";
 interface NormalPostProps {
   data: MPost;
 }
@@ -18,62 +20,32 @@ function NormalPost(props: NormalPostProps) {
   const mantineTheme = useMantineTheme();
   const [showComments, setShowComments] = useState(false);
   const stores = useStores();
+
   return (
     <Card
+      onClick={() => {}}
       shadow="sm"
       p="lg"
       radius="md"
       withBorder
-      style={{
-        width: "100%",
-        height: "fit-content",
-        minHeight: "50px",
-        padding: "20px",
-        borderRadius: stores.appStore.isPhone ? "0" : "8px",
-      }}
+      className={`w-full, h-fit min-h-[50] p-5 ${
+        stores.appStore.isPhone ? "rounded-none" : "rounded-lg"
+      }`}
     >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "center",
-        }}
-      >
+      <div className="flex items-center justify-start">
         <ProfileAvatar
           imageUrl={props.data.profile_pic_ref}
           initials={props.data.username.substring(0, 2).toUpperCase()}
         />
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-          }}
-        >
+        <div className="flex flex-col justify-center">
           <LinkedUserName
             type="hard"
             order={5}
-            style={{
-              textDecoration: "none",
-              marginLeft: "10px",
-              padding: "0",
-              marginTop: "0",
-              marginBottom: "0",
-              cursor: "pointer",
-            }}
+            className="ml-2 mt-0 mb-0 cursor-pointer p-0 no-underline"
             username={props.data.username}
           />
 
-          <Title
-            order={6}
-            color="dimmed"
-            style={{
-              marginLeft: "10px",
-              fontWeight: "300",
-              padding: "0",
-              marginTop: "0",
-            }}
-          >
+          <Title order={6} color="dimmed" className="ml-2 mt-0 p-0 font-medium">
             {sAgo(props.data.created_at)}
           </Title>
         </div>
@@ -83,22 +55,9 @@ function NormalPost(props: NormalPostProps) {
         {props.data.media && props.data.media.length > 0 && (
           <NormalPostMedia media={props.data.media} />
         )}
-        <div
-          style={{
-            marginTop: "10px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
+        <div className="mt-2 flex items-center justify-between">
           <Liked data={props.data.liked_by} />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
+          <div className="mt-2 flex items-center justify-between">
             <ActionIcon
               color={"red"}
               variant="subtle"
@@ -152,20 +111,34 @@ function NormalPost(props: NormalPostProps) {
             >
               <MessageCircle size={"20"} />
             </ActionIcon>
+            <ActionIcon
+              color={"indigo"}
+              variant="subtle"
+              radius={"xl"}
+              size="xl"
+              onClick={() => {
+                CopyToClipboard(
+                  `${GetHostUrl()}/post?post_id=${props.data.post_id}`
+                ).then(() => {
+                  showNotification({
+                    title: "Copied To Clipboard",
+                    message: "You can share post via copied link."
+                  });
+                });
+              }}
+            >
+              <Link2 size={"20"} />
+            </ActionIcon>
           </div>
         </div>
       </div>
       {showComments && (
-        <div
-          style={{
-            marginTop: "10px",
-          }}
-        >
-          <AddComment isReply={false} />
-          <Title order={6} style={{ marginTop: "20px" }}>
+        <div className="mt-3">
+          <AddComment isReply={false} post_id={props.data.post_id} />
+          <Title order={6} className="mt-5">
             Comment
           </Title>
-          <CommentThread />
+          <CommentThread post_id={props.data.post_id} />
         </div>
       )}
     </Card>

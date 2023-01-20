@@ -24,57 +24,39 @@ function ProfilePicAndStats() {
               width: "100%",
               display: "flex",
               alignItems: "center",
-              justifyContent: "space-between",
+              justifyContent: "space-between"
             }}
           >
             <ProfilePhoto
-              userName={viewProfile?.username}
-              profileImageUri={
-                viewProfile?.profile_image_uri
-              }
+              username={viewProfile?.username}
+              profileimageuri={viewProfile?.profile_image_uri}
             />
             <SStats
               onClick={() => {
-                if (
-                  viewProfile?.user_id !== profile?.user_id
-                )
-                  navigate(
-                    "/following?username=" +
-                      viewProfile?.username,
-                  );
+                if (viewProfile?.user_id !== profile?.user_id)
+                  navigate("/following?username=" + viewProfile?.username);
                 else navigate("/following");
               }}
             >
-              <Title order={5}>
-                {viewProfile?.following}
-              </Title>
+              <Title order={5}>{viewProfile?.following}</Title>
               <Title order={6} color="dimmed">
                 Following
               </Title>
             </SStats>
             <SStats
               onClick={() => {
-                if (
-                  viewProfile?.user_id !== profile?.user_id
-                )
-                  navigate(
-                    "/followers?username=" +
-                      viewProfile?.username,
-                  );
+                if (viewProfile?.user_id !== profile?.user_id)
+                  navigate("/followers?username=" + viewProfile?.username);
                 else navigate("/followers");
               }}
             >
-              <Title order={5}>
-                {viewProfile?.followers}
-              </Title>
+              <Title order={5}>{viewProfile?.followers}</Title>
               <Title order={6} color="dimmed">
                 Followers
               </Title>
             </SStats>
             <SStats>
-              <Title order={5}>
-                {viewProfile?.cric_index}
-              </Title>
+              <Title order={5}>{viewProfile?.cric_index}</Title>
               <Title order={6} color="dimmed">
                 Cric Index
               </Title>

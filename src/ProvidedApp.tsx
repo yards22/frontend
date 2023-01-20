@@ -20,6 +20,8 @@ import { MiscStore } from "./Logic/State/MiscStore";
 import { MiscRepo } from "./Logic/Repository/MiscRepo";
 import { NetworkStore } from "./Logic/State/NetworkStore";
 import { NetworkRepo } from "./Logic/Repository/NetworkRepo";
+import { CommentStore } from "./Logic/State/CommentStore";
+import { CommentRepo } from "./Logic/Repository/CommentRepo";
 
 interface ProvidedAppProps {
   children?: React.ReactNode;
@@ -50,6 +52,10 @@ function ProvidedApp(props: ProvidedAppProps) {
   const networkStore = new NetworkStore(
     new NetworkRepo(BASE_URL, BASE_URL_FOR_IMAGES, rq)
   );
+  const commentStore = new CommentStore(
+    new CommentRepo(BASE_URL + "/comment", BASE_URL_FOR_IMAGES, rq),
+    profileStore
+  );
   return (
     <div>
       <StoresContext.Provider
@@ -62,6 +68,7 @@ function ProvidedApp(props: ProvidedAppProps) {
           postStore,
           miscStore,
           networkStore,
+          commentStore
         }}
       >
         {
@@ -74,7 +81,7 @@ function ProvidedApp(props: ProvidedAppProps) {
                     withNormalizeCSS
                     theme={{
                       colors: {},
-                      colorScheme: appStore.theme,
+                      colorScheme: appStore.theme
                     }}
                   >
                     <NotificationsProvider
