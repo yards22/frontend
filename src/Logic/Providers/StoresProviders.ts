@@ -2,7 +2,6 @@ import { createContext, useContext } from "react";
 import AppStore from "../State/AppStore";
 import { AuthStore } from "../State/AuthStore";
 import { CommentStore } from "../State/CommentStore";
-import { ExploreStore } from "../State/ExploreStore";
 import { MiscStore } from "../State/MiscStore";
 import { NetworkStore } from "../State/NetworkStore";
 import { NotificationStore } from "../State/NotificationStore";
@@ -14,7 +13,6 @@ interface IStoresContext {
   authStore: AuthStore;
   profileStore: ProfileStore;
   notificationStore: NotificationStore;
-  exploreStore: ExploreStore;
   postStore: PostStore;
   miscStore: MiscStore;
   networkStore: NetworkStore;
