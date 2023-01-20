@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { IconPlus, IconX } from "../../../Atoms/Icons";
 import IconWrapper from "../../../Atoms/IconWrapper";
-import ProfileAvatar from "../../../Atoms/ProfileAvatar";
+import ProfilePhoto from "../../../Atoms/ProfilePhoto";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import NewPostImageView from "./NewPostImageView";
 
@@ -74,13 +74,16 @@ function NewPost() {
         const { profile } = profileStore;
         return (
           <SNewPost>
-            <ProfileAvatar imageUrl={profile?.profile_image_uri} />
+            <ProfilePhoto
+              profileimageuri={profile?.profile_image_uri}
+              username={profile?.username}
+            />
             <div
               style={{
                 width: "100%",
                 marginLeft: "18px",
                 display: "flex",
-                flexDirection: "column",
+                flexDirection: "column"
               }}
             >
               <Textarea
@@ -94,7 +97,7 @@ function NewPost() {
                 style={{
                   width: "100%",
                   fontSize: "28px",
-                  marginBottom: "10px",
+                  marginBottom: "10px"
                 }}
                 size="lg"
               />
@@ -105,7 +108,7 @@ function NewPost() {
                     justifyContent: "space-between",
                     alignItems: "center",
                     flexWrap: "wrap",
-                    marginBottom: "50px",
+                    marginBottom: "50px"
                   }}
                 >
                   {files.map((item, index) => {
@@ -141,7 +144,7 @@ function NewPost() {
                             }}
                           >
                             {<IconWrapper color="gray">{IconX}</IconWrapper>}
-                          </ActionIcon>,
+                          </ActionIcon>
                         ]}
                       />
                     );
@@ -156,7 +159,7 @@ function NewPost() {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  right: "10px",
+                  right: "10px"
                 }}
               >
                 {files.length <= MAX_FILES_ALLOWED && (
@@ -186,7 +189,7 @@ function NewPost() {
                     setLoading(true);
                     const postDetails = {
                       content,
-                      images: files,
+                      images: files
                     };
 
                     postStore
@@ -196,7 +199,7 @@ function NewPost() {
                           title: "Post created.",
                           message: "",
                           autoClose: 2500,
-                          color: "green",
+                          color: "green"
                         });
 
                         // cleaning
@@ -211,7 +214,7 @@ function NewPost() {
                           title: "Could not create post.",
                           message: "",
                           autoClose: 2500,
-                          color: "red",
+                          color: "red"
                         });
                       });
                   }}

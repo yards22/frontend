@@ -1,6 +1,5 @@
 import { Observer } from "mobx-react-lite";
 import { useEffect } from "react";
-import styled from "styled-components";
 import Loading from "../../Atoms/Loading";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import NewPost from "./Post/NewPost";
@@ -20,14 +19,7 @@ function FeedIndex() {
         if (!postStore.viewPosts) return <Loading />;
 
         return (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              padding: "10px",
-              gap: "5px",
-            }}
-          >
+          <div className="flex flex-col gap-3 p-2">
             <NewPost />
             {postStore.viewPosts.map((item, index) => {
               return <NormalPost data={item} key={`normal_post_${index}`} />;

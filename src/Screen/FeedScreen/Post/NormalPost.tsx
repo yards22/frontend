@@ -7,11 +7,11 @@ import { useState } from "react";
 import CommentThread from "./CommentThread";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import AddComment from "./AddComment";
-import ProfileAvatar from "../../../Atoms/ProfileAvatar";
 import sAgo from "s-ago";
 import NormalPostMedia from "./NormalPostMedia";
 import { CopyToClipboard, GetHostUrl } from "../../../Logic/Utils/Common";
 import { showNotification } from "@mantine/notifications";
+import ProfilePhoto from "../../../Atoms/ProfilePhoto";
 interface NormalPostProps {
   data: MPost;
 }
@@ -33,9 +33,9 @@ function NormalPost(props: NormalPostProps) {
       }`}
     >
       <div className="flex items-center justify-start">
-        <ProfileAvatar
-          imageUrl={props.data.profile_pic_ref}
-          initials={props.data.username.substring(0, 2).toUpperCase()}
+        <ProfilePhoto
+          profileimageuri={props.data.profile_pic_ref}
+          username={props.data.username}
         />
         <div className="flex flex-col justify-center">
           <LinkedUserName

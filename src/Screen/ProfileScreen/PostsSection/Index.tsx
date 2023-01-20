@@ -1,5 +1,4 @@
 import { Button, Select } from "@mantine/core";
-import { Observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { ArrowDown, ArrowUp } from "react-feather";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
@@ -27,24 +26,8 @@ function PostsSectionIndex() {
   });
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "100%",
-        marginTop: "18px",
-        padding: "8px",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "10px",
-        }}
-      >
+    <div className="mt-4 flex w-full flex-col p-2">
+      <div className="mb-2 flex w-full items-center justify-between">
         {postsForUserId ? (
           <b>Created Posts</b>
         ) : (
@@ -52,7 +35,7 @@ function PostsSectionIndex() {
             placeholder="Pick type"
             data={[
               { value: "mine", label: "Create Posts" },
-              { value: "fav", label: "Favorite Posts" },
+              { value: "fav", label: "Favorite Posts" }
             ]}
             value={selectedTypeOfPosts}
             onChange={(e: any) => {

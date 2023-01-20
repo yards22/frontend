@@ -1,8 +1,8 @@
 import { Avatar, MantineNumberSize } from "@mantine/core";
 import { HTMLAttributes } from "react";
 interface ProfilePhotoProps extends HTMLAttributes<HTMLDivElement> {
-  username: string | undefined;
-  profileimageuri: string | null | undefined;
+  username?: string | undefined;
+  profileimageuri?: string | null | undefined;
   size?: MantineNumberSize;
 }
 
@@ -13,7 +13,7 @@ function ProfilePhoto(props: ProfilePhotoProps) {
         size={props.size}
         src={props.profileimageuri}
         {...props}
-        style={{ borderRadius: "100000px" }}
+        className="rounded-full"
       />
     );
   }
@@ -24,7 +24,7 @@ function ProfilePhoto(props: ProfilePhotoProps) {
         color="blue"
         variant="gradient"
         {...props}
-        style={{ borderRadius: "100000px" }}
+        className="rounded-full"
       >
         {props.username?.substring(0, 2).toUpperCase()}
       </Avatar>
@@ -35,7 +35,7 @@ function ProfilePhoto(props: ProfilePhotoProps) {
       color="blue"
       variant="gradient"
       {...props}
-      style={{ borderRadius: "100000px" }}
+      className="rounded-full"
     />
   );
 }

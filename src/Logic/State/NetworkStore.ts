@@ -1,14 +1,11 @@
-import {
-  action,
-  makeAutoObservable,
-  observable,
-} from "mobx";
+import { action, makeAutoObservable, observable } from "mobx";
 import { MConnection } from "../Model/MConnection";
 import { NetworkRepo } from "../Repository/NetworkRepo";
 
 export class NetworkStore {
   @observable followers: MConnection[] | null = null;
   @observable following: MConnection[] | null = null;
+  @observable searches: MConnection[] | null | undefined = undefined;
   @observable recommendation: MConnection[] | null = null;
   networkRepo: NetworkRepo;
   token: string | null;
@@ -24,18 +21,15 @@ export class NetworkStore {
     user_id: number,
     username: string,
     cric_index: number,
-    profile_image_uri: string | null,
+    profile_image_uri: string | null
   ) => {
     try {
-      await this.networkRepo.follow(
-        this.token || "",
-        user_id,
-      );
+      await this.networkRepo.follow(this.token || "", user_id);
       this.following?.push({
         user_id,
         username,
         cric_index,
-        profile_image_uri,
+        profile_image_uri
       });
     } catch (err) {
       throw err;
@@ -45,14 +39,9 @@ export class NetworkStore {
   @action
   UnFollow = async (user_id: number) => {
     try {
-      await this.networkRepo.removeFollow(
-        this.token || "",
-        user_id,
-      );
+      await this.networkRepo.removeFollow(this.token || "", user_id);
       this.following =
-        this.following?.filter(
-          (v) => user_id !== v.user_id,
-        ) || [];
+        this.following?.filter((v) => user_id !== v.user_id) || [];
     } catch (err) {
       throw err;
     }
@@ -61,10 +50,22 @@ export class NetworkStore {
   @action
   GetRecommendation = async () => {
     try {
-      this.recommendation =
-        await this.networkRepo.getRecommendation(
-          this.token || "",
-        );
+      this.recommendation = await this.networkRepo.getRecommendation(
+        this.token || ""
+      );
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  @action
+  GetSearches = async (search: string) => {
+    this.searches = null;
+    try {
+      this.searches = await this.networkRepo.getSearch(
+        this.token || "",
+        search
+      );
     } catch (err) {
       throw err;
     }
@@ -77,11 +78,11 @@ export class NetworkStore {
     try {
       this.following = await this.networkRepo.getFollowing(
         this.token || "",
-        username,
+        username
       );
       this.followers = await this.networkRepo.getFollowers(
         this.token || "",
-        username,
+        username
       );
     } catch (err) {
       throw err;
