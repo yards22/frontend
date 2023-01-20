@@ -1,15 +1,17 @@
 import { Text, useMantineTheme } from "@mantine/core";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { MUINotification } from "../../Logic/Model/MNotification";
 import { getIcon } from "./IconForNotification";
 
 interface NotificationTileProps extends MUINotification {}
 
-const SNotificationTile = styled.div`
+const SNotificationTile = styled(Link)`
   min-height: 70px;
   padding: 5px 10px;
   display: flex;
+  text-decoration: none;
+  color: inherit;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #ececec;
@@ -29,14 +31,12 @@ const SBullDot = styled.div`
 `;
 function NotificationTile(props: NotificationTileProps) {
   const mantineTheme = useMantineTheme();
-  const navigate = useNavigate();
+  let url = "";
+  if (props.extra.post_id) url = `/post?post_id=${props.extra.post_id}`;
+  else url = "/followers";
   return (
     <SNotificationTile
-      onClick={() => {
-        if (props.extra.post_id)
-          navigate(`/post?post_id=${props.extra.post_id}`);
-        else navigate("/followers");
-      }}
+      to={url}
       theme={{
         bgColor:
           props.status === "Unseen"
@@ -45,7 +45,7 @@ function NotificationTile(props: NotificationTileProps) {
         hoverColor:
           props.status === "Unseen"
             ? mantineTheme.colors["blue"][1]
-            : mantineTheme.colors["gray"][1],
+            : mantineTheme.colors["gray"][1]
       }}
     >
       <SBullDot
@@ -53,7 +53,7 @@ function NotificationTile(props: NotificationTileProps) {
           bgColor:
             props.status !== "Read"
               ? mantineTheme.colors["blue"][8]
-              : "transparent",
+              : "transparent"
         }}
       />
       <div
@@ -63,20 +63,17 @@ function NotificationTile(props: NotificationTileProps) {
           padding: "8px",
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "center"
         }}
       >
         {getIcon(props.type, mantineTheme)}
       </div>
-      <div style={{ marginLeft: "10px", width: "100%" }}>
-        {" "}
-        {props.content}
-      </div>
+      <div style={{ marginLeft: "10px", width: "100%" }}> {props.content}</div>
       <Text
         style={{
           marginLeft: "10px",
           minWidth: "10%",
-          textAlign: "center",
+          textAlign: "center"
         }}
         color="dimmed"
         size={"xs"}
