@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import PeopleRecommendationsSection from "./PeopleRecommendation/PeopleRecommendationIndex";
 import TrendingPostsSection from "./TrendingPosts/TrendingPostsIndex";
+import UserSearchIndex from "./UserSearch/Index";
 
 const SNetworkIndex = styled.div`
   width: 100%;
@@ -21,6 +22,7 @@ function ExploreIndex() {
 
   return (
     <SNetworkIndex>
+      <UserSearchIndex />
       <PeopleRecommendationsSection />
       <TrendingPostsSection />
     </SNetworkIndex>
