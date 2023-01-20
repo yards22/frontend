@@ -29,7 +29,7 @@ function CommentTile(props: CommentProps) {
       <ProfilePhoto
         profileimageuri={props.profile_image_uri}
         username={props.username}
-        className="mt-3"
+        className="mt-3 mr-2"
         size={props.isReply ? "sm" : "md"}
       />
       <div className="flex w-full flex-col items-start justify-center p-1">

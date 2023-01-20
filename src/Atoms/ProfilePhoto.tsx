@@ -18,20 +18,22 @@ function ProfilePhoto(props: ProfilePhotoProps) {
     );
   }
   if (props.username)
-    <Avatar
-      size={props.size}
-      src={props.profileimageuri}
-      color="cyan"
-      {...props}
-      style={{ borderRadius: "100000px" }}
-    >
-      {props.username?.substring(0, 2).toUpperCase()}
-    </Avatar>;
+    return (
+      <Avatar
+        size={props.size}
+        color="blue"
+        variant="gradient"
+        {...props}
+        style={{ borderRadius: "100000px" }}
+      >
+        {props.username?.substring(0, 2).toUpperCase()}
+      </Avatar>
+    );
   return (
     <Avatar
       size={props.size}
-      src={props.profileimageuri}
-      color="cyan"
+      color="blue"
+      variant="gradient"
       {...props}
       style={{ borderRadius: "100000px" }}
     />
