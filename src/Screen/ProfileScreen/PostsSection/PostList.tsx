@@ -11,8 +11,14 @@ function PostList() {
       {() => {
         const { postStore } = stores;
         if (!postStore.viewPosts) return <Loading />;
+        if (postStore.viewPosts.length === 0)
+          return (
+            <b className="mt-4 w-full text-center text-gray-700">
+              No post items.
+            </b>
+          );
         return (
-          <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+          <div className="mb-5 flex flex-col gap-3">
             {postStore.viewPosts.map((item, index) => {
               return <NormalPost data={item} key={`normal_post_${index}`} />;
             })}
