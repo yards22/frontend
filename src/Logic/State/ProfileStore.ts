@@ -13,6 +13,7 @@ export class ProfileStore {
     makeAutoObservable(this);
     this.profileRepo = profileRepo;
     this.token = window.localStorage.getItem("token");
+    this.GetMyProfile();
   }
 
   @action
