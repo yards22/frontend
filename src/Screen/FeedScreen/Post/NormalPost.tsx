@@ -1,6 +1,16 @@
-import { ActionIcon, Card, Title, useMantineTheme } from "@mantine/core";
+import {
+  ActionIcon,
+  Card,
+  Title,
+  useMantineTheme
+} from "@mantine/core";
 import MPost from "../../../Logic/Model/MPost";
-import { Heart, MessageCircle, Star } from "react-feather";
+import {
+  Heart,
+  Link2,
+  MessageCircle,
+  Star
+} from "react-feather";
 import Liked from "./Liked";
 import LinkedUserName from "../../../Atoms/LinkedUserName";
 import { useState } from "react";
@@ -10,6 +20,11 @@ import AddComment from "./AddComment";
 import ProfileAvatar from "../../../Atoms/ProfileAvatar";
 import sAgo from "s-ago";
 import NormalPostMedia from "./NormalPostMedia";
+import {
+  CopyToClipboard,
+  GetHostUrl
+} from "../../../Logic/Utils/Common";
+import { showNotification } from "@mantine/notifications";
 interface NormalPostProps {
   data: MPost;
 }
@@ -18,36 +33,37 @@ function NormalPost(props: NormalPostProps) {
   const mantineTheme = useMantineTheme();
   const [showComments, setShowComments] = useState(false);
   const stores = useStores();
+
   return (
     <Card
+      onClick={() => {}}
       shadow="sm"
       p="lg"
       radius="md"
       withBorder
+      className="w-full, h-fit min-h-[50] p-5 hover:border-blue-300"
       style={{
-        width: "100%",
-        height: "fit-content",
-        minHeight: "50px",
-        padding: "20px",
-        borderRadius: stores.appStore.isPhone ? "0" : "8px",
+        borderRadius: stores.appStore.isPhone ? "0" : "8px"
       }}
     >
       <div
         style={{
           display: "flex",
           justifyContent: "flex-start",
-          alignItems: "center",
+          alignItems: "center"
         }}
       >
         <ProfileAvatar
           imageUrl={props.data.profile_pic_ref}
-          initials={props.data.username.substring(0, 2).toUpperCase()}
+          initials={props.data.username
+            .substring(0, 2)
+            .toUpperCase()}
         />
         <div
           style={{
             display: "flex",
             justifyContent: "center",
-            flexDirection: "column",
+            flexDirection: "column"
           }}
         >
           <LinkedUserName
@@ -59,7 +75,7 @@ function NormalPost(props: NormalPostProps) {
               padding: "0",
               marginTop: "0",
               marginBottom: "0",
-              cursor: "pointer",
+              cursor: "pointer"
             }}
             username={props.data.username}
           />
@@ -71,7 +87,7 @@ function NormalPost(props: NormalPostProps) {
               marginLeft: "10px",
               fontWeight: "300",
               padding: "0",
-              marginTop: "0",
+              marginTop: "0"
             }}
           >
             {sAgo(props.data.created_at)}
@@ -80,15 +96,16 @@ function NormalPost(props: NormalPostProps) {
       </div>
       <div style={{ marginTop: "10px" }}>
         {props.data.content}
-        {props.data.media && props.data.media.length > 0 && (
-          <NormalPostMedia media={props.data.media} />
-        )}
+        {props.data.media &&
+          props.data.media.length > 0 && (
+            <NormalPostMedia media={props.data.media} />
+          )}
         <div
           style={{
             marginTop: "10px",
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center",
+            alignItems: "center"
           }}
         >
           <Liked data={props.data.liked_by} />
@@ -96,7 +113,7 @@ function NormalPost(props: NormalPostProps) {
             style={{
               display: "flex",
               justifyContent: "space-between",
-              alignItems: "center",
+              alignItems: "center"
             }}
           >
             <ActionIcon
@@ -107,7 +124,8 @@ function NormalPost(props: NormalPostProps) {
               onClick={() => {
                 stores.postStore.ToggleLike(
                   props.data.post_id,
-                  stores.profileStore.profile?.username || ""
+                  stores.profileStore.profile?.username ||
+                    ""
                 );
               }}
             >
@@ -128,7 +146,9 @@ function NormalPost(props: NormalPostProps) {
               radius={"xl"}
               size="xl"
               onClick={() => {
-                stores.postStore.ToggleFav(props.data.post_id);
+                stores.postStore.ToggleFav(
+                  props.data.post_id
+                );
               }}
             >
               <Star
@@ -152,13 +172,34 @@ function NormalPost(props: NormalPostProps) {
             >
               <MessageCircle size={"20"} />
             </ActionIcon>
+            <ActionIcon
+              color={"indigo"}
+              variant="subtle"
+              radius={"xl"}
+              size="xl"
+              onClick={() => {
+                CopyToClipboard(
+                  `${GetHostUrl()}/post?post_id=${
+                    props.data.post_id
+                  }`
+                ).then(() => {
+                  showNotification({
+                    title: "Copied To Clipboard",
+                    message:
+                      "You can share post via copied link."
+                  });
+                });
+              }}
+            >
+              <Link2 size={"20"} />
+            </ActionIcon>
           </div>
         </div>
       </div>
       {showComments && (
         <div
           style={{
-            marginTop: "10px",
+            marginTop: "10px"
           }}
         >
           <AddComment isReply={false} />
