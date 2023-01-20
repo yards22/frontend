@@ -14,9 +14,7 @@ const SPostIndex = styled.section`
 function PostIndex() {
   const { postStore } = useStores();
   const search = useLocation().search;
-  const queryPostId = new URLSearchParams(search).get(
-    "post_id"
-  );
+  const queryPostId = new URLSearchParams(search).get("post_id");
   const [loading, setLoading] = useState(true);
   const [post, setPost] = useState<MPost | null>(null);
   useEffect(() => {
@@ -26,9 +24,7 @@ function PostIndex() {
         .then((p) => {
           setPost(p);
         })
-        .catch((err) => {
-          console.log(err);
-        })
+        .catch((err) => {})
         .finally(() => {
           setLoading(false);
         });

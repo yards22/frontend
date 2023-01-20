@@ -1,16 +1,6 @@
-import {
-  ActionIcon,
-  Card,
-  Title,
-  useMantineTheme
-} from "@mantine/core";
+import { ActionIcon, Card, Title, useMantineTheme } from "@mantine/core";
 import MPost from "../../../Logic/Model/MPost";
-import {
-  Heart,
-  Link2,
-  MessageCircle,
-  Star
-} from "react-feather";
+import { Heart, Link2, MessageCircle, Star } from "react-feather";
 import Liked from "./Liked";
 import LinkedUserName from "../../../Atoms/LinkedUserName";
 import { useState } from "react";
@@ -20,10 +10,7 @@ import AddComment from "./AddComment";
 import ProfileAvatar from "../../../Atoms/ProfileAvatar";
 import sAgo from "s-ago";
 import NormalPostMedia from "./NormalPostMedia";
-import {
-  CopyToClipboard,
-  GetHostUrl
-} from "../../../Logic/Utils/Common";
+import { CopyToClipboard, GetHostUrl } from "../../../Logic/Utils/Common";
 import { showNotification } from "@mantine/notifications";
 interface NormalPostProps {
   data: MPost;
@@ -42,17 +29,13 @@ function NormalPost(props: NormalPostProps) {
       radius="md"
       withBorder
       className={`w-full, h-fit min-h-[50] p-5 ${
-        stores.appStore.isPhone
-          ? "rounded-none"
-          : "rounded-lg"
+        stores.appStore.isPhone ? "rounded-none" : "rounded-lg"
       }`}
     >
       <div className="flex items-center justify-start">
         <ProfileAvatar
           imageUrl={props.data.profile_pic_ref}
-          initials={props.data.username
-            .substring(0, 2)
-            .toUpperCase()}
+          initials={props.data.username.substring(0, 2).toUpperCase()}
         />
         <div className="flex flex-col justify-center">
           <LinkedUserName
@@ -62,21 +45,16 @@ function NormalPost(props: NormalPostProps) {
             username={props.data.username}
           />
 
-          <Title
-            order={6}
-            color="dimmed"
-            className="ml-2 mt-0 p-0 font-medium"
-          >
+          <Title order={6} color="dimmed" className="ml-2 mt-0 p-0 font-medium">
             {sAgo(props.data.created_at)}
           </Title>
         </div>
       </div>
       <div style={{ marginTop: "10px" }}>
         {props.data.content}
-        {props.data.media &&
-          props.data.media.length > 0 && (
-            <NormalPostMedia media={props.data.media} />
-          )}
+        {props.data.media && props.data.media.length > 0 && (
+          <NormalPostMedia media={props.data.media} />
+        )}
         <div className="mt-2 flex items-center justify-between">
           <Liked data={props.data.liked_by} />
           <div className="mt-2 flex items-center justify-between">
@@ -88,8 +66,7 @@ function NormalPost(props: NormalPostProps) {
               onClick={() => {
                 stores.postStore.ToggleLike(
                   props.data.post_id,
-                  stores.profileStore.profile?.username ||
-                    ""
+                  stores.profileStore.profile?.username || ""
                 );
               }}
             >
@@ -110,9 +87,7 @@ function NormalPost(props: NormalPostProps) {
               radius={"xl"}
               size="xl"
               onClick={() => {
-                stores.postStore.ToggleFav(
-                  props.data.post_id
-                );
+                stores.postStore.ToggleFav(props.data.post_id);
               }}
             >
               <Star
@@ -143,14 +118,11 @@ function NormalPost(props: NormalPostProps) {
               size="xl"
               onClick={() => {
                 CopyToClipboard(
-                  `${GetHostUrl()}/post?post_id=${
-                    props.data.post_id
-                  }`
+                  `${GetHostUrl()}/post?post_id=${props.data.post_id}`
                 ).then(() => {
                   showNotification({
                     title: "Copied To Clipboard",
-                    message:
-                      "You can share post via copied link."
+                    message: "You can share post via copied link."
                   });
                 });
               }}
@@ -162,11 +134,11 @@ function NormalPost(props: NormalPostProps) {
       </div>
       {showComments && (
         <div className="mt-3">
-          <AddComment isReply={false} />
+          <AddComment isReply={false} post_id={props.data.post_id} />
           <Title order={6} className="mt-5">
             Comment
           </Title>
-          <CommentThread />
+          <CommentThread post_id={props.data.post_id} />
         </div>
       )}
     </Card>

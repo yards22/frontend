@@ -12,15 +12,11 @@ function FollowingScreenIndex() {
   const navigate = useNavigate();
   const { networkStore, appStore } = useStores();
   const search = useLocation().search;
-  const queryUsername = new URLSearchParams(search).get(
-    "username"
-  );
+  const queryUsername = new URLSearchParams(search).get("username");
 
   useEffect(() => {
     appStore.setNavigationState(4);
-    networkStore.GetFollowersAndFollowing(
-      queryUsername || undefined
-    );
+    networkStore.GetFollowersAndFollowing(queryUsername || undefined);
   }, [queryUsername]);
   return (
     <div>
@@ -28,8 +24,7 @@ function FollowingScreenIndex() {
         title="Following"
         onClick={() => {
           let url = "/profile";
-          if (queryUsername)
-            url += "?username=" + queryUsername;
+          if (queryUsername) url += "?username=" + queryUsername;
           navigate(url);
         }}
       />
@@ -53,8 +48,7 @@ function FollowingScreenIndex() {
                   >
                     Explore
                   </Button>{" "}
-                  page to find trending and recommended
-                  people to follow.
+                  page to find trending and recommended people to follow.
                 </p>
               </>
             );
@@ -70,15 +64,11 @@ function FollowingScreenIndex() {
                   >
                     <div className="flex gap-4">
                       <ProfilePhoto
-                        profileImageUri={
-                          item.profile_image_uri
-                        }
-                        userName={item.username}
+                        profileimageuri={item.profile_image_uri}
+                        username={item.username}
                       />
                       <div className="flex flex-col">
-                        <LinkedUserName
-                          username={item.username}
-                        />
+                        <LinkedUserName username={item.username} />
                         <Badge className="w-fit">
                           Cric Index {item.cric_index}
                         </Badge>

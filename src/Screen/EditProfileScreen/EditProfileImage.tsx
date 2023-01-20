@@ -34,7 +34,7 @@ function EditProfileImage(props: IEditProfileImage) {
                 position: "absolute",
                 right: "15px",
                 bottom: "15px",
-                zIndex: "10",
+                zIndex: "10"
               }}
             >
               {!profileStore.profile?.profile_image_uri ? (
@@ -84,18 +84,18 @@ function EditProfileImage(props: IEditProfileImage) {
               )}
             </div>
             <ProfilePhoto
-              profileImageUri={
+              profileimageuri={
                 selectedImageViewUri ??
                 stores.profileStore.profile?.profile_image_uri
               }
-              userName={profileStore.profile?.username}
+              username={profileStore.profile?.username}
               style={{ height: "200px", width: "200px" }}
             />
             <FileInput
               accept="image/*"
               ref={fileInputRef}
               style={{
-                display: "none",
+                display: "none"
               }}
               onChange={(e) => {
                 setSelectedImage(e);

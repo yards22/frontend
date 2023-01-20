@@ -34,8 +34,8 @@ function UserCard(props: UserCardProps) {
   return (
     <SUserCard>
       <ProfilePhoto
-        profileImageUri={props.profile_image_uri}
-        userName={props.username}
+        profileimageuri={props.profile_image_uri}
+        username={props.username}
       />
       <LinkedUserName username={props.username} type="hard" />
       <Badge mt={5} mb={10}>
@@ -61,7 +61,7 @@ function UserCard(props: UserCardProps) {
                       Started following <b>{props.username}</b>
                     </p>
                   ),
-                  color: "green",
+                  color: "green"
                 });
               })
               .catch((err) => {
@@ -71,7 +71,7 @@ function UserCard(props: UserCardProps) {
                       Could not follow <b>{props.username}</b>
                     </p>
                   ),
-                  color: "red",
+                  color: "red"
                 });
               });
           else
@@ -85,7 +85,7 @@ function UserCard(props: UserCardProps) {
                       Un-followed <b>{props.username}</b>
                     </p>
                   ),
-                  color: "green",
+                  color: "green"
                 });
               })
               .catch((err) => {
@@ -95,7 +95,7 @@ function UserCard(props: UserCardProps) {
                       Could not un-follow <b>{props.username}</b>
                     </p>
                   ),
-                  color: "red",
+                  color: "red"
                 });
               });
         }}
