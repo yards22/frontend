@@ -11,6 +11,14 @@ export function getIcon(type: string, mantineTheme: MantineTheme) {
         />
       );
     }
+    case "REPLY": {
+      return (
+        <MessageCircle
+          color={mantineTheme.colors["yellow"][9]}
+          fill={mantineTheme.colors["yellow"][4]}
+        />
+      );
+    }
     case "COMMENT": {
       return (
         <MessageCircle

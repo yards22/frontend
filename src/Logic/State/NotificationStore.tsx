@@ -135,6 +135,8 @@ export class NotificationStore {
         suffix += " shared your post.";
       } else if (mapItem[0].type === "FOLLOW") {
         suffix += " started to follow you.";
+      }else if(mapItem[0].type==="REPLY"){
+        suffix+=" replied to your comment."
       }
 
       const finalNotification: MUINotification = {
