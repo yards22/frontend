@@ -3,7 +3,7 @@ import MPost from "../../../Logic/Model/MPost";
 import { Heart, Link2, MessageCircle, Star } from "react-feather";
 import Liked from "./Liked";
 import LinkedUserName from "../../../Atoms/LinkedUserName";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import CommentThread from "./CommentThread";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import AddComment from "./AddComment";

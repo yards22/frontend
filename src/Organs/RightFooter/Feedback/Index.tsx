@@ -19,10 +19,14 @@ const SFeedback = styled.div`
 
 function FeedbackIndex() {
   const mantineTheme = useMantineTheme();
-  const [feedback, setFeedback] = useState<{ content: string; image?: File }>({
+  const [feedback, setFeedback] = useState<{
+    content: string;
+    image: File | null;
+  }>({
     content: "",
-    image: undefined
+    image: null
   });
+
   const [loading, setLoading] = useState(false);
   const store = useStores();
 
@@ -31,12 +35,9 @@ function FeedbackIndex() {
       <Card
         shadow="lg"
         style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          position: "relative",
           border: "1.5px dashed " + mantineTheme.colors.blue[3]
         }}
+        className="relative flex flex-col items-center"
       >
         <Title order={3} size={"md"}>
           Help Us Become Better
@@ -46,12 +47,7 @@ function FeedbackIndex() {
           can improve on for your next visit?
         </Text>
         <Textarea
-          style={{
-            marginBottom: "10px",
-            marginTop: "10px",
-            width: "100%",
-            fontSize: "25px"
-          }}
+          className="mt-2 w-full text-xl"
           minRows={6}
           value={feedback.content}
           onChange={(e) => {
@@ -62,7 +58,7 @@ function FeedbackIndex() {
           placeholder="Every suggestion helps us deliver better."
         />
         <FileInput
-          style={{ margin: "10px 0", width: "100%" }}
+          className="mt-1 w-full"
           value={feedback.image}
           accept="image/png,image/jpeg"
           placeholder="Attach some screenshot, if necessary."
@@ -78,11 +74,11 @@ function FeedbackIndex() {
           loading={loading}
           disabled={feedback.content === "" && feedback.image === undefined}
           variant="light"
-          style={{ width: "100%" }}
+          className="mt-4 w-full"
           onClick={() => {
             setLoading(true);
             store.miscStore
-              .CreateFeedback(feedback.content, feedback.image)
+              .CreateFeedback(feedback.content, feedback.image || undefined)
               .then(() => {
                 setLoading(false);
                 showNotification({
@@ -90,7 +86,7 @@ function FeedbackIndex() {
                   message: "Thank you for your valuable feedback.",
                   color: "green"
                 });
-                setFeedback({ content: "", image: undefined });
+                setFeedback({ content: "", image: null });
               })
               .catch((err) => {
                 setLoading(false);
