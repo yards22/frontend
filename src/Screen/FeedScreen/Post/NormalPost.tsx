@@ -3,7 +3,7 @@ import MPost from "../../../Logic/Model/MPost";
 import { Heart, Link2, MessageCircle, Star } from "react-feather";
 import Liked from "./Liked";
 import LinkedUserName from "../../../Atoms/LinkedUserName";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CommentThread from "./CommentThread";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import AddComment from "./AddComment";
@@ -12,6 +12,7 @@ import NormalPostMedia from "./NormalPostMedia";
 import { CopyToClipboard, GetHostUrl } from "../../../Logic/Utils/Common";
 import { showNotification } from "@mantine/notifications";
 import ProfilePhoto from "../../../Atoms/ProfilePhoto";
+import { useLocation } from "react-router-dom";
 interface NormalPostProps {
   data: MPost;
 }
@@ -20,6 +21,13 @@ function NormalPost(props: NormalPostProps) {
   const mantineTheme = useMantineTheme();
   const [showComments, setShowComments] = useState(false);
   const stores = useStores();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.search.includes("open_comments=true")) {
+      setShowComments(true);
+    }
+  }, [location.search]);
 
   return (
     <Card
@@ -48,7 +56,7 @@ function NormalPost(props: NormalPostProps) {
           <Title
             order={6}
             color="dimmed"
-            className="ml-2 mt-0 p-0 text-xs font-thin"
+            className="ml-2 mt-0 p-0 text-xs font-normal"
           >
             {sAgo(props.data.created_at)}
           </Title>

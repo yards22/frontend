@@ -1,5 +1,6 @@
 import { Anchor, Card, Center, Modal } from "@mantine/core";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import DontHaveAnAccount from "./DontHaveAnAccount";
 import EmailPasswordLogin from "./EmailPasswordLogin";
@@ -75,9 +76,14 @@ function LeftPane() {
           style={{ marginTop: "30px", fontSize: "12px", maxWidth: "300px" }}
         >
           By signing up, you agree to the
-          <Anchor> Terms of Service </Anchor>
+          <Link to={"/terms-and-conditions"}>
+            <Anchor> Terms of Service </Anchor>
+          </Link>
           and
-          <Anchor> Privacy Policy</Anchor>.
+          <Link to={"/privacy-policy"}>
+            <Anchor> Privacy Policy</Anchor>
+          </Link>
+          .
         </span>
       </div>
     </SLeftPane>

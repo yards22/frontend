@@ -1,19 +1,12 @@
 import { Text } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
-import { Zap } from "react-feather";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import NormalPost from "../../FeedScreen/Post/NormalPost";
 
 function TrendingPostsIndex() {
   const stores = useStores();
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "100%"
-      }}
-    >
+    <div className="flex w-full flex-col">
       <Text weight={"bold"} className="mb-2">
         Trending Posts
       </Text>
@@ -22,13 +15,7 @@ function TrendingPostsIndex() {
           const { postStore } = stores;
           if (!postStore.viewPosts) return <></>;
           return (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "5px"
-              }}
-            >
+            <div className="flex flex-col gap-1">
               {postStore.viewPosts.map((item, index) => {
                 return <NormalPost data={item} key={`normal_post_${index}`} />;
               })}
