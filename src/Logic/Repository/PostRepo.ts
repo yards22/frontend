@@ -1,8 +1,5 @@
 import { Request } from "../Utils/Fetch";
-import {
-  CheckResponse,
-  ThrowFor,
-} from "../Utils/ResponseHandler";
+import { CheckResponse, ThrowFor } from "../Utils/ResponseHandler";
 import { AuthHeaders } from "../../Atoms/Util";
 import MPost from "../Model/MPost";
 
@@ -10,11 +7,7 @@ export class PostRepo {
   baseUrlForProfilePic: string;
   baseUrl: string;
   rq: Request;
-  constructor(
-    baseUrl: string,
-    baseUrlForProfilePic: string,
-    rq: Request
-  ) {
+  constructor(baseUrl: string, baseUrlForProfilePic: string, rq: Request) {
     this.rq = rq;
     this.baseUrl = baseUrl;
     this.baseUrlForProfilePic = baseUrlForProfilePic;
@@ -39,19 +32,15 @@ export class PostRepo {
       const res = await fetch(`${this.baseUrl}/post`, {
         method: "POST",
         body: data,
-        headers: { ...AuthHeaders(props.token) },
+        headers: { ...AuthHeaders(props.token) }
       });
 
       const { body } = await CheckResponse(res, 201);
       if (body.data) {
         const images: string[] = [];
-        (JSON.parse(body.data.media) as string[]).forEach(
-          (item) => {
-            images.push(
-              this.baseUrlForProfilePic + "/" + item
-            );
-          }
-        );
+        (JSON.parse(body.data.media) as string[]).forEach((item) => {
+          images.push(this.baseUrlForProfilePic + "/" + item);
+        });
         body.data.media = images;
       }
       return body.data;
@@ -80,15 +69,13 @@ export class PostRepo {
         finalPosts.push({
           ...v,
           media: v.media
-            ? v.media?.map(
-                (item) => this.baseUrlForProfilePic + item
-              )
+            ? v.media?.map((item) => this.baseUrlForProfilePic + item)
             : null,
           created_at: new Date(v.created_at),
           updated_at: new Date(v.updated_at),
           profile_pic_ref: v.profile_pic_ref
             ? this.baseUrlForProfilePic + v.profile_pic_ref
-            : null,
+            : null
         });
       });
       return finalPosts;
@@ -97,11 +84,7 @@ export class PostRepo {
     }
   }
 
-  async likePost(
-    token: string,
-    post_id: bigint,
-    is_like: boolean
-  ) {
+  async likePost(token: string, post_id: bigint, is_like: boolean) {
     try {
       await this.rq.Put(
         `${this.baseUrl}/like`,
@@ -113,14 +96,10 @@ export class PostRepo {
     }
   }
 
-  async favPost(
-    token: string,
-    post_id: bigint,
-    is_fav: boolean
-  ) {
+  async favPost(token: string, post_id: bigint, is_fav: boolean) {
     try {
       await this.rq.Put(
-        `${this.baseUrl}/post/favourite`,
+        `${this.baseUrl}/post/fav`,
         { post_id, is_fav },
         AuthHeaders(token)
       );
@@ -129,13 +108,10 @@ export class PostRepo {
     }
   }
 
-  async getPostById(
-    token: string,
-    post_id: bigint
-  ): Promise<MPost | null> {
+  async getPostById(token: string, post_id: bigint): Promise<MPost | null> {
     try {
       const res = await this.rq.Get(
-        `${this.baseUrl}/post/get-by-id?post_id=${post_id}`,
+        `${this.baseUrl}/post/id?post_id=${post_id}`,
         AuthHeaders(token)
       );
       const { body } = await CheckResponse(res, 200);
@@ -143,9 +119,7 @@ export class PostRepo {
       post.created_at = new Date(post.created_at);
 
       if (post.media)
-        post.media = post.media?.map(
-          (v) => this.baseUrlForProfilePic + v
-        );
+        post.media = post.media?.map((v) => this.baseUrlForProfilePic + v);
 
       post.profile_pic_ref = post.profile_pic_ref
         ? this.baseUrlForProfilePic + post.profile_pic_ref
