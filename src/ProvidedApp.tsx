@@ -27,7 +27,7 @@ interface ProvidedAppProps {
 
 const BASE_URL = "http://localhost:4000";
 const BASE_URL_FOR_IMAGES =
-  "https://22Yardz-image-bucket.s3.ap-south-1.amazonaws.com/";
+  "https://22yards-image-bucket.s3.ap-south-1.amazonaws.com/";
 
 function ProvidedApp(props: ProvidedAppProps) {
   const rq = new Request({ "Content-Type": "application/json" });
