@@ -1,11 +1,20 @@
 import { Button, TextInput } from "@mantine/core";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Search } from "react-feather";
+import { useLocation } from "react-router-dom";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 
 function SearchBar() {
   const [search, setSearch] = useState("");
   const { networkStore } = useStores();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.search.includes("inputFocus=true") && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [location.search]);
   return (
     <form
       onSubmit={(e) => {
@@ -16,6 +25,7 @@ function SearchBar() {
     focus-within:border-solid focus-within:border-gray-400 focus-within:text-gray-700"
     >
       <TextInput
+        ref={inputRef}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search username"
