@@ -56,12 +56,12 @@ function TopBarDesktop() {
                     }}
                     > */}
             <Title color={"black"} order={2}>
-              22 Yards
+              22 Yardz
             </Title>
             <div
               style={{
                 display: "flex",
-                alignItems: "center",
+                alignItems: "center"
               }}
             >
               <STopBar
@@ -69,7 +69,7 @@ function TopBarDesktop() {
                   color:
                     appStore.navigationState === 0
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                      : "gray",
+                      : "gray"
                 }}
                 onClick={() => {
                   navigate("/feed");
@@ -84,7 +84,7 @@ function TopBarDesktop() {
                   color:
                     appStore.navigationState === 1
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                      : "gray",
+                      : "gray"
                 }}
                 onClick={() => {
                   navigate("/explore");
@@ -99,7 +99,7 @@ function TopBarDesktop() {
                   color:
                     appStore.navigationState === 2
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                      : "gray",
+                      : "gray"
                 }}
               >
                 <Search size={"20"} />
@@ -110,7 +110,7 @@ function TopBarDesktop() {
                   color:
                     appStore.navigationState === 3
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                      : "gray",
+                      : "gray"
                 }}
                 onClick={() => {
                   navigate("/notifications");
@@ -125,7 +125,7 @@ function TopBarDesktop() {
                   color:
                     appStore.navigationState === 4
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                      : "gray",
+                      : "gray"
                 }}
                 onClick={() => {
                   navigate("/profile");

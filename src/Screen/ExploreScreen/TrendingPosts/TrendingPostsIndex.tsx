@@ -11,23 +11,11 @@ function TrendingPostsIndex() {
       style={{
         display: "flex",
         flexDirection: "column",
-        width: "100%",
+        width: "100%"
       }}
     >
-      <Text
-        weight={"bold"}
-        style={{
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
+      <Text weight={"bold"} className="mb-2">
         Trending Posts
-        <Zap
-          fill="red"
-          color="black"
-          size={20}
-          style={{ marginLeft: "10px" }}
-        />
       </Text>
       <Observer>
         {() => {
@@ -38,7 +26,7 @@ function TrendingPostsIndex() {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "5px",
+                gap: "5px"
               }}
             >
               {postStore.viewPosts.map((item, index) => {

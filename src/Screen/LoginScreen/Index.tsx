@@ -1,21 +1,8 @@
 import { Loader } from "@mantine/core";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import LeftPane from "./LeftPane";
-import RightPane from "./RightPane";
-
-const SLoginIndex = styled.section`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  position: fixed;
-  top: 0px;
-  left: 0;
-  background: #e5e7eb;
-`;
-
 
 const AUTH_INITIAL = 0;
 const CHECKING_AUTH = 1;
@@ -62,7 +49,7 @@ function LoginIndex() {
           width: "100vh",
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "center"
         }}
       >
         <Loader variant="bars" size={"sm"} />
@@ -72,10 +59,9 @@ function LoginIndex() {
     return <Navigate to="/profile" />;
 
   return (
-    <SLoginIndex>
+    <div className="fixed top-0 left-0 flex w-full items-center justify-center bg-gray-200">
       <LeftPane />
-      {!store.appStore.isPhone && <RightPane />}
-    </SLoginIndex>
+    </div>
   );
 }
 

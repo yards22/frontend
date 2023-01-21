@@ -2,6 +2,7 @@ import { Text } from "@mantine/core";
 interface NavbarMobileItemProps {
   title: string;
   icon: JSX.Element;
+  badge?: JSX.Element;
 }
 
 function NavbarMobileItem(props: NavbarMobileItemProps) {
@@ -12,12 +13,15 @@ function NavbarMobileItem(props: NavbarMobileItemProps) {
         display: "flex",
         padding: "10px",
         alignItems: "center",
-        width: "100%",
+        justifyContent: "space-between",
+        width: "100%"
       }}
     >
-      {props.icon}
-      <div style={{ width: "20px" }} />
-      {props.title}
+      <div className="flex gap-2">
+        {props.icon}
+        {props.title}
+      </div>
+      {props.badge}
     </Text>
   );
 }

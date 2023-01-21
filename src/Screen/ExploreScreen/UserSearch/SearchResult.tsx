@@ -16,7 +16,7 @@ function SearchResult() {
           if (searches.length === 0) return <b>No result found.</b>;
           return (
             <div>
-              <Text weight={"bold"} className="mt-4">
+              <Text weight={"bold"} className="mt-4 mb-2">
                 Search Result
               </Text>
               {searches.map((item) => {

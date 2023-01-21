@@ -12,7 +12,7 @@ function SearchBar() {
         e.preventDefault();
         if (search !== "") networkStore.GetSearches(search);
       }}
-      className="flex border border-solid border-gray-200 transition-all 
+      className="flex rounded-[7px] border border-solid border-gray-200 transition-all 
     focus-within:border-solid focus-within:border-gray-400 focus-within:text-gray-700"
     >
       <TextInput

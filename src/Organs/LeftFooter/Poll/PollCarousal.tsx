@@ -24,11 +24,17 @@ function PollCarousal() {
       {() => {
         const { miscStore } = stores;
         if (!miscStore.polls) return <Loading />;
+        if (miscStore.polls.length === 0)
+          return (
+            <b className="flex h-[100px] items-center justify-center text-gray-400">
+              No Polls at the moment.
+            </b>
+          );
         return (
           <div
             style={{
               width: "300px",
-              height: "fit-content",
+              height: "fit-content"
             }}
           >
             <Carousel
@@ -42,9 +48,9 @@ function PollCarousal() {
                   transition: "width 250ms ease",
                   background: "gray",
                   "&[data-active]": {
-                    width: 40,
-                  },
-                },
+                    width: 40
+                  }
+                }
               }}
               slideGap="md"
               align="start"

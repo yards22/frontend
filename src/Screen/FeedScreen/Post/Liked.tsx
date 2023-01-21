@@ -67,7 +67,7 @@ function Liked(props: LikedProps) {
             setShowModal(true);
           }}
         >
-          others
+          ${props.data.length - 2} others
         </Text>
         &nbsp; liked it.
       </Text>

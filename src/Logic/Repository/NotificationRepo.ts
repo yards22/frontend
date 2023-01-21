@@ -1,7 +1,4 @@
-import {
-  CheckResponse,
-  ThrowFor,
-} from "../Utils/ResponseHandler";
+import { CheckResponse, ThrowFor } from "../Utils/ResponseHandler";
 import { Request } from "../Utils/Fetch";
 import { AuthHeaders } from "../../Atoms/Util";
 import { MNotification } from "../Model/MNotification";
@@ -16,14 +13,9 @@ export class NotificationRepo {
 
   async getNotifications(token: string) {
     try {
-      const res = await this.rq.Get(
-        this.baseUrl,
-        AuthHeaders(token),
-      );
+      const res = await this.rq.Get(this.baseUrl, AuthHeaders(token));
       const { body } = await CheckResponse(res, 200);
-      const temp: MNotification[] = (
-        body.data as any[]
-      ).map((v) => {
+      const temp: MNotification[] = (body.data as any[]).map((v) => {
         return { ...v, created_at: new Date(v.created_at) };
       });
       return temp;
@@ -37,9 +29,9 @@ export class NotificationRepo {
       const res = await this.rq.Post(
         this.baseUrl + "/username",
         {
-          user_ids,
+          user_ids
         },
-        AuthHeaders(token),
+        AuthHeaders(token)
       );
       const { body } = await CheckResponse(res, 200);
       return body.data;
@@ -51,15 +43,15 @@ export class NotificationRepo {
   async updateNotification(
     token: string,
     status: "Read" | "Seen",
-    ids: bigint[],
+    ids: bigint[]
   ) {
     try {
       await this.rq.Put(
         `${this.baseUrl}?status=${status}`,
         {
-          ids,
+          ids
         },
-        AuthHeaders(token),
+        AuthHeaders(token)
       );
     } catch (err: any) {
       ThrowFor(err, {});

@@ -19,16 +19,16 @@ const useStyles = createStyles((_theme, _params, getRef) => ({
   controls: {
     ref: getRef("controls"),
     transition: "opacity 150ms ease",
-    opacity: 0,
+    opacity: 0
   },
 
   root: {
     "&:hover": {
       [`& .${getRef("controls")}`]: {
-        opacity: 1,
-      },
-    },
-  },
+        opacity: 1
+      }
+    }
+  }
 }));
 
 function PeopleRecommendationIndex() {
@@ -44,10 +44,20 @@ function PeopleRecommendationIndex() {
       {() => {
         const { recommendation } = networkStore;
         if (!recommendation) return <Loading />;
-        if (recommendation.length === 0) return <></>;
+        if (recommendation.length === 0)
+          return (
+            // <p className="flex h-[100px] w-full items-center justify-center rounded-lg border border-solid border-blue-400 bg-blue-50 font-bold text-blue-800">
+            //   We still finding best people for you. Stay tuned!
+            // </p>
+            <b className="flex h-[140px] w-full items-center justify-center text-center text-lg font-bold text-gray-400">
+              We still finding best people for you. <br></br>Stay Tuned!
+            </b>
+          );
         return (
           <SPeopleRecommendationIndex>
-            <Text weight={"bold"}>Suggested Users For You</Text>
+            <Text weight={"bold"} className="mb-2">
+              Suggested Users For You
+            </Text>
             <Carousel
               slideGap="md"
               align="start"

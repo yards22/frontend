@@ -11,7 +11,7 @@ const SRightFooter = styled.div`
   width: ${(p: any) =>
     p.theme.width > 800 ? "300px" : `${(p.theme.width * 36.5) / 100}px`};
   margin-left: 30px;
-  padding-top: 10px;
+  padding-top: 20px;
 `;
 
 function RightFooterIndex() {

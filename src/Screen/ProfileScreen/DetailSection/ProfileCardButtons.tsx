@@ -1,11 +1,12 @@
 import { ActionIcon, Modal } from "@mantine/core";
 import React, { useState } from "react";
-import { LogOut } from "react-feather";
+import { Edit2, LogOut, Share2 } from "react-feather";
 import { Button } from "@mantine/core";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import { Observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
 import { showNotification } from "@mantine/notifications";
+import { CopyToClipboard, GetHostUrl } from "../../../Logic/Utils/Common";
 
 function ProfileCardButtons() {
   const navigate = useNavigate();
@@ -34,12 +35,12 @@ function ProfileCardButtons() {
               display: "flex",
               justifyContent: "flex-end",
               alignItems: "center",
-              marginTop: "15px",
+              marginTop: "15px"
             }}
           >
             <Button
               variant="light"
-              style={{ width: "100%", maxWidth: "300px" }}
+              leftIcon={<Edit2 size={16} />}
               onClick={() => {
                 if (viewProfile?.user_id === profile?.user_id)
                   navigate("/profile/edit");
@@ -59,7 +60,7 @@ function ProfileCardButtons() {
                               Started following <b>{viewProfile.username}</b>
                             </p>
                           ),
-                          color: "green",
+                          color: "green"
                         });
                       })
                       .catch((err) => {
@@ -69,7 +70,7 @@ function ProfileCardButtons() {
                               Could not follow <b>{viewProfile.username}</b>
                             </p>
                           ),
-                          color: "red",
+                          color: "red"
                         });
                       });
                   else
@@ -82,7 +83,7 @@ function ProfileCardButtons() {
                               Un-followed <b>{viewProfile.username}</b>
                             </p>
                           ),
-                          color: "green",
+                          color: "green"
                         });
                       })
                       .catch((err) => {
@@ -92,7 +93,7 @@ function ProfileCardButtons() {
                               Could not un-follow <b>{viewProfile.username}</b>
                             </p>
                           ),
-                          color: "red",
+                          color: "red"
                         });
                       });
                 }
@@ -100,7 +101,23 @@ function ProfileCardButtons() {
             >
               {buttonName}
             </Button>
-
+            <Button
+              variant="light"
+              color="blue"
+              style={{ marginLeft: "10px" }}
+              leftIcon={<Share2 size={16} />}
+              onClick={() => {
+                CopyToClipboard(
+                  `${GetHostUrl()}/profile?username=${viewProfile?.username}`
+                );
+                showNotification({
+                  title: "Copied To Clipboard",
+                  message: "You can share profile via copied link."
+                });
+              }}
+            >
+              Share Profile
+            </Button>
             {viewProfile?.user_id === profile?.user_id && (
               <ActionIcon
                 variant="light"
@@ -128,7 +145,7 @@ function ProfileCardButtons() {
                   display: "flex",
                   justifyContent: "flex-end",
                   alignItems: "center",
-                  marginTop: "20px",
+                  marginTop: "20px"
                 }}
               >
                 <Button

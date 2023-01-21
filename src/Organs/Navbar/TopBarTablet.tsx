@@ -8,7 +8,7 @@ import {
   User,
   Search,
   Award,
-  BarChart2,
+  BarChart2
 } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -65,12 +65,12 @@ function TopBarTablet() {
                     }}
                     > */}
             <Title color={"black"} order={2}>
-              22 Yards
+              22 Yardz
             </Title>
             <div
               style={{
                 display: "flex",
-                alignItems: "center",
+                alignItems: "center"
               }}
             >
               <STopBar
@@ -78,7 +78,7 @@ function TopBarTablet() {
                   color:
                     appStore.navigationState === 0
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                      : "gray",
+                      : "gray"
                 }}
                 onClick={() => {
                   navigate("/feed");
@@ -93,7 +93,7 @@ function TopBarTablet() {
                   color:
                     appStore.navigationState === 2
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                      : "gray",
+                      : "gray"
                 }}
                 onClick={() => {
                   navigate("/explore");
@@ -108,7 +108,7 @@ function TopBarTablet() {
                   color:
                     appStore.navigationState === 1
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                      : "gray",
+                      : "gray"
                 }}
               >
                 <Search size={"20"} />
@@ -119,7 +119,7 @@ function TopBarTablet() {
                   color:
                     appStore.navigationState === 3
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                      : "gray",
+                      : "gray"
                 }}
                 onClick={() => {
                   navigate("/notifications");
@@ -134,7 +134,7 @@ function TopBarTablet() {
                   color:
                     appStore.navigationState === 6
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                      : "gray",
+                      : "gray"
                 }}
                 onClick={() => {
                   navigate("/polls");
@@ -149,7 +149,7 @@ function TopBarTablet() {
                   color:
                     appStore.navigationState === 5
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                      : "gray",
+                      : "gray"
                 }}
                 onClick={() => {
                   navigate("/leaderboard");
@@ -164,7 +164,7 @@ function TopBarTablet() {
                   color:
                     appStore.navigationState === 4
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
-                      : "gray",
+                      : "gray"
                 }}
                 onClick={() => {
                   navigate("/profile");

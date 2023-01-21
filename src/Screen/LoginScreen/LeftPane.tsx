@@ -25,8 +25,10 @@ function LeftPane() {
   const [newAccountModal, setNewAccountModal] = useState(false);
   return (
     <SLeftPane>
-      <h1 style={{ fontWeight: "500", marginBottom: "10px",marginTop:"0px"}}>22 Yards</h1>
-      <span style={{ opacity: "0.6", marginBottom: "30px",textAlign:"center" }}>
+      <h1 className="my-4 font-semibold text-gray-700">22 Yardz</h1>
+      <span
+        style={{ opacity: "0.6", marginBottom: "30px", textAlign: "center" }}
+      >
         Cricket mainz one step away. Login to get started now.
       </span>
 
@@ -36,40 +38,42 @@ function LeftPane() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          maxWidth: "300px",
+          maxWidth: "300px"
         }}
       >
         <Card shadow="sm" p="lg" radius="md" withBorder>
-        <SignInWithGoogle />
-        <OrLabel />
-        <EmailPasswordLogin />
-        <DontHaveAnAccount
-          onSignUpRequest={() => {
-            setNewAccountModal(true);
-          }}
-        />
-        <Modal
-          title="New Account"
-          centered
-          transition="fade"
-          transitionDuration={600}
-          transitionTimingFunction="ease"
-          overlayOpacity={0.55}
-          overlayBlur={3}
-          opened={newAccountModal}
-          onClose={() => {
-            setNewAccountModal(false);
-          }}
-        >
-          <NewAccount
+          <SignInWithGoogle />
+          <OrLabel />
+          <EmailPasswordLogin />
+          <DontHaveAnAccount
+            onSignUpRequest={() => {
+              setNewAccountModal(true);
+            }}
+          />
+          <Modal
+            title="New Account"
+            centered
+            transition="fade"
+            transitionDuration={600}
+            transitionTimingFunction="ease"
+            overlayOpacity={0.55}
+            overlayBlur={3}
+            opened={newAccountModal}
             onClose={() => {
               setNewAccountModal(false);
             }}
-          />
-        </Modal>
+          >
+            <NewAccount
+              onClose={() => {
+                setNewAccountModal(false);
+              }}
+            />
+          </Modal>
         </Card>
 
-        <span style={{ marginTop: "30px",fontSize: "12px", maxWidth: "300px" }}>
+        <span
+          style={{ marginTop: "30px", fontSize: "12px", maxWidth: "300px" }}
+        >
           By signing up, you agree to the
           <Anchor> Terms of Service </Anchor>
           and

@@ -24,7 +24,7 @@ function TopBarMobile() {
               width: "100%",
               display: "flex",
               justifyContent: "center",
-              alignItems: "center",
+              alignItems: "center"
             }}
           >
             <Burger
@@ -32,20 +32,20 @@ function TopBarMobile() {
               color={"white"}
               style={{
                 position: "absolute",
-                left: "13px",
+                left: "13px"
               }}
               onClick={() => {
                 setIsNavBarOpened(!isNavBarOpened);
               }}
             />
             <Title color={"white"} order={5}>
-              22 Yards
+              22 Yardz
             </Title>
             <Search
               style={{
                 position: "absolute",
                 right: "13px",
-                color: "white",
+                color: "white"
               }}
             />
             {isNavBarOpened && (

@@ -69,15 +69,7 @@ function NotificationTile(props: NotificationTileProps) {
         {getIcon(props.type, mantineTheme)}
       </div>
       <div style={{ marginLeft: "10px", width: "100%" }}> {props.content}</div>
-      <Text
-        style={{
-          marginLeft: "10px",
-          minWidth: "10%",
-          textAlign: "center"
-        }}
-        color="dimmed"
-        size={"xs"}
-      >
+      <Text color="dimmed" size={"xs"} className="ml-2 min-w-[10%] text-right">
         {props.happened}
       </Text>
     </SNotificationTile>
