@@ -1,10 +1,6 @@
 import ProtectedRoutes from "./ProtectedRoutes";
 import ProfileIndex from "./Screen/ProfileScreen/Index";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginIndex from "./Screen/LoginScreen/Index";
 import ExploreIndex from "./Screen/ExploreScreen/Index";
 import { useStores } from "./Logic/Providers/StoresProviders";
@@ -51,10 +47,7 @@ function App() {
 
   useEffect(() => {
     handleScreenWidthChanges();
-    window.addEventListener(
-      "resize",
-      handleScreenWidthChanges
-    );
+    window.addEventListener("resize", handleScreenWidthChanges);
   }, []);
 
   return (
@@ -63,57 +56,30 @@ function App() {
         const { appStore, authStore } = store;
         return (
           <Router>
-            {authStore.user && appStore.isDesktop && (
-              <RightFooterIndex />
-            )}
+            {authStore.user && appStore.isDesktop && <RightFooterIndex />}
             <SApp
               style={{
-                marginBottom: `${
-                  appStore.isPhone ? "50px" : "0px"
-                }`,
+                marginBottom: `${appStore.isPhone ? "50px" : "0px"}`
               }}
               className={!appStore.isPhone ? "mx-3 " : ""}
             >
               <>
-                {authStore.user && appStore.isPhone && (
-                  <BottomBar />
-                )}
+                {authStore.user && appStore.isPhone && <BottomBar />}
                 {authStore.user && <TopBar />}
 
                 <Routes>
-                  <Route
-                    path="/"
-                    element={<LoginIndex />}
-                  />
+                  <Route path="/" element={<LoginIndex />} />
                   <Route element={<ProtectedRoutes />}>
-                    <Route
-                      path="explore"
-                      element={<ExploreIndex />}
-                    />
-                    <Route
-                      path="profile"
-                      element={<ProfileIndex />}
-                    />
-                    <Route
-                      path="profile/edit"
-                      element={<EditProfileIndex />}
-                    />
+                    <Route path="explore" element={<ExploreIndex />} />
+                    <Route path="profile" element={<ProfileIndex />} />
+                    <Route path="profile/edit" element={<EditProfileIndex />} />
                     <Route
                       path="notifications"
                       element={<NotificationIndex />}
                     />
-                    <Route
-                      path="feed"
-                      element={<FeedIndex />}
-                    />
-                    <Route
-                      path="feedback"
-                      element={<FeedBackScreenIndex />}
-                    />
-                    <Route
-                      path="polls"
-                      element={<PollsScreenIndex />}
-                    />
+                    <Route path="feed" element={<FeedIndex />} />
+                    <Route path="feedback" element={<FeedBackScreenIndex />} />
+                    <Route path="polls" element={<PollsScreenIndex />} />
                     <Route
                       path="comingSoon"
                       element={<ComingSoonScreenIndex />}
@@ -130,18 +96,13 @@ function App() {
                       path="followers"
                       element={<FollowersScreenIndex />}
                     />
-                    <Route
-                      path="post"
-                      element={<PostIndex />}
-                    />
+                    <Route path="post" element={<PostIndex />} />
                   </Route>
                   <Route>404</Route>
                 </Routes>
               </>
             </SApp>
-            {authStore.user && !appStore.isPhone && (
-              <LeftFooterIndex />
-            )}
+            {authStore.user && !appStore.isPhone && <LeftFooterIndex />}
           </Router>
         );
       }}
