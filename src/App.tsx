@@ -14,7 +14,7 @@ import FeedIndex from "./Screen/FeedScreen/Index";
 import TopBar from "./Organs/Navbar/TopBar";
 import BottomBar from "./Organs/Navbar/BottomBar";
 import EditProfileIndex from "./Screen/EditProfileScreen/Index";
-import ComingSoonScreenIndex from "./Screen/ComingScoonScreen/Index";
+import ComingSoonScreenIndex from "./Screen/ComingSoonScreen/Index";
 import LeaderBoardScreenIndex from "./Screen/LeaderBoardScreen/Index";
 import PollsScreenIndex from "./Screen/PollsScreen/Index";
 import FeedBackScreenIndex from "./Screen/FeedbackScreen/Index";
