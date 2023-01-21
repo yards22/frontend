@@ -28,6 +28,7 @@ function ProfilePicAndStats() {
             }}
           >
             <ProfilePhoto
+              size={"xl"}
               username={viewProfile?.username}
               profileimageuri={viewProfile?.profile_image_uri}
             />
