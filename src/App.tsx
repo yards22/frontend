@@ -21,6 +21,8 @@ import FeedBackScreenIndex from "./Screen/FeedbackScreen/Index";
 import FollowingScreenIndex from "./Screen/FollowingScreen/Index";
 import FollowersScreenIndex from "./Screen/FollowersScreen/Index";
 import PostIndex from "./Screen/PostScreen/Index";
+import PrivacyPolicy from "./Screen/TCPP/PrivacyPolicy";
+import TC from "./Screen/TCPP/TC";
 
 const SApp = styled.section`
   width: 100%;
@@ -98,6 +100,8 @@ function App() {
                     />
                     <Route path="post" element={<PostIndex />} />
                   </Route>
+                  <Route path="privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="terms-and-conditions" element={<TC />} />
                   <Route>404</Route>
                 </Routes>
               </>

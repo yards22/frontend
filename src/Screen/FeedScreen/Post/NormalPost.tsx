@@ -48,7 +48,7 @@ function NormalPost(props: NormalPostProps) {
           <Title
             order={6}
             color="dimmed"
-            className="ml-2 mt-0 p-0 text-xs font-thin"
+            className="ml-2 mt-0 p-0 text-xs font-normal"
           >
             {sAgo(props.data.created_at)}
           </Title>
