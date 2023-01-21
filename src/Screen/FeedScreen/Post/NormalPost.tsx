@@ -45,7 +45,11 @@ function NormalPost(props: NormalPostProps) {
             username={props.data.username}
           />
 
-          <Title order={6} color="dimmed" className="ml-2 mt-0 p-0 font-medium">
+          <Title
+            order={6}
+            color="dimmed"
+            className="ml-2 mt-0 p-0 text-xs font-thin"
+          >
             {sAgo(props.data.created_at)}
           </Title>
         </div>
@@ -55,8 +59,10 @@ function NormalPost(props: NormalPostProps) {
         {props.data.media && props.data.media.length > 0 && (
           <NormalPostMedia media={props.data.media} />
         )}
-        <div className="mt-2 flex items-center justify-between">
-          <Liked data={props.data.liked_by} />
+        <div className="mt-2 flex flex-col flex-wrap items-end">
+          <div className="w-full">
+            <Liked data={props.data.liked_by} />
+          </div>
           <div className="mt-2 flex items-center justify-between">
             <ActionIcon
               color={"red"}
