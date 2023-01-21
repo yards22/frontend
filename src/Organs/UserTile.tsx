@@ -13,84 +13,92 @@ interface UserTileProps {
 }
 
 function UserTile(props: UserTileProps) {
-  const { networkStore } = useStores();
+  const { networkStore, profileStore } = useStores();
   const [doesFollow, setDoesFollow] = useState(
     networkStore.IfFollows(props.user_id)
   );
+  const [isOwnProfile] = useState(
+    profileStore.profile?.user_id === props.user_id
+  );
+
+  console.log(isOwnProfile);
+
   return (
     <div className="flex h-[225] min-w-[180] items-center justify-center rounded-md border border-solid border-gray-200 p-2">
       <ProfilePhoto
-      size={"lg"}
+        size={"lg"}
         profileimageuri={props.profile_image_uri}
         username={props.username}
       />
-      <div className="flex-1 ml-2 items-center justify-center">
+      <div className="ml-2 flex-1 items-center justify-center">
         <LinkedUserName username={props.username} type="hard" />
         <Badge mt={5} mb={10}>
           <b>Cric Index</b> {props.cric_index}
         </Badge>
       </div>
-      <Button
-        variant={doesFollow ? "outline" : "filled"}
-        size={"xs"}
-        onClick={() => {
-          if (!doesFollow)
-            networkStore
-              .Follow(
-                props.user_id,
-                props.username,
-                props.cric_index,
-                props.profile_image_uri
-              )
-              .then(() => {
-                setDoesFollow(true);
-                showNotification({
-                  message: (
-                    <p>
-                      Started following <b>{props.username}</b>
-                    </p>
-                  ),
-                  color: "green"
+      {!isOwnProfile && (
+        <Button
+          variant={doesFollow ? "outline" : "filled"}
+          size={"xs"}
+          onClick={() => {
+            if (!doesFollow)
+              networkStore
+                .Follow(
+                  props.user_id,
+                  props.username,
+                  props.cric_index,
+                  props.profile_image_uri
+                )
+                .then(() => {
+                  setDoesFollow(true);
+                  showNotification({
+                    message: (
+                      <p>
+                        Started following <b>{props.username}</b>
+                      </p>
+                    ),
+                    color: "green"
+                  });
+                })
+                .catch((err) => {
+                  showNotification({
+                    message: (
+                      <p>
+                        Could not follow <b>{props.username}</b>
+                      </p>
+                    ),
+                    color: "red"
+                  });
                 });
-              })
-              .catch((err) => {
-                showNotification({
-                  message: (
-                    <p>
-                      Could not follow <b>{props.username}</b>
-                    </p>
-                  ),
-                  color: "red"
+            else
+              networkStore
+                .UnFollow(props.user_id)
+                .then(() => {
+                  setDoesFollow(false);
+                  showNotification({
+                    message: (
+                      <p>
+                        Un-followed <b>{props.username}</b>
+                      </p>
+                    ),
+                    color: "green"
+                  });
+                })
+                .catch((err) => {
+                  showNotification({
+                    message: (
+                      <p>
+                        Could not un-follow <b>{props.username}</b>
+                      </p>
+                    ),
+                    color: "red"
+                  });
                 });
-              });
-          else
-            networkStore
-              .UnFollow(props.user_id)
-              .then(() => {
-                setDoesFollow(false);
-                showNotification({
-                  message: (
-                    <p>
-                      Un-followed <b>{props.username}</b>
-                    </p>
-                  ),
-                  color: "green"
-                });
-              })
-              .catch((err) => {
-                showNotification({
-                  message: (
-                    <p>
-                      Could not un-follow <b>{props.username}</b>
-                    </p>
-                  ),
-                  color: "red"
-                });
-              });
-        }}
-      >
-        {doesFollow ? "Un-follow" : "Follow"}
-      </Button>
+          }}
+        >
+          {doesFollow ? "Un-follow" : "Follow"}
+        </Button>
+      )}
     </div>
   );
 }
