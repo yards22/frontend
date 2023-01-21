@@ -34,6 +34,9 @@ function NotificationTile(props: NotificationTileProps) {
   let url = "";
   if (props.extra.post_id) url = `/post?post_id=${props.extra.post_id}`;
   else url = "/followers";
+
+  if (props.type === "COMMENT" || props.type === "REPLY")
+    url += "&open_comments=true";
   return (
     <SNotificationTile
       to={url}
@@ -56,16 +59,7 @@ function NotificationTile(props: NotificationTileProps) {
               : "transparent"
         }}
       />
-      <div
-        style={{
-          height: "70px",
-          width: "70px",
-          padding: "8px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
+      <div className="flex h-[70px] w-[70px] items-center justify-center p-2">
         {getIcon(props.type, mantineTheme)}
       </div>
       <div style={{ marginLeft: "10px", width: "100%" }}> {props.content}</div>

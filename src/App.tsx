@@ -61,7 +61,7 @@ function App() {
             {authStore.user && appStore.isDesktop && <RightFooterIndex />}
             <SApp
               style={{
-                marginBottom: `${appStore.isPhone ? "50px" : "0px"}`
+                marginBottom: `${appStore.isPhone ? "70px" : "0px"}`
               }}
               className={!appStore.isPhone ? "mx-3 " : ""}
             >
