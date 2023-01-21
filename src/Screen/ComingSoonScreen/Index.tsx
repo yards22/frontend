@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useStores } from "../../Logic/Providers/StoresProviders";
-import ScoreCarousalIndex from "../../Organs/RightFooter/ScoreCarousal/Index";
 
 function ComingSoonScreenIndex() {
   const stores = useStores();
@@ -9,11 +8,7 @@ function ComingSoonScreenIndex() {
     stores.appStore.setNavigationState(7);
   });
 
-  return (
-    <div style={{ margin: "10px" }}>
-      <ScoreCarousalIndex />
-    </div>
-  );
+  return <div style={{ margin: "10px" }}></div>;
 }
 
 export default ComingSoonScreenIndex;

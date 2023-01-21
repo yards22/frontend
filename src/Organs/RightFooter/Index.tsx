@@ -1,8 +1,8 @@
 import { Observer } from "mobx-react-lite";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
+import ComingSoonIndex from "./ComingSoon/Index";
 import FeedbackIndex from "./Feedback/Index";
-import ScoreCarousalIndex from "./ScoreCarousal/Index";
 
 const SRightFooter = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ const SRightFooter = styled.div`
   width: ${(p: any) =>
     p.theme.width > 800 ? "300px" : `${(p.theme.width * 36.5) / 100}px`};
   margin-left: 30px;
-  padding-top: 20px;
+  margin-top: 15px;
 `;
 
 function RightFooterIndex() {
@@ -23,7 +23,8 @@ function RightFooterIndex() {
         if (!authStore.user) return <></>;
         return (
           <SRightFooter theme={{ width: appStore.deviceWidth }}>
-            <ScoreCarousalIndex />
+            <ComingSoonIndex />
+            <div className="h-8" />
             <FeedbackIndex />
           </SRightFooter>
         );

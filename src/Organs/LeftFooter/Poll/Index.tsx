@@ -18,7 +18,7 @@ function PollIndex() {
           display: "flex",
           width: "100%",
           justifyContent: "space-between",
-          alignItems: "center",
+          alignItems: "center"
         }}
       >
         <b>Polls</b>
