@@ -9,7 +9,7 @@ const SLeftFooter = styled.div`
   align-items: center;
   width: 300px;
   margin-right: 30px;
-  padding-top: 10px;
+  padding-top: 20px;
 `;
 
 function LeftFooterIndex() {

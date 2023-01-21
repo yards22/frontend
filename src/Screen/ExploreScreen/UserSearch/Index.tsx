@@ -4,7 +4,7 @@ import SearchResult from "./SearchResult";
 
 function UserSearchIndex() {
   return (
-    <div className="my-8 flex w-full flex-col">
+    <div className="my-3 flex w-full flex-col">
       <SearchBar />
       <SearchResult />
     </div>
