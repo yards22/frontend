@@ -2,12 +2,13 @@ import { Burger, Title, useMantineTheme } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import React, { useState } from "react";
 import { Search } from "react-feather";
+import { useNavigate } from "react-router-dom";
 import NavBarMobile from "./NavbarMobile/Index";
 
 function TopBarMobile() {
   const mantineTheme = useMantineTheme();
   const [isNavBarOpened, setIsNavBarOpened] = useState(false);
-
+  const navigate = useNavigate();
   return (
     <Observer>
       {() => {
@@ -46,6 +47,9 @@ function TopBarMobile() {
                 position: "absolute",
                 right: "13px",
                 color: "white"
+              }}
+              onClick={() => {
+                navigate("/explore?inputFocus=true" + new Date().getTime());
               }}
             />
             {isNavBarOpened && (

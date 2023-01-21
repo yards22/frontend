@@ -53,17 +53,6 @@ function TopBarTablet() {
         const { appStore } = stores;
         return (
           <STopBarContainer>
-            {/* <div
-                    style={{
-                        width: "100%",
-                        maxWidth: "1400px",
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        paddingLeft: "25px",
-                        paddingRight: "25px",
-                    }}
-                    > */}
             <Title color={"black"} order={2}>
               22 Yardz
             </Title>
@@ -109,6 +98,10 @@ function TopBarTablet() {
                     appStore.navigationState === 1
                       ? mantineTheme.colors[mantineTheme.primaryColor][7]
                       : "gray"
+                }}
+                onClick={() => {
+                  navigate("/explore?inputFocus=true" + new Date().getTime());
+                  appStore.setNavigationState(2);
                 }}
               >
                 <Search size={"20"} />
