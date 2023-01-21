@@ -25,9 +25,7 @@ function LeftPane() {
   const [newAccountModal, setNewAccountModal] = useState(false);
   return (
     <SLeftPane>
-      <h1 style={{ fontWeight: "500", marginBottom: "10px", marginTop: "0px" }}>
-        22 Yardz
-      </h1>
+      <h1 className="my-4 font-semibold text-gray-700">22 Yardz</h1>
       <span
         style={{ opacity: "0.6", marginBottom: "30px", textAlign: "center" }}
       >
