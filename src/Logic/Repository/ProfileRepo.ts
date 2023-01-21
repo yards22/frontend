@@ -41,7 +41,7 @@ export class ProfileRepo {
         username: body.data.username,
         followers: body.data.followers,
         following: body.data.following,
-        updated_at: body.data.updated_at,
+        updated_at: body.data.updated_at
       };
     } catch (err: any) {
       throw ThrowFor(err, {});
@@ -50,11 +50,12 @@ export class ProfileRepo {
 
   async checkUserName(username: string, token: string): Promise<number> {
     try {
-      const data = { username: username };
-      const res = await this.rq.Post(`${this.baseUrl}/checkUsername`, data, {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      });
+      const res = await this.rq.Get(
+        `${this.baseUrl}/username/check-availability?=${username}`,
+        {
+          Authorization: `Bearer ${token}`
+        }
+      );
       const response = await CheckResponse(res, 200);
       return response.status;
     } catch (err: any) {
@@ -79,7 +80,7 @@ export class ProfileRepo {
       const res = await fetch(`${this.baseUrl}/`, {
         method: "PUT",
         body: data,
-        headers: { ...AuthHeaders(token) },
+        headers: { ...AuthHeaders(token) }
       });
       const { body } = await CheckResponse(res, 200);
       let interests = [];
@@ -98,7 +99,7 @@ export class ProfileRepo {
         following: body.data.following,
         user_id: body.data.user_id,
         username: body.data.username,
-        updated_at: body.data.updated_at,
+        updated_at: body.data.updated_at
       };
     } catch (err: any) {
       throw ThrowFor(err, {});
