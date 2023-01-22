@@ -1,12 +1,5 @@
-import {
-  action,
-  makeAutoObservable,
-  observable,
-} from "mobx";
-import {
-  MNotification,
-  MUINotification,
-} from "../Model/MNotification";
+import { action, makeAutoObservable, observable } from "mobx";
+import { MNotification, MUINotification } from "../Model/MNotification";
 import LinkedUserName from "../../Atoms/LinkedUserName";
 import ago from "s-ago";
 import { NotificationRepo } from "../Repository/NotificationRepo";
@@ -15,12 +8,12 @@ const TOKEN_KEY = "token";
 
 export class NotificationStore {
   uid_uname: Map<number, string>;
-  @observable rawNotifications: MNotification[] | null =
-    null;
+  @observable rawNotifications: MNotification[] | null = null;
   @observable finalNotifications: MUINotification[] = [];
   @observable isLoading: boolean = false;
   notificationRepo: NotificationRepo;
   @observable token: string | null = null;
+  @observable notSeenCount: number = 0;
 
   constructor(notificationRepo: NotificationRepo) {
     makeAutoObservable(this);
@@ -28,6 +21,11 @@ export class NotificationStore {
     this.notificationRepo = notificationRepo;
     this.token = window.localStorage.getItem(TOKEN_KEY);
     this.GetNotifications();
+
+    // running get notification in interval of 10s
+    setInterval(() => {
+      this.GetNotifications();
+    }, 10000);
   }
 
   @action
@@ -38,13 +36,9 @@ export class NotificationStore {
   @action
   GetNotifications = async () => {
     this.rawNotifications =
-      (await this.notificationRepo.getNotifications(
-        this.token || "",
-      )) || [];
+      (await this.notificationRepo.getNotifications(this.token || "")) || [];
     await this.GetUserNamesFor(
-      this.rawNotifications.map(
-        (item) => item.triggered_by_id || 0,
-      ),
+      this.rawNotifications.map((item) => item.triggered_by_id || 0)
     );
     this.FormUI();
   };
@@ -53,20 +47,23 @@ export class NotificationStore {
   FormUI() {
     if (!this.rawNotifications) return;
     const buckets: Map<string, MNotification[]> = new Map();
+    let notSeenInRaw = 0;
     this.rawNotifications.forEach((item) => {
+      if (item.status === "Unseen") notSeenInRaw++;
       // type = LIKE COMMENT
       let namespace = `${item.type}`;
       if (item.entity === "POST")
         // entity = POST      identifier = 1, 2, 3
         namespace += `_${item.entity}_${item.entity_identifier}`;
 
-      if (item.type === "NEW")
-        namespace += item.id.toString();
+      if (item.type === "NEW") namespace += item.id.toString();
 
       const bucketItem = buckets.get(namespace) || [];
       bucketItem.push(item);
       buckets.set(namespace, bucketItem);
     });
+
+    this.notSeenCount = notSeenInRaw;
 
     this.finalNotifications = [];
     // now create ui notification out of raw notifications
@@ -76,52 +73,43 @@ export class NotificationStore {
       let stashes: BigInt[] = [];
       let usernames = (
         <LinkedUserName
-          username={
-            this.uid_uname.get(
-              mapItem[0].triggered_by_id || 0,
-            ) || ""
-          }
+          username={this.uid_uname.get(mapItem[0].triggered_by_id || 0) || ""}
         />
       );
       if (mapItem.length !== 1) {
         let enough = false;
         usernames = (
           <>
-            {mapItem.map(
-              (eachNotification, eachNotificationIndex) => {
-                stashes.push(eachNotification.id);
-                if (eachNotification.status === "Unseen")
-                  finalStatus = eachNotification.status;
-                if (eachNotification.created_at > finalDate)
-                  finalDate = eachNotification.created_at;
+            {mapItem.map((eachNotification, eachNotificationIndex) => {
+              stashes.push(eachNotification.id);
+              if (eachNotification.status === "Unseen")
+                finalStatus = eachNotification.status;
+              if (eachNotification.created_at > finalDate)
+                finalDate = eachNotification.created_at;
 
-                if (eachNotificationIndex === 3)
-                  enough = true;
-                if (enough) return <></>;
-                return (
-                  <>
-                    {eachNotificationIndex ===
-                    mapItem.length - 1
-                      ? " and "
-                      : eachNotificationIndex === 0
-                      ? ""
-                      : ", "}
-                    {eachNotificationIndex === 2 ? (
-                      "others"
-                    ) : (
-                      <LinkedUserName
-                        username={
-                          this.uid_uname.get(
-                            eachNotification.triggered_by_id ||
-                              0,
-                          ) || ""
-                        }
-                      />
-                    )}
-                  </>
-                );
-              },
-            )}
+              if (eachNotificationIndex === 3) enough = true;
+              if (enough) return <></>;
+              return (
+                <>
+                  {eachNotificationIndex === mapItem.length - 1
+                    ? " and "
+                    : eachNotificationIndex === 0
+                    ? ""
+                    : ", "}
+                  {eachNotificationIndex === 2 ? (
+                    "others"
+                  ) : (
+                    <LinkedUserName
+                      username={
+                        this.uid_uname.get(
+                          eachNotification.triggered_by_id || 0
+                        ) || ""
+                      }
+                    />
+                  )}
+                </>
+              );
+            })}
           </>
         );
       }
@@ -135,15 +123,14 @@ export class NotificationStore {
         suffix += " shared your post.";
       } else if (mapItem[0].type === "FOLLOW") {
         suffix += " started to follow you.";
-      }else if(mapItem[0].type==="REPLY"){
-        suffix+=" replied to your comment."
+      } else if (mapItem[0].type === "REPLY") {
+        suffix += " replied to your comment.";
       }
 
       const finalNotification: MUINotification = {
         stashes,
         content:
-          mapItem[0].type === "NEW" ||
-          mapItem[0].type === "INFO" ? (
+          mapItem[0].type === "NEW" || mapItem[0].type === "INFO" ? (
             mapItem[0].extra.content
           ) : (
             <>
@@ -154,11 +141,9 @@ export class NotificationStore {
         type: mapItem[0].type,
         extra: {
           post_id: mapItem[0].entity_identifier,
-          redirect_url: mapItem[0].extra
-            ? mapItem[0].extra.redirect_url
-            : "",
+          redirect_url: mapItem[0].extra ? mapItem[0].extra.redirect_url : ""
         },
-        status: finalStatus,
+        status: finalStatus
       };
 
       this.finalNotifications.push(finalNotification);
@@ -172,17 +157,13 @@ export class NotificationStore {
   GetUserNamesFor = async (ids: number[]) => {
     const fetchUsernameFor: number[] = [];
     ids.forEach((item) => {
-      if (!this.uid_uname.has(item))
-        fetchUsernameFor.push(item);
+      if (!this.uid_uname.has(item)) fetchUsernameFor.push(item);
     });
 
     const res: {
       user_id: number;
       username: string;
-    }[] = await this.notificationRepo.getUsernames(
-      this.token || "",
-      ids,
-    );
+    }[] = await this.notificationRepo.getUsernames(this.token || "", ids);
 
     res.forEach((v) => {
       this.uid_uname.set(v.user_id, v.username);
@@ -195,19 +176,17 @@ export class NotificationStore {
   };
 
   MarkAsSeen = () => {
-    const ids: bigint[] = [];
-    if (this.rawNotifications)
-      this.rawNotifications = this.rawNotifications.map(
-        (v) => {
+    this.notSeenCount = 0;
+    const timeout = setTimeout(() => {
+      const ids: bigint[] = [];
+      if (this.rawNotifications)
+        this.rawNotifications = this.rawNotifications.map((v) => {
           ids.push(v.id);
           return { ...v, status: "Seen" };
-        },
-      );
+        });
 
-    this.notificationRepo.updateNotification(
-      this.token || "",
-      "Seen",
-      ids,
-    );
+      this.notificationRepo.updateNotification(this.token || "", "Seen", ids);
+      clearTimeout(timeout);
+    }, 10000);
   };
 }
