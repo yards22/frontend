@@ -17,6 +17,8 @@ const SUserCard = styled.div`
   border-radius: 8px;
   border: 1px solid #e7e7e7;
   margin-right: 10px;
+  padding: 0 10px;
+  max-width: 150px;
 `;
 
 interface UserCardProps {
@@ -37,7 +39,7 @@ function UserCard(props: UserCardProps) {
         profileimageuri={props.profile_image_uri}
         username={props.username}
       />
-      <LinkedUserName username={props.username} type="hard" />
+      <LinkedUserName username={"asdfasdfasdfasdfasdfasdf"} type="hard" />
       <Badge mt={5} mb={10}>
         <b>Cric Index</b> {props.cric_index}
       </Badge>

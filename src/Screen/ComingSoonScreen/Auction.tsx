@@ -1,7 +1,6 @@
 import { Anchor, Badge } from "@mantine/core";
 import React from "react";
 import { Link } from "react-router-dom";
-import AuctionImage from "../../Logos/auction.jpeg";
 function Auction() {
   return (
     <div className="p-8 text-gray-700">
@@ -15,13 +14,6 @@ function Auction() {
       that we are working on our new player auction feature, where you can bid
       on your favorite players and create your own team to compete against other
       users in real-time matches.
-      <br />
-      <br />
-      <img
-        src={AuctionImage}
-        alt="news_image"
-        className="max-w-[90%] object-scale-down"
-      />
       <br />
       <br />
       Our new feature is similar to fantasy league but with a twist, you'll be

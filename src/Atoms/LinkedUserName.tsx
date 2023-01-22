@@ -9,6 +9,8 @@ const SLinkedUserNameHard = styled(Title)`
   overflow: hidden;
   white-space: nowrap;
   font-size: 15px;
+  max-width: 150px;
+  text-overflow: ellipsis;
   :hover {
     color: ${(p) => p.theme.linkHover};
   }
