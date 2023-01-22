@@ -12,6 +12,7 @@ import {
 } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import NotificationBellWithCount from "../../Atoms/NotificationBellWithCount";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 
 const STopBar = styled.a`
@@ -119,7 +120,16 @@ function TopBarTablet() {
                   appStore.setNavigationState(3);
                 }}
               >
-                <Bell size={"20"} />
+                <Observer>
+                  {() => {
+                    const { notificationStore } = stores;
+                    return (
+                      <NotificationBellWithCount
+                        count={notificationStore.notSeenCount}
+                      />
+                    );
+                  }}
+                </Observer>
                 <Text size="xs">Notifications</Text>
               </STopBar>
               <STopBar
