@@ -50,7 +50,7 @@ export class PostStore {
       const posts = await this.postRepo.getFeedPost(
         this.token || "",
         type,
-        10,
+        1000,
         0,
         userId
       );
