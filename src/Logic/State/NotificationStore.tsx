@@ -69,7 +69,11 @@ export class NotificationStore {
     // now create ui notification out of raw notifications
     buckets.forEach((mapItem) => {
       let finalStatus = mapItem[0].status;
+      mapItem.sort((a, b) => {
+        return a.created_at.getTime() - b.created_at.getTime();
+      });
       let finalDate = mapItem[0].created_at;
+
       let stashes: BigInt[] = [];
       let usernames = (
         <LinkedUserName
@@ -84,7 +88,7 @@ export class NotificationStore {
               stashes.push(eachNotification.id);
               if (eachNotification.status === "Unseen")
                 finalStatus = eachNotification.status;
-              if (eachNotification.created_at > finalDate)
+              if (eachNotification.created_at < finalDate)
                 finalDate = eachNotification.created_at;
 
               if (eachNotificationIndex === 3) enough = true;
@@ -138,6 +142,7 @@ export class NotificationStore {
             </>
           ),
         happened: ago(finalDate),
+        date: finalDate,
         type: mapItem[0].type,
         extra: {
           post_id: mapItem[0].entity_identifier,
@@ -148,7 +153,7 @@ export class NotificationStore {
 
       this.finalNotifications.push(finalNotification);
       this.finalNotifications.sort((a, b) => {
-        return a.happened > b.happened ? 1 : 0;
+        return b.date.getTime() - a.date.getTime();
       });
     });
   }
@@ -177,16 +182,13 @@ export class NotificationStore {
 
   MarkAsSeen = () => {
     this.notSeenCount = 0;
-    const timeout = setTimeout(() => {
-      const ids: bigint[] = [];
-      if (this.rawNotifications)
-        this.rawNotifications = this.rawNotifications.map((v) => {
-          ids.push(v.id);
-          return { ...v, status: "Seen" };
-        });
+    const ids: bigint[] = [];
+    if (this.rawNotifications)
+      this.rawNotifications = this.rawNotifications.map((v) => {
+        ids.push(v.id);
+        return { ...v, status: "Seen" };
+      });
 
-      this.notificationRepo.updateNotification(this.token || "", "Seen", ids);
-      clearTimeout(timeout);
-    }, 10000);
+    this.notificationRepo.updateNotification(this.token || "", "Seen", ids);
   };
 }

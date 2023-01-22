@@ -13,6 +13,7 @@ export interface MUINotification {
   stashes: BigInt[];
   status: "Read" | "Seen" | "Unseen";
   happened: string;
+  date: Date;
   content: JSX.Element;
   type: string;
   extra: any;
