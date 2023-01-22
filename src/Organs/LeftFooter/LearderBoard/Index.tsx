@@ -1,10 +1,10 @@
-import { Card, Table, Button } from "@mantine/core";
+import { Card, Table } from "@mantine/core";
 import styled from "styled-components";
 import LinkedUserName from "../../../Atoms/LinkedUserName";
 import { Observer } from "mobx-react-lite";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Loading from "../../../Atoms/Loading";
 
 const SLeaderBoardIndex = styled.div`
@@ -19,7 +19,6 @@ const SLeaderBoardIndex = styled.div`
 
 function LeaderBoardIndex() {
   const stores = useStores();
-  const navigate = useNavigate();
   const pathname = useLocation().pathname;
 
   useEffect(() => {
@@ -34,23 +33,12 @@ function LeaderBoardIndex() {
           <SLeaderBoardIndex>
             <div
               style={{
-                marginBottom: "10px",
                 display: "flex",
                 width: "100%",
                 justifyContent: "space-between",
-                alignItems: "center",
+                alignItems: "center"
               }}
-            >
-              <b>Leaderboard</b>
-              <Button
-                variant="subtle"
-                onClick={() => {
-                  navigate("/leaderboard");
-                }}
-              >
-                View All
-              </Button>
-            </div>
+            ></div>
             <Card
               shadow="sm"
               p="lg"
@@ -61,7 +49,7 @@ function LeaderBoardIndex() {
                 paddingBottom: "8px",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
+                alignItems: "center"
               }}
             >
               <Table striped highlightOnHover>
