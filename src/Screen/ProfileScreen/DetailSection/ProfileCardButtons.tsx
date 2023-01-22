@@ -1,6 +1,6 @@
 import { ActionIcon, Modal } from "@mantine/core";
 import React, { useState } from "react";
-import { Edit2, LogOut, Share2 } from "react-feather";
+import { Edit2, LogOut, Share2, UserMinus, UserPlus } from "react-feather";
 import { Button } from "@mantine/core";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import { Observer } from "mobx-react-lite";
@@ -23,9 +23,18 @@ function ProfileCardButtons() {
           doesFollow = networkStore.IfFollows(viewProfile.user_id);
 
         let buttonName = "Loading...";
-        if (viewProfile?.user_id === profile?.user_id)
+        let buttonIcon = <></>;
+        if (viewProfile?.user_id === profile?.user_id) {
+          buttonIcon = <Edit2 size={16} />;
           buttonName = "Edit Profile";
-        else if (following) buttonName = doesFollow ? "Un-follow" : "Follow";
+        } else if (following) {
+          buttonIcon = doesFollow ? (
+            <UserMinus size={16} />
+          ) : (
+            <UserPlus size={16} />
+          );
+          buttonName = doesFollow ? "Un-follow" : "Follow";
+        }
 
         return (
           <div
@@ -40,7 +49,7 @@ function ProfileCardButtons() {
           >
             <Button
               variant="light"
-              leftIcon={<Edit2 size={16} />}
+              leftIcon={buttonIcon}
               onClick={() => {
                 if (viewProfile?.user_id === profile?.user_id)
                   navigate("/profile/edit");
