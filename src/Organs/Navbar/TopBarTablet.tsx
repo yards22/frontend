@@ -52,7 +52,7 @@ function TopBarTablet() {
               }}
               className="rounded-md px-2 py-1"
             >
-              <img src={Logo} className="h-6 w-fit" alt="logo" />
+              <img src={Logo} className="w-[90px]" alt="logo" />
             </div>
             <div
               style={{

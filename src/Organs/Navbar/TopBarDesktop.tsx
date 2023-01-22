@@ -1,6 +1,6 @@
-import { Title, useMantineTheme, Text } from "@mantine/core";
+import { useMantineTheme, Text } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
-import { Home, Globe, Bell, User, Search } from "react-feather";
+import { Home, Globe, User, Search } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import NotificationBellWithCount from "../../Atoms/NotificationBellWithCount";
@@ -51,9 +51,9 @@ function TopBarDesktop() {
                 style={{
                   background: mantineTheme.colors[mantineTheme.primaryColor][7]
                 }}
-                className="rounded-md px-2 py-1"
+                className=" rounded-md px-2 py-1"
               >
-                <img src={Logo} className="h-6 w-fit" alt="logo" />
+                <img src={Logo} className="w-[90px]" alt="logo" />
               </div>
             </div>
             <div
