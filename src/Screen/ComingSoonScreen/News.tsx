@@ -1,6 +1,5 @@
 import { Anchor, Badge } from "@mantine/core";
 import { Link } from "react-router-dom";
-import NewsImage from "../../Logos/news.jpeg";
 
 function News() {
   return (
@@ -15,13 +14,6 @@ function News() {
       without any distractions. Our app provides in-depth coverage on everything
       from international matches to domestic leagues and local tournaments, with
       a focus on delivering the news in a precise and ad-free manner.
-      <br />
-      <br />
-      <img
-        src={NewsImage}
-        alt="news_image"
-        className="max-w-[90%] object-scale-down"
-      />
       <br />
       <br />
       You'll never miss a moment of the action, with real-time updates on the
