@@ -56,7 +56,7 @@ function CommentTile(props: CommentProps) {
         </Text>
         {showReply && (
           <AddComment
-            isReply={props.isReply}
+            isReply={true}
             comment_id={props.comment_id}
             onComment={() => {
               setShowReply(false);
