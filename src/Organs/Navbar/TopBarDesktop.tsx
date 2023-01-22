@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import NotificationBellWithCount from "../../Atoms/NotificationBellWithCount";
 import { useStores } from "../../Logic/Providers/StoresProviders";
-
+import Logo from "../../Logos/22YardzW.png";
 const STopBarContainer = styled.div`
   position: fixed;
   top: 0px;
@@ -45,11 +45,20 @@ function TopBarDesktop() {
         const { appStore } = stores;
         return (
           <STopBarContainer>
-            <Title color={"black"} order={2}>
-              22 Yardz
-            </Title>
+            <div className="h-2 w-[33.33%]"></div>
+            <div className="flex h-2 w-[33.33%] items-center justify-center">
+              <div
+                style={{
+                  background: mantineTheme.colors[mantineTheme.primaryColor][7]
+                }}
+                className="rounded-md px-2 py-1"
+              >
+                <img src={Logo} className="h-6 w-fit" alt="logo" />
+              </div>
+            </div>
             <div
               style={{
+                minWidth: "33.33%",
                 display: "flex",
                 alignItems: "center"
               }}

@@ -1,19 +1,11 @@
-import { useMantineTheme, Title, Text } from "@mantine/core";
+import { useMantineTheme, Text } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
-import React from "react";
-import {
-  Home,
-  Globe,
-  Bell,
-  User,
-  Search,
-  Award,
-  BarChart2
-} from "react-feather";
+import { Home, Globe, User, Search, Award, BarChart2 } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import NotificationBellWithCount from "../../Atoms/NotificationBellWithCount";
 import { useStores } from "../../Logic/Providers/StoresProviders";
+import Logo from "../../Logos/22YardzW.png";
 
 const STopBar = styled.a`
   display: flex;
@@ -54,9 +46,14 @@ function TopBarTablet() {
         const { appStore } = stores;
         return (
           <STopBarContainer>
-            <Title color={"black"} order={2}>
-              22 Yardz
-            </Title>
+            <div
+              style={{
+                background: mantineTheme.colors[mantineTheme.primaryColor][7]
+              }}
+              className="rounded-md px-2 py-1"
+            >
+              <img src={Logo} className="h-6 w-fit" alt="logo" />
+            </div>
             <div
               style={{
                 display: "flex",
