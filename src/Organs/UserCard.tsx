@@ -39,7 +39,7 @@ function UserCard(props: UserCardProps) {
         profileimageuri={props.profile_image_uri}
         username={props.username}
       />
-      <LinkedUserName username={"asdfasdfasdfasdfasdfasdf"} type="hard" />
+      <LinkedUserName username={props.username} type="hard" />
       <Badge mt={5} mb={10}>
         <b>Cric Index</b> {props.cric_index}
       </Badge>
