@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StoresContext } from "./Logic/Providers/StoresProviders";
 import { AuthRepo } from "./Logic/Repository/AuthRepo";
 import AppStore from "./Logic/State/AppStore";
@@ -51,6 +51,18 @@ function ProvidedApp(props: ProvidedAppProps) {
     new CommentRepo(BASE_URL + "/comment", BASE_URL_FOR_IMAGES, rq),
     profileStore
   );
+
+  useEffect(() => {
+    let interval: any;
+    notificationStore.GetNotifications();
+    interval = setInterval(() => {
+      notificationStore.GetNotifications();
+    }, 10000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
     <div>
       <StoresContext.Provider

@@ -1,7 +1,8 @@
 import { ActionIcon, useMantineTheme } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
-import { Home, User, Bell, PlusSquare, Globe } from "react-feather";
+import { Home, User, PlusSquare, Globe } from "react-feather";
 import { useNavigate } from "react-router-dom";
+import NotificationBellWithCount from "../../Atoms/NotificationBellWithCount";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 
 function BottomBar() {
@@ -60,7 +61,16 @@ function BottomBar() {
                 appStore.setNavigationState(3);
               }}
             >
-              <Bell size={"20"} />
+              <Observer>
+                {() => {
+                  const { notificationStore } = stores;
+                  return (
+                    <NotificationBellWithCount
+                      count={notificationStore.notSeenCount}
+                    />
+                  );
+                }}
+              </Observer>
             </ActionIcon>
             <ActionIcon
               color={

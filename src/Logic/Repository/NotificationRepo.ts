@@ -13,7 +13,10 @@ export class NotificationRepo {
 
   async getNotifications(token: string) {
     try {
-      const res = await this.rq.Get(this.baseUrl, AuthHeaders(token));
+      const res = await this.rq.Get(
+        `${this.baseUrl}?limit=10000&offset=0`,
+        AuthHeaders(token)
+      );
       const { body } = await CheckResponse(res, 200);
       const temp: MNotification[] = (body.data as any[]).map((v) => {
         return { ...v, created_at: new Date(v.created_at) };

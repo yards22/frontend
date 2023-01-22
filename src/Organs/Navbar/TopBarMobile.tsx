@@ -1,10 +1,10 @@
-import { Burger, Title, useMantineTheme } from "@mantine/core";
+import { Burger, useMantineTheme } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
 import React, { useState } from "react";
 import { Search } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import NavBarMobile from "./NavbarMobile/Index";
-
+import Logo from "../../Logos/22YardzW.png";
 function TopBarMobile() {
   const mantineTheme = useMantineTheme();
   const [isNavBarOpened, setIsNavBarOpened] = useState(false);
@@ -39,9 +39,7 @@ function TopBarMobile() {
                 setIsNavBarOpened(!isNavBarOpened);
               }}
             />
-            <Title color={"white"} order={5}>
-              22 Yardz
-            </Title>
+            <img src={Logo} className="h-7 " />
             <Search
               style={{
                 position: "absolute",

@@ -1,6 +1,7 @@
 import { Button, Textarea } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 
 interface AddCommentProps {
@@ -14,11 +15,20 @@ function AddComment(props: AddCommentProps) {
   const [comment, setComment] = useState("");
   const [loading, setLoading] = useState(false);
   const { commentStore } = useStores();
+  const location = useLocation();
+  const commentRef = useRef<HTMLTextAreaElement>(null);
+  useEffect(() => {
+    if (location.search.includes("open_comments=true") && !props.isReply) {
+    } else {
+      commentRef.current?.focus();
+    }
+  }, [location.search, props.isReply]);
+
   return (
     <div className="flex w-full items-center justify-center border border-solid border-transparent border-b-gray-300">
       <div className="w-full">
         <Textarea
-          autoFocus
+          ref={commentRef}
           variant="unstyled"
           minRows={1}
           placeholder={`Write a ${props.isReply ? "reply" : "comment"}`}

@@ -1,10 +1,11 @@
-import { Title, useMantineTheme, Text } from "@mantine/core";
+import { useMantineTheme, Text } from "@mantine/core";
 import { Observer } from "mobx-react-lite";
-import { Home, Globe, Bell, User, Search } from "react-feather";
+import { Home, Globe, User, Search } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import NotificationBellWithCount from "../../Atoms/NotificationBellWithCount";
 import { useStores } from "../../Logic/Providers/StoresProviders";
-
+import Logo from "../../Logos/22YardzW.png";
 const STopBarContainer = styled.div`
   position: fixed;
   top: 0px;
@@ -44,11 +45,20 @@ function TopBarDesktop() {
         const { appStore } = stores;
         return (
           <STopBarContainer>
-            <Title color={"black"} order={2}>
-              22 Yardz
-            </Title>
+            <div className="h-2 w-[33.33%]"></div>
+            <div className="flex h-2 w-[33.33%] items-center justify-center">
+              <div
+                style={{
+                  background: mantineTheme.colors[mantineTheme.primaryColor][7]
+                }}
+                className=" rounded-md px-2 py-1"
+              >
+                <img src={Logo} className="w-[90px]" alt="logo" />
+              </div>
+            </div>
             <div
               style={{
+                minWidth: "33.33%",
                 display: "flex",
                 alignItems: "center"
               }}
@@ -110,7 +120,16 @@ function TopBarDesktop() {
                   appStore.setNavigationState(3);
                 }}
               >
-                <Bell size={"20"} />
+                <Observer>
+                  {() => {
+                    const { notificationStore } = stores;
+                    return (
+                      <NotificationBellWithCount
+                        count={notificationStore.notSeenCount}
+                      />
+                    );
+                  }}
+                </Observer>
                 <Text size="xs">Notifications</Text>
               </STopBar>
               <STopBar

@@ -14,7 +14,6 @@ import FeedIndex from "./Screen/FeedScreen/Index";
 import TopBar from "./Organs/Navbar/TopBar";
 import BottomBar from "./Organs/Navbar/BottomBar";
 import EditProfileIndex from "./Screen/EditProfileScreen/Index";
-import ComingSoonScreenIndex from "./Screen/ComingSoonScreen/Index";
 import LeaderBoardScreenIndex from "./Screen/LeaderBoardScreen/Index";
 import PollsScreenIndex from "./Screen/PollsScreen/Index";
 import FeedBackScreenIndex from "./Screen/FeedbackScreen/Index";
@@ -23,6 +22,9 @@ import FollowersScreenIndex from "./Screen/FollowersScreen/Index";
 import PostIndex from "./Screen/PostScreen/Index";
 import PrivacyPolicy from "./Screen/TCPP/PrivacyPolicy";
 import TC from "./Screen/TCPP/TC";
+import Auction from "./Screen/ComingSoonScreen/Auction";
+import News from "./Screen/ComingSoonScreen/News";
+import LiveScore from "./Screen/ComingSoonScreen/LiveScore";
 
 const SApp = styled.section`
   width: 100%;
@@ -82,10 +84,9 @@ function App() {
                     <Route path="feed" element={<FeedIndex />} />
                     <Route path="feedback" element={<FeedBackScreenIndex />} />
                     <Route path="polls" element={<PollsScreenIndex />} />
-                    <Route
-                      path="comingSoon"
-                      element={<ComingSoonScreenIndex />}
-                    />
+                    <Route path="auction-table" element={<Auction />} />
+                    <Route path="news" element={<News />} />
+                    <Route path="live-scores" element={<LiveScore />} />
                     <Route
                       path="leaderboard"
                       element={<LeaderBoardScreenIndex />}
