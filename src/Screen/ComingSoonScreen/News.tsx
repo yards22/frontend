@@ -1,6 +1,6 @@
 import { Anchor, Badge } from "@mantine/core";
 import { Link } from "react-router-dom";
-import NewsImage from "./news.jpeg";
+import NewsImage from "../../Logos/news.jpeg";
 
 function News() {
   return (

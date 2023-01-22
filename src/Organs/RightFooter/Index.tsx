@@ -24,7 +24,7 @@ function RightFooterIndex() {
         return (
           <SRightFooter theme={{ width: appStore.deviceWidth }}>
             <ComingSoonIndex />
-            <div className="h-8" />
+            <div className="h-8 w-3" />
             <FeedbackIndex />
           </SRightFooter>
         );
