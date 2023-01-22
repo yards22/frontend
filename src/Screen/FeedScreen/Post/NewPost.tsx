@@ -201,7 +201,6 @@ function NewPost() {
                           autoClose: 2500,
                           color: "green"
                         });
-                        postStore.GetPosts("feed");
 
                         // cleaning
                         setFiles([]);
@@ -217,6 +216,9 @@ function NewPost() {
                           autoClose: 2500,
                           color: "red"
                         });
+                      })
+                      .finally(() => {
+                        postStore.GetPosts("feed");
                       });
                   }}
                 >
