@@ -21,11 +21,6 @@ export class NotificationStore {
     this.notificationRepo = notificationRepo;
     this.token = window.localStorage.getItem(TOKEN_KEY);
     this.GetNotifications();
-
-    // running get notification in interval of 10s
-    setInterval(() => {
-      this.GetNotifications();
-    }, 10000);
   }
 
   @action
