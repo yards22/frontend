@@ -1,4 +1,4 @@
-import { ActionIcon, Button, FileButton, Textarea } from "@mantine/core";
+import { ActionIcon, Badge, Button, FileButton, Textarea } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { Observer } from "mobx-react-lite";
 import { useEffect, useRef, useState } from "react";
@@ -94,6 +94,7 @@ function NewPost() {
                 autosize
                 minRows={2}
                 placeholder="Have Thoughts? Bowl It Out 🏏"
+                maxLength={240}
                 style={{
                   width: "100%",
                   fontSize: "28px",
@@ -162,6 +163,11 @@ function NewPost() {
                   right: "10px"
                 }}
               >
+                {content.length > 0 && (
+                  <Badge size="lg" color={"pink"} className="">
+                    {content.length} / 240
+                  </Badge>
+                )}
                 {files.length <= MAX_FILES_ALLOWED && (
                   <FileButton
                     onChange={handleImageSelect}
