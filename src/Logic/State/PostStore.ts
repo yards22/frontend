@@ -1,8 +1,4 @@
-import {
-  action,
-  makeAutoObservable,
-  observable,
-} from "mobx";
+import { action, makeAutoObservable, observable } from "mobx";
 import MPost from "../Model/MPost";
 import { PostRepo } from "../Repository/PostRepo";
 
@@ -29,7 +25,7 @@ export class PostStore {
     try {
       await this.postRepo.createPost({
         data: props,
-        token: this.token,
+        token: this.token
       });
     } catch (err) {
       throw err;
@@ -40,10 +36,7 @@ export class PostStore {
 
   @action
   GetPostByID = async (postId: bigint) => {
-    return this.postRepo.getPostById(
-      this.token || "",
-      postId
-    );
+    return this.postRepo.getPostById(this.token || "", postId);
   };
 
   @action
@@ -57,7 +50,7 @@ export class PostStore {
       const posts = await this.postRepo.getFeedPost(
         this.token || "",
         type,
-        10,
+        1000,
         0,
         userId
       );
@@ -65,9 +58,7 @@ export class PostStore {
       //sorting post
       posts.sort((a, b) => {
         if (sort === "desc")
-          return (
-            b.created_at.getTime() - a.created_at.getTime()
-          );
+          return b.created_at.getTime() - a.created_at.getTime();
         return 1;
       });
 
@@ -78,10 +69,7 @@ export class PostStore {
   };
 
   @action
-  ToggleLike = async (
-    post_id: bigint,
-    username: string
-  ) => {
+  ToggleLike = async (post_id: bigint, username: string) => {
     try {
       if (!this.viewPosts) return;
       const posts = this.viewPosts.map((v) => v);
@@ -98,19 +86,15 @@ export class PostStore {
       }
 
       // send with toggled like
-      await this.postRepo.likePost(
-        this.token || "",
-        post_id,
-        !liked
-      );
+      await this.postRepo.likePost(this.token || "", post_id, !liked);
 
       // now update in local store
       posts[index].is_liked = !liked;
       if (liked) {
         // remove from list of usernames
-        posts[index].liked_by = posts[
-          index
-        ].liked_by.filter((v) => v !== username);
+        posts[index].liked_by = posts[index].liked_by.filter(
+          (v) => v !== username
+        );
       } else {
         // add to list of usernames who liked post
         posts[index].liked_by.push(username);
@@ -140,11 +124,7 @@ export class PostStore {
       }
 
       // send with toggled is_fav
-      await this.postRepo.favPost(
-        this.token || "",
-        post_id,
-        !is_fav
-      );
+      await this.postRepo.favPost(this.token || "", post_id, !is_fav);
 
       // now update in local store
       posts[index].is_favorite = !is_fav;

@@ -1,7 +1,7 @@
 import { Anchor, Badge } from "@mantine/core";
 import React from "react";
 import { Link } from "react-router-dom";
-import AuctionImage from "./auction.jpeg";
+import AuctionImage from "../../Logos/auction.jpeg";
 function Auction() {
   return (
     <div className="p-8 text-gray-700">

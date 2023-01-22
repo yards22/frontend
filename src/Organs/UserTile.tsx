@@ -21,8 +21,6 @@ function UserTile(props: UserTileProps) {
     profileStore.profile?.user_id === props.user_id
   );
 
-  console.log(isOwnProfile);
-
   return (
     <div className="flex h-[225] min-w-[180] items-center justify-center rounded-md border border-solid border-gray-200 p-2">
       <ProfilePhoto

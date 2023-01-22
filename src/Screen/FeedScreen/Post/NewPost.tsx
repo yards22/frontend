@@ -216,6 +216,9 @@ function NewPost() {
                           autoClose: 2500,
                           color: "red"
                         });
+                      })
+                      .finally(() => {
+                        postStore.GetPosts("feed");
                       });
                   }}
                 >
