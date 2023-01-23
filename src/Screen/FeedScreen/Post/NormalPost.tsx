@@ -13,6 +13,7 @@ import { CopyToClipboard, GetHostUrl } from "../../../Logic/Utils/Common";
 import { showNotification } from "@mantine/notifications";
 import ProfilePhoto from "../../../Atoms/ProfilePhoto";
 import { useLocation } from "react-router-dom";
+import ParsedPost from "../../../Atoms/ParsedPost";
 interface NormalPostProps {
   data: MPost;
 }
@@ -63,7 +64,7 @@ function NormalPost(props: NormalPostProps) {
         </div>
       </div>
       <div style={{ marginTop: "10px" }}>
-        {props.data.content}
+        <ParsedPost content={props.data.content} />
         {props.data.media && props.data.media.length > 0 && (
           <NormalPostMedia media={props.data.media} />
         )}
