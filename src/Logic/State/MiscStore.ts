@@ -52,11 +52,20 @@ export class MiscStore {
         for (let i = 0; i < polls?.length; i++) {
           if (polls[i].poll.poll_id === pollId) {
             polls[i].hasPolled = true;
+            let found = false;
+
+            // now lets try to find out the reactions
             for (let j = 0; j < polls[i].reaction.length; j++) {
               if (polls[i].reaction[j].type === type) {
                 polls[i].reaction[j].count++;
+                found = true;
                 break;
               }
+            }
+
+            // first reaction
+            if (!found) {
+              polls[i].reaction.push({ type: type, count: 1 });
             }
             break;
           }
