@@ -18,12 +18,15 @@ function UsernameInterestsAndBio() {
 
         return (
           <SUsernameInterestsAndBio>
-            <Title order={6} style={{ marginTop: "10px" }}>
+            <Text
+              className="font-normal text-gray-700"
+              style={{ marginTop: "10px" }}
+            >
               {viewProfile?.username}
-            </Title>
-            <Text color="dimmed" size={"sm"}>
-              {viewProfile?.email_id}
             </Text>
+            <Title className="text-gray-700" size={"sm"}>
+              {viewProfile?.name}
+            </Title>
             <div style={{ display: "flex", flexWrap: "wrap" }}>
               {viewProfile?.interests &&
                 viewProfile?.interests.map((item, index) => {
@@ -44,7 +47,7 @@ function UsernameInterestsAndBio() {
               hideLabel="Hide"
               style={{
                 marginTop: "15px",
-                fontSize: "16px",
+                fontSize: "16px"
               }}
             >
               <Text style={{ fontSize: "16px" }} color="dimmed">

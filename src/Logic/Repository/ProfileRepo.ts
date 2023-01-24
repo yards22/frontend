@@ -31,6 +31,7 @@ export class ProfileRepo {
 
       return {
         bio: body.data.bio,
+        name: body.data.name,
         cric_index: body.data.cric_index,
         email_id: body.data.email_id,
         interests: interests,
@@ -66,6 +67,7 @@ export class ProfileRepo {
   async updateUserDetails(
     token: string,
     username?: string,
+    name?: string,
     bio?: string,
     intr?: string[],
     image?: File
@@ -76,6 +78,7 @@ export class ProfileRepo {
       if (bio) data.append("bio", bio);
       if (intr) data.append("interests", intr.toString());
       if (image) data.append("image", image);
+      data.append("name", name || "");
 
       const res = await fetch(`${this.baseUrl}/`, {
         method: "PUT",
@@ -90,6 +93,7 @@ export class ProfileRepo {
 
       return {
         bio: body.data.bio,
+        name: body.data.name,
         cric_index: body.data.cric_index,
         email_id: body.data.email_id,
         interests: interests,

@@ -62,7 +62,7 @@ function EditPageOne() {
                 justifyContent: "center",
                 alignItems: "center",
                 padding: "0px 15px",
-                marginBottom: "20px",
+                marginBottom: "20px"
               }}
             >
               <EditProfileImage
@@ -80,10 +80,22 @@ function EditPageOne() {
                   setUserName(e.target.value.trim());
                 }}
               />
+
               <Text color={"red"} mt={3} size="xs">
                 {userNameError}
               </Text>
-
+              <TextInput
+                style={{ width: "100%" }}
+                type="text"
+                value={profileStore.profile?.name || ""}
+                label="Name"
+                onChange={(e: any) => {
+                  profileStore.SetProfile({
+                    ...profileStore.profile,
+                    name: e.target.value
+                  } as any);
+                }}
+              />
               <Textarea
                 style={{ width: "100%" }}
                 label="Bio"
@@ -91,7 +103,7 @@ function EditPageOne() {
                 onChange={(e: any) => {
                   profileStore.SetProfile({
                     ...profileStore.profile,
-                    bio: e.target.value,
+                    bio: e.target.value
                   } as any);
                 }}
                 minRows={4}
@@ -107,6 +119,7 @@ function EditPageOne() {
                   profileStore
                     .UpdateProfile(
                       username,
+                      profileStore.profile?.name || undefined,
                       profileStore.profile?.bio || undefined,
                       profileStore.profile?.interests,
                       newProfileImage
@@ -115,7 +128,7 @@ function EditPageOne() {
                       setLoading(false);
                       showNotification({
                         message: "Profile Details Updated",
-                        color: "green",
+                        color: "green"
                       });
                       navigate("/profile");
                       stores.appStore.setNavigationState(4);
@@ -124,7 +137,7 @@ function EditPageOne() {
                       setLoading(false);
                       showNotification({
                         message: "Profile Details Not Updated",
-                        color: "red",
+                        color: "red"
                       });
                     });
                 }}

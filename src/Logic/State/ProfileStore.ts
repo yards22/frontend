@@ -66,6 +66,7 @@ export class ProfileStore {
   @action
   UpdateProfile = async (
     username?: string,
+    name?: string,
     bio?: string,
     intr?: string[],
     image?: File
@@ -75,6 +76,7 @@ export class ProfileStore {
       const profile = await this.profileRepo.updateUserDetails(
         this.token || "",
         username,
+        name,
         bio,
         intr,
         image
