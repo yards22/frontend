@@ -1,42 +1,25 @@
 import { Carousel } from "@mantine/carousel";
 import { Observer } from "mobx-react-lite";
 import Loading from "../../../Atoms/Loading";
-import { MPoll } from "../../../Logic/Model/MPoll";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import PollCard from "./PollCard";
 
-function getOptions(poll: MPoll): { title: string; votes: number }[] {
-  const res: { title: string; votes: number }[] = [];
-  poll.poll.options.forEach((option, index) => {
-    let count = 0;
-    poll.reaction.forEach((rx) => {
-      if (rx.type === index) count++;
-    });
-    res.push({ title: option, votes: count });
-  });
-  return res;
-}
-
 function PollCarousal() {
-  const stores = useStores();
+  const { miscStore } = useStores();
+
   return (
     <Observer>
       {() => {
-        const { miscStore } = stores;
-        if (!miscStore.polls) return <Loading />;
-        if (miscStore.polls.length === 0)
+        const { polls } = miscStore;
+        if (!polls) return <Loading />;
+        if (polls.length === 0)
           return (
             <b className="flex h-[100px] items-center justify-center text-gray-400">
               No Polls at the moment.
             </b>
           );
         return (
-          <div
-            style={{
-              width: "300px",
-              height: "fit-content"
-            }}
-          >
+          <div className="h-fit w-[300px]">
             <Carousel
               loop
               withControls={false}
@@ -55,16 +38,11 @@ function PollCarousal() {
               slideGap="md"
               align="start"
             >
-              {miscStore.polls.map((each, index) => {
-                if (index <= 2)
+              {polls.map((each, index) => {
+                if (index <= 5)
                   return (
                     <Carousel.Slide key={"poll_" + each.poll.poll_id}>
-                      <PollCard
-                        hasPolled={each.hasPolled}
-                        pollId={each.poll.poll_id}
-                        question={each.poll.poll_question}
-                        options={getOptions(each)}
-                      />
+                      <PollCard pollData={each} />
                     </Carousel.Slide>
                   );
                 return null;

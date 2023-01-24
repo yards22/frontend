@@ -37,12 +37,7 @@ function PollsScreenIndex() {
                   style={{ margin: "10px" }}
                   key={"poll_page_poll" + each.poll.poll_id}
                 >
-                  <PollCard
-                    hasPolled={each.hasPolled}
-                    pollId={each.poll.poll_id}
-                    question={each.poll.poll_question}
-                    options={getOptions(each)}
-                  />
+                  <PollCard pollData={each} />
                 </div>
               );
             })}
