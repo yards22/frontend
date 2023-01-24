@@ -16,7 +16,10 @@ function MakeOptions(data: MPoll) {
   const reactionCountMap = new Map<number, number>();
   data.reaction.forEach((reaction) => {
     totalVotes += reaction.count;
-    reactionCountMap.set(reaction.type, reaction.count);
+    reactionCountMap.set(
+      reaction.type,
+      (reactionCountMap.get(reaction.type) || 0) + reaction.count
+    );
   });
 
   data.poll.options.forEach((pollOption, index) => {
@@ -28,8 +31,9 @@ function MakeOptions(data: MPoll) {
     else
       res.push({
         title: pollOption,
-        percentage:
-          Math.round((reactionCountMap.get(index) || 0) / totalVotes) * 100
+        percentage: Math.round(
+          ((reactionCountMap.get(index) || 0) * 100) / totalVotes
+        )
       });
   });
   return res;
