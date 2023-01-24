@@ -9,7 +9,11 @@ import { useStores } from "../../../Logic/Providers/StoresProviders";
 import AddComment from "./AddComment";
 import sAgo from "s-ago";
 import NormalPostMedia from "./NormalPostMedia";
-import { CopyToClipboard, GetHostUrl } from "../../../Logic/Utils/Common";
+import {
+  CopyToClipboard,
+  GetHostUrl,
+  HashWithDate
+} from "../../../Logic/Utils/Common";
 import { showNotification } from "@mantine/notifications";
 import ProfilePhoto from "../../../Atoms/ProfilePhoto";
 import { useLocation } from "react-router-dom";
@@ -132,14 +136,19 @@ function NormalPost(props: NormalPostProps) {
               radius={"xl"}
               size="xl"
               onClick={() => {
-                CopyToClipboard(
-                  `${GetHostUrl()}/post?post_id=${props.data.post_id}`
-                ).then(() => {
-                  showNotification({
-                    title: "Copied To Clipboard",
-                    message: "You can share post via copied link."
-                  });
-                });
+                const postId = props.data.post_id;
+                const hashedPostId = HashWithDate(
+                  props.data.created_at,
+                  postId
+                );
+                CopyToClipboard(`${GetHostUrl()}/post?pr=${hashedPostId}`).then(
+                  () => {
+                    showNotification({
+                      title: "Copied To Clipboard",
+                      message: "You can share post via copied link."
+                    });
+                  }
+                );
               }}
             >
               <Link2 size={"20"} />
