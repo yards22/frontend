@@ -12,15 +12,7 @@ function PollIndex() {
   }, []);
   return (
     <>
-      <div
-        style={{
-          marginBottom: "10px",
-          display: "flex",
-          width: "100%",
-          justifyContent: "space-between",
-          alignItems: "center"
-        }}
-      >
+      <div className="mb-3 flex w-full items-center justify-between">
         <b>Polls</b>
         <Button
           variant="subtle"
