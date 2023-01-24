@@ -3,6 +3,7 @@ export interface MProfile {
   username: string;
   email_id: string | null;
   profile_image_uri: string | null;
+  name: string | null;
   bio: string | null;
   cric_index: number;
   followers: number;
