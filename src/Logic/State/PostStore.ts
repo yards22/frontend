@@ -97,7 +97,7 @@ export class PostStore {
         );
       } else {
         // add to list of usernames who liked post
-        posts[index].liked_by.push(username);
+        posts[index].liked_by = [username].concat(posts[index].liked_by);
       }
 
       this.viewPosts = posts;
