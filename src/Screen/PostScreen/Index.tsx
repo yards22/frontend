@@ -1,3 +1,4 @@
+import { Observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
@@ -17,9 +18,8 @@ function PostIndex() {
   const search = useLocation().search;
   const queryPostId = new URLSearchParams(search).get("post_id");
   const queryPostHash = new URLSearchParams(search).get("pr");
-  const [loading, setLoading] = useState(true);
-  const [post, setPost] = useState<MPost | null>(null);
   useEffect(() => {
+    postStore.viewPosts = null;
     let findBy = "";
     if (queryPostId && queryPostId !== "") {
       // using legacy post_id share
@@ -32,33 +32,36 @@ function PostIndex() {
     }
 
     if (findBy !== "") {
-      postStore
-        .GetPostByID(BigInt(findBy))
-        .then((p) => {
-          setPost(p);
-        })
-        .catch((err) => {})
-        .finally(() => {
-          setLoading(false);
-        });
+      postStore.GetPostByID(BigInt(findBy));
     } else {
-      setLoading(false);
-      setPost(null);
+      postStore.viewPosts = null;
     }
-  }, [queryPostId]);
-  if (loading) return <Loading />;
-  if (!post)
-    return (
-      <p className="mt-10 w-full text-center font-bold">
-        No post found. <br />
-        <span className="font-normal text-gray-700">
-          Either share link has expired or is invalid.
-        </span>
-      </p>
-    );
+  }, [queryPostId, queryPostHash]);
+
   return (
     <SPostIndex>
-      <NormalPost data={post} />
+      <Observer>
+        {() => {
+          const { viewPosts } = postStore;
+          if (!viewPosts) return <Loading />;
+          if (viewPosts.length === 0)
+            return (
+              <p className="mt-10 w-full text-center font-bold">
+                No post found. <br />
+                <span className="font-normal text-gray-700">
+                  Either share link has expired or is invalid.
+                </span>
+              </p>
+            );
+          return (
+            <>
+              {viewPosts.map((post) => (
+                <NormalPost data={post} key={"post_id" + post.post_id} />
+              ))}
+            </>
+          );
+        }}
+      </Observer>
     </SPostIndex>
   );
 }

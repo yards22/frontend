@@ -3,7 +3,7 @@ import MPost from "../Model/MPost";
 import { PostRepo } from "../Repository/PostRepo";
 
 export class PostStore {
-  @observable viewPosts: MPost[] | null = [];
+  @observable viewPosts: MPost[] | null = null;
   @observable isLoading: boolean = false;
   @observable token: string | null = null;
   postRepo: PostRepo;
@@ -36,7 +36,9 @@ export class PostStore {
 
   @action
   GetPostByID = async (postId: bigint) => {
-    return this.postRepo.getPostById(this.token || "", postId);
+    const post = await this.postRepo.getPostById(this.token || "", postId);
+    if (post) this.viewPosts = [post];
+    else this.viewPosts = [];
   };
 
   @action
