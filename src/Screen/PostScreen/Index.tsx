@@ -14,7 +14,7 @@ const SPostIndex = styled.section`
   padding: 10px;
 `;
 function PostIndex() {
-  const { postStore } = useStores();
+  const { postStore, profileStore } = useStores();
   const search = useLocation().search;
   const queryPostId = new URLSearchParams(search).get("post_id");
   const queryPostHash = new URLSearchParams(search).get("pr");
@@ -32,7 +32,9 @@ function PostIndex() {
     }
 
     if (findBy !== "") {
-      postStore.GetPostByID(BigInt(findBy));
+      profileStore.GetMyProfile().then(() => {
+        postStore.GetPostByID(BigInt(findBy));
+      });
     } else {
       postStore.viewPosts = null;
     }
