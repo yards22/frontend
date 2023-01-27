@@ -94,7 +94,7 @@ export class CommentStore {
           let comment = this.comments.get(post_id) || [];
           comment = comment.map((v) => {
             if (v.comment_id === parent_id) {
-              let replies = v.replies;
+              let replies = v.replies || [];
               replies = [reply].concat(replies);
               return { ...v, replies };
             }
@@ -110,7 +110,7 @@ export class CommentStore {
         );
 
         // forming comment object
-        const comment: MComment = {
+        const formedComment: MComment = {
           comment_id: d.comment_id,
           content,
           user_id: this.profileStore.profile.user_id,
@@ -121,7 +121,11 @@ export class CommentStore {
           replies: []
         };
 
-        const cs = [comment].concat(this.comments.get(parent_id) || []);
+        const cs = [formedComment].concat(
+          (this.comments.get(parent_id) || []).map((x) => x)
+        );
+
+        this.commentPostMap.set(d.comment_id, parent_id);
         this.comments.set(parent_id, cs);
       }
     } catch (err) {
