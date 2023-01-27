@@ -49,16 +49,15 @@ export class ProfileRepo {
     }
   }
 
-  async checkUserName(username: string, token: string): Promise<number> {
+  async checkUserName(username: string, token: string) {
     try {
       const res = await this.rq.Get(
-        `${this.baseUrl}/username/check-availability?=${username}`,
+        `${this.baseUrl}/username/check-availability?username=${username}`,
         {
           Authorization: `Bearer ${token}`
         }
       );
-      const response = await CheckResponse(res, 200);
-      return response.status;
+      await CheckResponse(res, 200);
     } catch (err: any) {
       throw ThrowFor(err, {});
     }
