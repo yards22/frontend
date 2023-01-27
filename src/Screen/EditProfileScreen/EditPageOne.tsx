@@ -1,10 +1,18 @@
-import { Textarea, Text, TextInput, Button, Divider } from "@mantine/core";
+import {
+  Textarea,
+  Text,
+  TextInput,
+  Button,
+  Divider,
+  Loader
+} from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { Observer } from "mobx-react-lite";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useStores } from "../../Logic/Providers/StoresProviders";
+import { validateUsername } from "../../Logic/Utils/Common";
 import EditInterest from "./EditInterest";
 
 import EditProfileImage from "./EditProfileImage";
@@ -30,19 +38,30 @@ function EditPageOne() {
   const [loading, setLoading] = useState(false);
 
   async function handleUsernameBlur() {
-    const regex = new RegExp("^[A-Za-z][A-Za-z0-9_]{7,29}$");
-    if (!regex.test(username))
-      setUserNameError(
-        "Username cannot be empty, must be 6 to 18 characters long, cannot have spaces or any special characters."
-      );
-    else if (
+    const vu = validateUsername(username);
+    setUserNameCheck(false);
+    if (vu) {
+      setUserNameError(vu.message);
+      return;
+    } else {
+      setUserNameError("");
+    }
+    if (
       username !== stores.profileStore.profile?.username &&
       stores.authStore.token
     ) {
-      stores.profileStore.CheckUserNameAvailability(username).then((res) => {
-        setUserNameCheck(true);
-        setUserNameError(res !== 200 ? "Username already taken." : "");
-      });
+      stores.profileStore
+        .CheckUserNameAvailability(username)
+        .then((res) => {
+          setUserNameCheck(true);
+          setUserNameError("");
+        })
+        .catch((err) => {
+          setUserNameError("Username already taken.");
+        })
+        .finally(() => {
+          setUserNameCheck(true);
+        });
     } else {
       setUserNameError("");
     }
@@ -81,9 +100,17 @@ function EditPageOne() {
                 }}
               />
 
-              <Text color={"red"} mt={3} size="xs">
+              <Text color={"red"} mt={3} size="xs" className="w-full">
                 {userNameError}
               </Text>
+              {!isUserNameCheckDone && (
+                <div className="flex w-full gap-2">
+                  <Loader size={"xs"} color="gray" />
+                  <Text size={"xs"} color="dimmed">
+                    Checking username
+                  </Text>
+                </div>
+              )}
               <TextInput
                 style={{ width: "100%" }}
                 type="text"
