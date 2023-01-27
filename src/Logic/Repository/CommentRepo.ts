@@ -1,5 +1,5 @@
 import { AuthHeaders } from "../../Atoms/Util";
-import { MComment } from "../Model/MComment";
+import { MComment, MCommentReply } from "../Model/MComment";
 import { Request } from "../Utils/Fetch";
 import { CheckResponse, ThrowFor } from "../Utils/ResponseHandler";
 
@@ -73,7 +73,42 @@ export class CommentRepo {
         AuthHeaders(token)
       );
       const { body } = await CheckResponse(res, 200);
-      return body.data as MComment;
+
+      const createdReply = body.data as MCommentReply;
+      createdReply.reply_id = body.data.comment_id;
+      return createdReply;
+    } catch (err: any) {
+      throw ThrowFor(err, {});
+    }
+  }
+
+  async deleteReply(token: string, comment_id: bigint, reply_id: bigint) {
+    try {
+      const res = await this.rq.Delete(
+        `${this.baseUrl}/reply`,
+        {
+          comment_id: reply_id,
+          parent_comment_id: comment_id
+        },
+        AuthHeaders(token)
+      );
+      await CheckResponse(res, 200);
+    } catch (err: any) {
+      throw ThrowFor(err, {});
+    }
+  }
+
+  async deleteComment(token: string, post_id: bigint, comment_id: bigint) {
+    try {
+      const res = await this.rq.Delete(
+        `${this.baseUrl}`,
+        {
+          comment_id: comment_id,
+          post_id: post_id
+        },
+        AuthHeaders(token)
+      );
+      await CheckResponse(res, 200);
     } catch (err: any) {
       throw ThrowFor(err, {});
     }
