@@ -12,8 +12,8 @@ function ProfilePhoto(props: ProfilePhotoProps) {
       <Avatar
         size={props.size}
         src={props.profileimageuri}
+        radius={"xl"}
         {...props}
-        className="rounded-full"
       />
     );
   }
@@ -23,8 +23,8 @@ function ProfilePhoto(props: ProfilePhotoProps) {
         size={props.size}
         color="blue"
         variant="gradient"
+        radius={"xl"}
         {...props}
-        className="rounded-full"
       >
         {props.username?.substring(0, 2).toUpperCase()}
       </Avatar>
@@ -34,8 +34,8 @@ function ProfilePhoto(props: ProfilePhotoProps) {
       size={props.size}
       color="blue"
       variant="gradient"
+      radius={"xl"}
       {...props}
-      className="rounded-full"
     />
   );
 }
