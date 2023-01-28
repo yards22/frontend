@@ -58,7 +58,7 @@ function PostIndex() {
           return (
             <>
               {viewPosts.map((post) => (
-                <NormalPost data={post} key={"post_id" + post.post_id} />
+                <NormalPost data={post} type="feed" key={"post_id" + post.post_id} />
               ))}
             </>
           );
