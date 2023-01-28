@@ -1,6 +1,6 @@
-import { ActionIcon, Card, Title, useMantineTheme } from "@mantine/core";
+import { ActionIcon, Button, Card, Menu, Modal, Title, useMantineTheme } from "@mantine/core";
 import MPost from "../../../Logic/Model/MPost";
-import { Heart, Link2, MessageCircle, Star } from "react-feather";
+import { AlertCircle, Edit, Edit2, Heart, Link2, MessageCircle, MoreVertical, Star, Trash } from "react-feather";
 import Liked from "./Liked";
 import LinkedUserName from "../../../Atoms/LinkedUserName";
 import { useEffect, useState } from "react";
@@ -18,15 +18,35 @@ import { showNotification } from "@mantine/notifications";
 import ProfilePhoto from "../../../Atoms/ProfilePhoto";
 import { useLocation } from "react-router-dom";
 import ParsedPost from "../../../Atoms/ParsedPost";
+import styled from "styled-components";
 interface NormalPostProps {
   data: MPost;
+  type: "feed" | "mine" | "trending" | "fav",
 }
+
+const DeleteIcon = styled.div`
+    display :flex;
+    justify-content:flex-end;
+    flex-direction:row;
+    width:100%;
+`
 
 function NormalPost(props: NormalPostProps) {
   const mantineTheme = useMantineTheme();
   const [showComments, setShowComments] = useState(false);
   const stores = useStores();
   const location = useLocation();
+
+  const OnDelete = async ()=>{
+    stores.postStore.DeletePost(props.data.post_id)
+    .then(()=>{
+       console.log("deleted")
+    }).catch((err)=>{
+      throw err;
+    }).finally(()=>{
+      stores.postStore.GetPosts(props.type)
+    })
+  } 
 
   useEffect(() => {
     if (location.search.includes("open_comments=true")) {
@@ -66,6 +86,26 @@ function NormalPost(props: NormalPostProps) {
             {sAgo(props.data.created_at)}
           </Title>
         </div>
+        <DeleteIcon>
+            {
+              stores.profileStore.viewProfile?.user_id === props.data.user_id ? 
+              <Menu>
+                <Menu.Target>
+                  <Button variant="subtle" color="dark" size="xs" compact={true}>
+                    <MoreVertical/>
+                  </Button>
+                </Menu.Target>
+                <Menu.Dropdown>
+                  <Menu.Label>More</Menu.Label>
+                  <Menu.Item icon={<Edit2 size={14} />}>Edit</Menu.Item>
+                  <Menu.Item color="red" icon={<Trash size={14}/>} onClick={OnDelete}>Delete</Menu.Item>
+                  <Menu.Item color="red" icon={<AlertCircle size={14} />}>Report</Menu.Item>
+                </Menu.Dropdown>
+              </Menu>
+                : null
+            }
+            </DeleteIcon>
+         
       </div>
       <div style={{ marginTop: "10px" }}>
         <ParsedPost content={props.data.content} />
