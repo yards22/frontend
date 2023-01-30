@@ -1,6 +1,6 @@
-import { ActionIcon, Button, Card, Menu, Modal, Title, useMantineTheme } from "@mantine/core";
+import { ActionIcon, Button, Card, Menu, Title, useMantineTheme } from "@mantine/core";
 import MPost from "../../../Logic/Model/MPost";
-import { AlertCircle, Edit, Edit2, Heart, Link2, MessageCircle, MoreVertical, Star, Trash } from "react-feather";
+import { AlertCircle, Edit2, Heart, Link2, MessageCircle, MoreVertical, Star, Trash } from "react-feather";
 import Liked from "./Liked";
 import LinkedUserName from "../../../Atoms/LinkedUserName";
 import { useEffect, useState } from "react";
@@ -36,7 +36,7 @@ function NormalPost(props: NormalPostProps) {
   const [showComments, setShowComments] = useState(false);
   const stores = useStores();
   const location = useLocation();
-
+  
   const OnDelete = async ()=>{
     stores.postStore.DeletePost(props.data.post_id)
     .then(()=>{
@@ -87,8 +87,6 @@ function NormalPost(props: NormalPostProps) {
           </Title>
         </div>
         <DeleteIcon>
-            {
-              stores.profileStore.viewProfile?.user_id === props.data.user_id ? 
               <Menu>
                 <Menu.Target>
                   <Button variant="subtle" color="dark" size="xs" compact={true}>
@@ -97,13 +95,18 @@ function NormalPost(props: NormalPostProps) {
                 </Menu.Target>
                 <Menu.Dropdown>
                   <Menu.Label>More</Menu.Label>
-                  <Menu.Item icon={<Edit2 size={14} />}>Edit</Menu.Item>
+                  {
+              stores.profileStore.profile?.user_id === props.data.user_id ? 
+                   
+                   <>
+                   <Menu.Item icon={<Edit2 size={14} />}>Edit</Menu.Item>
                   <Menu.Item color="red" icon={<Trash size={14}/>} onClick={OnDelete}>Delete</Menu.Item>
                   <Menu.Item color="red" icon={<AlertCircle size={14} />}>Report</Menu.Item>
+                   </>:
+                  <Menu.Item color="red" icon={<AlertCircle size={14} />}>Report</Menu.Item>
+}
                 </Menu.Dropdown>
               </Menu>
-                : null
-            }
             </DeleteIcon>
          
       </div>
