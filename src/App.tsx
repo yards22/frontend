@@ -25,6 +25,7 @@ import TC from "./Screen/TCPP/TC";
 import Auction from "./Screen/ComingSoonScreen/Auction";
 import News from "./Screen/ComingSoonScreen/News";
 import LiveScore from "./Screen/ComingSoonScreen/LiveScore";
+import InstMatchIndex from "./Screen/InstMatchScreen/Index";
 
 const SApp = styled.section`
   width: 100%;
@@ -100,6 +101,7 @@ function App() {
                       element={<FollowersScreenIndex />}
                     />
                     <Route path="post" element={<PostIndex />} />
+                    <Route path="instantMatch" element={<InstMatchIndex/>} />
                   </Route>
                   <Route path="privacy-policy" element={<PrivacyPolicy />} />
                   <Route path="terms-and-conditions" element={<TC />} />
