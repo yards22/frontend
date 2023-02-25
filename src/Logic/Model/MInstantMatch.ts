@@ -5,18 +5,19 @@ export interface MInstantMatch{
     hostTeam ?: string,
     visitorTeam ?: string,
     tossWonTeam ?: string,
+    noOfOvers ?:string,
     teamOptedTo ?: string,
     battingOrder ?:string[],
     currentBatingTeam ?:string,
     currentBowlingTeam ?:string,
-    strikerBatsman ?: string,
-    nonStrikerBatsman ?: string,
-    currentBowler ?: string,
+    strikerBatsman : MBatsman,
+    nonStrikerBatsman : MBatsman,
+    currentBowler : MBowler,
     hostTeamBatsMan ?: MBatsman[],
     hostTeamBowlers ? : MBowler[],
     visitorTeamBatsMan ?: MBatsman[],
     visitorTeamBowlers ?: MBowler[],
-    events ?: string[],
+    events : string[],
 }
 
 export interface MBatsman{
@@ -31,6 +32,22 @@ export interface MBatsman{
     strikeRate : number,
     isStriker : boolean,
     isNonStriker : boolean
+}
+
+export interface MTeam{
+    teamName : string,
+    runs : number,
+    wickets : number,
+    batsMen : MBatsman[],
+    bowler : MBowler[],
+    extras : MExtras,
+}
+
+export interface MExtras{
+    total : number,
+    Nb : number,
+    W : number,
+    B : number,
 }
 
 export interface MBowler{
@@ -49,4 +66,20 @@ export interface MSettingUpScoreCard{
     strikerBatsman : MBatsman,
     nonStrikerBatsman : MBatsman,
     currentBowler : MBowler 
+}
+
+export interface MCreatingTheMatchArgs{
+    currentInnings : number,
+    hostTeam : string,
+    visitorTeam : string,
+    tossWonTeam : string,
+    noOfOvers :string,
+    teamOptedTo : string,
+    battingOrder :string[],
+    currentBatingTeam :string,
+    currentBowlingTeam :string,
+    strikerBatsman : MBatsman,
+    nonStrikerBatsman : MBatsman,
+    currentBowler : MBowler,
+    events : string[]
 }

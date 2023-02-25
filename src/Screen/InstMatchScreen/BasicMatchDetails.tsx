@@ -2,6 +2,7 @@ import { Button, Card, Input, Radio } from '@mantine/core'
 import styled from 'styled-components'
 import { useStores } from '../../Logic/Providers/StoresProviders'
 import { useState } from 'react'
+import { showNotification } from '@mantine/notifications'
 
 const SBasicMatchDetails = styled.div`
     display: flex;
@@ -11,15 +12,50 @@ const SBasicMatchDetails = styled.div`
 `
 
 interface BasicMatchDetailsProps{
-    handleChangeTheSubRouteNext : ()=>void
+    handleChangeRouteToOpeningPlayerDetails : (a:string,b:string,c:string,d:string,e:string)=>void
 }
 
 function BasicMatchDetails(props:BasicMatchDetailsProps) {
-    const [hostTeamName,setHostTeamName] = useState("Host Team")
-    const [visitorTeamName,setVisitorTeamName] = useState("Visitor Team")
+    const [hostTeamName,setHostTeamName] = useState("")
+    const [visitorTeamName,setVisitorTeamName] = useState("")
+    const [tossWonTeam,setTossWonTeam] = useState("")
+    const [teamOptedTo,setTeamOptedTo] = useState("")
     const [noOfOvers,setNoOfOvers] = useState("10")
 
     const stores = useStores();
+
+    function handleChangeRouteToOpeningPlayerDetails(){
+        if(hostTeamName===""){
+            showNotification({
+                message : "Host Team Can't be Empty",
+                color : "red"
+            })
+            return
+        }
+        if(visitorTeamName===""){
+            showNotification({
+                message : "Visitor Team Can't be Empty",
+                color : "red"
+            })
+            return
+        }
+        if(tossWonTeam===""){
+            showNotification({
+                message : "Choose The Toss",
+                color : "red"
+            })
+            return
+        }
+        if(teamOptedTo===""){
+            showNotification({
+                message : `What did ${tossWonTeam} choose to?`,
+                color : "red"
+            })
+            return
+        }
+        props.handleChangeRouteToOpeningPlayerDetails(hostTeamName,visitorTeamName,tossWonTeam,teamOptedTo,noOfOvers)
+    }
+
     return (
         <SBasicMatchDetails>
             {/* Team Names */}
@@ -89,9 +125,10 @@ function BasicMatchDetails(props:BasicMatchDetailsProps) {
                     <Radio.Group
                         name="Toss"
                         withAsterisk
+                        onChange={(e)=>setTossWonTeam(e)}
                         >
-                        <Radio value={hostTeamName} label={hostTeamName} />
-                        <Radio value={visitorTeamName} label={visitorTeamName} />
+                        <Radio value={"hostTeam"} label={"Host Team"} />
+                        <Radio value={"visitorTeam"} label={"Visitor Team"} />
                     </Radio.Group>
                 </Card>
             </>
@@ -116,6 +153,7 @@ function BasicMatchDetails(props:BasicMatchDetailsProps) {
                     <Radio.Group
                         name="Opted"
                         withAsterisk
+                        onChange={(e)=>setTeamOptedTo(e)}
                         >
                         <Radio value={"bat"} label={"Bat"} />
                         <Radio value={"bowl"} label={"Bowl"} />
@@ -165,7 +203,7 @@ function BasicMatchDetails(props:BasicMatchDetailsProps) {
                     />
                 </Card>
             </>
-            <Button mt={"md"} onClick={()=>props.handleChangeTheSubRouteNext()}>
+            <Button mt={"md"} onClick={handleChangeRouteToOpeningPlayerDetails}>
                     Start Match
             </Button>
         </SBasicMatchDetails>

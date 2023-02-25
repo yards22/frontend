@@ -1,5 +1,5 @@
 import { action } from "mobx";
-import { MBatsman, MBowler, MInstantMatch, MSettingUpScoreCard } from "../Model/MInstantMatch";
+import { MBatsman, MBowler, MCreatingTheMatchArgs, MInstantMatch, MSettingUpScoreCard } from "../Model/MInstantMatch";
 import { InstantMatchRepo } from "../Repository/InstantMatchRepo";
 import {createBatsMan, createBowler} from "../Utils/InstantMatchUtil"
 
@@ -15,6 +15,7 @@ export class InstantMatchStore{
 
     @action
     SetCurrentMatch=(x:MInstantMatch)=>{
+        console.log("Current Summary",x)
         this.currentMatch = x;
     }
 
@@ -24,16 +25,18 @@ export class InstantMatchStore{
     }
 
     @action
-    CreateNewMatch=async ()=>{
-        const y = await this.instantMatchRepo.createNewMatch();
-        this.SetCurrentMatch(y);
+    CreateNewMatch=async (creatingTheMatchArgs:MCreatingTheMatchArgs):Promise<number>=>{
+        const y = await this.instantMatchRepo.createNewMatch(creatingTheMatchArgs);
+        this.SetOpeningPlayerDetails(y)
+        return y.matchId
     }
 
     @action
     SetBasicDetailsOfMatch= async (hostTeam:string,visitorTeam:string,tossWonTeam:string,teamOptedTo:string)=>{
         if(this.currentMatch){
             this.tempMatch = {...this.currentMatch,hostTeam,visitorTeam,tossWonTeam,teamOptedTo}
-            if((tossWonTeam===hostTeam && teamOptedTo==="BAT") || (tossWonTeam===visitorTeam && teamOptedTo==="BOWL")){
+            
+            if((tossWonTeam===hostTeam && teamOptedTo==="bat") || (tossWonTeam===visitorTeam && teamOptedTo==="bowl")){
                 //setting up host team bat
                 this.tempMatch = {...this.tempMatch, currentBatingTeam:hostTeam,currentBowlingTeam:visitorTeam, battingOrder:[hostTeam,visitorTeam]}
             }else{
@@ -45,9 +48,11 @@ export class InstantMatchStore{
     }
 
     @action
-    SetOpeningPlayerDetails = async(strikerBatsmanName:string,nonStrikerBatsmanName:string,currentBowlerName:string)=>{
-        if(this.currentMatch){
-            this.tempMatch = this.currentMatch
+    SetOpeningPlayerDetails = async(instTempMatch:MInstantMatch)=>{
+            let strikerBatsmanName = instTempMatch.strikerBatsman.batsmanName
+            let nonStrikerBatsmanName = instTempMatch.nonStrikerBatsman.batsmanName
+            let currentBowlerName = instTempMatch.currentBowler.bowlerName
+            this.tempMatch = instTempMatch
             let strikerBatsman: MBatsman = createBatsMan(strikerBatsmanName,true,false)
             let nonStrikerBatsman : MBatsman = createBatsMan(nonStrikerBatsmanName,false,true)
             let currentBowler : MBowler = createBowler(currentBowlerName,true)
@@ -69,8 +74,8 @@ export class InstantMatchStore{
                         battingTeam:  this.tempMatch.battingOrder? this.tempMatch.battingOrder[0] : "",
                         bowlingTeam: this.tempMatch.battingOrder? this.tempMatch.battingOrder[1] : "",
                     }
-                )
-        }
+            )
+        
     }
 
 

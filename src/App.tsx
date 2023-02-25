@@ -26,6 +26,7 @@ import Auction from "./Screen/ComingSoonScreen/Auction";
 import News from "./Screen/ComingSoonScreen/News";
 import LiveScore from "./Screen/ComingSoonScreen/LiveScore";
 import InstMatchIndex from "./Screen/InstMatchScreen/Index";
+import TheScoreCard from "./Screen/InstMatchScreen/TheScoreCard/TheScoreCard";
 
 const SApp = styled.section`
   width: 100%;
@@ -102,6 +103,7 @@ function App() {
                     />
                     <Route path="post" element={<PostIndex />} />
                     <Route path="instantMatch" element={<InstMatchIndex/>} />
+                    <Route path="instantMatch/:id" element={<TheScoreCard/>} />
                   </Route>
                   <Route path="privacy-policy" element={<PrivacyPolicy />} />
                   <Route path="terms-and-conditions" element={<TC />} />

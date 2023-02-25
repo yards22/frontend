@@ -1,4 +1,5 @@
 import { Button, Card } from '@mantine/core'
+import { showNotification } from '@mantine/notifications'
 import { useState } from 'react'
 import styled from 'styled-components'
 import { useStores } from '../../Logic/Providers/StoresProviders'
@@ -11,7 +12,7 @@ const SOpeningPlayerDetails = styled.div`
 `
 
 interface OpeningPlayerDetailsProps{
-    handleChangeTheSubRouteNext : ()=>void
+    handleChangeRouteToScoreCard : (a:string,b:string,c:string)=>void
 }
 
 function OpeningPlayerDetails(props:OpeningPlayerDetailsProps) {
@@ -20,6 +21,31 @@ function OpeningPlayerDetails(props:OpeningPlayerDetailsProps) {
     const [openingBowler,setOpeningBowler] = useState("")
 
     const stores=useStores()
+
+    function handleChangeRouteToScoreCard(){
+        if(strikerBatsman===""){
+            showNotification({
+                message : "Striker Name Can't be empty",
+                color : "red"
+            })
+            return
+        }
+        if(nonStrikerBatsman===""){
+            showNotification({
+                message : "Non Striker Name cannot be empty",
+                color : "red"
+            })
+            return
+        }
+        if(openingBowler===""){
+            showNotification({
+                message : "Opening Bowler Name Cannot be Empty",
+                color : "red"
+            })
+            return
+        }
+        props.handleChangeRouteToScoreCard(strikerBatsman,nonStrikerBatsman,openingBowler)
+    }
     return (
         <SOpeningPlayerDetails>
          <>
@@ -78,7 +104,7 @@ function OpeningPlayerDetails(props:OpeningPlayerDetailsProps) {
                         placeholder = "Opening Bowler Name"
                     />
                 </Card>
-                <Button mt={"md"} onClick={props.handleChangeTheSubRouteNext}>
+                <Button mt={"md"} onClick={handleChangeRouteToScoreCard}>
                     Start Match
                 </Button>
             </>
