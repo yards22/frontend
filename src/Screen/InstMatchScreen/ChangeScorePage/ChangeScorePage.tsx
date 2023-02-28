@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useStores } from '../../../Logic/Providers/StoresProviders'
 import CurrentBatting from './CurrentBatting'
 import CurrentBowling from './CurrentBowling'
+import CurrentOver from './CurrentOver'
 import CurrentStats from './CurrentStats'
 
 const SChangeScorePage = styled.div`
@@ -22,6 +23,7 @@ function ChangeScorePage() {
         <CurrentStats/>
         <CurrentBatting/>
         <CurrentBowling/>
+        <CurrentOver/>
     </SChangeScorePage>
   )
 }

@@ -9,6 +9,7 @@ const SCurrentBowling = styled.div`
     width: 100%;
     display: flex;
     margin-top: 10px;
+    margin-bottom: 10px;
 `
 
 

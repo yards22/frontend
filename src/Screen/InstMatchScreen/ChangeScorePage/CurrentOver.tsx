@@ -1,0 +1,34 @@
+import { Card } from '@mantine/core'
+import React from 'react'
+import { useStores } from '../../../Logic/Providers/StoresProviders'
+
+const dummyOver = [3 , 3 , 4, 1 , 2 , "W"]
+
+function CurrentOver() {
+  const stores = useStores()
+  
+  return (
+    <Card
+        shadow={!stores.appStore.isPhone ? "md" : "xs"}
+        radius={"md"}
+        withBorder={!stores.appStore.isPhone}
+        style={{
+            width : "100%",
+            display : "flex",
+            padding : "5px 10px",
+            overflow : "scroll",
+        }}
+    >  
+        <p style={{margin:"0px"}}>This Over : </p>
+        {
+            dummyOver.map((each:any)=>{
+                return(
+                    <p style={{margin:"0px 5px"}}>{each}</p>
+                )
+            })
+        }
+    </Card>
+  )
+}
+
+export default CurrentOver
