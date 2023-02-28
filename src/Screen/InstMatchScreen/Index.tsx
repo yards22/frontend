@@ -5,7 +5,7 @@ import { useStores } from '../../Logic/Providers/StoresProviders'
 import { createBatsMan, createBowler } from '../../Logic/Utils/InstantMatchUtil'
 import BasicMatchDetails from './BasicMatchDetails'
 import OpeningPlayerDetails from './OpeningPlayerDetails'
-import TheScoreCard from './TheScoreCard/TheScoreCard'
+import TheScoreCard from './ChangeScorePage/ChangeScorePage'
 
 const SInstMatchIndex = styled.div`
   display: flex;
