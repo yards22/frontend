@@ -17,6 +17,7 @@ function CurrentOver() {
             display : "flex",
             padding : "5px 10px",
             overflow : "scroll",
+            marginTop : "10px"
         }}
     >  
         <p style={{margin:"0px"}}>This Over : </p>
