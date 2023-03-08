@@ -1,85 +1,62 @@
-export interface MInstantMatch{
-    matchId : number,
-    created_by: string,
-    currentInnings : number,
-    hostTeam ?: string,
-    visitorTeam ?: string,
-    tossWonTeam ?: string,
-    noOfOvers ?:string,
-    teamOptedTo ?: string,
-    battingOrder ?:string[],
-    currentBatingTeam ?:string,
-    currentBowlingTeam ?:string,
-    strikerBatsman : MBatsman,
-    nonStrikerBatsman : MBatsman,
-    currentBowler : MBowler,
-    hostTeamBatsMan ?: MBatsman[],
-    hostTeamBowlers ? : MBowler[],
-    visitorTeamBatsMan ?: MBatsman[],
-    visitorTeamBowlers ?: MBowler[],
-    events : string[],
-}
-
-export interface MBatsman{
-    batsmanName : string,
-    runsScored : number,
-    ballsFaced : number,
-    noOfFours : number,
-    noOfSixes : number,
-    gotOutByBowler ?: string,
-    wayBatsmanGotOut ?:string,
-    helpedPlayerForWicket ?:string,
-    strikeRate : number,
-    isStriker : boolean,
-    isNonStriker : boolean
-}
-
-export interface MTeam{
-    teamName : string,
-    runs : number,
-    wickets : number,
-    batsMen : MBatsman[],
-    bowler : MBowler[],
-    extras : MExtras,
-}
-
-export interface MExtras{
-    total : number,
-    Nb : number,
-    W : number,
-    B : number,
-}
-
-export interface MBowler{
-    bowlerName : string,
-    noOfOvers : number,
-    noOfMaidenOvers : number,
-    noOfRunsGiven : number,
-    noOfWickets : number,
-    economyRate : number,
-    isCurrentBowler : boolean
-}
-
-export interface MSettingUpScoreCard{
-    battingTeam : string,
-    bowlingTeam : string,
-    strikerBatsman : MBatsman,
-    nonStrikerBatsman : MBatsman,
-    currentBowler : MBowler 
-}
-
 export interface MCreatingTheMatchArgs{
-    currentInnings : number,
-    hostTeam : string,
-    visitorTeam : string,
-    tossWonTeam : string,
-    noOfOvers :string,
-    teamOptedTo : string,
-    battingOrder :string[],
-    currentBatingTeam :string,
-    currentBowlingTeam :string,
-    strikerBatsman : MBatsman,
-    nonStrikerBatsman : MBatsman,
-    currentBowler : MBowler,
-    events : string[]
+    owner_id:number,
+    visitor_team:string,
+    host_team:string,
+    total_overs:number,
+    venue:string,
+    toss_details:{
+        toss_won_by:string,
+        opted_to:string
+    },
+    players_in_action:{
+       bowler:MBowlerInstantMatch,
+       striker_batsman:MBatsmanInstantMatch,
+       non_striker_batsman:MBatsmanInstantMatch,
+    }
+    current_innings : number,
+    batting_order :string[]
 }
+
+export interface MInstantMatch{
+    match_id : number,
+    owner_id:number,
+    visitor_team:string,
+    host_team:string,
+    total_overs:number,
+    venue:string,
+    toss_details:{
+        toss_won_by:string,
+        opted_to:string
+    },
+    players_in_action:{
+       bowler:MBowlerInstantMatch,
+       striker_batsman:MBatsmanInstantMatch,
+       non_striker_batsman:MBatsmanInstantMatch,
+    }
+    current_innings : number,
+    batting_order :string[]
+}
+
+export interface MBatsmanInstantMatch{
+    name:string,
+    runs:number,
+    balls:number,
+    fours:number,
+    sixes:number,
+    striker : boolean,
+    non_striker : boolean,
+    strike_rate : number,
+}
+
+
+export interface MBowlerInstantMatch{
+    name :string,
+    overs:number,
+    balls:number,
+    maiden:number,
+    runs:number,
+    wicket:number,
+    economy : number,
+}
+
+
