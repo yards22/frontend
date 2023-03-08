@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { useStores } from '../../Logic/Providers/StoresProviders'
-import { createBatsMan, createBowler } from '../../Logic/Utils/InstantMatchUtil'
+import { createBatsManInstantMatch, createBowlerInstantMatch } from '../../Logic/Utils/InstantMatchUtil'
 import BasicMatchDetails from './BasicMatchDetails'
 import OpeningPlayerDetails from './OpeningPlayerDetails'
 import TheScoreCard from './ChangeScorePage/ChangeScorePage'
@@ -55,19 +55,22 @@ function InstMatchIndex() {
       let battingOrder = getBattingOrder();
       let tossEvent = `${tossWonTeam} won the toss and decided to ${teamOptedTo}`
       stores.instantMatchStore.CreateNewMatch({
-         currentInnings:1,
-         hostTeam,
-         visitorTeam,
-         tossWonTeam,
-         teamOptedTo,
-         noOfOvers,
-         battingOrder,
-         currentBatingTeam : battingOrder[0],
-         currentBowlingTeam : battingOrder[1],
-         strikerBatsman : createBatsMan(strikerBatsmanName,true,false),
-         nonStrikerBatsman : createBatsMan(nonStrikerBatsmanName,false,true),
-         currentBowler : createBowler(currentBowlerName,true),
-         events : [tossEvent]
+        owner_id : stores.authStore.user ? stores.authStore.user.user_id : 1,
+        visitor_team : visitorTeam,
+        host_team : hostTeam,
+        total_overs : parseInt(noOfOvers),
+        venue : "ground",
+        toss_details : {
+          toss_won_by : tossWonTeam,
+          opted_to : teamOptedTo
+        },
+        players_in_action :{
+          bowler : createBowlerInstantMatch(currentBowlerName,true),
+          striker_batsman : createBatsManInstantMatch(strikerBatsmanName,true,false),
+          non_striker_batsman : createBatsManInstantMatch(nonStrikerBatsmanName,false,true),
+        },
+         current_innings : 1,
+         batting_order : battingOrder,
       }).then(e => {
         navigate(`/instantMatch/${e}`)
       })

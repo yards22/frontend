@@ -1,26 +1,26 @@
-import { MBatsman, MBowler } from "../Model/MInstantMatch";
+import { MBatsmanInstantMatch, MBowlerInstantMatch } from "../Model/MInstantMatch";
 
-export function createBatsMan(batsmanName:string,isStriker:boolean,isNonStriker:boolean):MBatsman{
+export function createBatsManInstantMatch(name:string,striker:boolean,non_striker:boolean):MBatsmanInstantMatch{
     return {
-        batsmanName,
-        isStriker,
-        isNonStriker,
-        noOfFours : 0,
-        runsScored : 0,
-        noOfSixes : 0,
-        ballsFaced : 0,
-        strikeRate : 0
+        name,
+        runs:0,
+        balls:0,
+        fours:0,
+        sixes:0,
+        striker,
+        non_striker,
+        strike_rate : 0
     };
 }
 
-export function createBowler(bowlerName:string,isCurrentBowler:boolean):MBowler{
+export function createBowlerInstantMatch(name:string,isCurrentBowler:boolean):MBowlerInstantMatch{
     return{
-        bowlerName,
-        noOfOvers:0,
-        noOfMaidenOvers:0,
-        noOfRunsGiven:0,
-        noOfWickets:0,
-        economyRate:0,
-        isCurrentBowler
+        name,
+        overs:0,
+        balls:0,
+        maiden:0,
+        runs:0,
+        wicket:0,
+        economy :0
     }
 }
