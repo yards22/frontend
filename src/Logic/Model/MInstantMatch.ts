@@ -15,7 +15,19 @@ export interface MInstantMatch{
        non_striker_batsman:MBatsmanInstantMatch,
     }
     current_innings : number,
-    batting_order :string[]
+    batting_order :string[],
+    innings_one : {
+      score : number,
+      wickets : number,
+      run_rate : number,
+    }
+    innings_two : {
+      score : number,
+      wickets : number,
+      run_rate : number,
+    },
+    overs : number,
+    balls : number,
 }
 
 export interface MBatsmanInstantMatch{
@@ -94,5 +106,17 @@ export interface MCreatingTheMatchArgs{
        non_striker_batsman:MBatsmanInstantMatch,
     }
     current_innings : number,
-    batting_order :string[]
+    batting_order :string[],
+    innings_one : {
+      score : number,
+      wickets : number,
+      run_rate : number,
+    }
+    innings_two : {
+      score : number,
+      wickets : number,
+      run_rate : number,
+    },
+    overs : number,
+    balls : number,
 }

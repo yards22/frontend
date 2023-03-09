@@ -26,7 +26,7 @@ import Auction from "./Screen/ComingSoonScreen/Auction";
 import News from "./Screen/ComingSoonScreen/News";
 import LiveScore from "./Screen/ComingSoonScreen/LiveScore";
 import InstMatchIndex from "./Screen/InstMatchScreen/Index";
-import TheScoreCard from "./Screen/InstMatchScreen/ChangeScorePage/ChangeScorePage";
+import TheScoreCard from "./Screen/InstMatchScreen/ChangeScorePage/ChangeScorePageIndex";
 
 const SApp = styled.section`
   width: 100%;

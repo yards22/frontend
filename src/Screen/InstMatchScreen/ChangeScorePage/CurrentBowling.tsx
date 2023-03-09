@@ -15,7 +15,7 @@ const SCurrentBowling = styled.div`
 
 const currentScoreBowlingRow = (bowler:MBowlerInstantMatch)=>(
     <tr key={bowler.name}>
-      <td>{bowler.name}{"*"}</td>
+      <td>{bowler.name}</td>
       <td style={{textAlign:"center"}}>{bowler.overs}</td>
       <td style={{textAlign:"center"}}>{bowler.maiden}</td>
       <td style={{textAlign:"center"}}>{bowler.runs}</td>

@@ -14,7 +14,7 @@ const SCurrentBatting = styled.div`
 
 const currentScoreBattingRow = (batsMan:MBatsmanInstantMatch)=>(
     <tr key={batsMan.name}>
-      <td>{batsMan.name}{batsMan.strike_rate ? "*" : ""}</td>
+      <td>{batsMan.name}{batsMan.striker ? "*" : ""}</td>
       <td style={{textAlign:"center"}}>{batsMan.runs}</td>
       <td style={{textAlign:"center"}}>{batsMan.balls}</td>
       <td style={{textAlign:"center"}}>{batsMan.fours}</td>

@@ -5,7 +5,7 @@ import { useStores } from '../../Logic/Providers/StoresProviders'
 import { createBatsManInstantMatch, createBowlerInstantMatch } from '../../Logic/Utils/InstantMatchUtil'
 import BasicMatchDetails from './BasicMatchDetails'
 import OpeningPlayerDetails from './OpeningPlayerDetails'
-import TheScoreCard from './ChangeScorePage/ChangeScorePage'
+import TheScoreCard from './ChangeScorePage/ChangeScorePageIndex'
 
 const SInstMatchIndex = styled.div`
   display: flex;
@@ -71,6 +71,18 @@ function InstMatchIndex() {
         },
          current_innings : 1,
          batting_order : battingOrder,
+         innings_one : {
+          score : 0,
+          wickets : 0,
+          run_rate : 0,
+        },
+        innings_two : {
+          score : 0,
+          wickets : 0,
+          run_rate : 0,
+        },
+        overs : 0,
+        balls : 0,
       }).then(e => {
         navigate(`/instantMatch/${e}`)
       })

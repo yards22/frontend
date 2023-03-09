@@ -1,11 +1,10 @@
-import React from 'react'
 import styled from 'styled-components'
 import { useStores } from '../../../Logic/Providers/StoresProviders'
 import CurrentBallEvent from './CurrentBallEvent'
 import CurrentBatting from './CurrentBatting'
 import CurrentBowling from './CurrentBowling'
 import CurrentOver from './CurrentOver'
-import CurrentStats from './CurrentStats'
+import CurrentStatsIndex from './CurrentStats/CurrentStatsIndex'
 import OtherDetailsButtons from './OtherDetailsButtons'
 import RunsInBall from './RunsInBall'
 
@@ -23,7 +22,7 @@ function ChangeScorePage() {
   return (
     <SChangeScorePage>
         <p>Team A vs Team B</p>
-        <CurrentStats/>
+        <CurrentStatsIndex/>
         <CurrentBatting/>
         <CurrentBowling/>
         <CurrentOver/>
