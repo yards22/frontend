@@ -1,9 +1,8 @@
 import { Observer } from "mobx-react-lite";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Loading from "../../Atoms/Loading";
-import MPost from "../../Logic/Model/MPost";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import { DeHashWithDate } from "../../Logic/Utils/Common";
 import NormalPost from "../FeedScreen/Post/NormalPost";
@@ -58,7 +57,7 @@ function PostIndex() {
           return (
             <>
               {viewPosts.map((post) => (
-                <NormalPost data={post} key={"post_id" + post.post_id} />
+                <NormalPost data={post} type="feed" key={"post_id" + post.post_id} />
               ))}
             </>
           );
