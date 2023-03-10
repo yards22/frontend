@@ -1,5 +1,5 @@
 import { Button, Card, Checkbox } from '@mantine/core';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useStores } from '../../../Logic/Providers/StoresProviders'
 
 function CurrentBallEvent() {
@@ -10,6 +10,11 @@ function CurrentBallEvent() {
     const [isWicket,setIsWicket] = useState(false)
 
     const stores = useStores();
+
+    useEffect(()=>{
+        
+    },[isWicket,isWide,isByes,isLegByes,isNoBall])
+
     return (
         <Card
             shadow={!stores.appStore.isPhone ? "md" : "xs"}

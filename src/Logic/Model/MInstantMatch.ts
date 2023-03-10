@@ -28,6 +28,7 @@ export interface MInstantMatch{
     },
     overs : number,
     balls : number,
+    current_over : number[]
 }
 
 export interface MBatsmanInstantMatch{
@@ -119,4 +120,5 @@ export interface MCreatingTheMatchArgs{
     },
     overs : number,
     balls : number,
+    current_over : number[]
 }

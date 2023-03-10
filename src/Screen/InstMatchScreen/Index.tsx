@@ -83,6 +83,7 @@ function InstMatchIndex() {
         },
         overs : 0,
         balls : 0,
+        current_over : [],
       }).then(e => {
         navigate(`/instantMatch/${e}`)
       })

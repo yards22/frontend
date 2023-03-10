@@ -1,3 +1,4 @@
+import { Button } from '@mantine/core'
 import styled from 'styled-components'
 import { useStores } from '../../../Logic/Providers/StoresProviders'
 import CurrentBallEvent from './CurrentBallEvent'
@@ -21,7 +22,10 @@ function ChangeScorePage() {
 
   return (
     <SChangeScorePage>
-        <p>Team A vs Team B</p>
+        <div style={{display:"flex",justifyContent:"space-between",width:"100%",alignItems:"center"}}>
+            <p>Team A vs Team B</p>
+            <Button>Add Ball</Button>
+        </div>
         <CurrentStatsIndex/>
         <CurrentBatting/>
         <CurrentBowling/>
