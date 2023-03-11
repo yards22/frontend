@@ -1,6 +1,6 @@
 import ProtectedRoutes from "./ProtectedRoutes";
 import ProfileIndex from "./Screen/ProfileScreen/Index";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import LoginIndex from "./Screen/LoginScreen/Index";
 import ExploreIndex from "./Screen/ExploreScreen/Index";
 import { useStores } from "./Logic/Providers/StoresProviders";
@@ -25,6 +25,8 @@ import TC from "./Screen/TCPP/TC";
 import Auction from "./Screen/ComingSoonScreen/Auction";
 import News from "./Screen/ComingSoonScreen/News";
 import LiveScore from "./Screen/ComingSoonScreen/LiveScore";
+import InstMatchIndex from "./Screen/InstMatchScreen/Index";
+import TheScoreCard from "./Screen/InstMatchScreen/ChangeScorePage/ChangeScorePageIndex";
 
 const SApp = styled.section`
   width: 100%;
@@ -100,6 +102,9 @@ function App() {
                       element={<FollowersScreenIndex />}
                     />
                     <Route path="post" element={<PostIndex />} />
+                    {/* <Route path="instantMatch" element={<InstMatchIndex/>} />
+                    <Route path="instantMatch/:id" element={<TheScoreCard/>} /> */}
+                    <Route path="**" element={<Navigate to={"feed"}/>}/>
                   </Route>
                   <Route path="privacy-policy" element={<PrivacyPolicy />} />
                   <Route path="terms-and-conditions" element={<TC />} />

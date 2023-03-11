@@ -35,6 +35,18 @@ export class PostStore {
   };
 
   @action
+  DeletePost = async(postId:bigint)=>{
+     this.SetLoading(true)
+     try{
+        await this.postRepo.deletePost(this.token||"",postId);
+     }catch(err){
+        throw(err);
+     }finally{
+      this.SetLoading(false)
+     }
+  }
+
+  @action
   GetPostByID = async (postId: bigint) => {
     const post = await this.postRepo.getPostById(this.token || "", postId);
     if (post) this.viewPosts = [post];
