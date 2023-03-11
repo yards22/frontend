@@ -1,14 +1,22 @@
-import { Anchor, Badge } from "@mantine/core";
+import { Anchor, Badge, Button } from "@mantine/core";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function LiveScore() {
+
+  const navigate = useNavigate()
+
+  function handleNavigateToInstantMatch(){
+    navigate("/instantMatch")
+  }
   return (
     <div className="p-8 text-gray-700">
       <div className="mb-10 flex flex-col items-center justify-center">
+        {/* <Button onClick={handleNavigateToInstantMatch}>Instant Match</Button> */}
         <h2 className="m-0 w-full text-center text-gray-700">Live Scores</h2>
         <Badge color={"yellow"}>Coming Soon</Badge>
       </div>
+
       <h3>Calling all Cricket Fans!</h3>
       Get ready for the live scores experience on 22Yardz ! Never miss a moment
       of the action, whether it's an international match or a premier league.
