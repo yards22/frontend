@@ -17,7 +17,7 @@ function TrendingPostsIndex() {
           return (
             <div className="flex flex-col gap-1">
               {postStore.viewPosts.map((item, index) => {
-                return <NormalPost data={item} type="trending"  key={`normal_post_${index}`} />;
+                return <NormalPost data={item} key={`normal_post_${index}`} />;
               })}
             </div>
           );

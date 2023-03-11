@@ -20,8 +20,6 @@ import { NetworkStore } from "./Logic/State/NetworkStore";
 import { NetworkRepo } from "./Logic/Repository/NetworkRepo";
 import { CommentStore } from "./Logic/State/CommentStore";
 import { CommentRepo } from "./Logic/Repository/CommentRepo";
-import { InstantMatchStore } from "./Logic/State/InstantMatchStore";
-import { InstantMatchRepo } from "./Logic/Repository/InstantMatchRepo";
 
 interface ProvidedAppProps {
   children?: React.ReactNode;
@@ -53,9 +51,6 @@ function ProvidedApp(props: ProvidedAppProps) {
     profileStore
   );
 
-  const instantMatchStore = new InstantMatchStore(
-    new InstantMatchRepo()
-  )
   useEffect(() => {
     let interval: any;
     notificationStore.GetNotifications();
@@ -78,8 +73,7 @@ function ProvidedApp(props: ProvidedAppProps) {
           postStore,
           miscStore,
           networkStore,
-          commentStore,
-          instantMatchStore
+          commentStore
         }}
       >
         {
