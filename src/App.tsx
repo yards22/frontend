@@ -102,8 +102,8 @@ function App() {
                       element={<FollowersScreenIndex />}
                     />
                     <Route path="post" element={<PostIndex />} />
-                    <Route path="instantMatch" element={<InstMatchIndex/>} />
-                    <Route path="instantMatch/:id" element={<TheScoreCard/>} />
+                    {/* <Route path="instantMatch" element={<InstMatchIndex/>} />
+                    <Route path="instantMatch/:id" element={<TheScoreCard/>} /> */}
                     <Route path="**" element={<Navigate to={"feed"}/>}/>
                   </Route>
                   <Route path="privacy-policy" element={<PrivacyPolicy />} />

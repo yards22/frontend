@@ -12,7 +12,7 @@ function LiveScore() {
   return (
     <div className="p-8 text-gray-700">
       <div className="mb-10 flex flex-col items-center justify-center">
-        <Button onClick={handleNavigateToInstantMatch}>Instant Match</Button>
+        {/* <Button onClick={handleNavigateToInstantMatch}>Instant Match</Button> */}
         <h2 className="m-0 w-full text-center text-gray-700">Live Scores</h2>
         <Badge color={"yellow"}>Coming Soon</Badge>
       </div>
