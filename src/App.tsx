@@ -1,6 +1,6 @@
 import ProtectedRoutes from "./ProtectedRoutes";
 import ProfileIndex from "./Screen/ProfileScreen/Index";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import LoginIndex from "./Screen/LoginScreen/Index";
 import ExploreIndex from "./Screen/ExploreScreen/Index";
 import { useStores } from "./Logic/Providers/StoresProviders";
@@ -104,6 +104,7 @@ function App() {
                     <Route path="post" element={<PostIndex />} />
                     <Route path="instantMatch" element={<InstMatchIndex/>} />
                     <Route path="instantMatch/:id" element={<TheScoreCard/>} />
+                    <Route path="**" element={<Navigate to={"feed"}/>}/>
                   </Route>
                   <Route path="privacy-policy" element={<PrivacyPolicy />} />
                   <Route path="terms-and-conditions" element={<TC />} />

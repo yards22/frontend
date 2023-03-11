@@ -49,12 +49,13 @@ export class AuthStore {
     //routing accordingly 
     if(r && p){
       //if expected route have query parameters
-      console.log(r,p)
-      window.location.href = `${r}?${p}`
+      // window.location.href = `${r}?${p}`
+      window.location.replace(`${r}?${p}`)
     }
     else if(r){
       //if expected route have no query parameters
-      window.location.href = `/${r}`;
+      // window.location.href = `/${r}`;
+      window.location.replace(`${r}`)
       // window.location.search = ""
     }else{
       //no expected route the original functionality
