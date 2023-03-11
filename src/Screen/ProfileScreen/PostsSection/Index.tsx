@@ -54,7 +54,7 @@ function PostsSectionIndex() {
           )}
         </Button>
       </div>
-      <PostList type={selectedTypeOfPosts}/>
+      <PostList />
     </div>
   );
 }

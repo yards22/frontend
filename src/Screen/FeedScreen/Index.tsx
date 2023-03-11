@@ -22,7 +22,7 @@ function FeedIndex() {
           <div className="flex flex-col gap-3 p-2">
             <NewPost />
             {postStore.viewPosts.map((item, index) => {
-              return <NormalPost data={item} type="feed" key={`normal_post_${index}`} />;
+              return <NormalPost data={item} key={`normal_post_${index}`} />;
             })}
           </div>
         );
