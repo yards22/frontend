@@ -1,6 +1,6 @@
 import { Loader } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { Navigate, useLocation, useSearchParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import LeftPane from "./LeftPane";
 
@@ -11,11 +11,7 @@ const CHECKED_AUTH_LOGGED_IN = 2;
 function LoginIndex() {
   const [authStage, setAuthStage] = useState(CHECKING_AUTH);
   const store = useStores();
-  const location = useLocation();
-  const [searchParams] = useSearchParams();
-
   useEffect(() => {
-    console.log("login",searchParams.get("r"))
     if (
       !store.authStore.user &&
       (store.authStore.token == null || store.authStore.token === "")
@@ -64,7 +60,7 @@ function LoginIndex() {
 
   return (
     <div className="fixed top-0 left-0 flex w-full items-center justify-center bg-gray-200">
-      <LeftPane r={searchParams.get("r")} p={searchParams.get("p")}/>
+      <LeftPane />
     </div>
   );
 }
