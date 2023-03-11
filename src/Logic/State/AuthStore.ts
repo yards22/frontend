@@ -1,4 +1,5 @@
 import { action, makeAutoObservable, observable } from "mobx";
+import { useNavigate } from "react-router-dom";
 import { MAuth } from "../Model/MAuth";
 import { AuthRepo } from "../Repository/AuthRepo";
 const TOKEN_KEY = "token";
@@ -33,19 +34,36 @@ export class AuthStore {
   };
 
   @action
-  SetToken = (token: string | null) => {
+  SetToken = (token: string | null,r:string|null,p:string|null) => {
     let validToken: string | null = null;
     if (!token) validToken = null;
     else if (token !== "") validToken = token;
     if (validToken) {
-      if (this.isNewUser) {
-        window.location.pathname = "/profile";
-      } else {
-        window.location.pathname = "/feed";
-      }
       window.localStorage.setItem(TOKEN_KEY, validToken);
-    } else window.localStorage.removeItem(TOKEN_KEY);
+     
+    } else {
+      window.localStorage.removeItem(TOKEN_KEY);
+      window.location.href = "/"
+    }
     this.token = validToken;
+    //routing accordingly 
+    if(r && p){
+      //if expected route have query parameters
+      console.log(r,p)
+      window.location.href = `${r}?${p}`
+    }
+    else if(r){
+      //if expected route have no query parameters
+      window.location.href = `/${r}`;
+      // window.location.search = ""
+    }else{
+      //no expected route the original functionality
+        if (this.isNewUser) {
+          window.location.pathname = "/profile";
+        } else {
+          window.location.pathname = "/feed";
+        }
+    }
   };
 
   @action
@@ -62,12 +80,12 @@ export class AuthStore {
   };
 
   @action
-  LoginUser = async (mail_id: string, password: string) => {
+  LoginUser = async (mail_id: string, password: string, r:string|null,p:string|null) => {
     this.SetLoading(true);
     try {
       const { user_data, token } = await this.authRepo.login(mail_id, password);
       this.SetUser(user_data);
-      this.SetToken(token);
+      this.SetToken(token,r,p);
     } catch (err) {
       throw err;
     } finally {
@@ -76,7 +94,7 @@ export class AuthStore {
   };
 
   @action
-  OAuthLoginUser = async (id_token: string) => {
+  OAuthLoginUser = async (id_token: string, r:string|null,p:string|null) => {
     this.SetLoading(true);
     try {
       const { user_data, token, is_exists } = await this.authRepo.oauthLogin(
@@ -86,7 +104,7 @@ export class AuthStore {
         this.SetIsNewUser(true);
       }
       this.SetUser(user_data);
-      this.SetToken(token);
+      this.SetToken(token,r,p);
     } catch (err) {
       throw err;
     } finally {
@@ -100,7 +118,7 @@ export class AuthStore {
     try {
       await this.authRepo.logout(this.token || "");
       this.SetUser(null);
-      this.SetToken(null);
+      this.SetToken(null,null,null);
     } catch (err) {
       throw err;
     } finally {
@@ -109,7 +127,7 @@ export class AuthStore {
   };
 
   @action
-  SignUpUser = async (mail_id: string, password: string, otp: string) => {
+  SignUpUser = async (mail_id: string, password: string, otp: string,r:string|null,p:string|null) => {
     this.SetLoading(true);
     try {
       const { user_data, token } = await this.authRepo.signUp(
@@ -119,7 +137,7 @@ export class AuthStore {
       );
       this.SetIsNewUser(true);
       this.SetUser(user_data);
-      this.SetToken(token);
+      this.SetToken(token,r,p);
     } catch (err) {
     } finally {
       this.SetLoading(false);
@@ -136,7 +154,7 @@ export class AuthStore {
         otp
       );
       this.SetUser(user_data);
-      this.SetToken(token);
+      this.SetToken(token,null,null);
     } catch (err) {
       throw err;
     } finally {
