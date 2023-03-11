@@ -11,8 +11,6 @@ const MIN_PASSWORD_LEN = 8;
 
 interface NewAccountProps {
   onClose: () => void;
-  r : string|null,
-  p : string|null
 }
 
 function NewAccount(props: NewAccountProps) {
@@ -70,7 +68,7 @@ function NewAccount(props: NewAccountProps) {
 
   function handleSignUp() {
     store.authStore
-      .SignUpUser(data.mail_id, data.confirmPassword, data.otp,props.r,props.p)
+      .SignUpUser(data.mail_id, data.confirmPassword, data.otp)
       .then(() => {
         props.onClose();
       })

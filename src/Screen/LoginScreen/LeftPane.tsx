@@ -22,12 +22,7 @@ const SLeftPane = styled.section`
     padding-left: 40px;
   }
 `;
-
-interface ILeftPane{
-  r : string|null,
-  p : string|null
-}
-function LeftPane(props:ILeftPane) {
+function LeftPane() {
   const [newAccountModal, setNewAccountModal] = useState(false);
   return (
     <SLeftPane>
@@ -48,9 +43,9 @@ function LeftPane(props:ILeftPane) {
         }}
       >
         <Card shadow="sm" p="lg" radius="md" withBorder>
-          <SignInWithGoogle r={props.r} p={props.p}/>
+          <SignInWithGoogle />
           <OrLabel />
-          <EmailPasswordLogin r={props.r} p={props.p}/>
+          <EmailPasswordLogin />
           <DontHaveAnAccount
             onSignUpRequest={() => {
               setNewAccountModal(true);
@@ -73,7 +68,6 @@ function LeftPane(props:ILeftPane) {
               onClose={() => {
                 setNewAccountModal(false);
               }}
-              r={props.r} p={props.p}
             />
           </Modal>
         </Card>
