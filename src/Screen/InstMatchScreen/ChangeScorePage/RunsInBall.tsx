@@ -1,8 +1,12 @@
-import { Button, Card } from '@mantine/core';
+import { Button, Card, Modal } from '@mantine/core';
 import React,{useState} from 'react'
 import { useStores } from '../../../Logic/Providers/StoresProviders';
 
-function RunsInBall() {
+interface IRunsInBall{
+  handleBallUpdate : (a:number)=>void
+}
+
+function RunsInBall(props:IRunsInBall) {
     const stores = useStores();
     const [isZeroRuns,setIsZeroRuns] = useState(false)
     const [isOneRun,setIsOneRun] = useState(false)
@@ -13,9 +17,11 @@ function RunsInBall() {
     const [isSixRuns,setIsSixRuns] = useState(false)
     const [isCustomRuns,setIsCustomRuns] = useState(false)
     const [customRuns,setCustomRuns] = useState("...")
+    const [openTheCustomRunsModel,setOpenTheCustomModel] = useState(false)
+    const [tempCustomRuns,setTempRunsCustom] = useState("1")
 
     function handleZeroRuns(){
-      setIsZeroRuns(!isZeroRuns)
+      setIsZeroRuns(true)
       setIsOneRun(false)
       setIsTwoRuns(false)
       setIsThreeRuns(false)
@@ -24,10 +30,11 @@ function RunsInBall() {
       setIsSixRuns(false)
       setIsCustomRuns(false)
       setCustomRuns("...")
+      props.handleBallUpdate(0)
     }
 
     function handleOneRun(){
-      setIsOneRun(!isOneRun)
+      setIsOneRun(true)
       setIsZeroRuns(false)
       setIsTwoRuns(false)
       setIsThreeRuns(false)
@@ -36,10 +43,11 @@ function RunsInBall() {
       setIsSixRuns(false)
       setIsCustomRuns(false)
       setCustomRuns("...")
+      props.handleBallUpdate(1)
     }
 
     function handleTwoRuns(){
-      setIsTwoRuns(!isTwoRuns)
+      setIsTwoRuns(true)
       setIsZeroRuns(false)
       setIsOneRun(false)
       setIsThreeRuns(false)
@@ -48,10 +56,11 @@ function RunsInBall() {
       setIsSixRuns(false)
       setIsCustomRuns(false)
       setCustomRuns("...")
+      props.handleBallUpdate(2)
     }
 
     function handleThreeRuns(){
-      setIsThreeRuns(!isThreeRuns)
+      setIsThreeRuns(true)
       setIsZeroRuns(false)
       setIsOneRun(false)
       setIsTwoRuns(false)
@@ -60,10 +69,11 @@ function RunsInBall() {
       setIsSixRuns(false)
       setIsCustomRuns(false)
       setCustomRuns("...")
+      props.handleBallUpdate(3)
     }
 
     function handleFourRuns(){
-      setIsFourRuns(!isFourRuns)
+      setIsFourRuns(true)
       setIsZeroRuns(false)
       setIsOneRun(false)
       setIsTwoRuns(false)
@@ -72,10 +82,11 @@ function RunsInBall() {
       setIsSixRuns(false)
       setIsCustomRuns(false)
       setCustomRuns("...")
+      props.handleBallUpdate(4)
     }
 
     function handleFiveRuns(){
-      setIsFiveRuns(!isFiveRuns)
+      setIsFiveRuns(true)
       setIsZeroRuns(false)
       setIsOneRun(false)
       setIsTwoRuns(false)
@@ -84,10 +95,11 @@ function RunsInBall() {
       setIsSixRuns(false)
       setIsCustomRuns(false)
       setCustomRuns("...")
+      props.handleBallUpdate(5)
     }
 
     function handleSixRuns(){
-      setIsSixRuns(!isSixRuns)
+      setIsSixRuns(true)
       setIsZeroRuns(false)
       setIsOneRun(false)
       setIsTwoRuns(false)
@@ -96,10 +108,11 @@ function RunsInBall() {
       setIsFiveRuns(false)
       setIsCustomRuns(false)
       setCustomRuns("...")
+      props.handleBallUpdate(6)
     }
 
     function handleCustomRuns(){
-      setIsCustomRuns(!isCustomRuns)
+      setIsCustomRuns(true)
       setIsZeroRuns(false)
       setIsOneRun(false)
       setIsTwoRuns(false)
@@ -107,6 +120,10 @@ function RunsInBall() {
       setIsFourRuns(false)
       setIsFiveRuns(false)
       setIsSixRuns(false)
+      setOpenTheCustomModel(true)
+      if(customRuns!=="..."){
+        setTempRunsCustom(customRuns)
+      }
     }
 
     return (
@@ -198,7 +215,20 @@ function RunsInBall() {
             {customRuns}
           </Button>
         </div>
-          
+        <Modal
+          opened={openTheCustomRunsModel}
+          onClose={()=>{
+              setOpenTheCustomModel(false)
+              setIsCustomRuns(false)
+            }}
+
+        >
+          <div style={{display:"flex",flexDirection:"column"}}>
+            <label>Enter Custom Runs</label>
+            <input type={"number"} id="customRuns" onChange={(e)=>setTempRunsCustom(e.target.value)}/>
+            <Button mt={"lg"} onClick={()=>{setOpenTheCustomModel(false);props.handleBallUpdate(parseInt(tempCustomRuns))}}>OK</Button>
+          </div>
+        </Modal>
       </Card>
    )
 }

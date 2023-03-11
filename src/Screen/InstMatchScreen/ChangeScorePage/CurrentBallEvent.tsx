@@ -2,7 +2,11 @@ import { Button, Card, Checkbox } from '@mantine/core';
 import React, { useEffect, useState } from 'react'
 import { useStores } from '../../../Logic/Providers/StoresProviders'
 
-function CurrentBallEvent() {
+interface ICurrentBallEvent{
+    handleBallEvent : (a:boolean,b:boolean,c:boolean,d:boolean,e:boolean)=>void
+}
+
+function CurrentBallEvent(props:ICurrentBallEvent) {
     const [isWide,setIsWide] = useState(false)
     const [isNoBall,setIsNoBall] = useState(false)
     const [isByes,setIsByes] = useState(false)
@@ -12,7 +16,7 @@ function CurrentBallEvent() {
     const stores = useStores();
 
     useEffect(()=>{
-        
+        props.handleBallEvent(isWide,isNoBall,isByes,isLegByes,isWicket)
     },[isWicket,isWide,isByes,isLegByes,isNoBall])
 
     return (
@@ -37,10 +41,38 @@ function CurrentBallEvent() {
                 marginBottom : "8px",
               }}
             >
-                <Checkbox label="Wide" checked={isWide} onChange={(e)=>setIsWide(e.target.checked)}/>
-                <Checkbox label="No Ball" checked={isNoBall} onChange={(e)=>setIsNoBall(e.target.checked)}/>
-                <Checkbox label="Byes" checked={isByes} onChange={(e)=>setIsByes(e.target.checked)}/>
-                <Checkbox label="Leg Byes" checked={isLegByes} onChange={(e)=>setIsLegByes(e.target.checked)}/>
+                <Checkbox 
+                    label="Wide" 
+                    checked={isWide} 
+                    disabled={isLegByes}
+                    onChange={(e)=>{
+                         setIsWide(e.target.checked)
+                         if(e.target.checked){
+                            setIsLegByes(false)
+                         }
+                    }}
+                />
+                <Checkbox 
+                    label="No Ball" 
+                    checked={isNoBall} 
+                    onChange={(e)=>setIsNoBall(e.target.checked)}
+                />
+                <Checkbox 
+                    label="Byes" 
+                    checked={isByes} 
+                    onChange={(e)=>{
+                        setIsByes(e.target.checked)
+                        if(e.target.checked){
+                            setIsLegByes(false)
+                        }
+                    }}
+                />
+                <Checkbox 
+                    label="Leg Byes" 
+                    checked={isLegByes} 
+                    disabled={isWide || isByes} 
+                    onChange={(e)=>setIsLegByes(e.target.checked)}
+                />
            </div>
            <div style={{display : "flex", justifyContent :"space-between", alignItems : "center"}}>
               <Checkbox label="Wicket" checked={isWicket} onChange={(e)=>setIsWicket(e.target.checked)}/>

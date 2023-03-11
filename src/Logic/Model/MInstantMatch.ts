@@ -54,7 +54,7 @@ export interface MBowlerInstantMatch{
 }
 
 
-export interface ScoreItem{
+export interface MScoreItem{
     match_id: string,
     owner_id:number,
     innings_details:{
