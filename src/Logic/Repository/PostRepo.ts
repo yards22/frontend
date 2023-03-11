@@ -84,19 +84,6 @@ export class PostRepo {
     }
   }
 
-  async deletePost(token:string,post_id:bigint){
-    try{
-       await this.rq.Delete(
-        `${this.baseUrl}/post`,
-        {post_id},
-        AuthHeaders(token)
-       )
-    }
-    catch(err){
-      throw err
-    }
-  }
-
   async likePost(token: string, post_id: bigint, is_like: boolean) {
     try {
       await this.rq.Put(
