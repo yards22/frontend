@@ -6,7 +6,13 @@ import IconWrapper from "../../Atoms/IconWrapper";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import { ValidateEmail } from "../../Logic/Utils/Validation";
 import ForgotPassword from "./ForgetPassword/Index";
-function EmailPasswordLogin() {
+
+interface IEmailPasswordLogin{
+  r : string|null,
+  p : string|null
+}
+
+function EmailPasswordLogin(props:IEmailPasswordLogin) {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [forgotPasswordModal, setForgotPasswordModal] = useState(false);
@@ -15,7 +21,7 @@ function EmailPasswordLogin() {
 
   function handleLogin() {
     store.authStore
-      .LoginUser(credentials.email, credentials.password)
+      .LoginUser(credentials.email, credentials.password,props.r,props.p)
       .then(() => {})
       .catch((err) => {
         setErrorText(err.message);

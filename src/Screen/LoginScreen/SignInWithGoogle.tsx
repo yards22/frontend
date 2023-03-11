@@ -3,12 +3,20 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { Observer } from "mobx-react-lite";
 import { useState } from "react";
 import { Button } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 const CLIENT_ID =
   "442538559529-bm10qpqtcg3k06rrgnc4i0pqnc3fee4s.apps.googleusercontent.com";
 
-function SignInWithGoogle() {
+
+interface ISignInWithGoogle{
+    r : string|null,
+    p : string|null
+}
+
+function SignInWithGoogle(props:ISignInWithGoogle) {
   const [didLoginFailed, setDidLoginFailed] = useState(false);
   const store = useStores();
+  const navigate = useNavigate();
 
   return !didLoginFailed ? (
     <GoogleOAuthProvider clientId={CLIENT_ID}>
@@ -23,7 +31,7 @@ function SignInWithGoogle() {
               onSuccess={(credentialResponse) => {
                 if (credentialResponse.credential)
                   store.authStore
-                    .OAuthLoginUser(credentialResponse.credential)
+                    .OAuthLoginUser(credentialResponse.credential,props.r,props.p)
                     .then(() => {})
                     .catch((err) => setDidLoginFailed(true));
                 else setDidLoginFailed(true);
