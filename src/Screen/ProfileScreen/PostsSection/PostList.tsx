@@ -3,11 +3,7 @@ import Loading from "../../../Atoms/Loading";
 import { useStores } from "../../../Logic/Providers/StoresProviders";
 import NormalPost from "../../FeedScreen/Post/NormalPost";
 
-interface PostListProps{
-  type:"fav"|"mine"
-}
-
-function PostList(props:PostListProps) {
+function PostList() {
   const stores = useStores();
 
   return (
@@ -24,7 +20,7 @@ function PostList(props:PostListProps) {
         return (
           <div className="mb-5 flex flex-col gap-3">
             {postStore.viewPosts.map((item, index) => {
-              return <NormalPost data={item} type={props.type ==="mine"?"mine":"fav"} key={`normal_post_${index}`} />;
+              return <NormalPost data={item} key={`normal_post_${index}`} />;
             })}
           </div>
         );
