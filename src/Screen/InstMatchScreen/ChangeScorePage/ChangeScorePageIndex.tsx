@@ -1,4 +1,5 @@
 import { Button, Modal } from '@mantine/core'
+import { Observer } from 'mobx-react-lite'
 import { useState } from 'react'
 import styled from 'styled-components'
 import { useStores } from '../../../Logic/Providers/StoresProviders'
@@ -62,27 +63,38 @@ function ChangeScorePage() {
     setNumberOfRuns(runs)
   }
 
+  function handleCloseModal(){
+
+  }
+
   return (
-    <SChangeScorePage>
-        <div style={{display:"flex",justifyContent:"space-between",width:"100%",alignItems:"center"}}>
-            <p>Team A vs Team B</p>
-        </div>
-        <CurrentStatsIndex/>
-        <CurrentBatting/>
-        <CurrentBowling/>
-        <CurrentOver/>
-        <CurrentBallEvent handleBallEvent={handleBallEvent}/>
-        <div style={{display:"flex",width:"100%"}}>
-            <OtherDetailsButtons/>
-            <RunsInBall handleBallUpdate={handleBallUpdate}/>
-        </div>
-        <Modal
-          opened={showBallUpdateModel}
-          onClose={handleCloseBallUpdateModal}
-        >
-          <ScoreChangeModal isWicket={isWicket} isExtra={isExtra} extraType={extraType} noOfRuns={noOfRuns}/>
-        </Modal>
-    </SChangeScorePage>
+    <Observer>
+       {()=>{
+          return(
+            <SChangeScorePage>
+              <div style={{display:"flex",justifyContent:"space-between",width:"100%",alignItems:"center"}}>
+                  <p>Team A vs Team B</p>
+              </div>
+              <CurrentStatsIndex/>
+              <CurrentBatting/>
+              <CurrentBowling/>
+              <CurrentOver/>
+              <CurrentBallEvent handleBallEvent={handleBallEvent}/>
+              <div style={{display:"flex",width:"100%"}}>
+                  <OtherDetailsButtons/>
+                  <RunsInBall handleBallUpdate={handleBallUpdate}/>
+              </div>
+              <Modal
+                opened={showBallUpdateModel}
+                onClose={handleCloseBallUpdateModal}
+              >
+                <ScoreChangeModal handleCloseBallUpdateModal={handleCloseBallUpdateModal} isWicket={isWicket} isExtra={isExtra} extraType={extraType} noOfRuns={noOfRuns}/>
+              </Modal>
+          </SChangeScorePage>
+          )
+        } 
+       }
+    </Observer>
   )
 }
 

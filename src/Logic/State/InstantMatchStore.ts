@@ -12,6 +12,11 @@ export class InstantMatchStore{
     }
 
     @action
+    GetCurrentMatch=()=>{
+        return this.currentInstantMatch;
+    }
+
+    @action
     SetCurrentMatch=(x:MInstantMatch)=>{
         console.log("Current Summary",x)
         this.currentInstantMatch = x;
