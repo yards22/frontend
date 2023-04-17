@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import { useStores } from "../../Logic/Providers/StoresProviders";
 import DetailSectionIndex from "./DetailSection/Index";
 import PostsSectionIndex from "./PostsSection/Index";
+import PlayerStatsSection from "./PlayerStatsSection/PlayerStatsSection";
 
 function ProfileIndex() {
   const store = useStores();
@@ -53,6 +54,7 @@ function ProfileIndex() {
         return profileStore.viewProfile ? (
           <>
             <DetailSectionIndex />
+            <PlayerStatsSection/>
             <PostsSectionIndex />
           </>
         ) : (
