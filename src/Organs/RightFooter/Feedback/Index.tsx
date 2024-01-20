@@ -61,7 +61,7 @@ function FeedbackIndex() {
           className="mt-1 w-full"
           value={feedback.image}
           accept="image/png,image/jpeg"
-          placeholder="Attach some screenshot, if necessary."
+
           onChange={(file) => {
             if (file)
               setFeedback((p) => {
