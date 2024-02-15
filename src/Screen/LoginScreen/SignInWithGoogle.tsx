@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Button } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 const CLIENT_ID =
-  "442538559529-bm10qpqtcg3k06rrgnc4i0pqnc3fee4s.apps.googleusercontent.com";
+  "909534443970-bqntlk3fokr64jn8lofg1sg9f651io8b.apps.googleusercontent.com";
 
 
 interface ISignInWithGoogle{
